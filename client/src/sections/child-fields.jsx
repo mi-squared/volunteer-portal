@@ -35,11 +35,11 @@ export default React.createClass({
                         selectValue={this.getChild()['q_child_age']}
                         data={this.props.data}
                         onChange={this.handleChange.bind(this, "q_child_age")}>
-                        <Option value="0-23mos">0-23mos</Option>
-                        <Option value="2-4">2-4</Option>
-                        <Option value="5-6">5-6</Option>
-                        <Option value="7-9">7-9</Option>
-                        <Option value="10-12">10-12</Option>
+                        <option value="0-23mos">0-23mos</option>
+                        <option value="2-4">2-4</option>
+                        <option value="5-6">5-6</option>
+                        <option value="7-9">7-9</option>
+                        <option value="10-12">10-12</option>
                     </DropdownField>
                 </div>
 
@@ -49,11 +49,11 @@ export default React.createClass({
                         selectValue={this.getChild()['q_child_tshirt']}
                         data={this.props.data}
                         onChange={this.handleChange.bind(this, "q_child_tshirt")}>
-                        <Option value="xsm">Extra small</Option>
-                        <Option value="sm">Small</Option>
-                        <Option value="med">Medium</Option>
-                        <Option value="lrg">Large</Option>
-                        <Option value="xlrg">Extra large</Option>
+                        <option value="xsm">Extra small</option>
+                        <option value="sm">Small</option>
+                        <option value="med">Medium</option>
+                        <option value="lrg">Large</option>
+                        <option value="xlrg">Extra large</option>
                     </DropdownField>
                 </div>
 

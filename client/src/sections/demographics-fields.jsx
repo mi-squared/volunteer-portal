@@ -92,11 +92,11 @@ export default React.createClass({
                         selectValue={this.props.data['q_race_ethnicity']}
                         data={this.props.data}
                         onChange={this.handleChange.bind(this, "q_race_ethnicity")}>
-                        <Option value="white">White</Option>
-                        <Option value="african-american">African American</Option>
-                        <Option value="asian">Asian</Option>
-                        <Option value="pacific-islander">Pacific Islander</Option>
-                        <Option value="other">Other</Option>
+                        <option value="white">White</option>
+                        <option value="african-american">African American</option>
+                        <option value="asian">Asian</option>
+                        <option value="pacific-islander">Pacific Islander</option>
+                        <option value="other">Other</option>
                     </DropdownField>
                 </QuestionContainer>
 
@@ -106,10 +106,10 @@ export default React.createClass({
                         selectValue={this.props.data['q_gender']}
                         data={this.props.data}
                         onChange={this.handleChange.bind(this, "q_gender")}>
-                        <Option value="male">Male</Option>
-                        <Option value="female">Female</Option>
-                        <Option value="trans-male">Transgendered Male</Option>
-                        <Option value="trans-female">Transgendered Male</Option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="trans-male">Transgendered Male</option>
+                        <option value="trans-female">Transgendered Male</option>
                     </DropdownField>
                 </QuestionContainer>
 

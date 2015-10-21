@@ -75,9 +75,9 @@ export default React.createClass({
                             field="q_volunteering_area"
                             multiple="true"
                             onChange={ function(f,e) { console.log(f,e.target.value); }}>
-                            <Option value="logistics">Logistics</Option>
-                            <Option value="security">Security</Option>
-                            <Option value="hospitality">Hospitality</Option>
+                            <option value="logistics">Logistics</option>
+                            <option value="security">Security</option>
+                            <option value="hospitality">Hospitality</option>
                         </DropdownField>
                     </div>
                 </div>

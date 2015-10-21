@@ -27,9 +27,9 @@ export default React.createClass({
                         selectValue={this.props.data['q_school_level']}
                         data={this.props.data}
                         onChange={this.handleChange.bind(this, "q_school_level")}>
-                        <Option value="highschool">High school</Option>
-                        <Option value="college">College</Option>
-                        <Option value="university">University</Option>
+                        <option value="highschool">High school</option>
+                        <option value="college">College</option>
+                        <option value="university">University</option>
                     </DropdownField>
                 </div>
 
