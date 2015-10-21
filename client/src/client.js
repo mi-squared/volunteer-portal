@@ -1,0 +1,103 @@
+import Q from 'q/q.js';
+import {getServiceBaseURL}  from './core.js';
+
+export function login(username, password) {
+    var data = {
+        'username' : username,
+        'password' : password
+    };
+
+    var deferred = Q.defer();
+
+    $.ajax({
+        type: "POST",
+        url: getServiceBaseURL() + '/api/v1/accounts/login',
+        data: data,
+        success: function(response) {
+            // login worked
+            deferred.resolve(response);
+        },
+        error: function(request, status, error) {
+            deferred.reject(request.responseText)
+        },
+        dataType: 'json'
+    });
+
+    return deferred.promise;
+}
+
+export function register(data) {
+    var deferred = Q.defer();
+
+    $.ajax({
+        type: "POST",
+        url: getServiceBaseURL() + '/api/v1/accounts',
+        data: data,
+        success: function(response) {
+            // successfull registration; try logging in
+            login(data.username, data.password)
+                .then(
+                    function(r) {
+                        deferred.resolve(r);
+                    },
+                    function(e) {
+                        deferred.reject(e);
+                    }
+            );
+        },
+        error: function(request, status, error) {
+            deferred.reject(request.responseText)
+        },
+        dataType: 'json'
+    });
+
+    return deferred.promise;
+}
+
+export function saveApplicationRemote(token, application) {
+    var deferred = Q.defer();
+    var applicationID = application['id'];
+    var endpoint = (getServiceBaseURL() + '/api/v1/applications')
+                 + (applicationID ?  '/' + applicationID : '');
+
+    $.ajax({
+        type: applicationID ? "PUT" : "POST",
+        url: endpoint,
+        data: JSON.stringify(application),
+        headers: {
+            'Authorization':'Bearer ' + token,
+            'Content-Type':'application/json'
+        },
+        success: function(response) {
+            deferred.resolve(response);
+        },
+        error: function(request, status, error) {
+            deferred.reject(request.responseText)
+        },
+        dataType: 'json'
+    });
+
+    return deferred.promise;
+}
+
+export function getApplication(token, applicationID) {
+    var deferred = Q.defer();
+
+    $.ajax({
+        type: "GET",
+        url: getServiceBaseURL() + '/api/v1/applications/' + applicationID,
+        headers: {
+            'Authorization':'Bearer ' + token,
+            'Content-Type':'application/json'
+        },
+        success: function(response) {
+            deferred.resolve(response);
+        },
+        error: function(request, status, error) {
+            deferred.reject(request.responseText)
+        },
+        dataType: 'json'
+    });
+
+    return deferred.promise;
+}

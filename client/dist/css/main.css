@@ -1,0 +1,72 @@
+html, body {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.availability-field .form-group {
+    /*float: left;*/
+}
+
+@media (min-width: 768px) {
+    body {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        font-family: "Raleway",Helvetica,sans-serif
+    }
+}
+
+.welcome {
+    padding-top: 80px;
+    font-size: x-large;
+}
+
+.welcome .nav-button {
+    width: 220px;
+    min-height: 50px;
+}
+
+.welcome div {
+    text-align: center;
+}
+
+.j-required {
+    color: red;
+    margin-right: 4px;
+}
+
+.j-error-message {
+    color: red;
+    margin-left: 4px;
+}
+
+.j-page-nav {
+    margin-top: 18px;
+}
+.j-page-nav button {
+    margin-right: 5px;
+}
+
+/* centered columns styles */
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
+.col-fixed {
+    /* custom width */
+    width:320px;
+}
+.col-min {
+    /* custom min width */
+    min-width:320px;
+}
+.col-max {
+    /* custom max width */
+    max-width:320px;
+}
