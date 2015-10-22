@@ -50,18 +50,17 @@ function validate(nextProps) {
         // apply label
         var state;
         var self = this;
-        if (nextProps && nextProps.errorFields) {
+        if (nextProps && nextProps.errorFields && nextProps.errorFields.length > 0) {
             nextProps.errorFields.map(entry => {
                 if (entry.field === self.props.fieldName && !state) {
-                    state = entry.message
+                    state = entry.message;
                 }
             });
         }
 
-        var errorMessage;
         var errorMessageExists = parent.find("label span.j-error-message").length > 0;
         if (state && !errorMessageExists) {
-            errorMessage = "<span class='j-error-message'>" + state + "</span>";
+            var errorMessage = "<span class='j-error-message'>" + state + "</span>";
             parent.find("label").append(errorMessage);
             parent.addClass("has-error");
         } else if (!state && errorMessageExists) {
