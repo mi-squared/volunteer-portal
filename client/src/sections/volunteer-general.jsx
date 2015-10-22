@@ -23,22 +23,6 @@ export default React.createClass({
         return (
             <div>
                 <YesNoField data={this.props.data}
-                    fieldName="q_volunteer_organization_member"
-                    label="You part of a volunteer group?"
-                />
-
-                <QuestionContainer data={this.props.data}
-                    criteria={ {key : 'q_volunteer_organization_member', value : "true" } }>
-                    <Input
-                        label="Volunteer coordinating organization"
-                        type="text"
-                        fieldName="q_volunteer_organization"
-                        value={this.props.data.q_volunteer_organization}
-                        onChange={this.handleChange.bind(this, "q_volunteer_organization")}
-                    />
-                </QuestionContainer>
-
-                <YesNoField data={this.props.data}
                     fieldName="q_volunteered_before"
                     label="Have you volunteered for your best pathway to health before?"
                 />
@@ -61,6 +45,22 @@ export default React.createClass({
                         fieldName="q_volunteered_capacity"
                         value={this.props.data.q_volunteered_capacity}
                         onChange={this.handleChange.bind(this, "q_volunteered_capacity")}/>
+                </QuestionContainer>
+
+                <YesNoField data={this.props.data}
+                    fieldName="q_volunteer_organization_member"
+                    label="Are you part of a volunteer group?"
+                />
+
+                <QuestionContainer data={this.props.data}
+                    criteria={ {key : 'q_volunteer_organization_member', value : "true" } }>
+                    <Input
+                        label="What is the name of your volunteer group?"
+                        type="text"
+                        fieldName="q_volunteer_organization"
+                        value={this.props.data.q_volunteer_organization}
+                        onChange={this.handleChange.bind(this, "q_volunteer_organization")}
+                    />
                 </QuestionContainer>
 
                 <div>
