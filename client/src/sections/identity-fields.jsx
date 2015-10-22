@@ -47,9 +47,9 @@ export default React.createClass({
             <div>
                 <div>
                     <ValidatedInput
+                        onBlur={this.props.onBlur}
                         errorFields={this.props.errorFields}
-                        bsStyle={this.handleValidationState("q_first_name") }
-                        required={this.isRequired("q_first_name")}
+                        required={true}
                         ref="f_first_name"
                         label="First name"
                         type="text"
@@ -57,18 +57,17 @@ export default React.createClass({
                         value={this.props.data.q_first_name}
                         onChange={this.handleChange.bind(this, "q_first_name")}/>
                     <ValidatedInput
+                        onBlur={this.props.onBlur}
                         errorFields={this.props.errorFields}
-                        bsStyle={this.handleValidationState("q_middle_name") }
-                        required={this.isRequired("q_middle_name")}
                         ref="f_middle_name"
                         label="Middle name" type="text"
                         fieldName="q_middle_name"
                         value={this.props.data.q_middle_name}
                         onChange={this.handleChange.bind(this, "q_middle_name")}/>
                     <ValidatedInput
+                        onBlur={this.props.onBlur}
                         errorFields={this.props.errorFields}
-                        bsStyle={this.handleValidationState("q_last_name") }
-                        required={this.isRequired("q_last_name")}
+                        required={true}
                         ref="f_last_name"
                         label="Last name"
                         type="text"

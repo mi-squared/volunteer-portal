@@ -28,7 +28,7 @@ export const MainPage = React.createClass({
     doValidate: function() {
         // todo - should be a module
         var fieldsToCheck = ['q_first_name', 'q_last_name', 'q_dob', 'q_email',
-            'q_address_1', 'q_address_city', 'q_address_state' ];
+            'q_address_1', 'q_address_city', 'q_address_state', 'q_address_zip' ];
         var fieldsInError = [];
         for ( var i in fieldsToCheck ) {
             var field = fieldsToCheck[i];
@@ -74,7 +74,7 @@ export const MainPage = React.createClass({
             {alert}
 
             <Demographics data={this.props}
-                          requiredFields={['q_first_name', 'q_last_name', 'q_dob', 'q_email' ]}
+                          onBlur={this.doValidate}
                           errorFields={this.state.errorFields}/>
 
             <hr/>

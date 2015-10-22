@@ -35,6 +35,7 @@ export default React.createClass({
             <div>
                 <div>
                     <ValidatedInput
+                        onBlur={this.props.onBlur}
                         errorFields={this.props.errorFields}
                         required={true}
                         label="Address 1" type="text"
@@ -55,6 +56,7 @@ export default React.createClass({
 
                 <div>
                     <ValidatedInput
+                        onBlur={this.props.onBlur}
                         errorFields={this.props.errorFields}
                         required={true}
                         label="City" type="text"
@@ -76,6 +78,7 @@ export default React.createClass({
 
                 <div>
                     <ValidatedInput
+                        onBlur={this.props.onBlur}
                         errorFields={this.props.errorFields}
                         required={true}
                         label="Zip" type="text"
@@ -90,8 +93,8 @@ export default React.createClass({
                         data={this.props.data}
                         required={true}
                         label="Country"
-                        fieldName="q_address_state"
-                        onChange={this.handleChange.bind(this, "q_address_state")}
+                        fieldName="q_address_country"
+                        onChange={this.handleChange.bind(this, "q_address_country")}
                     />
                 </div>
 
@@ -115,6 +118,7 @@ export default React.createClass({
 
                 <div>
                     <ValidatedInput
+                        onBlur={this.props.onBlur}
                         errorFields={this.props.errorFields}
                         bsStyle={this.handleValidationState("q_email") }
                         label="Email address" type="text" value={this.props.data.q_email}
