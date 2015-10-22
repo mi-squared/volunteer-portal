@@ -11,7 +11,6 @@ export default class ValidatedInput extends Input {
         if (super.componentWillMount) {
             super.componentWillMount();
         }
-        validate.call(this, this.props);
     }
 
     componentWillUnmount() {
@@ -23,6 +22,16 @@ export default class ValidatedInput extends Input {
     componentDidMount() {
         if ( super.componentDidMount) {
             super.componentDidMount();
+        }
+        if (this.props.required) {
+            var thisDomNode = $(this.getInputDOMNode());
+            var parent = thisDomNode.parent();
+            var label = parent.find("label span");
+
+            if (parent.find("span.j-required").length < 1) {
+                var requiredDOM = $("<span class='j-required'>*</span>");
+                label.prepend(requiredDOM);
+            }
         }
         validate.call(this, this.props);
     }
@@ -36,39 +45,32 @@ export default class ValidatedInput extends Input {
 }
 
 function validate(nextProps) {
-    if (this.props.required) {
-        var thisDomNode = $(this.getInputDOMNode());
-        var parent = thisDomNode.parent();
+    if (!this.props.required) {
+        return;
+    }
+    var parent = $(this.getInputDOMNode()).parent();
 
-        var label = parent.find("label span");
+    // apply label
+    var state;
+    var self = this;
+    if (nextProps && nextProps.errorFields && nextProps.errorFields.length > 0) {
+        nextProps.errorFields.map(entry => {
+            if (entry.field === self.props.fieldName && !state) {
+                state = entry.message;
+            }
+        });
+    }
 
-        if (parent.find("span.j-required").length < 1) {
-            var requiredDOM = $("<span class='j-required'>*</span>");
-            label.prepend(requiredDOM);
-        }
-
-        // apply label
-        var state;
-        var self = this;
-        if (nextProps && nextProps.errorFields && nextProps.errorFields.length > 0) {
-            nextProps.errorFields.map(entry => {
-                if (entry.field === self.props.fieldName && !state) {
-                    state = entry.message;
-                }
-            });
-        }
-
-        var errorMessageExists = parent.find("label span.j-error-message").length > 0;
-        if (state && !errorMessageExists) {
-            var errorMessage = "<span class='j-error-message'>" + state + "</span>";
-            parent.find("label").append(errorMessage);
-            parent.addClass("has-error");
-        } else if (!state && errorMessageExists) {
-            parent.find("label span.j-error-message").remove();
-            parent.removeClass("has-error");
-        } else if (errorMessageExists) {
-            $(parent.find("label span.j-error-message")).html(state);
-            parent.addClass("has-error");
-        }
+    var errorMessageExists = parent.find("label span.j-error-message").length > 0;
+    if (state && !errorMessageExists) {
+        var errorMessage = "<span class='j-error-message'>" + state + "</span>";
+        parent.find("label").append(errorMessage);
+        parent.addClass("has-error");
+    } else if (!state && errorMessageExists) {
+        parent.find("label span.j-error-message").remove();
+        parent.removeClass("has-error");
+    } else if (errorMessageExists) {
+        $(parent.find("label span.j-error-message")).html(state);
+        parent.addClass("has-error");
     }
 }
