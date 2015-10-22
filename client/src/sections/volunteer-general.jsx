@@ -24,7 +24,7 @@ export default React.createClass({
             <div>
                 <YesNoField data={this.props.data}
                     fieldName="q_volunteer_organization_member"
-                    label="Are you part of an Organization coordinating Volunteers?"
+                    label="You part of a volunteer group?"
                 />
 
                 <QuestionContainer data={this.props.data}
