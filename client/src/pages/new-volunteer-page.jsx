@@ -15,7 +15,7 @@ export const NewVolunteerPage = React.createClass({
 
     getInitialState: function() {
         return {
-            focusElement: "f_first_name",
+            focusElement: "q_first_name",
             alertVisible: false,
             errorFields: [],
             errorMessage : 'Form error'
@@ -40,18 +40,6 @@ export const NewVolunteerPage = React.createClass({
         var fieldsInError = [];
         var schema = {
             properties: {
-                q_email: {
-                    type: 'string',
-                    maxLength: 255,
-                    format: 'email',
-                    required: true,
-                    allowEmpty: false
-                },
-                q_dob: {
-                    type: 'string',
-                    format: "date",
-                    required: true
-                },
                 q_first_name: {
                     type: 'string',
                     maxLength: 255,
@@ -63,6 +51,18 @@ export const NewVolunteerPage = React.createClass({
                     maxLength: 255,
                     required: true,
                     allowEmpty: false
+                },
+                q_email: {
+                    type: 'string',
+                    maxLength: 255,
+                    format: 'email',
+                    required: true,
+                    allowEmpty: false
+                },
+                q_dob: {
+                    type: 'string',
+                    format: "date",
+                    required: true
                 },
                 q_password: {
                     type: 'string',
@@ -122,16 +122,27 @@ export const NewVolunteerPage = React.createClass({
             );
 
         } else {
-            this.setState({
-                errorMessage: "Form error"
-            });
-            this.doAlerts();
+            var self = this;
+            setTimeout( function() {
+                var errorField = self.state.errorFields[0];
+                self.setState({
+                    focusElement : errorField ? errorField['field'] : '',
+                    errorMessage: "Form error"
+                });
+                self.doAlerts();
+            }, 1);
         }
+    },
+
+    onBlur: function() {
+        this.setState( {
+            focusElement : ''
+        });
+        this.doValidate();
     },
 
     doAlerts: function() {
         this.handleAlertShow();
-        this.setState({ focusElement: "f_first_name" } );
     },
 
     doCancel: function() {
@@ -160,9 +171,8 @@ export const NewVolunteerPage = React.createClass({
 
                 <div>
                     <RegistrationFields
-                        onBlur={this.doValidate}
+                        onBlur={this.onBlur}
                         data={this.props}
-                        requiredFields={[ 'q_first_name', 'q_last_name'] }
                         focusElement={this.state.focusElement}
                         errorFields={this.state.errorFields}/>
                 </div>

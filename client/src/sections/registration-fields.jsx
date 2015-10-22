@@ -15,32 +15,24 @@ export default React.createClass({
             value : e.target.value
         });
     },
+
     handleDateChange(date) {
-        this.props.data.q_dob = date;
-    },
-
-    handleValidationState: function(field, e) {
-        if ( !this.props.errorFields ) {
-            return;
-        }
-        var state;
-        this.props.errorFields.map(entry => {
-            if ( entry.field === field && !state ) {
-                state = "error";
-            }
+        this.props.data.updateField( {
+            key : 'q_dob',
+            value : date
         });
-
-        return state;
     },
+
 
     render: function() {
         return (
             <div>
-                <IdentityFields {...this.props} focusElement={this.props.focusElement} />
+                <IdentityFields {...this.props} />
 
                 <DateField
+                    focusElement={this.props.focusElement}
+                    onBlur={this.props.onBlur}
                     errorFields={this.props.errorFields}
-                    bsStyle={this.handleValidationState("q_dob") }
                     label="Date of birth (mm/yy/dddd)"
                     value={this.props.data.q_dob}
                     required={true}
@@ -48,16 +40,18 @@ export default React.createClass({
                     onChange={this.handleDateChange}
                 />
 
-                <ValidatedInput errorFields={this.props.errorFields}
-                                bsStyle={this.handleValidationState("q_email") }
+                <ValidatedInput focusElement={this.props.focusElement}
+                                onBlur={this.props.onBlur}
+                                errorFields={this.props.errorFields}
                                 label="Email address" type="text"
                                 value={this.props.data.q_email}
                                 required={true}
                                 fieldName="q_email"
                                 onChange={this.handleChange.bind(this, "q_email")}/>
 
-                <ValidatedInput errorFields={this.props.errorFields}
-                                bsStyle={this.handleValidationState("q_password") }
+                <ValidatedInput focusElement={this.props.focusElement}
+                                onBlur={this.props.onBlur}
+                                errorFields={this.props.errorFields}
                                 label="Password" type="password"
                                 value={this.props.data.q_password}
                                 required={true}
