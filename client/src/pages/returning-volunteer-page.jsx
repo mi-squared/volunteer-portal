@@ -105,16 +105,21 @@ export const ReturningVolunteerPage = React.createClass({
                     }
             );
         } else {
-            this.setState({
-                errorMessage: "Form error"
-            });
-            this.doAlerts();
+            var self = this;
+            setTimeout( function() {
+                var errorField = self.state.errorFields[0];
+                self.setState({
+                    focusElement : errorField ? errorField['field'] : '',
+                    errorMessage: "Form error"
+                });
+                self.doAlerts();
+            }, 1);
         }
     },
 
     doInvalidCredentials: function() {
         this.setState({
-            focusElement: 'f_username',
+            focusElement: 'f_password',
             errorMessage: "Invalid username or password",
             errorFields : [
                 {
@@ -128,6 +133,7 @@ export const ReturningVolunteerPage = React.createClass({
             ]
         });
         this.doAlerts();
+        this.setState( { 'f_password' : '' });
     },
 
     doCancel: function() {
@@ -137,13 +143,18 @@ export const ReturningVolunteerPage = React.createClass({
 
     doAlerts: function() {
         this.handleAlertShow();
-        this.setState({ focusElement: "f_username" } );
     },
 
     handleChange: function(field, e) {
         var state = {};
         state[field] = e.target.value;
         this.setState(state);
+    },
+
+    onBlur: function() {
+        this.setState( {
+            focusElement : ''
+        });
     },
 
     render: function() {
@@ -170,6 +181,7 @@ export const ReturningVolunteerPage = React.createClass({
 
                 <div>
                     <SignInFields
+                        onBlur={this.onBlur}
                         handleChange={this.handleChange}
                         data={this.state}
                         focusElement={this.state.focusElement}

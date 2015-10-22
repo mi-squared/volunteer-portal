@@ -16,25 +16,12 @@ export default React.createClass({
         this.props.handleChange(field, e);
     },
 
-    handleValidationState: function(field, e) {
-        if ( !this.props.errorFields ) {
-            return;
-        }
-        var state;
-        this.props.errorFields.map(entry => {
-            if ( entry.field === field && !state ) {
-                state = "error";
-            }
-        });
-
-        return state;
-    },
-
     render: function() {
         return (
             <div>
-                <ValidatedInput errorFields={this.props.errorFields}
-                                bsStyle={this.handleValidationState("f_username") }
+                <ValidatedInput focusElement={this.props.focusElement}
+                                onBlur={this.props.onBlur}
+                                errorFields={this.props.errorFields}
                                 label="Email (username)" type="text"
                                 value={this.props.data.f_username}
                                 required={true}
@@ -42,8 +29,9 @@ export default React.createClass({
                                 ref="f_username"
                                 onChange={this.handleChange.bind(this, "f_username")}/>
 
-                <ValidatedInput errorFields={this.props.errorFields}
-                                bsStyle={this.handleValidationState("f_password") }
+                <ValidatedInput focusElement={this.props.focusElement}
+                                onBlur={this.props.onBlur}
+                                errorFields={this.props.errorFields}
                                 label="Password" type="password"
                                 value={this.props.data.f_password}
                                 required={true}
