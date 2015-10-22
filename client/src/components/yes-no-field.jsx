@@ -14,27 +14,24 @@ export default React.createClass({
 
     render: function() {
         return (
-            <QuestionContainer props={this.props.data}>
-                <label>
+            <div  className="form-group">
+                <label  className="control-label">
                     {this.props.label}
                 </label>
 
-                <Input type="radio"
-                    label="Yes"
-                    ref={this.props.fieldName}
-                    name={this.props.fieldName}
-                    value="true"
-                    checked={this.props.data[this.props.fieldName] === "true"}
-                    onChange={this.handleChange.bind(this, this.props.fieldName)}/>
-
-                <Input type="radio"
-                    label="No"
-                    ref={this.props.fieldName}
-                    name={this.props.fieldName}
-                    value="false"
-                    checked={this.props.data[this.props.fieldName] !== "true"}
-                    onChange={this.handleChange.bind(this, this.props.fieldName)}/>
-            </QuestionContainer>
+                <div>
+                    <label className="radio-inline">
+                        <input onChange={this.handleChange.bind(this, this.props.fieldName)}
+                            checked={this.props.data[this.props.fieldName] === "true"}
+                            type="radio" name={this.props.fieldName} ref={this.props.fieldName} value="true">Yes</input>
+                    </label>
+                    <label className="radio-inline">
+                        <input onChange={this.handleChange.bind(this, this.props.fieldName)}
+                            checked={this.props.data[this.props.fieldName] !== "true"}
+                            type="radio" name={this.props.fieldName} ref={this.props.fieldName} value="false">No</input>
+                    </label>
+                </div>
+            </div>
         );
     }
 });
