@@ -38,7 +38,7 @@ export default class ValidatedInput extends Input {
             // apply label
             var state;
             var self = this;
-            if ( nextProps.errorFields ) {
+            if ( nextProps &&  nextProps.errorFields ) {
                 nextProps.errorFields.map(entry => {
                     if ( entry.field === self.props.fieldName && !state ) {
                         state = entry.message

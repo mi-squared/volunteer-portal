@@ -17,15 +17,15 @@ export const DoRegisterPage = React.createClass({
     render: function() {
         return (
             <div className="container">
-                <h1>New volunteer registration</h1>
+                <h1>Volunteer Application</h1>
 
                 <div>
                     Thank you for registering. You will receive an email notification about your account information.
-                    Please click 'Continue' to proceed to the volunteer application form.
+                    Please click 'Create' to proceed to the volunteer application form.
                 </div>
 
                 <div className="j-page-nav">
-                    <Button onClick={this.doContinue}>Continue</Button>
+                    <Button onClick={this.doContinue}>Create</Button>
                 </div>
 
             </div>

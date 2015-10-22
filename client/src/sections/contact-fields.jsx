@@ -4,6 +4,7 @@ import Input from 'react-bootstrap/lib/Input';
 
 import ValidatedInput from '../components/validated-input-field.jsx';
 import StateField from '../components/state-field.jsx';
+import CountryField from '../components/country-field.jsx';
 
 export default React.createClass({
 
@@ -85,13 +86,12 @@ export default React.createClass({
                 </div>
 
                 <div>
-                    <ValidatedInput
-                        errorFields={this.props.errorFields}
+                    <CountryField
+                        data={this.props.data}
                         required={true}
-                        label="Country" type="text"
-                        fieldName="q_address_country"
-                        value={this.props.data.q_address_country}
-                        onChange={this.handleChange.bind(this, "q_address_country")}
+                        label="Country"
+                        fieldName="q_address_state"
+                        onChange={this.handleChange.bind(this, "q_address_state")}
                     />
                 </div>
 
