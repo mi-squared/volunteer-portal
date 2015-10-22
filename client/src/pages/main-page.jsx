@@ -14,7 +14,7 @@ export const MainPage = React.createClass({
     mixins: [ Router.Navigation ],
 
     getInitialState: function() {
-        return {errorFields: []};
+        return {errorFields: [], focusElement : 'q_first_name'};
     },
 
     handleAlertDismiss: function() {
@@ -22,13 +22,19 @@ export const MainPage = React.createClass({
     },
 
     handleAlertShow: function() {
-        this.setState({alertVisible: true});
+        var errorField = this.state.errorFields[0];
+        this.setState( {
+            focusElement : errorField['field'],
+            alertVisible: true
+        });
     },
 
     doValidate: function() {
         // todo - should be a module
-        var fieldsToCheck = ['q_first_name', 'q_last_name', 'q_dob', 'q_email',
-            'q_address_1', 'q_address_city', 'q_address_state', 'q_address_zip' ];
+        var fieldsToCheck = [
+            'q_first_name', 'q_last_name', 'q_dob',
+            'q_address_1', 'q_address_city', 'q_address_state', 'q_address_zip',
+            'q_email' ];
         var fieldsInError = [];
         for ( var i in fieldsToCheck ) {
             var field = fieldsToCheck[i];
@@ -44,7 +50,7 @@ export const MainPage = React.createClass({
     },
 
     doContinue : function() {
-        if ( this.doValidate() ) {
+        if (this.doValidate() ) {
             // save the application if passes validation
             // then move on to next page
             this.props.saveApplication();
@@ -53,6 +59,13 @@ export const MainPage = React.createClass({
         } else {
             this.handleAlertShow();
         }
+    },
+
+    onBlur: function() {
+        this.setState( {
+            focusElement : ''
+        });
+        this.doValidate();
     },
 
     render: function() {
@@ -74,7 +87,8 @@ export const MainPage = React.createClass({
             {alert}
 
             <Demographics data={this.props}
-                          onBlur={this.doValidate}
+                          onBlur={this.onBlur}
+                          focusElement={this.state.focusElement}
                           errorFields={this.state.errorFields}/>
 
             <hr/>

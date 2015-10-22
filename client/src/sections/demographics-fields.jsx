@@ -12,6 +12,7 @@ import StudentFields from './student-fields.jsx';
 
 export default React.createClass({
 
+    // todo - common to all sections - make into a mixin
     handleChange(field, e) {
         this.props.data.updateField( {
             key : field,
@@ -19,25 +20,10 @@ export default React.createClass({
         });
     },
 
-    // todo - this should be in a module
-    handleValidationState: function(field, e) {
-        if ( !this.props.errorFields ) {
-            return;
-        }
-        var state;
-        this.props.errorFields.map(entry => {
-            if ( entry.field === field && !state ) {
-                state = "error";
-            }
-        });
-
-        return state;
-    },
-
     render: function() {
         return (
             <div>
-                <IdentityFields {...this.props} focusElement="f_first_name" />
+                <IdentityFields {...this.props} />
 
                 <ContactFields {...this.props} />
 

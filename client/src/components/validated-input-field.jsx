@@ -31,6 +31,13 @@ export default class ValidatedInput extends Input {
             super.componentWillReceiveProps(nextProps);
         }
         validate.call(this, nextProps);
+
+        if ( nextProps.focusElement == this.props.fieldName ) {
+            var self = this;
+            setTimeout( function() {
+                $(self.getInputDOMNode()).focus();
+            }, 1);
+        }
     }
 }
 

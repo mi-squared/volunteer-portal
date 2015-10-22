@@ -6,6 +6,7 @@ import ValidatedInput from '../components/validated-input-field.jsx';
 
 export default React.createClass({
 
+    // todo - common to all sections - make into a mixin
     handleChange(field, e) {
         if ( this.props.onChange ) {
             this.props.onChange(field, e);
@@ -17,29 +18,14 @@ export default React.createClass({
         }
     },
 
+    // todo - common to all sections - make into a mixin
     componentDidMount: function() {
         if ( this.props.focusElement ) {
-            this.refs[this.props.focusElement].getInputDOMNode().focus();
-        }
-    },
-
-    isRequired: function(field) {
-        return this.props.requiredFields
-            && this.props.requiredFields.indexOf(field) > -1;
-    },
-
-    handleValidationState: function(field, e) {
-        if ( !this.props.errorFields ) {
-            return;
-        }
-        var state;
-        this.props.errorFields.map(entry => {
-            if ( entry.field === field && !state ) {
-                state = "error";
+            var ref = this.refs[this.props.focusElement];
+            if ( ref ) {
+                ref.getInputDOMNode().focus();
             }
-        });
-
-        return state;
+        }
     },
 
     render: function() {
@@ -47,28 +33,31 @@ export default React.createClass({
             <div>
                 <div>
                     <ValidatedInput
+                        focusElement={this.props.focusElement}
                         onBlur={this.props.onBlur}
                         errorFields={this.props.errorFields}
                         required={true}
-                        ref="f_first_name"
+                        ref="q_first_name"
                         label="First name"
                         type="text"
                         fieldName="q_first_name"
                         value={this.props.data.q_first_name}
                         onChange={this.handleChange.bind(this, "q_first_name")}/>
                     <ValidatedInput
+                        focusElement={this.props.focusElement}
                         onBlur={this.props.onBlur}
                         errorFields={this.props.errorFields}
-                        ref="f_middle_name"
+                        ref="q_middle_name"
                         label="Middle name" type="text"
                         fieldName="q_middle_name"
                         value={this.props.data.q_middle_name}
                         onChange={this.handleChange.bind(this, "q_middle_name")}/>
                     <ValidatedInput
+                        focusElement={this.props.focusElement}
                         onBlur={this.props.onBlur}
                         errorFields={this.props.errorFields}
                         required={true}
-                        ref="f_last_name"
+                        ref="q_last_name"
                         label="Last name"
                         type="text"
                         fieldName="q_last_name"

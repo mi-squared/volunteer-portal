@@ -8,6 +8,7 @@ import CountryField from '../components/country-field.jsx';
 
 export default React.createClass({
 
+    // todo - common to all sections - make into a mixin
     handleChange(field, e) {
         this.props.data.updateField( {
             key : field,
@@ -15,18 +16,14 @@ export default React.createClass({
         });
     },
 
-    handleValidationState: function(field, e) {
-        if ( !this.props.errorFields ) {
-            return;
-        }
-        var state;
-        this.props.errorFields.map(entry => {
-            if ( entry.field === field && !state ) {
-                state = "error";
+    // todo - common to all sections - make into a mixin
+    componentDidMount() {
+        if ( this.props.focusElement ) {
+            var ref = this.refs[this.props.focusElement];
+            if ( ref ) {
+                ref.getInputDOMNode().focus();
             }
-        });
-
-        return state;
+        }
     },
 
     render: function() {
@@ -35,10 +32,12 @@ export default React.createClass({
             <div>
                 <div>
                     <ValidatedInput
+                        focusElement={this.props.focusElement}
                         onBlur={this.props.onBlur}
                         errorFields={this.props.errorFields}
                         required={true}
                         label="Address 1" type="text"
+                        ref="q_address_1"
                         fieldName="q_address_1"
                         value={this.props.data.q_address_1}
                         onChange={this.handleChange.bind(this, "q_address_1")}
@@ -49,6 +48,7 @@ export default React.createClass({
                     <Input
                         label="Address 2"
                         type="text"
+                        ref="q_address_2"
                         value={this.props.data.q_address_2}
                         onChange={this.handleChange.bind(this, "q_address_2")}
                     />
@@ -56,10 +56,12 @@ export default React.createClass({
 
                 <div>
                     <ValidatedInput
+                        focusElement={this.props.focusElement}
                         onBlur={this.props.onBlur}
                         errorFields={this.props.errorFields}
                         required={true}
                         label="City" type="text"
+                        ref="q_address_city"
                         fieldName="q_address_city"
                         value={this.props.data.q_address_city}
                         onChange={this.handleChange.bind(this, "q_address_city")}
@@ -71,6 +73,7 @@ export default React.createClass({
                         data={this.props.data}
                         required={true}
                         label="State/Province"
+                        ref="q_address_state"
                         fieldName="q_address_state"
                         onChange={this.handleChange.bind(this, "q_address_state")}
                     />
@@ -78,10 +81,12 @@ export default React.createClass({
 
                 <div>
                     <ValidatedInput
+                        focusElement={this.props.focusElement}
                         onBlur={this.props.onBlur}
                         errorFields={this.props.errorFields}
                         required={true}
                         label="Zip" type="text"
+                        ref="q_address_zip"
                         fieldName="q_address_zip"
                         value={this.props.data.q_address_zip}
                         onChange={this.handleChange.bind(this, "q_address_zip")}
@@ -93,6 +98,7 @@ export default React.createClass({
                         data={this.props.data}
                         required={true}
                         label="Country"
+                        ref="q_address_country"
                         fieldName="q_address_country"
                         onChange={this.handleChange.bind(this, "q_address_country")}
                     />
@@ -103,6 +109,7 @@ export default React.createClass({
                         label="Mobile phone"
                         type="text"
                         value={this.props.data.q_phone_mobile}
+                        ref="q_phone_mobile"
                         onChange={this.handleChange.bind(this, "q_phone_mobile")}
                     />
                 </div>
@@ -112,17 +119,19 @@ export default React.createClass({
                         label="Home phone"
                         type="text"
                         value={this.props.data.q_phone_home}
+                        ref="q_phone_home"
                         onChange={this.handleChange.bind(this, "q_phone_home")}
                     />
                 </div>
 
                 <div>
                     <ValidatedInput
+                        focusElement={this.props.focusElement}
                         onBlur={this.props.onBlur}
                         errorFields={this.props.errorFields}
-                        bsStyle={this.handleValidationState("q_email") }
                         label="Email address" type="text" value={this.props.data.q_email}
                         required={true}
+                        ref="q_email"
                         fieldName="q_email"
                         onChange={this.handleChange.bind(this, "q_email")}/>
                 </div>
