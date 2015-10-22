@@ -5,7 +5,8 @@ export const INITIAL_STATE =  Map({
     q_is_adventist: "false",
     q_dob : "1970-01-01",
     q_date_graduation : "1970-01-01",
-    q_volunteered_before : 'false'
+    q_volunteered_before : 'false',
+    q_available_entire_time : 'true'
 });
 
 var serviceURL = 'http://localhost:7771';
