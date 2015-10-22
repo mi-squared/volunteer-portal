@@ -25,11 +25,13 @@ export default class ValidatedInput extends Input {
         }
 
         if ( this.props.required ) {
-            var parent = $(this.getInputDOMNode()).parent();
+            var thisDomNode = $(this.getInputDOMNode());
+            var parent = thisDomNode.parent();
+
             var label = parent.find("label span");
-            var requiredDOM = $("<span class='j-required'>*</span>");
 
             if ( parent.find("span.j-required").length < 1 ) {
+                var requiredDOM = $("<span class='j-required'>*</span>");
                 label.prepend(requiredDOM);
             }
 
@@ -49,10 +51,13 @@ export default class ValidatedInput extends Input {
             if ( state && !errorMessageExists ) {
                 errorMessage = "<span class='j-error-message'>" + state + "</span>";
                 parent.find("label").append(errorMessage);
+                parent.addClass("has-error");
             } else if (!state && errorMessageExists ){
                 parent.find("label span.j-error-message").remove();
+                parent.removeClass("has-error");
             } else if (errorMessageExists ){
                 $(parent.find("label span.j-error-message")).html(state);
+                parent.addClass("has-error");
             }
         }
     }

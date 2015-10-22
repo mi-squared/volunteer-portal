@@ -76,7 +76,6 @@ export default React.createClass({
                 <QuestionContainer data={this.props.data}>
                     <ValidatedInput
                         errorFields={this.props.errorFields}
-                        bsStyle={this.handleValidationState("q_dob") }
                         required={true}
                         label="Date of birth" type="text"
                         fieldName="q_dob"
@@ -123,7 +122,7 @@ export default React.createClass({
 
                 <YesNoField data={this.props.data}
                     fieldName="q_is_adventist"
-                    label="Are you Seventh-day Adventist?"
+                    label="Are you a committed Seventh-day Adventist in good standing and do you believe in all the fundamental beliefs of the church?"
                 />
 
                 <QuestionContainer data={this.props.data} criteria={ {key : 'q_is_adventist', value : "true" } }>

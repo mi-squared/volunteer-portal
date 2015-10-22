@@ -27,7 +27,8 @@ export const MainPage = React.createClass({
 
     doValidate: function() {
         // todo - should be a module
-        var fieldsToCheck = ['q_first_name', 'q_last_name', 'q_dob', 'q_email' ];
+        var fieldsToCheck = ['q_first_name', 'q_last_name', 'q_dob', 'q_email',
+            'q_address_1', 'q_address_city', 'q_address_state' ];
         var fieldsInError = [];
         for ( var i in fieldsToCheck ) {
             var field = fieldsToCheck[i];

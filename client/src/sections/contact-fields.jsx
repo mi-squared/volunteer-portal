@@ -15,12 +15,17 @@ export default React.createClass({
     },
 
     handleValidationState: function(field, e) {
-        var isError = this.props.errorFields
-            && this.props.errorFields.indexOf(field) > -1;
-
-        if ( isError ) {
-            return "error";
+        if ( !this.props.errorFields ) {
+            return;
         }
+        var state;
+        this.props.errorFields.map(entry => {
+            if ( entry.field === field && !state ) {
+                state = "error";
+            }
+        });
+
+        return state;
     },
 
     render: function() {
@@ -28,9 +33,11 @@ export default React.createClass({
         return (
             <div>
                 <div>
-                    <Input
-                        label="Address 1"
-                        type="text"
+                    <ValidatedInput
+                        errorFields={this.props.errorFields}
+                        required={true}
+                        label="Address 1" type="text"
+                        fieldName="q_address_1"
                         value={this.props.data.q_address_1}
                         onChange={this.handleChange.bind(this, "q_address_1")}
                     />
@@ -46,9 +53,11 @@ export default React.createClass({
                 </div>
 
                 <div>
-                    <Input
-                        label="City"
-                        type="text"
+                    <ValidatedInput
+                        errorFields={this.props.errorFields}
+                        required={true}
+                        label="City" type="text"
+                        fieldName="q_address_city"
                         value={this.props.data.q_address_city}
                         onChange={this.handleChange.bind(this, "q_address_city")}
                     />
@@ -57,6 +66,7 @@ export default React.createClass({
                 <div>
                     <StateField
                         data={this.props.data}
+                        required={true}
                         label="State/Province"
                         fieldName="q_address_state"
                         onChange={this.handleChange.bind(this, "q_address_state")}
@@ -64,18 +74,22 @@ export default React.createClass({
                 </div>
 
                 <div>
-                    <Input
-                        label="Zip"
-                        type="text"
+                    <ValidatedInput
+                        errorFields={this.props.errorFields}
+                        required={true}
+                        label="Zip" type="text"
+                        fieldName="q_address_zip"
                         value={this.props.data.q_address_zip}
                         onChange={this.handleChange.bind(this, "q_address_zip")}
                     />
                 </div>
 
                 <div>
-                    <Input
-                        label="Country"
-                        type="text"
+                    <ValidatedInput
+                        errorFields={this.props.errorFields}
+                        required={true}
+                        label="Country" type="text"
+                        fieldName="q_address_country"
                         value={this.props.data.q_address_country}
                         onChange={this.handleChange.bind(this, "q_address_country")}
                     />
