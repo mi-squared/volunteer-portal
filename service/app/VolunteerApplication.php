@@ -18,6 +18,7 @@ class VolunteerApplication extends Model
         'q_last_name',
         'q_languages',
         'q_email',
+        'q_tshirt',
 
         // contact
         "q_address_1",

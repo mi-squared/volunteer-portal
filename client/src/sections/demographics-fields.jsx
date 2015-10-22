@@ -112,6 +112,20 @@ export default React.createClass({
                     </DropdownField>
                 </QuestionContainer>
 
+                <QuestionContainer data={this.props.data}>
+                    <DropdownField
+                        label="Shirt size"
+                        selectValue={this.props.data['q_tshirt']}
+                        data={this.props.data}
+                        onChange={this.handleChange.bind(this, "q_tshirt")}>
+                        <option value="xsm">Extra small</option>
+                        <option value="sm">Small</option>
+                        <option value="med">Medium</option>
+                        <option value="lrg">Large</option>
+                        <option value="xlrg">Extra large</option>
+                    </DropdownField>
+                </QuestionContainer>
+
                 <QuestionContainer>
                     <Input label="Languages spoken" type="textarea"
                         fieldName="q_languages"
