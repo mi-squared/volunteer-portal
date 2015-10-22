@@ -53,7 +53,7 @@ $app->get('/', function () use ($app) {
                         font-size: 24px;
                     }
                 </style>
-                <META http-equiv=\"refresh\" content=\"1;URL=/client/dist/index.html\">
+                <META http-equiv=\"refresh\" content=\"0;URL=/client/dist/index.html\">
             </head>
             <body>
                 <div class=\"container\">
