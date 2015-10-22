@@ -7,33 +7,23 @@ export default class ValidatedInput extends Input {
         super(props);
     }
 
-    componentWillMount() {
-        if (super.componentWillMount) {
-            super.componentWillMount();
-        }
-    }
-
-    componentWillUnmount() {
-        if (super.componentWillUnmount) {
-            super.componentWillUnmount();
-        }
-    }
-
     componentDidMount() {
         if ( super.componentDidMount) {
             super.componentDidMount();
         }
         if (this.props.required) {
-            var thisDomNode = $(this.getInputDOMNode());
-            var parent = thisDomNode.parent();
-            var label = parent.find("label span");
-
-            if (parent.find("span.j-required").length < 1) {
+            if ( !this.parent ) {
+                this.parent = $(this.getInputDOMNode()).parent();
+            }
+            var label = this.parent.find("label span");
+            if (this.parent.find("span.j-required").length < 1) {
                 var requiredDOM = $("<span class='j-required'>*</span>");
                 label.prepend(requiredDOM);
             }
+
+            validate.call(this, this.props);
         }
-        validate.call(this, this.props);
+
     }
 
     componentWillReceiveProps(nextProps) {
@@ -48,7 +38,10 @@ function validate(nextProps) {
     if (!this.props.required) {
         return;
     }
-    var parent = $(this.getInputDOMNode()).parent();
+
+    if ( !this.parent ) {
+        this.parent = $(this.getInputDOMNode()).parent();
+    }
 
     // apply label
     var state;
@@ -61,16 +54,16 @@ function validate(nextProps) {
         });
     }
 
-    var errorMessageExists = parent.find("label span.j-error-message").length > 0;
+    var errorMessageExists = this.parent.find("label span.j-error-message").length > 0;
     if (state && !errorMessageExists) {
         var errorMessage = "<span class='j-error-message'>" + state + "</span>";
-        parent.find("label").append(errorMessage);
-        parent.addClass("has-error");
+        this.parent.find("label").append(errorMessage);
+        this.parent.addClass("has-error");
     } else if (!state && errorMessageExists) {
-        parent.find("label span.j-error-message").remove();
-        parent.removeClass("has-error");
+        this.parent.find("label span.j-error-message").remove();
+        this.parent.removeClass("has-error");
     } else if (errorMessageExists) {
-        $(parent.find("label span.j-error-message")).html(state);
-        parent.addClass("has-error");
+        $(this.parent.find("label span.j-error-message")).html(state);
+        this.parent.addClass("has-error");
     }
 }
