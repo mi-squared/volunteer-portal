@@ -36,7 +36,6 @@ export default class ValidatedInput extends Input {
 }
 
 function validate(nextProps) {
-    debugger;
     if (this.props.required) {
         var thisDomNode = $(this.getInputDOMNode());
         var parent = thisDomNode.parent();

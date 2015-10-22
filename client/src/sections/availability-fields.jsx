@@ -25,7 +25,7 @@ export default React.createClass({
                     criteria={ {key : 'q_available_entire_time', value : "false" } }>
 
                     <div>
-                        <h3>Which days are you available to volunteer?</h3>
+                        <label>Which days are you available to volunteer?</label>
                     </div>
                     <div>
                         <AvailabilityField label="Monday" />
@@ -42,7 +42,7 @@ export default React.createClass({
                     </div>
 
                     <div>
-                        <h3>Pre event</h3>
+                        <label>Which pre-event activities can you help with?</label>
                     </div>
                     <div>
                         <AvailabilityField label="Logistics-Truck Unloading" />
@@ -51,7 +51,7 @@ export default React.createClass({
                     </div>
 
                     <div>
-                        <h3>Post event</h3>
+                        <label>Which post-event activities can you help with?</label>
                     </div>
                     <div>
                         <AvailabilityField label="Logistics tear down" />

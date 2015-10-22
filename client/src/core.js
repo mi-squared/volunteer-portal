@@ -1,13 +1,15 @@
 import {Map, List} from 'immutable';
 
-export const INITIAL_STATE =  Map({
+var initialStateTemplate = {
     children: {},
     q_is_adventist: "false",
     q_dob : "1970-01-01",
     q_date_graduation : "1970-01-01",
     q_volunteered_before : 'false',
     q_available_entire_time : 'true'
-});
+};
+
+export const INITIAL_STATE =  Map(JSON.parse(JSON.stringify(initialStateTemplate)));
 
 var serviceURL = 'http://localhost:7771';
 
@@ -16,13 +18,7 @@ export function setEntries(state, entries) {
 }
 
 export function reset() {
-    var defaultState = {
-        children: {},
-        q_is_adventist: "false",
-        q_dob: "1970-01-01",
-        q_date_graduation : "1970-01-01",
-        q_volunteered_before: 'false'
-    };
+    var defaultState = JSON.parse(JSON.stringify(initialStateTemplate));
     var childID = new Date().getTime();
     defaultState['children'][childID]= { childID : childID };
     return Map(defaultState);
