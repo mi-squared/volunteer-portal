@@ -160,6 +160,7 @@ export const NewVolunteerPage = React.createClass({
 
                 <div>
                     <RegistrationFields
+                        onBlur={this.doValidate}
                         data={this.props}
                         requiredFields={[ 'q_first_name', 'q_last_name'] }
                         focusElement={this.state.focusElement}
