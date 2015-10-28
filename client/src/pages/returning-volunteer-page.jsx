@@ -92,6 +92,7 @@ export const ReturningVolunteerPage = React.createClass({
                                     response['application_id'] = response['id'];
                                     delete response['id'];
                                     self.props.loadApplication(response);
+                                    self.transitionTo('/main');
                                 },
                                 function(error) {
                                     console.log(error);
@@ -99,8 +100,8 @@ export const ReturningVolunteerPage = React.createClass({
                             );
                         } else {
                             console.log("New app.");
+                            self.transitionTo('/main');
                         }
-                        self.transitionTo('/main');
                     },
                     function(error) {
                         self.doInvalidCredentials();

@@ -37,6 +37,7 @@ export default React.createClass({
                     value={this.props.value}
                     onChange={this.props.onChange}
                     ref={this.props.ref}
+                    onBlur={this.props.onBlur}
                 />
             </div>
         );

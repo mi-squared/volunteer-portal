@@ -6,8 +6,23 @@ import ValidatedInput from '../components/validated-input-field.jsx';
 
 export default React.createClass({
 
+    componentWillMount: function() {
+        this.setState({
+            'q_first_name' : this.props.data['q_first_name'],
+            'q_middle_name' : this.props.data['q_middle_name'],
+            'q_last_name' : this.props.data['q_last_name']
+        });
+    },
+
     // todo - common to all sections - make into a mixin
     handleChange(field, e) {
+        var state = {};
+        state[field] = e.target.value;
+        this.setState(state);
+    },
+
+    commitChange(field, e) {
+        debugger;
         if ( this.props.onChange ) {
             this.props.onChange(field, e);
         } else if ( this.props.data.updateField ){
@@ -36,35 +51,35 @@ export default React.createClass({
                 <div>
                     <ValidatedInput
                         focusElement={this.props.focusElement}
-                        onBlur={this.props.onBlur}
                         errorFields={this.props.errorFields}
                         required={true}
                         label="First name"
                         type="text"
                         fieldName="q_first_name"
                         ref="q_first_name"
-                        value={this.props.data.q_first_name}
+                        value={this.state.q_first_name}
+                        onBlur={this.commitChange.bind(this, "q_first_name")}
                         onChange={this.handleChange.bind(this, "q_first_name")}/>
                     <ValidatedInput
                         focusElement={this.props.focusElement}
-                        onBlur={this.props.onBlur}
                         errorFields={this.props.errorFields}
                         label="Middle name" type="text"
                         fieldName="q_middle_name"
                         ref="q_middle_name"
-                        value={this.props.data.q_middle_name}
-                        onChange={this.handleChange.bind(this, "q_middle_name")}/>
+                        value={this.state.q_middle_name}
+                        onChange={this.handleChange.bind(this, "q_middle_name")}
+                        onBlur={this.commitChange.bind(this, "q_middle_name")}/>
                     <ValidatedInput
                         focusElement={this.props.focusElement}
-                        onBlur={this.props.onBlur}
                         errorFields={this.props.errorFields}
                         required={true}
                         label="Last name"
                         type="text"
                         fieldName="q_last_name"
                         ref="q_last_name"
-                        value={this.props.data.q_last_name}
-                        onChange={this.handleChange.bind(this, "q_last_name")}/>
+                        value={this.state.q_last_name}
+                        onChange={this.handleChange.bind(this, "q_last_name")}
+                        onBlur={this.commitChange.bind(this, "q_last_name")}/>
                 </div>
             </div>
         );
