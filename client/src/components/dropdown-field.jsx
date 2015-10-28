@@ -25,7 +25,7 @@ export default React.createClass({
         }
     },
 
-    componentWillReceiveProps: function(nextProps) {
+    XcomponentWillReceiveProps: function(nextProps) {
         if ( this.props.required ) {
             var parent = $(this.getDOMNode());
 
