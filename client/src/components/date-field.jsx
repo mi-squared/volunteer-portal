@@ -5,6 +5,10 @@ var classNames = require('classnames');
 
 export default React.createClass({
 
+    getInputDOMNode: function() {
+        return $(this.getDOMNode()).find("input").get(0);
+    },
+
     getInitialState: function() {
         return {
             date: "1970-01-01",
@@ -18,53 +22,25 @@ export default React.createClass({
         return this.setState({date: newDate});
     },
 
-    componentWillReceiveProps(nextProps) {
-        if (super.componentWillReceiveProps) {
-            super.componentWillReceiveProps(nextProps);
-        }
-
-        if ( this.props.required ) {
-            var parent = $(this.getDOMNode());
-            var label = parent.find("label span");
-            var requiredDOM = $("<span class='j-required'>*</span>");
-
-            if ( parent.find("span.j-required").length < 1 ) {
-                label.prepend(requiredDOM);
-            }
-
-            // apply label
-            var state;
-            var self = this;
-            if ( nextProps.errorFields ) {
-                nextProps.errorFields.map(entry => {
-                    if ( entry.field === self.props.fieldName && !state ) {
-                        state = entry.message
-                    }
-                });
-            }
-
-            var errorMessage;
-            var errorMessageExists = parent.find("label span.j-error-message").length > 0;
-            if ( state && !errorMessageExists ) {
-                errorMessage = "<span class='j-error-message'>" + state + "</span>";
-                parent.find("label").append(errorMessage);
-            } else if (!state && errorMessageExists ){
-                parent.find("label span.j-error-message").remove();
-            } else if (errorMessageExists ){
-                $(parent.find("label span.j-error-message")).html(state);
-            }
-        }
-    },
-
     render: function() {
         const {date, format, mode, inputFormat} = this.state;
-        var classes = classNames('form-group', this.props.bsStyle == 'error' ? 'has-error' : '' );
+
+        var requiredLabel = this.props.required ? <span className='j-required'>*</span> : '';
+        var message;
+        if (this.props.errorFields) {
+            var errorField = this.props.errorFields[this.props.fieldName];
+            if ( errorField ) {
+                message = errorField['message'];
+            }
+        }
+        var errorMessage = message ? <span className='j-error-message'>{message}</span> : '';
 
         return(
-            <div className={classes}>
+            <div className={classNames('form-group', message ? 'has-error' : '')}>
                 <label className="control-label">
-                    <span>{this.props.label}</span>
+                    <span>{requiredLabel}{this.props.label}</span>
                 </label>
+                {errorMessage}
                 <DateTimeField
                     dateTime={this.props.value}
                     format={format}

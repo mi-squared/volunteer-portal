@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import Router, {Route, DefaultRoute, Link} from 'react-router';
 import Button from 'react-bootstrap/lib/Button.js';
 import Alert from 'react-bootstrap/lib/Alert.js';
+import Revalidator from 'revalidator/lib/revalidator.js'
 
 import Demographics from '../sections/demographics-fields.jsx';
 
@@ -10,14 +11,33 @@ import * as actionCreators from '../action_creators';
 
 import {saveApplication}  from '../client.js';
 
-import composePage from './base-page.jsx';
+export const MainPage = React.createClass({
+    mixins: [ Router.Navigation ],
 
-class MainPage extends React.Component {
+    getInitialState: function() {
+        return {
+            focusElement: "q_first_name",
+            alertVisible: false,
+            errorFields: {},
+            errorMessage : 'Form error'
+        };
+    },
 
-    constructor(props) {
-        super(props);
-        this.schema =
-        {
+    handleAlertDismiss: function() {
+        this.setState({alertVisible: false});
+    },
+
+    handleAlertShow: function() {
+        var self = this;
+        self.setState({
+            alertVisible: true
+        });
+    },
+
+    doValidate: function() {
+        // todo - should be a module
+        var fieldsInError = {};
+        var schema = {
             properties: {
                 q_first_name: {
                     type: 'string',
@@ -69,37 +89,69 @@ class MainPage extends React.Component {
                 }
             }
         };
-
-        this.doContinue = this.doContinue.bind(this);
-    }
-
-    componentWillMount() {
-    }
-
-    doContinue() {
-        if (this.props.doValidate.call(this, this.schema) ) {
-            // save the application if passes validation
-            this.props.saveApplication();
-            // then move on to next page
-            this.props.transitionTo.call(this, this.props['q_bringing_children'] === 'true' ?
-                '/children-page' : '/volunteering-detail');
-        } else {
-            this.props.handleAlertShow.call(this);
+        var res = Revalidator.validate(this.props, schema);
+        if ( !res.valid ) {
+            for ( var i in res.errors ) {
+                var error = res.errors[i];
+                fieldsInError[error['property']] = {
+                    field: error['property'],
+                    message: error['message']
+                };
+            }
         }
-    }
 
-    render() {
+        var errorField = !fieldsInError ? null : fieldsInError[Object.keys(fieldsInError)[0] ];
+        this.setState({
+            focusElement : errorField ? errorField['field'] : null,
+            errorFields : fieldsInError,
+            submitTS: new Date().getTime()
+        });
+        return Object.keys(fieldsInError) < 1;
+    },
+
+    doContinue : function() {
+        if (this.doValidate() ) {
+            // save the application if passes validation
+            // then move on to next page
+            this.props.saveApplication();
+            var isBringingChildren = this.props['q_bringing_children'] === 'true';
+            this.transitionTo(isBringingChildren ? '/children-page' : '/volunteering-detail');
+        } else {
+            this.handleAlertShow();
+        }
+    },
+
+    onBlur: function() {
+        this.setState( {
+            focusElement : ''
+        });
+        this.doValidate();
+    },
+
+    render: function() {
+        var alert;
+        if (this.state.alertVisible) {
+            alert = (
+                <Alert bsStyle="danger" onDismiss={this.handleAlertDismiss}>
+                    <h4>Form error</h4>
+                    <p>Please update the fields in error to continue.</p>
+                </Alert>
+            );
+        } else {
+            alert = <div/>;
+        }
+
         return <div className="container">
             <h1>Volunteer Application</h1>
 
-            {this.props.alert}
+            {alert}
 
             <Demographics
-                submitTS={this.props.state.submitTS}
+                submitTS={this.state.submitTS}
                 data={this.props}
-                onBlur={super.onBlur}
-                focusElement={this.props.state.focusElement || 'q_first_name'}
-                errorFields={this.props.state.errorFields}/>
+                onBlur={this.onBlur}
+                focusElement={this.state.focusElement}
+                errorFields={this.state.errorFields}/>
 
             <hr/>
 
@@ -108,7 +160,7 @@ class MainPage extends React.Component {
             </div>
         </div>;
     }
-}
+});
 
 function mapStateToProps(state) {
     return state.toJSON();
@@ -116,4 +168,4 @@ function mapStateToProps(state) {
 
 export const MainPageContainer = connect(
     mapStateToProps, actionCreators
-)(composePage(MainPage));
+)(MainPage);

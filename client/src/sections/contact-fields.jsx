@@ -16,13 +16,15 @@ export default React.createClass({
         });
     },
 
-    // todo - common to all sections - make into a mixin
-    componentDidMount() {
-        if ( this.props.focusElement ) {
-            var ref = this.refs[this.props.focusElement];
-            if ( ref ) {
-                ref.getInputDOMNode().focus();
-            }
+    componentWillReceiveProps: function(nextProps) {
+        if ( nextProps.submitTS !== this.props.submitTS ) {
+            var self = this;
+            setTimeout( function() {
+                var ref = self.refs[nextProps.focusElement];
+                if (ref && ref.getInputDOMNode ) {
+                    ref.getInputDOMNode().focus();
+                }
+            }, 1);
         }
     },
 

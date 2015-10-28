@@ -6,9 +6,12 @@ import ValidatedInput from '../components/validated-input-field.jsx';
 
 export default React.createClass({
 
-    componentDidMount: function() {
-        if ( this.props.focusElement ) {
-            this.refs[this.props.focusElement].getInputDOMNode().focus();
+    componentWillReceiveProps: function(nextProps) {
+        if ( nextProps.submitTS !== this.props.submitTS ) {
+            var self = this;
+            setTimeout( function() {
+                self.refs[nextProps.focusElement].getInputDOMNode().focus();
+            }, 1);
         }
     },
 
@@ -36,6 +39,7 @@ export default React.createClass({
                                 value={this.props.data.f_password}
                                 required={true}
                                 fieldName="f_password"
+                                ref="f_password"
                                 onChange={this.handleChange.bind(this, "f_password")}/>
             </div>
         );

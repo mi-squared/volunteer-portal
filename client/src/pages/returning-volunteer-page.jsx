@@ -18,7 +18,7 @@ export const ReturningVolunteerPage = React.createClass({
         return {
             focusElement: "f_username",
             alertVisible: false,
-            errorFields: [],
+            errorFields: {},
             errorMessage : 'Form error'
         };
     },
@@ -38,7 +38,7 @@ export const ReturningVolunteerPage = React.createClass({
 
     doValidate: function() {
         // todo - should be a module
-        var fieldsInError = [];
+        var fieldsInError = {};
         var schema = {
             properties: {
                 f_username: {
@@ -56,19 +56,21 @@ export const ReturningVolunteerPage = React.createClass({
             }
         };
         var res = Revalidator.validate(this.state, schema);
-
         if ( !res.valid ) {
             for ( var i in res.errors ) {
                 var error = res.errors[i];
-                fieldsInError.push({
+                fieldsInError[error['property']] = {
                     field: error['property'],
                     message: error['message']
-                });
+                };
             }
         }
 
-        this.setState({ errorFields : fieldsInError });
-        return fieldsInError.length < 1;
+        this.setState({
+            errorFields : fieldsInError,
+            submitTS: new Date().getTime()
+        });
+        return Object.keys(fieldsInError) < 1;
     },
 
     doSignIn: function() {
@@ -107,10 +109,11 @@ export const ReturningVolunteerPage = React.createClass({
         } else {
             var self = this;
             setTimeout( function() {
-                var errorField = self.state.errorFields[0];
+                var errorField = !self.state.errorFields ? null : self.state.errorFields[Object.keys(self.state.errorFields)[0] ];
                 self.setState({
-                    focusElement : errorField ? errorField['field'] : '',
-                    errorMessage: "Form error"
+                    focusElement : errorField ? errorField['field'] : null,
+                    errorMessage: "Form error",
+                    submitTS: new Date().getTime()
                 });
                 self.doAlerts();
             }, 1);
@@ -121,19 +124,22 @@ export const ReturningVolunteerPage = React.createClass({
         this.setState({
             focusElement: 'f_password',
             errorMessage: "Invalid username or password",
-            errorFields : [
-                {
+            errorFields : {
+                'f_username': {
                     field: 'f_username',
                     message: ''
                 },
-                {
+                'f_password': {
                     field: 'f_password',
                     message: ''
                 }
-            ]
+            }
         });
         this.doAlerts();
-        this.setState( { 'f_password' : '' });
+        this.setState( {
+            'f_password' : '',
+            submitTS: new Date().getTime()
+        });
     },
 
     doCancel: function() {
@@ -181,6 +187,7 @@ export const ReturningVolunteerPage = React.createClass({
 
                 <div>
                     <SignInFields
+                        submitTS={this.state.submitTS}
                         onBlur={this.onBlur}
                         handleChange={this.handleChange}
                         data={this.state}

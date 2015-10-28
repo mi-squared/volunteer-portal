@@ -20,6 +20,18 @@ export default React.createClass({
         });
     },
 
+    componentWillReceiveProps: function(nextProps) {
+        if ( nextProps.submitTS !== this.props.submitTS ) {
+            var self = this;
+            setTimeout( function() {
+                var ref = self.refs[nextProps.focusElement];
+                if (ref && ref.getInputDOMNode ) {
+                    ref.getInputDOMNode().focus();
+                }
+            }, 1);
+        }
+    },
+
     render: function() {
         return (
             <div>
@@ -34,6 +46,7 @@ export default React.createClass({
                         label="Emergency contact name"
                         type="text"
                         fieldName="q_emergency_contact_name"
+                        ref="q_emergency_contact_name"
                         value={this.props.data.q_emergency_contact_name}
                         onChange={this.handleChange.bind(this, "q_emergency_contact_name")}
                     />
@@ -44,6 +57,7 @@ export default React.createClass({
                         label="Relationship"
                         type="text"
                         fieldName="q_emergency_contact_relationship"
+                        ref="q_emergency_contact_relationship"
                         value={this.props.data.q_emergency_contact_relationship}
                         onChange={this.handleChange.bind(this, "q_emergency_contact_relationship")}
                     />
@@ -54,6 +68,7 @@ export default React.createClass({
                         label="Phone number"
                         type="text"
                         fieldName="q_emergency_contact_phonenumber"
+                        ref="q_emergency_contact_phonenumber"
                         value={this.props.data.q_emergency_contact_phonenumber}
                         onChange={this.handleChange.bind(this, "q_emergency_contact_phonenumber")}
                     />
@@ -65,6 +80,7 @@ export default React.createClass({
                         required={true}
                         label="Date of birth" type="text"
                         fieldName="q_dob"
+                        ref="q_dob"
                         value={this.props.data.q_dob}
                         onChange={this.handleChange.bind(this, "q_dob")}/>
                 </QuestionContainer>
@@ -75,6 +91,7 @@ export default React.createClass({
                     <DropdownField
                         label="Race / Ethnicity"
                         selectValue={this.props.data['q_race_ethnicity']}
+                        ref="q_race_ethnicity"
                         data={this.props.data}
                         onChange={this.handleChange.bind(this, "q_race_ethnicity")}>
                         <option value="white">White</option>
@@ -89,6 +106,7 @@ export default React.createClass({
                     <DropdownField
                         label="Gender"
                         selectValue={this.props.data['q_gender']}
+                        ref="q_gender"
                         data={this.props.data}
                         onChange={this.handleChange.bind(this, "q_gender")}>
                         <option value="male">Male</option>
@@ -102,6 +120,7 @@ export default React.createClass({
                     <DropdownField
                         label="Shirt size"
                         selectValue={this.props.data['q_tshirt']}
+                        ref="q_tshirt"
                         data={this.props.data}
                         onChange={this.handleChange.bind(this, "q_tshirt")}>
                         <option value="xsm">Extra small</option>
@@ -115,6 +134,7 @@ export default React.createClass({
                 <QuestionContainer>
                     <Input label="Languages spoken" type="textarea"
                         fieldName="q_languages"
+                        ref="q_languages"
                         value={this.props.data.q_languages}
                         onChange={this.handleChange.bind(this, "q_languages")}
                     />
@@ -122,6 +142,7 @@ export default React.createClass({
 
                 <YesNoField data={this.props.data}
                     fieldName="q_is_adventist"
+                    ref="q_is_adventist"
                     label="Are you a committed Seventh-day Adventist in good standing and do you believe in all the fundamental beliefs of the church?"
                 />
 

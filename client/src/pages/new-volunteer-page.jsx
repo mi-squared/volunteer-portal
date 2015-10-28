@@ -17,7 +17,7 @@ export const NewVolunteerPage = React.createClass({
         return {
             focusElement: "q_first_name",
             alertVisible: false,
-            errorFields: [],
+            errorFields: {},
             errorMessage : 'Form error'
         };
     },
@@ -37,7 +37,7 @@ export const NewVolunteerPage = React.createClass({
 
     doValidate: function() {
         // todo - should be a module
-        var fieldsInError = [];
+        var fieldsInError = {};
         var schema = {
             properties: {
                 q_first_name: {
@@ -76,15 +76,18 @@ export const NewVolunteerPage = React.createClass({
         if ( !res.valid ) {
             for ( var i in res.errors ) {
                 var error = res.errors[i];
-                fieldsInError.push({
+                fieldsInError[error['property']] = {
                     field: error['property'],
                     message: error['message']
-                });
+                };
             }
         }
 
-        this.setState({ errorFields : fieldsInError });
-        return fieldsInError.length < 1;
+        this.setState({
+            errorFields : fieldsInError,
+            submitTS: new Date().getTime()
+        });
+        return Object.keys(fieldsInError) < 1;
     },
 
     doRegister: function() {
@@ -124,10 +127,11 @@ export const NewVolunteerPage = React.createClass({
         } else {
             var self = this;
             setTimeout( function() {
-                var errorField = self.state.errorFields[0];
+                var errorField = !self.state.errorFields ? null : self.state.errorFields[Object.keys(self.state.errorFields)[0] ];
                 self.setState({
-                    focusElement : errorField ? errorField['field'] : '',
-                    errorMessage: "Form error"
+                    focusElement : errorField ? errorField['field'] : null,
+                    errorMessage: "Form error",
+                    submitTS: new Date().getTime()
                 });
                 self.doAlerts();
             }, 1);
@@ -171,6 +175,7 @@ export const NewVolunteerPage = React.createClass({
 
                 <div>
                     <RegistrationFields
+                        submitTS={this.state.submitTS}
                         onBlur={this.onBlur}
                         data={this.props}
                         focusElement={this.state.focusElement}

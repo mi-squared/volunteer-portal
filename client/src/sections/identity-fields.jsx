@@ -18,13 +18,15 @@ export default React.createClass({
         }
     },
 
-    // todo - common to all sections - make into a mixin
-    componentDidMount: function() {
-        if ( this.props.focusElement ) {
-            var ref = this.refs[this.props.focusElement];
-            if ( ref ) {
-                ref.getInputDOMNode().focus();
-            }
+    componentWillReceiveProps: function(nextProps) {
+        if ( nextProps.submitTS !== this.props.submitTS ) {
+            var self = this;
+            setTimeout( function() {
+                var ref = self.refs[nextProps.focusElement];
+                if (ref ) {
+                    ref.getInputDOMNode().focus();
+                }
+            }, 1);
         }
     },
 
@@ -37,19 +39,19 @@ export default React.createClass({
                         onBlur={this.props.onBlur}
                         errorFields={this.props.errorFields}
                         required={true}
-                        ref="q_first_name"
                         label="First name"
                         type="text"
                         fieldName="q_first_name"
+                        ref="q_first_name"
                         value={this.props.data.q_first_name}
                         onChange={this.handleChange.bind(this, "q_first_name")}/>
                     <ValidatedInput
                         focusElement={this.props.focusElement}
                         onBlur={this.props.onBlur}
                         errorFields={this.props.errorFields}
-                        ref="q_middle_name"
                         label="Middle name" type="text"
                         fieldName="q_middle_name"
+                        ref="q_middle_name"
                         value={this.props.data.q_middle_name}
                         onChange={this.handleChange.bind(this, "q_middle_name")}/>
                     <ValidatedInput
@@ -57,10 +59,10 @@ export default React.createClass({
                         onBlur={this.props.onBlur}
                         errorFields={this.props.errorFields}
                         required={true}
-                        ref="q_last_name"
                         label="Last name"
                         type="text"
                         fieldName="q_last_name"
+                        ref="q_last_name"
                         value={this.props.data.q_last_name}
                         onChange={this.handleChange.bind(this, "q_last_name")}/>
                 </div>

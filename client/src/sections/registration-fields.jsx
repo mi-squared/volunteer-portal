@@ -9,6 +9,18 @@ import DateField from '../components/date-field.jsx';
 
 export default React.createClass({
 
+    componentWillReceiveProps: function(nextProps) {
+        if ( nextProps.submitTS !== this.props.submitTS ) {
+            var self = this;
+            setTimeout( function() {
+                var ref = self.refs[nextProps.focusElement];
+                if (ref ) {
+                    ref.getInputDOMNode().focus();
+                }
+            }, 1);
+        }
+    },
+
     handleChange(field, e) {
         this.props.data.updateField( {
             key : field,
@@ -37,6 +49,7 @@ export default React.createClass({
                     value={this.props.data.q_dob}
                     required={true}
                     fieldName="q_dob"
+                    ref="q_dob"
                     onChange={this.handleDateChange}
                 />
 
@@ -47,6 +60,7 @@ export default React.createClass({
                                 value={this.props.data.q_email}
                                 required={true}
                                 fieldName="q_email"
+                                ref="q_email"
                                 onChange={this.handleChange.bind(this, "q_email")}/>
 
                 <ValidatedInput focusElement={this.props.focusElement}
@@ -56,6 +70,7 @@ export default React.createClass({
                                 value={this.props.data.q_password}
                                 required={true}
                                 fieldName="q_password"
+                                ref="q_password"
                                 onChange={this.handleChange.bind(this, "q_password")}/>
             </div>
         );
