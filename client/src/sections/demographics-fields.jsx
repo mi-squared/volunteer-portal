@@ -10,34 +10,20 @@ import ContactFields from './contact-fields.jsx';
 import IdentityFields from './identity-fields.jsx';
 import StudentFields from './student-fields.jsx';
 
-export default React.createClass({
+import BaseSection from './base-section.jsx'
 
-    // todo - common to all sections - make into a mixin
-    handleChange(field, e) {
-        this.props.data.updateField( {
-            key : field,
-            value : e.target.value
-        });
-    },
+export default class DemographicsFields extends BaseSection {
+    constructor(props) {
+        super(props);
+        this.handleChange = super.handleChange.bind(this);
+    }
 
-    componentWillReceiveProps: function(nextProps) {
-        if ( nextProps.submitTS !== this.props.submitTS ) {
-            var self = this;
-            setTimeout( function() {
-                var ref = self.refs[nextProps.focusElement];
-                if (ref && ref.getInputDOMNode ) {
-                    ref.getInputDOMNode().focus();
-                }
-            }, 1);
-        }
-    },
-
-    render: function() {
+    render() {
         return (
             <div>
-                <IdentityFields {...this.props} />
+                <IdentityFields {...this.props} onChange={this.handleChange}/>
 
-                <ContactFields {...this.props} />
+                <ContactFields {...this.props}  onChange={this.handleChange}/>
 
                 <hr/>
 
@@ -76,6 +62,7 @@ export default React.createClass({
 
                 <QuestionContainer data={this.props.data}>
                     <ValidatedInput
+                        focusElement={this.props.focusElement}
                         errorFields={this.props.errorFields}
                         required={true}
                         label="Date of birth" type="text"
@@ -182,4 +169,4 @@ export default React.createClass({
             </div>
         );
     }
-});
+}

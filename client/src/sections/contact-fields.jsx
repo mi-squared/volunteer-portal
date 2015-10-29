@@ -5,31 +5,15 @@ import Input from 'react-bootstrap/lib/Input';
 import ValidatedInput from '../components/validated-input-field.jsx';
 import StateField from '../components/state-field.jsx';
 import CountryField from '../components/country-field.jsx';
+import BaseSection from './base-section.jsx'
 
-export default React.createClass({
+export default class ContactFields extends BaseSection {
+    constructor(props) {
+        super(props);
+        this.handleChange = super.handleChange.bind(this);
+    }
 
-    // todo - common to all sections - make into a mixin
-    handleChange(field, e) {
-        this.props.data.updateField( {
-            key : field,
-            value : e.target.value
-        });
-    },
-
-    componentWillReceiveProps: function(nextProps) {
-        if ( nextProps.submitTS !== this.props.submitTS ) {
-            var self = this;
-            setTimeout( function() {
-                var ref = self.refs[nextProps.focusElement];
-                if (ref && ref.getInputDOMNode ) {
-                    ref.getInputDOMNode().focus();
-                }
-            }, 1);
-        }
-    },
-
-    render: function() {
-        var self = this;
+    render() {
         return (
             <div>
                 <div>
@@ -42,17 +26,18 @@ export default React.createClass({
                         ref="q_address_1"
                         fieldName="q_address_1"
                         value={this.props.data.q_address_1}
-                        onChange={this.handleChange.bind(this, "q_address_1")}
+                        onChange={this.handleChange}
                     />
                 </div>
 
                 <div>
-                    <Input
+                    <ValidatedInput
                         label="Address 2"
                         type="text"
                         ref="q_address_2"
+                        fieldName="q_address_2"
                         value={this.props.data.q_address_2}
-                        onChange={this.handleChange.bind(this, "q_address_2")}
+                        onChange={this.handleChange}
                     />
                 </div>
 
@@ -91,7 +76,7 @@ export default React.createClass({
                         ref="q_address_zip"
                         fieldName="q_address_zip"
                         value={this.props.data.q_address_zip}
-                        onChange={this.handleChange.bind(this, "q_address_zip")}
+                        onChange={this.handleChange}
                     />
                 </div>
 
@@ -102,7 +87,7 @@ export default React.createClass({
                         label="Country"
                         ref="q_address_country"
                         fieldName="q_address_country"
-                        onChange={this.handleChange.bind(this, "q_address_country")}
+                        onChange={this.handleChange}
                     />
                 </div>
 
@@ -135,9 +120,10 @@ export default React.createClass({
                         required={true}
                         ref="q_email"
                         fieldName="q_email"
-                        onChange={this.handleChange.bind(this, "q_email")}/>
+                        onChange={this.handleChange}
+                    />
                 </div>
             </div>
         );
     }
-});
+}

@@ -1,76 +1,26 @@
 import React from 'react';
 
+import classNames from 'classnames'
+
 export default React.createClass({
 
-    handleChange(field, e) {
-        if ( this.props.onChange ) {
-            this.props.onChange(field, e);
-        } else if ( this.props.data.updateField ){
-            this.props.data.updateField( {
-                key : field,
-                value : $(React.findDOMNode(this)).val()
-            });
-        }
-    },
-
-    componentDidMount() {
-        if ( this.props.multiple ) {
-            var targetField = $(React.findDOMNode(this));
-            targetField.select2();
-
-            var self = this;
-            targetField.on("select2:select", function (e) {
-                self.handleChange( self.props.field, e );
-            });
-        }
-    },
-
-    XcomponentWillReceiveProps: function(nextProps) {
-        if ( this.props.required ) {
-            var parent = $(this.getDOMNode());
-
-            var label = parent.find("label span");
-            if ( parent.find("span.j-required").length < 1 ) {
-                var requiredDOM = $("<span class='j-required'>*</span>");
-                label.prepend(requiredDOM);
-            }
-
-            // apply label
-            var state;
-            var self = this;
-            if ( nextProps.errorFields ) {
-                nextProps.errorFields.map(entry => {
-                    if ( entry.field === self.props.fieldName && !state ) {
-                        state = entry.message
-                    }
-                });
-            }
-
-            var errorMessage;
-            var errorMessageExists = parent.find("label span.j-error-message").length > 0;
-            if ( state && !errorMessageExists ) {
-                errorMessage = "<span class='j-error-message'>" + state + "</span>";
-                parent.find("label").append(errorMessage);
-                parent.addClass("has-error");
-            } else if (!state && errorMessageExists ){
-                parent.find("label span.j-error-message").remove();
-                parent.removeClass("has-error");
-            } else if (errorMessageExists ){
-                $(parent.find("label span.j-error-message")).html(state);
-            }
-        }
-    },
-
-    getOptions() {
-        return this.props.options || [];
-    },
-
     render: function() {
+        var requiredLabel = this.props.required ? <span className='j-required'>*</span> : '';
+        var message;
+        if (this.props.errorFields) {
+            var errorField = this.props.errorFields[this.props.fieldName];
+            if ( errorField ) {
+                message = errorField['message'];
+            }
+        }
+        var errorMessage = message ? <span className='j-error-message'>{message}</span> : '';
+
         return (
-            <div className="form-group">
+            <div className={classNames('form-group', message ? 'has-error' : '')}>
                 <label className="control-label">
-                    <span>{this.props.label}</span>
+                    <span>{requiredLabel}{this.props.label}</span>
                 </label>
+                {errorMessage}
                 <div>
                     <select
                         className="form-control"

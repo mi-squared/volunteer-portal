@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Input from 'react-bootstrap/lib/Input';
 import classNames from 'classnames'
 
 export default React.createClass({
@@ -8,10 +7,30 @@ export default React.createClass({
         return $(this.getDOMNode()).find("input").get(0);
     },
 
+    handleChange: function(e) {
+        this.dirty = true;
+        this.setState({ value: e.target.value });
+    },
+
+    commitChange: function(e) {
+        if ( this.props.onChange ) {
+            this.props.onChange(this.props.fieldName, e);
+        }
+        this.dirty = false;
+    },
+
+    componentWillMount: function() {
+        this.setState({ value: this.props.value });
+    },
+
     componentDidMount: function() {
         if ( this.props.focusElement === this.props.fieldName ) {
             this.getInputDOMNode().focus();
         }
+    },
+
+    getValue: function() {
+        return this.dirty ? this.state.value : this.props.value;
     },
 
     render: function() {
@@ -34,10 +53,10 @@ export default React.createClass({
                 <input label={this.props.label}
                     type={this.props.type}
                     className="form-control"
-                    value={this.props.value}
-                    onChange={this.props.onChange}
+                    value={this.getValue()}
+                    onChange={this.handleChange}
                     ref={this.props.ref}
-                    onBlur={this.props.onBlur}
+                    onBlur={this.commitChange}
                 />
             </div>
         );

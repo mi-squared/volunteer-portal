@@ -13,6 +13,7 @@ export default React.createClass({
                 selectValue={this.props.data[this.props.fieldName]}
                 data={this.props.data}
                 field={this.props.fieldName}
+                ref={this.props.ref}
                 onChange={this.props.onChange}>
                 <option value="AFG">Afghanistan</option>
                 <option value="ALA">Åland Islands</option>

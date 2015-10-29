@@ -1,47 +1,33 @@
 import React from 'react';
 
-import Input from 'react-bootstrap/lib/Input';
-
 import ValidatedInput from '../components/validated-input-field.jsx';
+import BaseSection from './base-section.jsx'
 
-export default React.createClass({
+export default class IdentityFields extends BaseSection {
 
-    componentWillReceiveProps: function(nextProps) {
-        if ( nextProps.submitTS !== this.props.submitTS ) {
-            var self = this;
-            setTimeout( function() {
-                self.refs[nextProps.focusElement].getInputDOMNode().focus();
-            }, 1);
-        }
-    },
-
-    handleChange(field, e) {
-        this.props.handleChange(field, e);
-    },
-
-    render: function() {
+    render() {
         return (
             <div>
-                <ValidatedInput focusElement={this.props.focusElement}
-                                onBlur={this.props.onBlur}
-                                errorFields={this.props.errorFields}
-                                label="Email (username)" type="text"
-                                value={this.props.data.f_username}
-                                required={true}
-                                fieldName="f_username"
-                                ref="f_username"
-                                onChange={this.handleChange.bind(this, "f_username")}/>
+                <ValidatedInput
+                    {...this.props}
+                    label="Email (username)" type="text"
+                    value={this.props.data.f_username}
+                    required={true}
+                    fieldName="f_username"
+                    ref="f_username"
+                    onChange={this.handleChange}
+                />
 
-                <ValidatedInput focusElement={this.props.focusElement}
-                                onBlur={this.props.onBlur}
-                                errorFields={this.props.errorFields}
-                                label="Password" type="password"
-                                value={this.props.data.f_password}
-                                required={true}
-                                fieldName="f_password"
-                                ref="f_password"
-                                onChange={this.handleChange.bind(this, "f_password")}/>
+                <ValidatedInput
+                    {...this.props}
+                    label="Password" type="password"
+                    value={this.props.data.f_password}
+                    required={true}
+                    fieldName="f_password"
+                    ref="f_password"
+                    onChange={this.handleChange}
+                />
             </div>
         );
     }
-});
+}

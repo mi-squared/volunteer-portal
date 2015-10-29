@@ -73,9 +73,6 @@ class MainPage extends React.Component {
         this.doContinue = this.doContinue.bind(this);
     }
 
-    componentWillMount() {
-    }
-
     doContinue() {
         if (this.props.doValidate.call(this, this.schema) ) {
             // save the application if passes validation

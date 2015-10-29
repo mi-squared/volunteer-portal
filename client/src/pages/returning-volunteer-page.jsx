@@ -188,6 +188,7 @@ export const ReturningVolunteerPage = React.createClass({
 
                 <div>
                     <SignInFields
+                        {...this.props}
                         submitTS={this.state.submitTS}
                         onBlur={this.onBlur}
                         handleChange={this.handleChange}
