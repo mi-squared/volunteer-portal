@@ -7,7 +7,6 @@ export default class BaseSection extends React.Component {
     }
 
     handleChange(field, e) {
-        debugger;
         this.props.updateField( {
             key : field.split("."),
             value : e.target.value
