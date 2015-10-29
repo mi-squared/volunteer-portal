@@ -52,14 +52,14 @@ function doSave(stateJSON) {
     var token = stateJSON['jwt'];
     var application = {};
 
-    for ( var key in stateJSON ) {
+    for ( var key in stateJSON.data ) {
         if ( ( key.indexOf('q_') == 0
             || key == 'application_id'
             || key == 'user_id'
             )
 
-            && stateJSON.hasOwnProperty(key) ) {
-            application[key] = stateJSON[key];
+            && stateJSON.data.hasOwnProperty(key) ) {
+            application[key] = stateJSON.data[key];
         }
     }
 

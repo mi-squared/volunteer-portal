@@ -15,7 +15,7 @@ export const NewVolunteerPage = React.createClass({
 
     getInitialState: function() {
         return {
-            focusElement: "q_first_name",
+            focusElement: "data.q_first_name",
             alertVisible: false,
             errorFields: {},
             errorMessage : 'Form error'
@@ -76,8 +76,8 @@ export const NewVolunteerPage = React.createClass({
         if ( !res.valid ) {
             for ( var i in res.errors ) {
                 var error = res.errors[i];
-                fieldsInError[error['property']] = {
-                    field: error['property'],
+                fieldsInError[ 'data.' + error['property']] = {
+                    field: 'data.' + error['property'],
                     message: error['message']
                 };
             }

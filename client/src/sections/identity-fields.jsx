@@ -13,16 +13,16 @@ export default class IdentityFields extends BaseSection {
                     required={true}
                     label="First name"
                     type="text"
-                    fieldName="q_first_name"
-                    ref="q_first_name"
+                    fieldName="data.q_first_name"
+                    ref="data.q_first_name"
                     value={this.props.data.q_first_name}
                     onChange={this.handleChange}
                 />
                 <ValidatedInput
                     {...this.props}
                     label="Middle name" type="text"
-                    fieldName="q_middle_name"
-                    ref="q_middle_name"
+                    fieldName="data.q_middle_name"
+                    ref="data.q_middle_name"
                     value={this.props.data.q_middle_name}
                     onChange={this.handleChange}
                 />
@@ -31,8 +31,8 @@ export default class IdentityFields extends BaseSection {
                     required={true}
                     label="Last name"
                     type="text"
-                    fieldName="q_last_name"
-                    ref="q_last_name"
+                    fieldName="data.q_last_name"
+                    ref="data.q_last_name"
                     value={this.props.data.q_last_name}
                     onChange={this.handleChange}
                 />

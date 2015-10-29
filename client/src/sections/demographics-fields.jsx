@@ -25,8 +25,8 @@ export default class DemographicsFields extends BaseSection {
                     <Input
                         label="Emergency contact name"
                         type="text"
-                        fieldName="q_emergency_contact_name"
-                        ref="q_emergency_contact_name"
+                        fieldName="data.q_emergency_contact_name"
+                        ref="data.q_emergency_contact_name"
                         value={this.props.data.q_emergency_contact_name}
                         onChange={this.handleChange.bind(this, "q_emergency_contact_name")}
                     />
@@ -36,8 +36,8 @@ export default class DemographicsFields extends BaseSection {
                     <Input
                         label="Relationship"
                         type="text"
-                        fieldName="q_emergency_contact_relationship"
-                        ref="q_emergency_contact_relationship"
+                        fieldName="data.q_emergency_contact_relationship"
+                        ref="data.q_emergency_contact_relationship"
                         value={this.props.data.q_emergency_contact_relationship}
                         onChange={this.handleChange.bind(this, "q_emergency_contact_relationship")}
                     />
@@ -47,8 +47,8 @@ export default class DemographicsFields extends BaseSection {
                     <Input
                         label="Phone number"
                         type="text"
-                        fieldName="q_emergency_contact_phonenumber"
-                        ref="q_emergency_contact_phonenumber"
+                        fieldName="data.q_emergency_contact_phonenumber"
+                        ref="data.q_emergency_contact_phonenumber"
                         value={this.props.data.q_emergency_contact_phonenumber}
                         onChange={this.handleChange.bind(this, "q_emergency_contact_phonenumber")}
                     />
@@ -59,8 +59,8 @@ export default class DemographicsFields extends BaseSection {
                         {...this.props}
                         required={true}
                         label="Date of birth" type="text"
-                        fieldName="q_dob"
-                        ref="q_dob"
+                        fieldName="data.q_dob"
+                        ref="data.q_dob"
                         value={this.props.data.q_dob}
                         onChange={this.handleChange.bind(this, "q_dob")}/>
                 </QuestionContainer>
@@ -72,7 +72,7 @@ export default class DemographicsFields extends BaseSection {
                         {...this.props}
                         label="Race / Ethnicity"
                         selectValue={this.props.data['q_race_ethnicity']}
-                        ref="q_race_ethnicity"
+                        ref="data.q_race_ethnicity"
                         onChange={this.handleChange.bind(this, "q_race_ethnicity")}>
                         <option value="white">White</option>
                         <option value="african-american">African American</option>
@@ -87,7 +87,7 @@ export default class DemographicsFields extends BaseSection {
                         {...this.props}
                         label="Gender"
                         selectValue={this.props.data['q_gender']}
-                        ref="q_gender"
+                        ref="data.q_gender"
                         onChange={this.handleChange.bind(this, "q_gender")}>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
@@ -101,7 +101,7 @@ export default class DemographicsFields extends BaseSection {
                         {...this.props}
                         label="Shirt size"
                         selectValue={this.props.data['q_tshirt']}
-                        ref="q_tshirt"
+                        ref="data.q_tshirt"
                         onChange={this.handleChange.bind(this, "q_tshirt")}>
                         <option value="xsm">Extra small</option>
                         <option value="sm">Small</option>
@@ -113,16 +113,16 @@ export default class DemographicsFields extends BaseSection {
 
                 <QuestionContainer>
                     <Input label="Languages spoken" type="textarea"
-                        fieldName="q_languages"
-                        ref="q_languages"
+                        fieldName="data.q_languages"
+                        ref="data.q_languages"
                         value={this.props.data.q_languages}
                         onChange={this.handleChange.bind(this, "q_languages")}
                     />
                 </QuestionContainer>
 
                 <YesNoField {...this.props}
-                    fieldName="q_is_adventist"
-                    ref="q_is_adventist"
+                    fieldName="data.q_is_adventist"
+                    ref="data.q_is_adventist"
                     label="Are you a committed Seventh-day Adventist in good standing and do you believe in all the fundamental beliefs of the church?"
                 />
 
@@ -147,12 +147,12 @@ export default class DemographicsFields extends BaseSection {
                 </QuestionContainer>
 
                 <YesNoField {...this.props}
-                    fieldName="q_bringing_children"
+                    fieldName="data.q_bringing_children"
                     label="Are you bringing children under 13?"
                 />
 
                 <YesNoField {...this.props}
-                    fieldName="q_is_student"
+                    fieldName="data.q_is_student"
                     label="Are you a student volunteer?"
                 />
 

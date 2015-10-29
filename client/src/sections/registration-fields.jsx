@@ -24,8 +24,8 @@ export default class RegistrationFields extends BaseSection {
                     label="Date of birth (mm/yy/dddd)"
                     value={this.props.data.q_dob}
                     required={true}
-                    fieldName="q_dob"
-                    ref="q_dob"
+                    fieldName="data.q_dob"
+                    ref="data.q_dob"
                     onChange={this.handleDateChange}
                 />
 
@@ -34,18 +34,18 @@ export default class RegistrationFields extends BaseSection {
                     label="Email address" type="text"
                     value={this.props.data.q_email}
                     required={true}
-                    fieldName="q_email"
-                    ref="q_email"
-                    onChange={this.handleChange.bind("q_email")}/>
+                    fieldName="data.q_email"
+                    ref="data.q_email"
+                    onChange={this.handleChange}/>
 
                 <ValidatedInput
                     {...this.props}
                     label="Password" type="password"
                     value={this.props.data.q_password}
                     required={true}
-                    fieldName="q_password"
-                    ref="q_password"
-                    onChange={this.handleChange.bind("q_password")}/>
+                    fieldName="data.q_password"
+                    ref="data.q_password"
+                    onChange={this.handleChange}/>
             </div>
         );
     }

@@ -16,14 +16,14 @@ export default class LicenseFields extends BaseSection {
                     <StateField
                         {...this.props}
                         label="State of license"
-                        fieldName="q_licensed_state"/>
+                        fieldName="data.q_licensed_state"/>
                 </QuestionContainer>
 
                 <QuestionContainer {...this.props} >
                     <Input
                         label="Discipline licensed in"
                         type="text"
-                        fieldName="q_licensed_discipline"
+                        fieldName="data.q_licensed_discipline"
                         value={this.props.data.q_licensed_discipline}
                         onChange={this.handleChange.bind(this, "q_licensed_discipline")}/>
                 </QuestionContainer>
@@ -32,7 +32,7 @@ export default class LicenseFields extends BaseSection {
                     <DateField
                         label="Expiration date of license (mm/yy/dddd)"
                         value={this.props.data.q_dob}
-                        fieldName="q_licensed_expiration_date"
+                        fieldName="data.q_licensed_expiration_date"
                     />
 
                 </QuestionContainer>

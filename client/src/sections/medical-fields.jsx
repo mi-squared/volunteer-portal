@@ -13,21 +13,21 @@ export default class MedicalFields extends BaseSection {
                 <QuestionContainer {...this.props}>
                     <Input type="text" label="List any specialties:"
                         type="text"
-                        fieldName="q_medical_specialties"
+                        fieldName="data.q_medical_specialties"
                         value={this.props.data.q_medical_specialties}
                         onChange={this.handleChange.bind(this, "q_medical_specialties")}/>
                 </QuestionContainer>
 
                 <QuestionContainer {...this.props}>
                     <Input type="text" label="NPI"
-                        fieldName="q_medical_npi"
+                        fieldName="data.q_medical_npi"
                         value={this.props.data.q_medical_npi}
                         onChange={this.handleChange.bind(this, "q_medical_npi")}/>
                 </QuestionContainer>
 
                 <QuestionContainer {...this.props}>
                     <Input type="text" label="DEA (Optional)"
-                        fieldName="q_medical_dea"
+                        fieldName="data.q_medical_dea"
                         value={this.props.data.q_medical_dea}
                         onChange={this.handleChange.bind(this, "q_medical_dea")}/>
                 </QuestionContainer>

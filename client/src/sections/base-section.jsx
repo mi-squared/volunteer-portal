@@ -3,13 +3,13 @@ import React from 'react';
 export default class BaseSection extends React.Component {
     constructor(props) {
         super(props);
-
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(field, e) {
+        debugger;
         this.props.updateField( {
-            key : field,
+            key : field.split("."),
             value : e.target.value
         });
     }

@@ -36,8 +36,8 @@ export default function composePage(Component) {
             if (!res.valid) {
                 for (var i in res.errors) {
                     var error = res.errors[i];
-                    fieldsInError[error['property']] = {
-                        field: error['property'],
+                    fieldsInError['data.' + error['property']] = {
+                        field: 'data.' + error['property'],
                         message: error['message']
                     };
                 }

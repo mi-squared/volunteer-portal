@@ -12,12 +12,12 @@ export default class AvailabilityFields extends BaseSection {
         return (
             <div>
                 <YesNoField {...this.props}
-                    fieldName="q_share_room"
+                    fieldName="data.data.q_share_room"
                     label="Are you able and willing to share a room?"
                 />
 
                 <YesNoField {...this.props}
-                    fieldName="q_available_entire_time"
+                    fieldName="data.data.q_available_entire_time"
                     label="Aside from any emergencies are you able to help the entire time?"
                 />
 

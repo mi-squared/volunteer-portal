@@ -41,7 +41,7 @@ export default class MedicalFields extends BaseSection {
                     <DateField
                         label="Date of anticipated graduation"
                         value={this.props.data.q_date_graduation}
-                        fieldName="q_date_graduation"
+                        fieldName="data.q_date_graduation"
                     />
                 </div>
 

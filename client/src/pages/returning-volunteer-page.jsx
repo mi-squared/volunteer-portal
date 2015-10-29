@@ -16,7 +16,7 @@ export const ReturningVolunteerPage = React.createClass({
 
     getInitialState: function() {
         return {
-            focusElement: "f_username",
+            focusElement: "session.f_username",
             alertVisible: false,
             errorFields: {},
             errorMessage : 'Form error'
@@ -41,13 +41,13 @@ export const ReturningVolunteerPage = React.createClass({
         var fieldsInError = {};
         var schema = {
             properties: {
-                f_username: {
+                'f_username': {
                     type: 'string',
                     maxLength: 255,
                     required: true,
                     allowEmpty: false
                 },
-                f_password: {
+                'f_password': {
                     type: 'string',
                     maxLength: 255,
                     required: true,
@@ -55,13 +55,14 @@ export const ReturningVolunteerPage = React.createClass({
                 }
             }
         };
-        var res = Revalidator.validate(this.state, schema);
+
+        var res = Revalidator.validate(this.props.session, schema);
         if ( !res.valid ) {
             for ( var i in res.errors ) {
                 var error = res.errors[i];
                 fieldsInError[error['property']] = {
-                    field: error['property'],
-                    message: error['message']
+                    field: 'session.' + error['property'],
+                    message: 'session.' + error['message']
                 };
             }
         }
@@ -75,9 +76,11 @@ export const ReturningVolunteerPage = React.createClass({
 
     doSignIn: function() {
         // validation
+        debugger;
         if ( this.doValidate() ) {
             var self = this;
-            login(this.state['f_username'], this.state['f_password'])
+            debugger;
+            login(this.props.session['f_username'], this.props.session['f_password'])
                 .then(
                     function(response) {
                         var token = response.token;
@@ -123,22 +126,21 @@ export const ReturningVolunteerPage = React.createClass({
 
     doInvalidCredentials: function() {
         this.setState({
-            focusElement: 'f_password',
+            focusElement: 'session.f_password',
             errorMessage: "Invalid username or password",
             errorFields : {
-                'f_username': {
-                    field: 'f_username',
+                'session.f_username': {
+                    field: 'session.f_username',
                     message: ''
                 },
-                'f_password': {
-                    field: 'f_password',
+                'session.f_password': {
+                    field: 'session.f_password',
                     message: ''
                 }
             }
         });
         this.doAlerts();
         this.setState( {
-            'f_password' : '',
             submitTS: new Date().getTime()
         });
     },
@@ -150,12 +152,6 @@ export const ReturningVolunteerPage = React.createClass({
 
     doAlerts: function() {
         this.handleAlertShow();
-    },
-
-    handleChange: function(field, e) {
-        var state = {};
-        state[field] = e.target.value;
-        this.setState(state);
     },
 
     onBlur: function() {
@@ -191,8 +187,6 @@ export const ReturningVolunteerPage = React.createClass({
                         {...this.props}
                         submitTS={this.state.submitTS}
                         onBlur={this.onBlur}
-                        handleChange={this.handleChange}
-                        data={this.state}
                         focusElement={this.state.focusElement}
                         errorFields={this.state.errorFields}
                     />

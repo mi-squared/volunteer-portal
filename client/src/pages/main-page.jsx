@@ -5,11 +5,8 @@ import Button from 'react-bootstrap/lib/Button.js';
 import Alert from 'react-bootstrap/lib/Alert.js';
 
 import Demographics from '../sections/demographics-fields.jsx';
-
 import * as actionCreators from '../action_creators';
-
 import {saveApplication}  from '../client.js';
-
 import composePage from './base-page.jsx';
 
 class MainPage extends React.Component {
@@ -95,7 +92,7 @@ class MainPage extends React.Component {
                 {...this.props}
                 submitTS={this.props.state.submitTS}
                 onBlur={super.onBlur}
-                focusElement={this.props.state.focusElement || 'q_first_name'}
+                focusElement={this.props.state.focusElement || 'data.q_first_name'}
                 errorFields={this.props.state.errorFields}/>
 
             <hr/>

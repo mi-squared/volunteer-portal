@@ -17,8 +17,8 @@ export default class ContactFields extends BaseSection {
                         {...this.props}
                         required={true}
                         label="Address 1" type="text"
-                        ref="q_address_1"
-                        fieldName="q_address_1"
+                        ref="data.q_address_1"
+                        fieldName="data.data.q_address_1"
                         value={this.props.data.q_address_1}
                         onChange={this.handleChange}
                     />
@@ -29,8 +29,8 @@ export default class ContactFields extends BaseSection {
                         {...this.props}
                         label="Address 2"
                         type="text"
-                        ref="q_address_2"
-                        fieldName="q_address_2"
+                        ref="data.q_address_2"
+                        fieldName="data.data.q_address_2"
                         value={this.props.data.q_address_2}
                         onChange={this.handleChange}
                     />
@@ -41,8 +41,8 @@ export default class ContactFields extends BaseSection {
                         {...this.props}
                         required={true}
                         label="City" type="text"
-                        ref="q_address_city"
-                        fieldName="q_address_city"
+                        ref="data.q_address_city"
+                        fieldName="data.data.q_address_city"
                         value={this.props.data.q_address_city}
                         onChange={this.handleChange.bind(this, "q_address_city")}
                     />
@@ -53,8 +53,8 @@ export default class ContactFields extends BaseSection {
                         {...this.props}
                         required={true}
                         label="State/Province"
-                        ref="q_address_state"
-                        fieldName="q_address_state"
+                        ref="data.q_address_state"
+                        fieldName="data.data.q_address_state"
                         onChange={this.handleChange.bind(this, "q_address_state")}
                     />
                 </div>
@@ -64,8 +64,8 @@ export default class ContactFields extends BaseSection {
                         {...this.props}
                         required={true}
                         label="Zip" type="text"
-                        ref="q_address_zip"
-                        fieldName="q_address_zip"
+                        ref="data.q_address_zip"
+                        fieldName="data.data.q_address_zip"
                         value={this.props.data.q_address_zip}
                         onChange={this.handleChange}
                     />
@@ -76,8 +76,8 @@ export default class ContactFields extends BaseSection {
                         {...this.props}
                         required={true}
                         label="Country"
-                        ref="q_address_country"
-                        fieldName="q_address_country"
+                        ref="data.q_address_country"
+                        fieldName="data.data.q_address_country"
                         onChange={this.handleChange}
                     />
                 </div>
@@ -87,7 +87,7 @@ export default class ContactFields extends BaseSection {
                         label="Mobile phone"
                         type="text"
                         value={this.props.data.q_phone_mobile}
-                        ref="q_phone_mobile"
+                        ref="data.q_phone_mobile"
                         onChange={this.handleChange.bind(this, "q_phone_mobile")}
                     />
                 </div>
@@ -97,7 +97,7 @@ export default class ContactFields extends BaseSection {
                         label="Home phone"
                         type="text"
                         value={this.props.data.q_phone_home}
-                        ref="q_phone_home"
+                        ref="data.q_phone_home"
                         onChange={this.handleChange.bind(this, "q_phone_home")}
                     />
                 </div>
@@ -108,8 +108,8 @@ export default class ContactFields extends BaseSection {
                         label="Email address" type="text"
                         value={this.props.data.q_email}
                         required={true}
-                        ref="q_email"
-                        fieldName="q_email"
+                        ref="data.q_email"
+                        fieldName="data.q_email"
                         onChange={this.handleChange}
                     />
                 </div>
