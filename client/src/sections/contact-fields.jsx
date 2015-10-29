@@ -8,19 +8,13 @@ import CountryField from '../components/country-field.jsx';
 import BaseSection from './base-section.jsx'
 
 export default class ContactFields extends BaseSection {
-    constructor(props) {
-        super(props);
-        this.handleChange = super.handleChange.bind(this);
-    }
 
     render() {
         return (
             <div>
                 <div>
                     <ValidatedInput
-                        focusElement={this.props.focusElement}
-                        onBlur={this.props.onBlur}
-                        errorFields={this.props.errorFields}
+                        {...this.props}
                         required={true}
                         label="Address 1" type="text"
                         ref="q_address_1"
@@ -32,6 +26,7 @@ export default class ContactFields extends BaseSection {
 
                 <div>
                     <ValidatedInput
+                        {...this.props}
                         label="Address 2"
                         type="text"
                         ref="q_address_2"
@@ -43,9 +38,7 @@ export default class ContactFields extends BaseSection {
 
                 <div>
                     <ValidatedInput
-                        focusElement={this.props.focusElement}
-                        onBlur={this.props.onBlur}
-                        errorFields={this.props.errorFields}
+                        {...this.props}
                         required={true}
                         label="City" type="text"
                         ref="q_address_city"
@@ -57,7 +50,7 @@ export default class ContactFields extends BaseSection {
 
                 <div>
                     <StateField
-                        data={this.props.data}
+                        {...this.props}
                         required={true}
                         label="State/Province"
                         ref="q_address_state"
@@ -68,9 +61,7 @@ export default class ContactFields extends BaseSection {
 
                 <div>
                     <ValidatedInput
-                        focusElement={this.props.focusElement}
-                        onBlur={this.props.onBlur}
-                        errorFields={this.props.errorFields}
+                        {...this.props}
                         required={true}
                         label="Zip" type="text"
                         ref="q_address_zip"
@@ -82,7 +73,7 @@ export default class ContactFields extends BaseSection {
 
                 <div>
                     <CountryField
-                        data={this.props.data}
+                        {...this.props}
                         required={true}
                         label="Country"
                         ref="q_address_country"
@@ -113,10 +104,9 @@ export default class ContactFields extends BaseSection {
 
                 <div>
                     <ValidatedInput
-                        focusElement={this.props.focusElement}
-                        onBlur={this.props.onBlur}
-                        errorFields={this.props.errorFields}
-                        label="Email address" type="text" value={this.props.data.q_email}
+                        {...this.props}
+                        label="Email address" type="text"
+                        value={this.props.data.q_email}
                         required={true}
                         ref="q_email"
                         fieldName="q_email"

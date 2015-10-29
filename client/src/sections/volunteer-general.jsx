@@ -5,29 +5,20 @@ import Input from 'react-bootstrap/lib/Input';
 import QuestionContainer from '../components/question-container.jsx';
 import DropdownField from '../components/dropdown-field.jsx';
 import YesNoField from '../components/yes-no-field.jsx';
-
 import MedicalFields from './medical-fields.jsx';
 import LicenseFields from './license-fields.jsx';
+import BaseSection from './base-section.jsx'
 
-export default React.createClass({
-    mixins: [React.addons.PureRenderMixin],
-
-    handleChange(field, e) {
-        this.props.data.updateField( {
-            key : field,
-            value : e.target.value
-        });
-    },
-
-    render: function() {
+export default class MedicalFields extends BaseSection {
+    render() {
         return (
             <div>
-                <YesNoField data={this.props.data}
+                <YesNoField {...this.props}
                     fieldName="q_volunteered_before"
                     label="Have you volunteered for your best pathway to health before?"
                 />
 
-                <QuestionContainer data={this.props.data}
+                <QuestionContainer {...this.props}
                     criteria={ {key : 'q_volunteered_before', value : "true" } }>
                     <Input
                         label="What area did you work in?"
@@ -37,7 +28,7 @@ export default React.createClass({
                         onChange={this.handleChange.bind(this, "q_volunteered_area")}/>
                 </QuestionContainer>
 
-                <QuestionContainer data={this.props.data}
+                <QuestionContainer {...this.props}
                     criteria={ {key : 'q_volunteered_before', value : "true" } }>
                     <Input
                         label="In what capacity did you work?"
@@ -47,12 +38,12 @@ export default React.createClass({
                         onChange={this.handleChange.bind(this, "q_volunteered_capacity")}/>
                 </QuestionContainer>
 
-                <YesNoField data={this.props.data}
+                <YesNoField {...this.props}
                     fieldName="q_volunteer_organization_member"
                     label="Are you part of a volunteer group?"
                 />
 
-                <QuestionContainer data={this.props.data}
+                <QuestionContainer {...this.props}
                     criteria={ {key : 'q_volunteer_organization_member', value : "true" } }>
                     <Input
                         label="What is the name of your volunteer group?"
@@ -69,8 +60,8 @@ export default React.createClass({
                     </label>
                     <div>
                         <DropdownField
+                            {...this.props}
                             selectValue={this.props.data.q_area_volunteer}
-                            data={this.props.data}
                             placeHolder="security"
                             field="q_volunteering_area"
                             multiple="true"
@@ -82,27 +73,27 @@ export default React.createClass({
                     </div>
                 </div>
 
-                <YesNoField data={this.props.data}
+                <YesNoField {...this.props}
                             fieldName="q_volunteering_in_licensed_area"
                             label="Do you want to volunteer in your currently licensed area?"
                 />
 
-                <QuestionContainer data={this.props.data}
+                <QuestionContainer {...this.props}
                     criteria={ {key : 'q_volunteering_in_licensed_area', value : "true" } }>
-                    <LicenseFields data={this.props.data} />
+                    <LicenseFields {...this.props} />
                 </QuestionContainer>
 
-                <YesNoField data={this.props.data}
+                <YesNoField {...this.props}
                     fieldName="q_is_medical_professional"
                     label="Are you volunteering as a medical professional?"
                 />
 
-                <QuestionContainer data={this.props.data}
+                <QuestionContainer {...this.props}
                     criteria={ {key : 'q_is_medical_professional', value : "true" } }>
-                    <MedicalFields data={this.props.data} />
+                    <MedicalFields {...this.props} />
                 </QuestionContainer>
 
-                <YesNoField data={this.props.data}
+                <YesNoField {...this.props}
                     fieldName="q_is_legal_professional"
                     label="Are you volunteering as a legal professional?"
                 />
@@ -110,4 +101,4 @@ export default React.createClass({
             </div>
         );
     }
-});
+}

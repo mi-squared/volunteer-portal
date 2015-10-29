@@ -8,7 +8,7 @@ import BaseSection from './base-section.jsx'
 export default class RegistrationFields extends BaseSection {
 
     handleDateChange(date) {
-        this.props.data.updateField( {
+        this.props.updateField( {
             key : 'q_dob',
             value : date
         });

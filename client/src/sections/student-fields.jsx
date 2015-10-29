@@ -4,28 +4,20 @@ import Input from 'react-bootstrap/lib/Input';
 
 import DateField from '../components/date-field.jsx';
 import DropdownField from '../components/dropdown-field.jsx';
-
 import QuestionContainer from '../components/question-container.jsx';
+import BaseSection from './base-section.jsx'
 
-export default React.createClass({
-
-    handleChange(field, e) {
-        this.props.data.updateField( {
-            key : field,
-            value : e.target.value
-        });
-    },
-
-    render: function() {
+export default class MedicalFields extends BaseSection {
+    render() {
         return (
-            <QuestionContainer data={this.props.data}
+            <QuestionContainer {...this.props}
                 criteria={ {key : 'q_is_student', value : "true" } }>
 
                 <div>
                     <DropdownField
+                        {...this.props}
                         label="School level"
                         selectValue={this.props.data['q_school_level']}
-                        data={this.props.data}
                         onChange={this.handleChange.bind(this, "q_school_level")}>
                         <option value="highschool">High school</option>
                         <option value="college">College</option>
@@ -42,7 +34,8 @@ export default React.createClass({
                 <div>
                     <Input label="Area of study" type="text"
                         value={this.props.data['q_school_studied_area']}
-                        onChange={this.handleChange.bind(this, "q_school_studied_area")} />                </div>
+                        onChange={this.handleChange.bind(this, "q_school_studied_area")} />
+                </div>
 
                 <div>
                     <DateField
@@ -61,4 +54,4 @@ export default React.createClass({
             </QuestionContainer>
         );
     }
-});
+}

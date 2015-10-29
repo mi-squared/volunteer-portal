@@ -72,7 +72,7 @@ export const NewVolunteerPage = React.createClass({
                 }
             }
         };
-        var res = Revalidator.validate(this.props, schema);
+        var res = Revalidator.validate(this.props.data, schema);
         if ( !res.valid ) {
             for ( var i in res.errors ) {
                 var error = res.errors[i];
@@ -95,12 +95,12 @@ export const NewVolunteerPage = React.createClass({
         if ( this.doValidate() ) {
             var self = this;
             var data = {
-                'username' : this.props['q_email'],
-                'last_name' : this.props['q_last_name'],
-                'first_name' : this.props['q_first_name'],
-                'middle_name' : this.props['q_middle_name'],
-                'email': this.props['q_email'],
-                'password' : this.props['q_password']
+                'username' : this.props.data['q_email'],
+                'last_name' : this.props.data['q_last_name'],
+                'first_name' : this.props.data['q_first_name'],
+                'middle_name' : this.props.data['q_middle_name'],
+                'email': this.props.data['q_email'],
+                'password' : this.props.data['q_password']
             };
 
             register(data).then(
@@ -175,11 +175,12 @@ export const NewVolunteerPage = React.createClass({
 
                 <div>
                     <RegistrationFields
+                        {...this.props}
                         submitTS={this.state.submitTS}
                         onBlur={this.onBlur}
-                        data={this.props}
                         focusElement={this.state.focusElement}
-                        errorFields={this.state.errorFields}/>
+                        errorFields={this.state.errorFields}
+                    />
                 </div>
 
                 <hr/>

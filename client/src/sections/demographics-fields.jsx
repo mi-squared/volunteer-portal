@@ -9,25 +9,19 @@ import DropdownField from '../components/dropdown-field.jsx';
 import ContactFields from './contact-fields.jsx';
 import IdentityFields from './identity-fields.jsx';
 import StudentFields from './student-fields.jsx';
-
 import BaseSection from './base-section.jsx'
 
 export default class DemographicsFields extends BaseSection {
-    constructor(props) {
-        super(props);
-        this.handleChange = super.handleChange.bind(this);
-    }
-
     render() {
         return (
             <div>
                 <IdentityFields {...this.props} onChange={this.handleChange}/>
 
-                <ContactFields {...this.props}  onChange={this.handleChange}/>
+                <ContactFields {...this.props} onChange={this.handleChange}/>
 
                 <hr/>
 
-                <QuestionContainer data={this.props.data}>
+                <QuestionContainer {...this.props}>
                     <Input
                         label="Emergency contact name"
                         type="text"
@@ -38,7 +32,7 @@ export default class DemographicsFields extends BaseSection {
                     />
                 </QuestionContainer>
 
-                <QuestionContainer data={this.props.data}>
+                <QuestionContainer {...this.props}>
                     <Input
                         label="Relationship"
                         type="text"
@@ -49,7 +43,7 @@ export default class DemographicsFields extends BaseSection {
                     />
                 </QuestionContainer>
 
-                <QuestionContainer data={this.props.data}>
+                <QuestionContainer {...this.props}>
                     <Input
                         label="Phone number"
                         type="text"
@@ -60,10 +54,9 @@ export default class DemographicsFields extends BaseSection {
                     />
                 </QuestionContainer>
 
-                <QuestionContainer data={this.props.data}>
+                <QuestionContainer {...this.props}>
                     <ValidatedInput
-                        focusElement={this.props.focusElement}
-                        errorFields={this.props.errorFields}
+                        {...this.props}
                         required={true}
                         label="Date of birth" type="text"
                         fieldName="q_dob"
@@ -74,12 +67,12 @@ export default class DemographicsFields extends BaseSection {
 
                 <hr/>
 
-                <QuestionContainer data={this.props.data}>
+                <QuestionContainer {...this.props}>
                     <DropdownField
+                        {...this.props}
                         label="Race / Ethnicity"
                         selectValue={this.props.data['q_race_ethnicity']}
                         ref="q_race_ethnicity"
-                        data={this.props.data}
                         onChange={this.handleChange.bind(this, "q_race_ethnicity")}>
                         <option value="white">White</option>
                         <option value="african-american">African American</option>
@@ -89,12 +82,12 @@ export default class DemographicsFields extends BaseSection {
                     </DropdownField>
                 </QuestionContainer>
 
-                <QuestionContainer data={this.props.data}>
+                <QuestionContainer {...this.props}>
                     <DropdownField
+                        {...this.props}
                         label="Gender"
                         selectValue={this.props.data['q_gender']}
                         ref="q_gender"
-                        data={this.props.data}
                         onChange={this.handleChange.bind(this, "q_gender")}>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
@@ -103,12 +96,12 @@ export default class DemographicsFields extends BaseSection {
                     </DropdownField>
                 </QuestionContainer>
 
-                <QuestionContainer data={this.props.data}>
+                <QuestionContainer {...this.props}>
                     <DropdownField
+                        {...this.props}
                         label="Shirt size"
                         selectValue={this.props.data['q_tshirt']}
                         ref="q_tshirt"
-                        data={this.props.data}
                         onChange={this.handleChange.bind(this, "q_tshirt")}>
                         <option value="xsm">Extra small</option>
                         <option value="sm">Small</option>
@@ -127,13 +120,13 @@ export default class DemographicsFields extends BaseSection {
                     />
                 </QuestionContainer>
 
-                <YesNoField data={this.props.data}
+                <YesNoField {...this.props}
                     fieldName="q_is_adventist"
                     ref="q_is_adventist"
                     label="Are you a committed Seventh-day Adventist in good standing and do you believe in all the fundamental beliefs of the church?"
                 />
 
-                <QuestionContainer data={this.props.data} criteria={ {key : 'q_is_adventist', value : "true" } }>
+                <QuestionContainer {...this.props} criteria={ {key : 'q_is_adventist', value : "true" } }>
                     <Input label="Church name" type="text" value={this.props.data.q_church_name}
                         onChange={this.handleChange.bind(this, "q_church_name")}
                     />
@@ -148,24 +141,22 @@ export default class DemographicsFields extends BaseSection {
                     />
                 </QuestionContainer>
 
-                <QuestionContainer data={this.props.data} criteria={ {key : 'q_is_adventist', value : "false" } }>
+                <QuestionContainer {...this.props} criteria={ {key : 'q_is_adventist', value : "false" } }>
                     <Input label="Church affiliation" type="text"
                         onChange={this.handleChange.bind(this, "q_church_affiliation")}/>
                 </QuestionContainer>
 
-                <YesNoField data={this.props.data}
+                <YesNoField {...this.props}
                     fieldName="q_bringing_children"
                     label="Are you bringing children under 13?"
                 />
 
-                <YesNoField data={this.props.data}
+                <YesNoField {...this.props}
                     fieldName="q_is_student"
                     label="Are you a student volunteer?"
                 />
 
-                <StudentFields
-                    errorFields={this.props.errorFields}
-                    data={this.props.data} />
+                <StudentFields {...this.props} />
             </div>
         );
     }

@@ -11,7 +11,7 @@ export default React.createClass({
                 required={this.props.required}
                 label={this.props.label}
                 selectValue={this.props.data[this.props.fieldName]}
-                data={this.props.data}
+                {...this.props}
                 field={this.props.fieldName}
                 ref={this.props.ref}
                 onChange={this.props.onChange}>

@@ -17,7 +17,7 @@ export const ChildrenPage = React.createClass({
     },
 
     getChildren: function() {
-        var children = this.props['children'];
+        var children = this.props.data.children;
         var childrenArray = [];
         Object.keys(children).forEach(function (key) {
             var val = children[key];

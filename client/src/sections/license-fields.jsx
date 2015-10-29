@@ -1,37 +1,25 @@
 import React from 'react';
 import ReactAddons from 'react/addons';
-
 import Input from 'react-bootstrap/lib/Input';
-import DateTimeField from "react-bootstrap-datetimepicker";
 
 import QuestionContainer from '../components/question-container.jsx';
-import YesNoField from '../components/yes-no-field.jsx';
 import DateField from '../components/date-field.jsx';
 import StateField from '../components/state-field.jsx';
+import BaseSection from './base-section.jsx'
 
-export default React.createClass({
+export default class LicenseFields extends BaseSection {
 
-    mixins: [React.addons.PureRenderMixin],
-
-    handleChange(field, e) {
-        this.props.data.updateField( {
-            key : field,
-            value : e.target.value
-        });
-    },
-
-    render: function () {
+    render () {
         return (
-            <QuestionContainer data={this.props.data}>
-
-                <QuestionContainer data={this.props.data }>
+            <div>
+                <QuestionContainer {...this.props}>
                     <StateField
-                        data={this.props.data}
+                        {...this.props}
                         label="State of license"
                         fieldName="q_licensed_state"/>
                 </QuestionContainer>
 
-                <QuestionContainer data={this.props.data} >
+                <QuestionContainer {...this.props} >
                     <Input
                         label="Discipline licensed in"
                         type="text"
@@ -40,7 +28,7 @@ export default React.createClass({
                         onChange={this.handleChange.bind(this, "q_licensed_discipline")}/>
                 </QuestionContainer>
 
-                <QuestionContainer data={this.props.data}>
+                <QuestionContainer {...this.props}>
                     <DateField
                         label="Expiration date of license (mm/yy/dddd)"
                         value={this.props.data.q_dob}
@@ -48,8 +36,7 @@ export default React.createClass({
                     />
 
                 </QuestionContainer>
-
-            </QuestionContainer>
+            </div>
         );
     }
-});
+}

@@ -1,13 +1,15 @@
 import {Map, List} from 'immutable';
 
 var initialStateTemplate = {
-    children: {},
-    q_is_adventist: "false",
-    q_dob : "1970-01-01",
-    q_date_graduation : "1970-01-01",
-    q_volunteered_before : 'false',
-    q_address_country: 'USA',
-    q_available_entire_time : 'true'
+    data: {
+        children: {},
+        q_is_adventist: "false",
+        q_dob : "1970-01-01",
+        q_date_graduation : "1970-01-01",
+        q_volunteered_before : 'false',
+        q_address_country: 'USA',
+        q_available_entire_time : 'true'
+    }
 };
 
 export const INITIAL_STATE =  Map(JSON.parse(JSON.stringify(initialStateTemplate)));

@@ -5,23 +5,23 @@ import Input from 'react-bootstrap/lib/Input';
 import QuestionContainer from '../components/question-container.jsx';
 import AvailabilityField from '../components/availability-field.jsx';
 import YesNoField from '../components/yes-no-field.jsx';
+import BaseSection from './base-section.jsx'
 
-export default React.createClass({
-    render: function() {
+export default class AvailabilityFields extends BaseSection {
+    render() {
         return (
             <div>
-
-                <YesNoField data={this.props.data}
+                <YesNoField {...this.props}
                     fieldName="q_share_room"
                     label="Are you able and willing to share a room?"
                 />
 
-                <YesNoField data={this.props.data}
+                <YesNoField {...this.props}
                     fieldName="q_available_entire_time"
                     label="Aside from any emergencies are you able to help the entire time?"
                 />
 
-                <QuestionContainer data={this.props.data}
+                <QuestionContainer {...this.props}
                     criteria={ {key : 'q_available_entire_time', value : "false" } }>
 
                     <div>
@@ -66,4 +66,4 @@ export default React.createClass({
             </div>
         );
     }
-});
+}

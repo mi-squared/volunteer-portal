@@ -78,7 +78,7 @@ class MainPage extends React.Component {
             // save the application if passes validation
             this.props.saveApplication();
             // then move on to next page
-            this.props.transitionTo.call(this, this.props['q_bringing_children'] === 'true' ?
+            this.props.transitionTo.call(this, this.props.data['q_bringing_children'] === 'true' ?
                 '/children-page' : '/volunteering-detail');
         } else {
             this.props.handleAlertShow.call(this);
@@ -92,8 +92,8 @@ class MainPage extends React.Component {
             {this.props.alert}
 
             <Demographics
+                {...this.props}
                 submitTS={this.props.state.submitTS}
-                data={this.props}
                 onBlur={super.onBlur}
                 focusElement={this.props.state.focusElement || 'q_first_name'}
                 errorFields={this.props.state.errorFields}/>

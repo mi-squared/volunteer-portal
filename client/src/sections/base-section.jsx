@@ -8,7 +8,7 @@ export default class BaseSection extends React.Component {
     }
 
     handleChange(field, e) {
-        this.props.data.updateField( {
+        this.props.updateField( {
             key : field,
             value : e.target.value
         });

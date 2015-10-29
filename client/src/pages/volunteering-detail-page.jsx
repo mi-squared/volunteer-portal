@@ -17,7 +17,7 @@ export const VolunteeringDetailPage = React.createClass({
     },
 
     doBack : function() {
-        var isBringingChildren = this.props['q_bringing_children'] === 'true';
+        var isBringingChildren = this.props.data['q_bringing_children'] === 'true';
         this.transitionTo(isBringingChildren ? '/children-page' : '/main');
     },
     render: function() {
@@ -26,9 +26,9 @@ export const VolunteeringDetailPage = React.createClass({
             <div className="container">
                 <h1>Volunteering detail</h1>
 
-                <VolunteerGeneral data={this.props}/>
+                <VolunteerGeneral {...this.props}/>
 
-                <Availability data={this.props}/>
+                <Availability {...this.props}/>
 
                 <hr/>
 

@@ -32,7 +32,7 @@ export default function composePage(Component) {
 
         doValidate: function (schema) {
             var fieldsInError = {};
-            var res = Revalidator.validate(this.props, schema);
+            var res = Revalidator.validate(this.props.data, schema);
             if (!res.valid) {
                 for (var i in res.errors) {
                     var error = res.errors[i];

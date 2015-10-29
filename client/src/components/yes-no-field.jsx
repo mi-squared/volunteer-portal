@@ -6,7 +6,7 @@ import QuestionContainer from './question-container.jsx';
 export default React.createClass({
 
     handleChange(field, e) {
-        this.props.data.updateField( {
+        this.props.updateField( {
             key : field,
             value : e.target.value
         });
