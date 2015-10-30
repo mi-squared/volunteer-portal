@@ -117,15 +117,13 @@ class ReturningVolunteerPage extends React.Component {
 
                 {this.props.alert}
 
-                <div>
-                    <SignInFields
-                        {...this.props}
-                        onBlur={this.onBlur}
-                        submitTS={this.props.submitTS}
-                        focusElement={this.props.focusElement||this.state.focusElement}
-                        errorFields={this.props.errorFields}
-                    />
-                </div>
+                <SignInFields
+                    {...this.props}
+                    onBlur={this.onBlur}
+                    submitTS={this.props.submitTS}
+                    focusElement={this.props.focusElement||this.state.focusElement}
+                    errorFields={this.props.errorFields}
+                />
 
                 <hr/>
 

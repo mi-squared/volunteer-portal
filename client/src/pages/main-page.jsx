@@ -1,8 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import Router, {Route, DefaultRoute, Link} from 'react-router';
 import Button from 'react-bootstrap/lib/Button.js';
-import Alert from 'react-bootstrap/lib/Alert.js';
 
 import Demographics from '../sections/demographics-fields.jsx';
 import * as actionCreators from '../action_creators';
@@ -13,8 +11,17 @@ class MainPage extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            focusElement: "data.q_first_name",
+            alertVisible: false,
+            errorFields: {},
+            errorMessage : ''
+        };
+
         this.schema =
         {
+            fieldPrefix: 'data.',
             properties: {
                 q_first_name: {
                     type: 'string',
@@ -71,14 +78,14 @@ class MainPage extends React.Component {
     }
 
     doContinue() {
-        if (this.props.doValidate.call(this, this.schema) ) {
+        if ( this.props.doValidate( this.schema ) ) {
             // save the application if passes validation
             this.props.saveApplication();
             // then move on to next page
-            this.props.transitionTo.call(this, this.props.data['q_bringing_children'] === 'true' ?
+            this.props.transitionTo(this.props.data['q_bringing_children'] === 'true' ?
                 '/children-page' : '/volunteering-detail');
         } else {
-            this.props.handleAlertShow.call(this);
+            this.props.handleAlertShow();
         }
     }
 
@@ -90,10 +97,11 @@ class MainPage extends React.Component {
 
             <Demographics
                 {...this.props}
-                submitTS={this.props.state.submitTS}
-                onBlur={super.onBlur}
-                focusElement={this.props.state.focusElement || 'data.q_first_name'}
-                errorFields={this.props.state.errorFields}/>
+                onBlur={this.onBlur}
+                submitTS={this.props.submitTS}
+                focusElement={this.props.focusElement||this.state.focusElement}
+                errorFields={this.props.errorFields}
+            />
 
             <hr/>
 
@@ -104,10 +112,6 @@ class MainPage extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
-    return state.toJSON();
-}
-
 export const MainPageContainer = connect(
-    mapStateToProps, actionCreators
+    (state) => state.toJSON(), actionCreators
 )(composePage(MainPage));

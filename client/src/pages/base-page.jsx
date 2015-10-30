@@ -26,24 +26,30 @@ export default function composePage(Component) {
             setTimeout( function() {
                 errors = errors || {};
                 var partialState = {
-                    focusElement: errors.focusElement,
-                    errorMessage: errors.errorMessage,
                     alertVisible: true,
                     submitTS: new Date().getTime()
                 };
                 if ( errors.errorFields) {
                     partialState.errorFields = errors.errorFields;
                 }
+                if ( errors.focusElement ) {
+                    partialState.focusElement = errors.focusElement
+                }
+                if ( errors.errorMessage ) {
+                    partialState.errorMessage = errors.errorMessage
+                }
                 console.log("state: ", self.state);
                 console.log("partial state: ", partialState);
                 self.setState(partialState)
+                console.log("state: ", self.state);
             }, 1);
         },
 
         doValidate: function (schema, data) {
             var fieldsInError = {};
-            var res = Revalidator.validate(data || this.props.data, schema);
-            var fieldPrefix = schema.fieldPrefix || '';
+            data = data || this.props.data;
+            var res = Revalidator.validate(data, schema);
+            var fieldPrefix = schema.fieldPrefix || 'data.';
             if (!res.valid) {
                 for (var i in res.errors) {
                     var error = res.errors[i];
