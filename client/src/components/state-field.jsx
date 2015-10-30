@@ -75,8 +75,7 @@ export default React.createClass({
 
     render: function() {
         return(
-            <DropdownField
-                {...this.props}
+            <DropdownField {...this.props}
                 required={this.props.required}
                 label={this.props.label}
                 selectValue={this.props.data[this.getFieldName()]}

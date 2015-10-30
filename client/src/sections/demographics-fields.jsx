@@ -30,7 +30,6 @@ export default class DemographicsFields extends BaseSection {
                 />
 
                 <ValidatedInput {...this.props}
-                    {...this.props}
                     label="Relationship"
                     type="text"
                     fieldName="data.q_emergency_contact_relationship"
@@ -39,8 +38,7 @@ export default class DemographicsFields extends BaseSection {
                     onChange={this.handleChange}
                 />
 
-                <ValidatedInput
-                    {...this.props}
+                <ValidatedInput {...this.props}
                     label="Phone number"
                     type="text"
                     fieldName="data.q_emergency_contact_phonenumber"
@@ -49,8 +47,7 @@ export default class DemographicsFields extends BaseSection {
                     onChange={this.handleChange}
                 />
 
-                <ValidatedInput
-                    {...this.props}
+                <ValidatedInput {...this.props}
                     required={true}
                     label="Date of birth" type="text"
                     fieldName="data.q_dob"
@@ -60,8 +57,7 @@ export default class DemographicsFields extends BaseSection {
 
                 <hr/>
 
-                <DropdownField
-                    {...this.props}
+                <DropdownField {...this.props}
                     label="Race / Ethnicity"
                     selectValue={this.props.data['q_race_ethnicity']}
                     fieldName="data.q_race_ethnicity"
@@ -74,8 +70,7 @@ export default class DemographicsFields extends BaseSection {
                     <option value="other">Other</option>
                 </DropdownField>
 
-                <DropdownField
-                    {...this.props}
+                <DropdownField {...this.props}
                     label="Gender"
                     selectValue={this.props.data['q_gender']}
                     field="data.q_gender"
@@ -87,8 +82,7 @@ export default class DemographicsFields extends BaseSection {
                     <option value="trans-female">Transgendered Male</option>
                 </DropdownField>
 
-                <DropdownField
-                    {...this.props}
+                <DropdownField {...this.props}
                     label="Shirt size"
                     selectValue={this.props.data['q_tshirt']}
                     fieldName="data.q_tshirt"
@@ -114,6 +108,7 @@ export default class DemographicsFields extends BaseSection {
                     fieldName="data.q_is_adventist"
                     ref="data.q_is_adventist"
                     label="Are you a committed Seventh-day Adventist in good standing and do you believe in all the fundamental beliefs of the church?"
+                    onChange={this.handleChange}
                 />
 
                 <QuestionContainer {...this.props} criteria={ {key : 'q_is_adventist', value : "true" } }>
@@ -152,6 +147,7 @@ export default class DemographicsFields extends BaseSection {
                         label="Church affiliation" type="text"
                         fieldName="data.q_church_affiliation"
                         ref="data.q_church_affiliation"
+                        value={this.props.data.q_church_affiliation}
                         onChange={this.handleChange}
                     />
                 </QuestionContainer>
@@ -159,14 +155,16 @@ export default class DemographicsFields extends BaseSection {
                 <YesNoField {...this.props}
                     fieldName="data.q_bringing_children"
                     label="Are you bringing children under 13?"
+                    onChange={this.handleChange}
                 />
 
                 <YesNoField {...this.props}
                     fieldName="data.q_is_student"
                     label="Are you a student volunteer?"
+                    onChange={this.handleChange}
                 />
 
-                <StudentFields {...this.props} />
+                <StudentFields {...this.props} onChange={this.handleChange}/>
             </div>
         );
     }
