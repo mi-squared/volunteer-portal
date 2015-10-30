@@ -14,20 +14,41 @@ import BaseSection from './base-section.jsx'
 export default class DemographicsFields extends BaseSection {
     render() {
         return (
-            <div>
+            <div className="col-md-7">
                 <IdentityFields {...this.props} onChange={this.handleChange}/>
-                <ContactFields {...this.props} onChange={this.handleChange}/>
-
-                <hr/>
 
                 <ValidatedInput {...this.props}
-                    label="Emergency contact name"
-                    type="text"
-                    fieldName="data.q_emergency_contact_name"
-                    ref="data.q_emergency_contact_name"
-                    value={this.props.data.q_emergency_contact_name}
-                    onChange={this.handleChange}
-                />
+                    required={true}
+                    label="Date of birth" type="text"
+                    fieldName="data.q_dob"
+                    ref="data.q_dob"
+                    value={this.props.data.q_dob}
+                    onChange={this.handleChange}/>
+
+                <ContactFields {...this.props} onChange={this.handleChange}/>
+
+                <div className="row">
+                    <div className="col-md-9">
+                        <ValidatedInput {...this.props}
+                            label="Emergency contact name"
+                            type="text"
+                            fieldName="data.q_emergency_contact_name"
+                            ref="data.q_emergency_contact_name"
+                            value={this.props.data.q_emergency_contact_name}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <div className="col-md-3">
+                        <ValidatedInput {...this.props}
+                            label="Phone number"
+                            type="text"
+                            fieldName="data.q_emergency_contact_phonenumber"
+                            ref="data.q_emergency_contact_phonenumber"
+                            value={this.props.data.q_emergency_contact_phonenumber}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                </div>
 
                 <ValidatedInput {...this.props}
                     label="Relationship"
@@ -38,49 +59,38 @@ export default class DemographicsFields extends BaseSection {
                     onChange={this.handleChange}
                 />
 
-                <ValidatedInput {...this.props}
-                    label="Phone number"
-                    type="text"
-                    fieldName="data.q_emergency_contact_phonenumber"
-                    ref="data.q_emergency_contact_phonenumber"
-                    value={this.props.data.q_emergency_contact_phonenumber}
-                    onChange={this.handleChange}
-                />
-
-                <ValidatedInput {...this.props}
-                    required={true}
-                    label="Date of birth" type="text"
-                    fieldName="data.q_dob"
-                    ref="data.q_dob"
-                    value={this.props.data.q_dob}
-                    onChange={this.handleChange}/>
 
                 <hr/>
 
-                <DropdownField {...this.props}
-                    label="Race / Ethnicity"
-                    selectValue={this.props.data['q_race_ethnicity']}
-                    fieldName="data.q_race_ethnicity"
-                    ref="data.q_race_ethnicity"
-                    onChange={this.handleChange}>
-                    <option value="white">White</option>
-                    <option value="african-american">African American</option>
-                    <option value="asian">Asian</option>
-                    <option value="pacific-islander">Pacific Islander</option>
-                    <option value="other">Other</option>
-                </DropdownField>
-
-                <DropdownField {...this.props}
-                    label="Gender"
-                    selectValue={this.props.data['q_gender']}
-                    field="data.q_gender"
-                    ref="data.q_gender"
-                    onChange={this.handleChange}>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="trans-male">Transgendered Male</option>
-                    <option value="trans-female">Transgendered Male</option>
-                </DropdownField>
+                <div className="row">
+                    <div className="col-md-9">
+                        <DropdownField {...this.props}
+                            label="Race / Ethnicity"
+                            selectValue={this.props.data['q_race_ethnicity']}
+                            fieldName="data.q_race_ethnicity"
+                            ref="data.q_race_ethnicity"
+                            onChange={this.handleChange}>
+                            <option value="white">White</option>
+                            <option value="african-american">African American</option>
+                            <option value="asian">Asian</option>
+                            <option value="pacific-islander">Pacific Islander</option>
+                            <option value="other">Other</option>
+                        </DropdownField>
+                    </div>
+                    <div className="col-md-3">
+                        <DropdownField {...this.props}
+                            label="Gender"
+                            selectValue={this.props.data['q_gender']}
+                            field="data.q_gender"
+                            ref="data.q_gender"
+                            onChange={this.handleChange}>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="trans-male">Transgendered Male</option>
+                            <option value="trans-female">Transgendered Male</option>
+                        </DropdownField>
+                    </div>
+                </div>
 
                 <DropdownField {...this.props}
                     label="Shirt size"

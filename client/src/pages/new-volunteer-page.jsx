@@ -82,7 +82,7 @@ class NewVolunteerPage extends React.Component {
                     self.props.login({
                         token: response.token
                     });
-                    self.transitionTo('/do-register');
+                    self.props.transitionTo('/do-register');
                 },
                 function(error) {
                     self.props.handleAlertShow({

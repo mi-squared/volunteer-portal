@@ -102,10 +102,10 @@ class MainPage extends React.Component {
                 errorFields={this.props.errorFields}
             />
 
-            <hr/>
-
-            <div className="j-page-nav">
-                <Button onClick={this.doContinue}>Continue</Button>
+            <div className="col-md-7">
+                <div className="j-page-nav">
+                    <Button onClick={this.doContinue}>Continue</Button>
+                </div>
             </div>
         </div>;
     }
