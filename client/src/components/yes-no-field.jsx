@@ -21,12 +21,12 @@ export default React.createClass({
                 <div>
                     <label className="radio-inline">
                         <input onChange={this.commitChange}
-                            checked={this.props.data[this.props.fieldName] === "true"}
+                            checked={this.props.value === "true"}
                             type="radio" name={this.props.fieldName} ref={this.props.fieldName} value="true">Yes</input>
                     </label>
                     <label className="radio-inline">
                         <input onChange={this.commitChange}
-                            checked={this.props.data[this.props.fieldName] !== "true"}
+                            checked={this.props.value !== "true"}
                             type="radio" name={this.props.fieldName} ref={this.props.fieldName} value="false">No</input>
                     </label>
                 </div>

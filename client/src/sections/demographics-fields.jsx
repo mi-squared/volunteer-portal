@@ -108,6 +108,7 @@ export default class DemographicsFields extends BaseSection {
                     fieldName="data.q_is_adventist"
                     ref="data.q_is_adventist"
                     label="Are you a committed Seventh-day Adventist in good standing and do you believe in all the fundamental beliefs of the church?"
+                    value={this.props.data.q_is_adventist}
                     onChange={this.handleChange}
                 />
 
@@ -155,12 +156,14 @@ export default class DemographicsFields extends BaseSection {
                 <YesNoField {...this.props}
                     fieldName="data.q_bringing_children"
                     label="Are you bringing children under 13?"
+                    value={this.props.data.q_bringing_children}
                     onChange={this.handleChange}
                 />
 
                 <YesNoField {...this.props}
                     fieldName="data.q_is_student"
                     label="Are you a student volunteer?"
+                    value={this.props.data.q_is_student}
                     onChange={this.handleChange}
                 />
 
