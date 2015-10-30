@@ -59,11 +59,21 @@ export default class DemographicsFields extends BaseSection {
                     onChange={this.handleChange}
                 />
 
-
-                <hr/>
-
                 <div className="row">
-                    <div className="col-md-9">
+                    <div className="col-md-6">
+                        <DropdownField {...this.props}
+                            label="Gender"
+                            selectValue={this.props.data['q_gender']}
+                            field="data.q_gender"
+                            ref="data.q_gender"
+                            onChange={this.handleChange}>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="trans-male">Transgendered Male</option>
+                            <option value="trans-female">Transgendered Male</option>
+                        </DropdownField>
+                    </div>
+                    <div className="col-md-6">
                         <DropdownField {...this.props}
                             label="Race / Ethnicity"
                             selectValue={this.props.data['q_race_ethnicity']}
@@ -75,19 +85,6 @@ export default class DemographicsFields extends BaseSection {
                             <option value="asian">Asian</option>
                             <option value="pacific-islander">Pacific Islander</option>
                             <option value="other">Other</option>
-                        </DropdownField>
-                    </div>
-                    <div className="col-md-3">
-                        <DropdownField {...this.props}
-                            label="Gender"
-                            selectValue={this.props.data['q_gender']}
-                            field="data.q_gender"
-                            ref="data.q_gender"
-                            onChange={this.handleChange}>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="trans-male">Transgendered Male</option>
-                            <option value="trans-female">Transgendered Male</option>
                         </DropdownField>
                     </div>
                 </div>
@@ -130,6 +127,7 @@ export default class DemographicsFields extends BaseSection {
                         value={this.props.data.q_church_name}
                         onChange={this.handleChange}
                     />
+
                     <ValidatedInput {...this.props}
                         label="Pastor name" type="text"
                         fieldName="data.q_church_pastor_name"
@@ -137,20 +135,27 @@ export default class DemographicsFields extends BaseSection {
                         value={this.props.data.q_church_pastor_name}
                         onChange={this.handleChange}
                     />
-                    <ValidatedInput {...this.props}
-                        label="Pastor email" type="text"
-                        fieldName="data.q_church_pastor_email"
-                        ref="data.q_church_pastor_email"
-                        value={this.props.data.q_church_pastor_email}
-                        onChange={this.handleChange}
-                    />
-                    <ValidatedInput {...this.props}
-                        label="Pastor contact number" type="text"
-                        fieldName="data.q_church_pastor_phone"
-                        ref="data.q_church_pastor_phone"
-                        value={this.props.data.q_church_pastor_phone}
-                        onChange={this.handleChange}
-                    />
+
+                    <div className="row">
+                        <div className="col-md-6">
+                            <ValidatedInput {...this.props}
+                                label="Pastor email" type="text"
+                                fieldName="data.q_church_pastor_email"
+                                ref="data.q_church_pastor_email"
+                                value={this.props.data.q_church_pastor_email}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <div className="col-md-6">
+                            <ValidatedInput {...this.props}
+                                label="Pastor contact number" type="text"
+                                fieldName="data.q_church_pastor_phone"
+                                ref="data.q_church_pastor_phone"
+                                value={this.props.data.q_church_pastor_phone}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                    </div>
                 </QuestionContainer>
 
                 <QuestionContainer {...this.props} criteria={ {key : 'q_is_adventist', value : "false" } }>
