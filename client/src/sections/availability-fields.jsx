@@ -37,17 +37,55 @@ export default class AvailabilityFields extends BaseSection {
                         <label>Which days are you available to volunteer?</label>
                     </div>
                     <div>
-                        <AvailabilityField label="Monday" />
-                        <AvailabilityField label="Tuesday" />
-                        <AvailabilityField label="Wednesday" />
-                        <AvailabilityField label="Thursday" />
-                        <AvailabilityField label="Friday" />
-                        <div className="availability-field">
-                            <Input label="Sabbath" type="checkbox"/>
-                        </div>
-                        <div className="availability-field">
-                            <Input label="Sunday" type="checkbox"/>
-                        </div>
+                        <AvailabilityField {...this.props}
+                            label="Monday"
+                            fieldName="data.q_available_day_mon"
+                            ref="data.q_available_day_mon"
+                            value={this.props.data.q_available_day_mon}
+                            onChange={this.handleChange}
+                        />
+                        <AvailabilityField {...this.props}
+                            label="Tuesday"
+                            fieldName="data.q_available_day_tue"
+                            ref="data.q_available_day_tue"
+                            value={this.props.data.q_available_day_tue}
+                            onChange={this.handleChange}
+                        />
+                        <AvailabilityField {...this.props}
+                            label="Wednesday"
+                            fieldName="data.q_available_day_wed"
+                            ref="data.q_available_day_wed"
+                            value={this.props.data.q_available_day_wed}
+                            onChange={this.handleChange}
+                        />
+                        <AvailabilityField {...this.props}
+                            label="Thursday"
+                            fieldName="data.q_available_day_thu"
+                            ref="data.q_available_day_thu"
+                            value={this.props.data.q_available_day_thu}
+                            onChange={this.handleChange}
+                        />
+                        <AvailabilityField {...this.props}
+                            label="Friday"
+                            fieldName="data.q_available_day_fri"
+                            ref="data.q_available_day_fri"
+                            value={this.props.data.q_available_day_fri}
+                            onChange={this.handleChange}
+                        />
+                        <AvailabilityField {...this.props}
+                            label="Sabbath"
+                            fieldName="data.q_available_day_sat"
+                            ref="data.q_available_day_sat"
+                            value={this.props.data.q_available_day_sat}
+                            onChange={this.handleChange}
+                        />
+                        <AvailabilityField {...this.props}
+                            label="Sunday"
+                            fieldName="data.q_available_day_sun"
+                            ref="data.q_available_day_sun"
+                            value={this.props.data.q_available_day_sun}
+                            onChange={this.handleChange}
+                        />
                     </div>
 
                     <div>

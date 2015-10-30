@@ -7,9 +7,10 @@ export default class BaseSection extends React.Component {
     }
 
     handleChange(field, e) {
+        var value = typeof e === 'object' ? e.target.value : e
         this.props.updateField( {
             key : field.split("."),
-            value : e.target.value
+            value : value
         });
     }
 
