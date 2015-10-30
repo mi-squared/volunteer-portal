@@ -64,6 +64,7 @@ export default class DemographicsFields extends BaseSection {
                     {...this.props}
                     label="Race / Ethnicity"
                     selectValue={this.props.data['q_race_ethnicity']}
+                    fieldName="data.q_race_ethnicity"
                     ref="data.q_race_ethnicity"
                     onChange={this.handleChange}>
                     <option value="white">White</option>
@@ -77,6 +78,7 @@ export default class DemographicsFields extends BaseSection {
                     {...this.props}
                     label="Gender"
                     selectValue={this.props.data['q_gender']}
+                    field="data.q_gender"
                     ref="data.q_gender"
                     onChange={this.handleChange}>
                     <option value="male">Male</option>
@@ -89,6 +91,7 @@ export default class DemographicsFields extends BaseSection {
                     {...this.props}
                     label="Shirt size"
                     selectValue={this.props.data['q_tshirt']}
+                    fieldName="data.q_tshirt"
                     ref="data.q_tshirt"
                     onChange={this.handleChange}>
                     <option value="xsm">Extra small</option>

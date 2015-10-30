@@ -4,6 +4,12 @@ import classNames from 'classnames'
 
 export default React.createClass({
 
+    commitChange: function(e) {
+        if ( this.props.onChange ) {
+            this.props.onChange(this.props.fieldName, e);
+        }
+    },
+
     render: function() {
         var requiredLabel = this.props.required ? <span className='j-required'>*</span> : '';
         var message;
@@ -24,10 +30,10 @@ export default React.createClass({
                 <div>
                     <select
                         className="form-control"
-                        multiple={this.props.multiple}
                         value={this.props.selectValue}
-                        ref="input"
-                        onChange={this.handleChange}
+                        ref={this.props.ref}
+                        fieldName={this.props.fieldName}
+                        onChange={this.commitChange}
                         placeholder={this.props.placeHolder}>
                     {this.props.children.map(entry =>
                             <option key={entry.props.value} value={entry.props.value}>{entry.props.children}</option>
