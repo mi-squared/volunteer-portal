@@ -95,8 +95,7 @@ class MainPage extends React.Component {
 
             {this.props.alert}
 
-            <Demographics
-                {...this.props}
+            <Demographics {...this.props}
                 onBlur={this.onBlur}
                 submitTS={this.props.submitTS}
                 focusElement={this.props.focusElement||this.state.focusElement}
