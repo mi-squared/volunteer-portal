@@ -2,8 +2,16 @@ html, body {
     -webkit-tap-highlight-color: transparent;
 }
 
-.availability-field .form-group {
-    /*float: left;*/
+.availability-field label {
+    font-weight: normal;
+}
+
+.availability-field input[type=checkbox] {
+    margin-right: 7px;
+}
+
+.availability-field select {
+    margin-left: 7px;
 }
 
 @media (min-width: 768px) {
