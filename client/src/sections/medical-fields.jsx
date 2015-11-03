@@ -16,7 +16,7 @@ export default class MedicalFields extends BaseSection {
                 <div>
                     <MultiselectField
                         {...this.props}
-                        label="List any specialties:"
+                        label="List any medical specialties:"
                         value={this.props.data.q_medical_specialties}
                         placeHolder="Click to choose specialties"
                         ref="data.q_medical_specialties"

@@ -36,9 +36,11 @@ class VolunteeringDetailPage extends React.Component {
     render() {
         return (
             <div className="container">
-                <h1>Volunteering detail</h1>
+                <div className="col-md-7">
+                    <h1>Volunteering detail</h1>
 
-                {this.props.alert}
+                    {this.props.alert}
+                </div>
 
                 <VolunteerGeneral {...this.props}
                     onBlur={this.onBlur}
@@ -56,7 +58,7 @@ class VolunteeringDetailPage extends React.Component {
 
                 <hr/>
 
-                <div className="j-page-nav">
+                <div className="j-page-nav col-md-7">
                     <Button onClick={this.doBack}>Back</Button>
                     <Button onClick={this.doContinue}>Continue</Button>
                 </div>

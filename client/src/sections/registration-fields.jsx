@@ -17,7 +17,7 @@ export default class RegistrationFields extends BaseSection {
 
     render() {
         return (
-            <div>
+            <div className="col-md-7">
                 <IdentityFields {...this.props} />
 
                 <ContactFields {...this.props} onChange={this.handleChange}/>

@@ -110,12 +110,14 @@ class ReturningVolunteerPage extends React.Component {
     render() {
         return (
             <div className="container">
-                <h1>Welcome back</h1>
-                <h3>
-                    Please sign in to continue.
-                </h3>
+                <div className="col-md-7">
+                    <h1>Welcome back</h1>
+                    <h3>
+                        Please sign in to continue.
+                    </h3>
 
-                {this.props.alert}
+                    {this.props.alert}
+                </div>
 
                 <SignInFields
                     {...this.props}
@@ -127,7 +129,7 @@ class ReturningVolunteerPage extends React.Component {
 
                 <hr/>
 
-                <div className="j-page-nav">
+                <div className="j-page-nav col-md-7">
                     <Button onClick={this.doSignIn}>Log in</Button>
                     <Button onClick={this.doCancel}>Cancel</Button>
                 </div>

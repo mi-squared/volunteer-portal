@@ -133,23 +133,21 @@ class NewVolunteerPage extends React.Component {
     render() {
         return (
             <div className="container">
-                <h1>Volunteer Profile</h1>
+                <div className="col-md-7">
+                    <h1>Volunteer Profile</h1>
 
-                {alert}
-
-                <div>
-                    <RegistrationFields
-                        {...this.props}
-                        onBlur={this.onBlur}
-                        submitTS={this.props.submitTS}
-                        focusElement={this.props.focusElement||this.state.focusElement}
-                        errorFields={this.props.errorFields}
-                    />
+                    {alert}
                 </div>
 
-                <hr/>
+                <RegistrationFields
+                    {...this.props}
+                    onBlur={this.onBlur}
+                    submitTS={this.props.submitTS}
+                    focusElement={this.props.focusElement||this.state.focusElement}
+                    errorFields={this.props.errorFields}
+                />
 
-                <div className="j-page-nav">
+                <div className="j-page-nav col-md-7">
                     <Button onClick={this.doRegister}>Create</Button>
                     <Button onClick={this.doCancel}>Cancel</Button>
                 </div>
