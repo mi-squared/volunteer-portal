@@ -34,6 +34,30 @@ class NewVolunteerPage extends React.Component {
                     required: true,
                     allowEmpty: false
                 },
+                q_address_1: {
+                    type: 'string',
+                    maxLength: 255,
+                    required: true,
+                    allowEmpty: false
+                },
+                q_address_city: {
+                    type: 'string',
+                    maxLength: 255,
+                    required: true,
+                    allowEmpty: false
+                },
+                q_address_state: {
+                    type: 'string',
+                    maxLength: 255,
+                    required: true,
+                    allowEmpty: false
+                },
+                q_address_zip: {
+                    type: 'string',
+                    maxLength: 255,
+                    required: true,
+                    allowEmpty: false
+                },
                 q_email: {
                     type: 'string',
                     maxLength: 255,
