@@ -90,24 +90,26 @@ class MainPage extends React.Component {
     }
 
     render() {
-        return <div className="container">
-            <h1>Volunteer Application</h1>
+        return (
+            <div className="container">
+                <div className="col-md-7">
+                    <h1>Volunteer Application</h1>
 
-            {this.props.alert}
+                    {this.props.alert}
+                </div>
 
-            <Demographics {...this.props}
-                onBlur={this.onBlur}
-                submitTS={this.props.submitTS}
-                focusElement={this.props.focusElement||this.state.focusElement}
-                errorFields={this.props.errorFields}
-            />
+                <Demographics {...this.props}
+                    onBlur={this.onBlur}
+                    submitTS={this.props.submitTS}
+                    focusElement={this.props.focusElement||this.state.focusElement}
+                    errorFields={this.props.errorFields}
+                    />
 
-            <div className="col-md-7">
-                <div className="j-page-nav">
+                <div className="j-page-nav col-md-7">
                     <Button onClick={this.doContinue}>Continue</Button>
                 </div>
             </div>
-        </div>;
+        );
     }
 }
 

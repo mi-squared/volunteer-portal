@@ -43,17 +43,19 @@ export default React.createClass({
                     <span>{requiredLabel}{this.props.label}</span>
                 </label>
                 {errorMessage}
-                <select
-                    multiple="true"
-                    className="form-control"
-                    ref={this.props.ref}
-                    value={this.getValue()}
-                    fieldName={this.props.fieldName}
-                    style={{width: "75%"}}>>
-                    {this.props.children.map(entry =>
-                        <option key={entry.props.value} value={entry.props.value}>{entry.props.children}</option>
-                    )}
-                </select>
+                <div>
+                    <select
+                        multiple="true"
+                        className="form-control"
+                        ref={this.props.ref}
+                        value={this.getValue()}
+                        fieldName={this.props.fieldName}
+                        style={{width: "75%"}}>>
+                        {this.props.children.map(entry =>
+                            <option key={entry.props.value || entry.props.children} value={entry.props.value || entry.props.children}>{entry.props.children}</option>
+                        )}
+                    </select>
+                </div>
             </div>
         );
     }

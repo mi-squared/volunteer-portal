@@ -7,7 +7,7 @@ export default class SigninFields extends BaseSection {
 
     render() {
         return (
-            <div>
+            <div className="col-md-7">
                 <ValidatedInput
                     {...this.props}
                     label="Email (username)" type="text"
