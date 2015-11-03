@@ -73,7 +73,7 @@ export default class VolunteerGeneral extends BaseSection {
                         <MultiselectField
                             {...this.props}
                             value={this.props.data.q_volunteering_area}
-                            placeHolder="security"
+                            placeHolder="Click here to choose areas"
                             ref="data.q_volunteering_area"
                             fieldName="data.q_volunteering_area"
                             onChange={this.handleChange}>

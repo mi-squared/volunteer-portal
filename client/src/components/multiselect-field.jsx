@@ -16,7 +16,9 @@ export default React.createClass({
 
     componentDidMount: function() {
         var targetField = $(React.findDOMNode(this)).find("select");
-        targetField.select2();
+        targetField.select2(
+            { placeholder : this.props.placeHolder }
+        );
 
         var self = this;
         targetField.on("select2:select", function (e) {
@@ -47,7 +49,6 @@ export default React.createClass({
                     ref={this.props.ref}
                     value={this.getValue()}
                     fieldName={this.props.fieldName}
-                    placeholder={this.props.placeHolder}
                     style={{width: "75%"}}>>
                     {this.props.children.map(entry =>
                         <option key={entry.props.value} value={entry.props.value}>{entry.props.children}</option>
