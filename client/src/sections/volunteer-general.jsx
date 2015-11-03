@@ -4,6 +4,7 @@ import ReactAddons from 'react/addons';
 import ValidatedInput from '../components/validated-input-field.jsx';
 import QuestionContainer from '../components/question-container.jsx';
 import DropdownField from '../components/dropdown-field.jsx';
+import MultiselectField from '../components/multiselect-field.jsx';
 import YesNoField from '../components/yes-no-field.jsx';
 import MedicalFields from './medical-fields.jsx';
 import LicenseFields from './license-fields.jsx';
@@ -66,20 +67,20 @@ export default class VolunteerGeneral extends BaseSection {
 
                 <div>
                     <label>
-                        What area would you like to volunteer in? Check all that apply:
+                        What areas would you like to volunteer in?
                     </label>
                     <div>
-                        <DropdownField
+                        <MultiselectField
                             {...this.props}
-                            selectValue={this.props.data.q_area_volunteer}
-                            placeHolder="security"
-                            field="q_volunteering_area"
-                            multiple="true"
-                            onChange={ function(f,e) { console.log(f,e.target.value); }}>
+                            value={this.props.data.q_volunteering_area}
+                            placeHolder="Click here to choose areas"
+                            ref="data.q_volunteering_area"
+                            fieldName="data.q_volunteering_area"
+                            onChange={this.handleChange}>
                             <option value="logistics">Logistics</option>
                             <option value="security">Security</option>
                             <option value="hospitality">Hospitality</option>
-                        </DropdownField>
+                        </MultiselectField>
                     </div>
                 </div>
 
