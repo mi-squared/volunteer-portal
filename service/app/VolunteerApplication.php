@@ -76,6 +76,8 @@ class VolunteerApplication extends Model
         "q_is_legal_professional",
 
         // availability
+        "q_available_entire_time",
+
         "q_available_day_mon",
         "q_available_day_tue",
         "q_available_day_wed",

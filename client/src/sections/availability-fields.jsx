@@ -30,6 +30,9 @@ export default class AvailabilityFields extends BaseSection {
                     onChange={this.handleChange}
                 />
 
+                <div>
+                    {this.props.data.q_available_entire_time}
+                </div>
                 <QuestionContainer {...this.props}
                     criteria={ {key : 'q_available_entire_time', value : "false" } }>
 
