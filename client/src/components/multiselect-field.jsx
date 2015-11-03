@@ -50,7 +50,7 @@ export default React.createClass({
                         ref={this.props.ref}
                         value={this.getValue()}
                         fieldName={this.props.fieldName}
-                        style={{width: "75%"}}>>
+                        style={{width: "100%"}}>>
                         {this.props.children.map(entry =>
                             <option key={entry.props.value || entry.props.children} value={entry.props.value || entry.props.children}>{entry.props.children}</option>
                         )}
