@@ -6,15 +6,23 @@ export default React.createClass({
     mixins: [React.addons.PureRenderMixin],
 
     render: function() {
-        var show = true;
+        var show = false;
         if ( this.props.criteria ) {
 
             var criteria = this.props.criteria;
             if ( typeof criteria === 'object' ) {
                 var key = this.props.criteria.key;
                 var value = this.props.criteria.value;
-                if ( this.props.data[key] !== value ) {
-                    show = false;
+                if ( !value ) {
+                    value = "false";
+                }
+
+                if ( value === "false" && !this.props.data[key] ) {
+                    show = true;
+                } else if (!value && !this.props.data[key] ){
+                    show = true;
+                } else if ( this.props.data[key] == value) {
+                    show = true;
                 }
             } else if ( typeof criteria === 'function' ) {
                 show = criteria();

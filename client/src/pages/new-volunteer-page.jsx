@@ -1,44 +1,26 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import Router, {Route, DefaultRoute, Link} from 'react-router';
 import Button from 'react-bootstrap/lib/Button.js';
-import Alert from 'react-bootstrap/lib/Alert.js'
-import Revalidator from 'revalidator/lib/revalidator.js'
+
 import {register}  from '../client.js';
-
 import RegistrationFields from '../sections/registration-fields.jsx';
-import {MainContainer} from './main-page.jsx';
 import * as actionCreators from '../action_creators';
+import composePage from './base-page.jsx';
 
-export const NewVolunteerPage = React.createClass({
-    mixins: [ Router.Navigation ],
+class NewVolunteerPage extends React.Component {
 
-    getInitialState: function() {
-        return {
-            focusElement: "q_first_name",
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            focusElement: "data.q_first_name",
             alertVisible: false,
-            errorFields: [],
+            errorFields: {},
             errorMessage : 'Form error'
         };
-    },
 
-    componentWillMount: function() {
-        // reset to initial state whenever this form appears
-        this.props.reset();
-    },
-
-    handleAlertDismiss: function() {
-        this.setState({alertVisible: false});
-    },
-
-    handleAlertShow: function() {
-        this.setState({alertVisible: true});
-    },
-
-    doValidate: function() {
-        // todo - should be a module
-        var fieldsInError = [];
-        var schema = {
+        this.schema = {
+            fieldPrefix: 'data.',
             properties: {
                 q_first_name: {
                     type: 'string',
@@ -72,32 +54,27 @@ export const NewVolunteerPage = React.createClass({
                 }
             }
         };
-        var res = Revalidator.validate(this.props, schema);
-        if ( !res.valid ) {
-            for ( var i in res.errors ) {
-                var error = res.errors[i];
-                fieldsInError.push({
-                    field: error['property'],
-                    message: error['message']
-                });
-            }
-        }
 
-        this.setState({ errorFields : fieldsInError });
-        return fieldsInError.length < 1;
-    },
+        this.doRegister = this.doRegister.bind(this);
+        this.doCancel = this.doCancel.bind(this);
+    }
 
-    doRegister: function() {
+    componentWillMount() {
+        // reset to initial state whenever this form appears
+        this.props.reset();
+    }
+
+    doRegister() {
         // validation
-        if ( this.doValidate() ) {
-            var self = this;
+        var self = this;
+        if ( this.props.doValidate(this.schema, this.props.data) ) {
             var data = {
-                'username' : this.props['q_email'],
-                'last_name' : this.props['q_last_name'],
-                'first_name' : this.props['q_first_name'],
-                'middle_name' : this.props['q_middle_name'],
-                'email': this.props['q_email'],
-                'password' : this.props['q_password']
+                'username' : this.props.data['q_email'],
+                'last_name' : this.props.data['q_last_name'],
+                'first_name' : this.props.data['q_first_name'],
+                'middle_name' : this.props.data['q_middle_name'],
+                'email': this.props.data['q_email'],
+                'password' : this.props.data['q_password']
             };
 
             register(data).then(
@@ -105,64 +82,31 @@ export const NewVolunteerPage = React.createClass({
                     self.props.login({
                         token: response.token
                     });
-                    self.transitionTo('/do-register');
+                    self.props.transitionTo('/do-register');
                 },
                 function(error) {
-                    self.setState({
+                    self.props.handleAlertShow({
                         errorMessage: "You may have already registered another account under that email.",
                         errorFields : [
                             {
-                                field: '<q_email></q_email>',
+                                field: 'data.q_email',
                                 message: ''
                             }
                         ]
                     });
-                    self.doAlerts();
                 }
             );
-
         } else {
-            var self = this;
-            setTimeout( function() {
-                var errorField = self.state.errorFields[0];
-                self.setState({
-                    focusElement : errorField ? errorField['field'] : '',
-                    errorMessage: "Form error"
-                });
-                self.doAlerts();
-            }, 1);
+            this.props.handleAlertShow();
         }
-    },
+    }
 
-    onBlur: function() {
-        this.setState( {
-            focusElement : ''
-        });
-        this.doValidate();
-    },
-
-    doAlerts: function() {
-        this.handleAlertShow();
-    },
-
-    doCancel: function() {
+    doCancel() {
         this.props.reset();
-        this.transitionTo('/');
-    },
+        this.props.transitionTo('/');
+    }
 
-    render: function() {
-        var alert;
-        if (this.state.alertVisible) {
-            alert = (
-                <Alert bsStyle="danger" onDismiss={this.handleAlertDismiss}>
-                    <h4>{this.state.errorMessage}</h4>
-                    <p>Please update the fields in error to continue.</p>
-                </Alert>
-            );
-        } else {
-            alert = <div/>;
-        }
-
+    render() {
         return (
             <div className="container">
                 <h1>Volunteer Profile</h1>
@@ -171,10 +115,12 @@ export const NewVolunteerPage = React.createClass({
 
                 <div>
                     <RegistrationFields
+                        {...this.props}
                         onBlur={this.onBlur}
-                        data={this.props}
-                        focusElement={this.state.focusElement}
-                        errorFields={this.state.errorFields}/>
+                        submitTS={this.props.submitTS}
+                        focusElement={this.props.focusElement||this.state.focusElement}
+                        errorFields={this.props.errorFields}
+                    />
                 </div>
 
                 <hr/>
@@ -187,12 +133,8 @@ export const NewVolunteerPage = React.createClass({
             </div>
         );
     }
-});
-
-function mapStateToProps(state) {
-    return state.toJSON();
 }
 
 export const NewVolunteerPageContainer = connect(
-    mapStateToProps, actionCreators
-)(NewVolunteerPage);
+    (state) => state.toJSON(), actionCreators
+)(composePage(NewVolunteerPage));

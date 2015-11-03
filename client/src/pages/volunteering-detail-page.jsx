@@ -1,34 +1,58 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import Router, {Route, DefaultRoute, Link} from 'react-router';
 import Button from 'react-bootstrap/lib/Button.js';
 
 import VolunteerGeneral from '../sections/volunteer-general.jsx';
 import Availability from '../sections/availability-fields.jsx';
-
+import composePage from './base-page.jsx';
 import * as actionCreators from '../action_creators';
 
-export const VolunteeringDetailPage = React.createClass({
-    mixins: [ Router.Navigation ],
+class VolunteeringDetailPage extends React.Component {
+    constructor(props) {
+        super(props);
 
-    doContinue : function() {
-        // todo - where does this go?
-        this.transitionTo('/esign');
-    },
+        this.state = {
+            alertVisible: false,
+            errorFields: {},
+            errorMessage : ''
+        };
 
-    doBack : function() {
-        var isBringingChildren = this.props['q_bringing_children'] === 'true';
-        this.transitionTo(isBringingChildren ? '/children-page' : '/main');
-    },
-    render: function() {
+        this.doContinue = this.doContinue.bind(this);
+        this.doBack = this.doBack.bind(this);
+    }
 
+    doContinue() {
+        // save the application if passes validation
+        this.props.saveApplication();
+
+        this.props.transitionTo('/esign');
+    }
+
+    doBack() {
+        var isBringingChildren = this.props.data['q_bringing_children'] === 'true';
+        this.props.transitionTo(isBringingChildren ? '/children-page' : '/main');
+    }
+
+    render() {
         return (
             <div className="container">
                 <h1>Volunteering detail</h1>
 
-                <VolunteerGeneral data={this.props}/>
+                {this.props.alert}
 
-                <Availability data={this.props}/>
+                <VolunteerGeneral {...this.props}
+                    onBlur={this.onBlur}
+                    submitTS={this.props.submitTS}
+                    focusElement={this.props.focusElement||this.state.focusElement}
+                    errorFields={this.props.errorFields}
+                />
+
+                <Availability {...this.props}
+                    onBlur={this.onBlur}
+                    submitTS={this.props.submitTS}
+                    focusElement={this.props.focusElement||this.state.focusElement}
+                    errorFields={this.props.errorFields}
+                />
 
                 <hr/>
 
@@ -37,16 +61,11 @@ export const VolunteeringDetailPage = React.createClass({
                     <Button onClick={this.doContinue}>Continue</Button>
                 </div>
 
-
             </div>
         );
     }
-});
-
-function mapStateToProps(state) {
-    return state.toJSON();
 }
 
 export const VolunteeringDetailPageContainer = connect(
-    mapStateToProps, actionCreators
-)(VolunteeringDetailPage);
+    (state) => state.toJSON(), actionCreators
+)(composePage(VolunteeringDetailPage));

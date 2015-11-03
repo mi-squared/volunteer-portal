@@ -1,49 +1,44 @@
 import React from 'react';
 import ReactAddons from 'react/addons';
-
 import Input from 'react-bootstrap/lib/Input';
 
-import QuestionContainer from '../components/question-container.jsx';
-import YesNoField from '../components/yes-no-field.jsx';
+import ValidatedInput from '../components/validated-input-field.jsx';
+import BaseSection from './base-section.jsx'
 
-export default React.createClass({
-
-    mixins: [React.addons.PureRenderMixin],
-
-    handleChange(field, e) {
-        this.props.data.updateField( {
-            key : field,
-            value : e.target.value
-        });
-    },
-
-    render: function () {
+export default class MedicalFields extends BaseSection {
+    render() {
         return (
-            <QuestionContainer data={this.props.data}>
+            <div>
 
-                <QuestionContainer data={this.props.data}>
-                    <Input type="text" label="List any specialties:"
-                        type="text"
-                        fieldName="q_medical_specialties"
-                        value={this.props.data.q_medical_specialties}
-                        onChange={this.handleChange.bind(this, "q_medical_specialties")}/>
-                </QuestionContainer>
+                <hr/>
 
-                <QuestionContainer data={this.props.data}>
-                    <Input type="text" label="NPI"
-                        fieldName="q_medical_npi"
-                        value={this.props.data.q_medical_npi}
-                        onChange={this.handleChange.bind(this, "q_medical_npi")}/>
-                </QuestionContainer>
+                <ValidatedInput
+                    {...this.props}
+                    label="List any specialties:"
+                    value={this.props.data.q_medical_specialties}
+                    fieldName="data.q_medical_specialties"
+                    ref="data.q_medical_specialties"
+                    onChange={this.handleChange}/>
 
-                <QuestionContainer data={this.props.data}>
-                    <Input type="text" label="DEA (Optional)"
-                        fieldName="q_medical_dea"
-                        value={this.props.data.q_medical_dea}
-                        onChange={this.handleChange.bind(this, "q_medical_dea")}/>
-                </QuestionContainer>
+                <ValidatedInput
+                    {...this.props}
+                    label="NPI"
+                    value={this.props.data.q_medical_npi}
+                    fieldName="data.q_medical_npi"
+                    ref="data.q_medical_npi"
+                    onChange={this.handleChange}/>
 
-            </QuestionContainer>
+                <ValidatedInput
+                    {...this.props}
+                    label="DEA (Optional)"
+                    value={this.props.data.q_medical_dea}
+                    fieldName="data.q_medical_dea"
+                    ref="data.q_medical_dea"
+                    onChange={this.handleChange}/>
+
+                <hr/>
+
+            </div>
         );
     }
-});
+}

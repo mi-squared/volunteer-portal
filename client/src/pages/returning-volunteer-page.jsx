@@ -1,53 +1,34 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import Router, {Route, DefaultRoute, Link} from 'react-router';
 import Button from 'react-bootstrap/lib/Button.js';
-import Alert from 'react-bootstrap/lib/Alert.js'
-import Revalidator from 'revalidator/lib/revalidator.js'
 
 import * as actionCreators from '../action_creators';
 import {login, getApplication}  from '../client.js';
-
+import composePage from './base-page.jsx';
 import SignInFields from '../sections/signin-fields.jsx';
 
-export const ReturningVolunteerPage = React.createClass({
+class ReturningVolunteerPage extends React.Component {
 
-    mixins: [ Router.Navigation ],
-
-    getInitialState: function() {
-        return {
-            focusElement: "f_username",
+    constructor(props) {
+        super(props);
+        this.state = {
+            focusElement: "session.f_username",
             alertVisible: false,
-            errorFields: [],
+            errorFields: {},
             errorMessage : 'Form error'
         };
-    },
 
-    componentWillMount: function() {
-        // reset to initial state whenever this form appears
-        this.props.reset();
-    },
-
-    handleAlertDismiss: function() {
-        this.setState({alertVisible: false});
-    },
-
-    handleAlertShow: function() {
-        this.setState({alertVisible: true});
-    },
-
-    doValidate: function() {
-        // todo - should be a module
-        var fieldsInError = [];
-        var schema = {
+        this.schema =
+        {
+            fieldPrefix: 'session.',
             properties: {
-                f_username: {
+                'f_username': {
                     type: 'string',
                     maxLength: 255,
                     required: true,
                     allowEmpty: false
                 },
-                f_password: {
+                'f_password': {
                     type: 'string',
                     maxLength: 255,
                     required: true,
@@ -55,27 +36,22 @@ export const ReturningVolunteerPage = React.createClass({
                 }
             }
         };
-        var res = Revalidator.validate(this.state, schema);
 
-        if ( !res.valid ) {
-            for ( var i in res.errors ) {
-                var error = res.errors[i];
-                fieldsInError.push({
-                    field: error['property'],
-                    message: error['message']
-                });
-            }
-        }
+        this.doSignIn = this.doSignIn.bind(this);
+        this.doCancel = this.doCancel.bind(this);
+        this.doInvalidCredentials = this.doInvalidCredentials.bind(this);
+    }
 
-        this.setState({ errorFields : fieldsInError });
-        return fieldsInError.length < 1;
-    },
+    componentWillMount() {
+        // reset to initial state whenever this form appears
+        this.props.reset();
+    }
 
-    doSignIn: function() {
+    doSignIn() {
         // validation
-        if ( this.doValidate() ) {
+        if ( this.props.doValidate( this.schema, this.props.session) ) {
             var self = this;
-            login(this.state['f_username'], this.state['f_password'])
+            login(this.props.session['f_username'], this.props.session['f_password'])
                 .then(
                     function(response) {
                         var token = response.token;
@@ -90,6 +66,7 @@ export const ReturningVolunteerPage = React.createClass({
                                     response['application_id'] = response['id'];
                                     delete response['id'];
                                     self.props.loadApplication(response);
+                                    self.props.transitionTo('/main');
                                 },
                                 function(error) {
                                     console.log(error);
@@ -97,79 +74,40 @@ export const ReturningVolunteerPage = React.createClass({
                             );
                         } else {
                             console.log("New app.");
+                            self.props.transitionTo('/main');
                         }
-                        self.transitionTo('/main');
                     },
                     function(error) {
                         self.doInvalidCredentials();
                     }
             );
         } else {
-            var self = this;
-            setTimeout( function() {
-                var errorField = self.state.errorFields[0];
-                self.setState({
-                    focusElement : errorField ? errorField['field'] : '',
-                    errorMessage: "Form error"
-                });
-                self.doAlerts();
-            }, 1);
+            this.props.handleAlertShow();
         }
-    },
+    }
 
-    doInvalidCredentials: function() {
-        this.setState({
-            focusElement: 'f_password',
+    doInvalidCredentials() {
+        this.props.handleAlertShow({
+            focusElement: 'session.f_password',
             errorMessage: "Invalid username or password",
-            errorFields : [
-                {
-                    field: 'f_username',
+            errorFields : {
+                'session.f_username': {
+                    field: 'session.f_username',
                     message: ''
                 },
-                {
-                    field: 'f_password',
+                'session.f_password': {
+                    field: 'session.f_password',
                     message: ''
                 }
-            ]
+            }
         });
-        this.doAlerts();
-        this.setState( { 'f_password' : '' });
-    },
+    }
 
-    doCancel: function() {
-        // todo - reinitialize state
-        this.transitionTo('/');
-    },
+    doCancel() {
+        this.props.transitionTo('/');
+    }
 
-    doAlerts: function() {
-        this.handleAlertShow();
-    },
-
-    handleChange: function(field, e) {
-        var state = {};
-        state[field] = e.target.value;
-        this.setState(state);
-    },
-
-    onBlur: function() {
-        this.setState( {
-            focusElement : ''
-        });
-    },
-
-    render: function() {
-        var alert;
-        if (this.state.alertVisible) {
-            alert = (
-                <Alert bsStyle="danger" onDismiss={this.handleAlertDismiss}>
-                    <h4>{this.state.errorMessage}</h4>
-                    <p>Please update the fields in error to continue.</p>
-                </Alert>
-            );
-        } else {
-            alert = <div/>;
-        }
-
+    render() {
         return (
             <div className="container">
                 <h1>Welcome back</h1>
@@ -177,17 +115,15 @@ export const ReturningVolunteerPage = React.createClass({
                     Please sign in to continue.
                 </h3>
 
-                {alert}
+                {this.props.alert}
 
-                <div>
-                    <SignInFields
-                        onBlur={this.onBlur}
-                        handleChange={this.handleChange}
-                        data={this.state}
-                        focusElement={this.state.focusElement}
-                        errorFields={this.state.errorFields}
-                    />
-                </div>
+                <SignInFields
+                    {...this.props}
+                    onBlur={this.onBlur}
+                    submitTS={this.props.submitTS}
+                    focusElement={this.props.focusElement||this.state.focusElement}
+                    errorFields={this.props.errorFields}
+                />
 
                 <hr/>
 
@@ -199,12 +135,8 @@ export const ReturningVolunteerPage = React.createClass({
             </div>
         );
     }
-});
-
-function mapStateToProps(state) {
-    return state.toJSON();
 }
 
 export const ReturningVolunteerPageContainer = connect(
-    mapStateToProps, actionCreators
-)(ReturningVolunteerPage);
+    (state) => state.toJSON(), actionCreators
+)(composePage(ReturningVolunteerPage));

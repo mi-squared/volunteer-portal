@@ -74,5 +74,26 @@ class VolunteerApplication extends Model
 
         // legal
         "q_is_legal_professional",
+
+        // availability
+        "q_available_entire_time",
+
+        "q_available_day_mon",
+        "q_available_day_tue",
+        "q_available_day_wed",
+        "q_available_day_thu",
+        "q_available_day_fri",
+        "q_available_day_sat",
+        "q_available_day_sun",
+
+        "q_available_preactivity_trucks",
+        "q_available_preactivity_central",
+        "q_available_preactivity_dept",
+
+        "q_available_postactivity_teardown",
+        "q_available_postactivity_truck",
+        "q_available_postactivity_followup",
+        "q_available_postactivity_follow2",
+        "q_available_postactivity_centers"
     ];
 }

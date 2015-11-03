@@ -1,55 +1,47 @@
 import React from 'react';
 import ReactAddons from 'react/addons';
-
 import Input from 'react-bootstrap/lib/Input';
-import DateTimeField from "react-bootstrap-datetimepicker";
 
 import QuestionContainer from '../components/question-container.jsx';
-import YesNoField from '../components/yes-no-field.jsx';
-import DateField from '../components/date-field.jsx';
+import ValidatedInput from '../components/validated-input-field.jsx';
 import StateField from '../components/state-field.jsx';
+import BaseSection from './base-section.jsx'
 
-export default React.createClass({
+export default class LicenseFields extends BaseSection {
 
-    mixins: [React.addons.PureRenderMixin],
-
-    handleChange(field, e) {
-        this.props.data.updateField( {
-            key : field,
-            value : e.target.value
-        });
-    },
-
-    render: function () {
+    render () {
         return (
-            <QuestionContainer data={this.props.data}>
+            <div>
 
-                <QuestionContainer data={this.props.data }>
-                    <StateField
-                        data={this.props.data}
-                        label="State of license"
-                        fieldName="q_licensed_state"/>
-                </QuestionContainer>
+                <hr/>
 
-                <QuestionContainer data={this.props.data} >
-                    <Input
-                        label="Discipline licensed in"
-                        type="text"
-                        fieldName="q_licensed_discipline"
-                        value={this.props.data.q_licensed_discipline}
-                        onChange={this.handleChange.bind(this, "q_licensed_discipline")}/>
-                </QuestionContainer>
+                <StateField
+                    {...this.props}
+                    label="State of license"
+                    ref="data.q_licensed_state"
+                    fieldName="data.q_licensed_state"
+                    onChange={this.handleChange}
+                />
 
-                <QuestionContainer data={this.props.data}>
-                    <DateField
-                        label="Expiration date of license (mm/yy/dddd)"
-                        value={this.props.data.q_dob}
-                        fieldName="q_licensed_expiration_date"
-                    />
+                <ValidatedInput
+                    {...this.props}
+                    label="Discipline licensed in"
+                    value={this.props.data.q_licensed_discipline}
+                    fieldName="data.q_licensed_discipline"
+                    ref="data.q_licensed_discipline"
+                    onChange={this.handleChange}/>
 
-                </QuestionContainer>
+                <ValidatedInput
+                    {...this.props}
+                    label="Expiration date of license (mm/yy/dddd)"
+                    value={this.props.data.q_license_expiration}
+                    fieldName="data.q_license_expiration"
+                    ref="data.q_license_expiration"
+                    onChange={this.handleChange}/>
 
-            </QuestionContainer>
+                <hr/>
+
+            </div>
         );
     }
-});
+}

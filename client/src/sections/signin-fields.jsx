@@ -1,43 +1,33 @@
 import React from 'react';
 
-import Input from 'react-bootstrap/lib/Input';
-
 import ValidatedInput from '../components/validated-input-field.jsx';
+import BaseSection from './base-section.jsx'
 
-export default React.createClass({
+export default class SigninFields extends BaseSection {
 
-    componentDidMount: function() {
-        if ( this.props.focusElement ) {
-            this.refs[this.props.focusElement].getInputDOMNode().focus();
-        }
-    },
-
-    handleChange(field, e) {
-        this.props.handleChange(field, e);
-    },
-
-    render: function() {
+    render() {
         return (
             <div>
-                <ValidatedInput focusElement={this.props.focusElement}
-                                onBlur={this.props.onBlur}
-                                errorFields={this.props.errorFields}
-                                label="Email (username)" type="text"
-                                value={this.props.data.f_username}
-                                required={true}
-                                fieldName="f_username"
-                                ref="f_username"
-                                onChange={this.handleChange.bind(this, "f_username")}/>
+                <ValidatedInput
+                    {...this.props}
+                    label="Email (username)" type="text"
+                    value={this.props.session.f_username}
+                    required={true}
+                    fieldName="session.f_username"
+                    ref="session.f_username"
+                    onChange={this.handleChange}
+                />
 
-                <ValidatedInput focusElement={this.props.focusElement}
-                                onBlur={this.props.onBlur}
-                                errorFields={this.props.errorFields}
-                                label="Password" type="password"
-                                value={this.props.data.f_password}
-                                required={true}
-                                fieldName="f_password"
-                                onChange={this.handleChange.bind(this, "f_password")}/>
+                <ValidatedInput
+                    {...this.props}
+                    label="Password" type="password"
+                    value={this.props.session.f_password}
+                    required={true}
+                    fieldName="session.f_password"
+                    ref="session.f_password"
+                    onChange={this.handleChange}
+                />
             </div>
         );
     }
-});
+}

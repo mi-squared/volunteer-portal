@@ -6,23 +6,23 @@ import MenuItem from 'react-bootstrap/lib/MenuItem.js';
 
 import QuestionContainer from '../components/question-container.jsx';
 import DropdownField from '../components/dropdown-field.jsx';
-
 import ContactFields from './contact-fields.jsx';
 import IdentityFields from './identity-fields.jsx';
+import BaseSection from './base-section.jsx'
 
-export default React.createClass({
+export default class ChildFields extends BaseSection {
 
     handleChange(field, e) {
         var thisChild = this.getChild();
         thisChild[field] = e.target.value;
-        this.props.data.updateChild(thisChild);
-    },
+        this.props.updateChild(thisChild);
+    }
 
     getChild() {
         return this.props.data['children'][this.props.childID];
-    },
+    }
 
-    render: function() {
+    render() {
         return (
             <QuestionContainer data={ this.props.data }>
                 <div>
@@ -33,7 +33,7 @@ export default React.createClass({
                     <DropdownField
                         label="Child's age"
                         selectValue={this.getChild()['q_child_age']}
-                        data={this.props.data}
+                        {...this.props}
                         onChange={this.handleChange.bind(this, "q_child_age")}>
                         <option value="0-23mos">0-23mos</option>
                         <option value="2-4">2-4</option>
@@ -47,7 +47,7 @@ export default React.createClass({
                     <DropdownField
                         label="Shirt size"
                         selectValue={this.getChild()['q_child_tshirt']}
-                        data={this.props.data}
+                        {...this.props}
                         onChange={this.handleChange.bind(this, "q_child_tshirt")}>
                         <option value="xsm">Extra small</option>
                         <option value="sm">Small</option>
@@ -82,4 +82,4 @@ export default React.createClass({
             </QuestionContainer>
         );
     }
-});
+}

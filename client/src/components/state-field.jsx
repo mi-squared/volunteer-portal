@@ -69,18 +69,22 @@ export default React.createClass({
         ];
     },
 
+    getFieldName() {
+        return this.props.fieldName.split(".")[1];
+    },
+
     render: function() {
         return(
-            <DropdownField
+            <DropdownField {...this.props}
                 required={this.props.required}
                 label={this.props.label}
-                selectValue={this.props.data[this.props.fieldName]}
-                data={this.props.data}
-                field={this.props.fieldName}
+                selectValue={this.props.data[this.getFieldName()]}
+                fieldName={this.props.fieldName}
+                ref={this.props.ref}
                 onChange={this.props.onChange}>
-                    {this.getStates().map(entry =>
-                        <option key={entry.abbreviation} value={entry.abbreviation}>{entry.abbreviation}</option>
-                    )}
+                {this.getStates().map(entry =>
+                    <option key={entry.abbreviation} value={entry.abbreviation}>{entry.abbreviation}</option>
+                )}
             </DropdownField>
         );
     }
