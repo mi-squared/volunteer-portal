@@ -7,6 +7,7 @@ var initialStateTemplate = {
         q_dob : "1970-01-01",
         q_date_graduation : "1970-01-01",
         q_volunteered_before : 'false',
+        q_languages: 'English',
         q_address_country: 'USA',
         q_available_entire_time : 'true'
     },
