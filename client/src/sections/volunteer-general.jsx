@@ -66,33 +66,29 @@ export default class VolunteerGeneral extends BaseSection {
                 </QuestionContainer>
 
                 <div>
-                    <label>
-                        What areas would you like to volunteer in?
-                    </label>
-                    <div>
-                        <MultiselectField
-                            {...this.props}
-                            value={this.props.data.q_volunteering_area}
-                            placeHolder="Click to choose volunteer areas"
-                            ref="data.q_volunteering_area"
-                            fieldName="data.q_volunteering_area"
-                            onChange={this.handleChange}>
+                    <MultiselectField
+                        {...this.props}
+                        label="What areas would you like to volunteer in?"
+                        value={this.props.data.q_volunteering_area}
+                        placeHolder="Click to choose volunteer areas"
+                        ref="data.q_volunteering_area"
+                        fieldName="data.q_volunteering_area"
+                        onChange={this.handleChange}>
 
-                            <option value="Logistics">Logistics</option>
-                            <option value="Security">Security</option>
-                            <option value="Hospitality">Hospitality</option>
-                            <option value="Food service">Food service</option>
-                            <option value="Registration">Registration</option>
-                            <option value="Exit management">Exit management</option>
-                            <option value="Chaplaincy">Chaplaincy</option>
-                            <option value="Hairstyling">Hairstyling</option>
-                            <option value="Clothing">Clothing</option>
-                            <option value="Lifestyle">Lifestyle</option>
-                            <option value="Media">Lifestyle</option>
-                            <option value="Food Demo">Food Demo</option>
-                            <option value="Music">Music</option>
-                        </MultiselectField>
-                    </div>
+                        <option value="Logistics">Logistics</option>
+                        <option value="Security">Security</option>
+                        <option value="Hospitality">Hospitality</option>
+                        <option value="Food service">Food service</option>
+                        <option value="Registration">Registration</option>
+                        <option value="Exit management">Exit management</option>
+                        <option value="Chaplaincy">Chaplaincy</option>
+                        <option value="Hairstyling">Hairstyling</option>
+                        <option value="Clothing">Clothing</option>
+                        <option value="Lifestyle">Lifestyle</option>
+                        <option value="Media">Lifestyle</option>
+                        <option value="Food Demo">Food Demo</option>
+                        <option value="Music">Music</option>
+                    </MultiselectField>
                 </div>
 
                 <YesNoField {...this.props}

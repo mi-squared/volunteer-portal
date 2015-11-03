@@ -5,6 +5,7 @@ import QuestionContainer from '../components/question-container.jsx';
 import ValidatedInput from '../components/validated-input-field.jsx';
 import YesNoField from '../components/yes-no-field.jsx';
 import DropdownField from '../components/dropdown-field.jsx';
+import LanguageField from '../components/language-field.jsx';
 
 import ContactFields from './contact-fields.jsx';
 import IdentityFields from './identity-fields.jsx';
@@ -102,8 +103,8 @@ export default class DemographicsFields extends BaseSection {
                     <option value="xlrg">Extra large</option>
                 </DropdownField>
 
-                <ValidatedInput {...this.props}
-                    label="Languages spoken" type="textarea"
+                <LanguageField {...this.props}
+                    label="Languages spoken"
                     fieldName="data.q_languages"
                     ref="data.q_languages"
                     value={this.props.data.q_languages}
