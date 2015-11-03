@@ -77,9 +77,20 @@ export default class VolunteerGeneral extends BaseSection {
                             ref="data.q_volunteering_area"
                             fieldName="data.q_volunteering_area"
                             onChange={this.handleChange}>
-                            <option value="logistics">Logistics</option>
-                            <option value="security">Security</option>
-                            <option value="hospitality">Hospitality</option>
+
+                            <option value="Logistics">Logistics</option>
+                            <option value="Security">Security</option>
+                            <option value="Hospitality">Hospitality</option>
+                            <option value="Food service">Food service</option>
+                            <option value="Registration">Registration</option>
+                            <option value="Exit management">Exit management</option>
+                            <option value="Chaplaincy">Chaplaincy</option>
+                            <option value="Hairstyling">Hairstyling</option>
+                            <option value="Clothing">Clothing</option>
+                            <option value="Lifestyle">Lifestyle</option>
+                            <option value="Media">Lifestyle</option>
+                            <option value="Food Demo">Food Demo</option>
+                            <option value="Music">Music</option>
                         </MultiselectField>
                     </div>
                 </div>
