@@ -4,6 +4,7 @@ use JWTAuth;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\VolunteerApplication;
+use App\VolunteerChild;
 
 class VolunteerApplicationController extends BaseController
 {
@@ -19,6 +20,15 @@ class VolunteerApplicationController extends BaseController
             $applicationMeta = $request->all();
             $applicationMeta['user_id'] = $userID;
             $VolunteerApplication = VolunteerApplication::create($applicationMeta);
+
+            if ( array_key_exists('children', $applicationMeta) ) {
+                foreach($applicationMeta['children'] as $child) {
+                    $VolunteerChild = VolunteerChild::create($child);
+                    $VolunteerApplication->children()->save($VolunteerChild);
+                }
+            }
+
+            $VolunteerApplication->children;
             return response()->json($VolunteerApplication);
         }
         catch (JWTException $e)
@@ -36,6 +46,18 @@ class VolunteerApplicationController extends BaseController
             $applicationMeta = $request->all();
             $VolunteerApplication  = VolunteerApplication::where('id', '=', $volunteerApplicationID)->firstOrFail();
             $VolunteerApplication->update($applicationMeta);
+            if ( array_key_exists('children', $applicationMeta) ) {
+                foreach($applicationMeta['children'] as $child) {
+                    if ( array_key_exists('id', $child) ) {
+                        $VolunteerChild = VolunteerChild::where('id', '=', $child['id'])->firstOrFail();
+                        $VolunteerChild->update($child);
+                    } else {
+                        $VolunteerChild = VolunteerChild::create($child);
+                    }
+                    $VolunteerApplication->children()->save($VolunteerChild);
+                }
+            }
+            $VolunteerApplication->children;
             return response()->json($VolunteerApplication);
         }
         catch (JWTException $e)
@@ -47,6 +69,7 @@ class VolunteerApplicationController extends BaseController
 
     public function getVolunteerApplication($volunteerApplicationID) {
         $VolunteerApplication  = VolunteerApplication::where('id', '=', $volunteerApplicationID)->firstOrFail();
+        $VolunteerApplication->children;
         return response()->json($VolunteerApplication);
     }
 
