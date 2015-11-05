@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddAvailabilityFieldsToVolunteerApplication4 extends Migration
+class AddAvailabilityFieldsToVolunteerApplication5 extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddAvailabilityFieldsToVolunteerApplication4 extends Migration
     public function up()
     {
         Schema::table('volunteer_application', function (Blueprint $table) {
-            $table->string("q_esigned")->default("");
+            $table->string("q_esigned_date")->default("");
         });
     }
 
@@ -25,7 +25,7 @@ class AddAvailabilityFieldsToVolunteerApplication4 extends Migration
     public function down()
     {
         Schema::table('volunteer_application', function (Blueprint $table) {
-            $table->dropColumn("q_esigned");
+            $table->string("q_esigned_date")->default("");
         });
     }
 }
