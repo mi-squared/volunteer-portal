@@ -44,20 +44,34 @@ export default React.createClass({
         }
         var errorMessage = message ? <span className='j-error-message'>{message}</span> : '';
 
+        var text =
+            <input label={this.props.label}
+               type={this.props.type}
+               className="form-control"
+               value={this.getValue()}
+               onChange={this.handleChange}
+               ref={this.props.ref}
+               onBlur={this.commitChange}
+               placeholder={this.props.placeholder}
+            />;
+
+        var textArea =
+            <textarea label={this.props.label}
+                   className="form-control"
+                   onChange={this.handleChange}
+                   ref={this.props.ref}
+                   onBlur={this.commitChange}
+            >{this.getValue()}</textarea>;
+
+        var toShow = this.props.type == 'textarea' ? textArea : text;
+
         return(
             <div className={classNames('form-group', message ? 'has-error' : '')}>
                 <label className="control-label">
                     <span>{requiredLabel}{this.props.label}</span>
                 </label>
                 {errorMessage}
-                <input label={this.props.label}
-                    type={this.props.type}
-                    className="form-control"
-                    value={this.getValue()}
-                    onChange={this.handleChange}
-                    ref={this.props.ref}
-                    onBlur={this.commitChange}
-                />
+                {toShow}
             </div>
         );
     }

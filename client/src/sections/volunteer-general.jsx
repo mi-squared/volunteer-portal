@@ -117,14 +117,6 @@ export default class VolunteerGeneral extends BaseSection {
                     <MedicalFields {...this.props} />
                 </QuestionContainer>
 
-                <YesNoField {...this.props}
-                    fieldName="data.q_is_legal_professional"
-                    ref="data.q_is_legal_professional"
-                    label="Are you volunteering as a legal professional?"
-                    value={this.props.data.q_is_legal_professional}
-                    onChange={this.handleChange}
-                />
-
             </div>
         );
     }

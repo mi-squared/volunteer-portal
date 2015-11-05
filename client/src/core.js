@@ -4,8 +4,6 @@ var initialStateTemplate = {
     data: {
         children: {},
         q_is_adventist: "false",
-        q_dob : "1970-01-01",
-        q_date_graduation : "1970-01-01",
         q_volunteered_before : 'false',
         q_languages: 'English',
         q_address_country: 'USA',

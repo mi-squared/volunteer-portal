@@ -71,12 +71,14 @@ class VolunteerApplication extends Model
         // medical
         "q_is_medical_professional",
         "q_medical_specialties",
+        "q_medical_subspecialties",
 
         // legal
         "q_is_legal_professional",
 
         // availability
         "q_available_entire_time",
+        "q_share_room",
 
         "q_available_day_mon",
         "q_available_day_tue",
@@ -94,6 +96,9 @@ class VolunteerApplication extends Model
         "q_available_postactivity_truck",
         "q_available_postactivity_followup",
         "q_available_postactivity_follow2",
-        "q_available_postactivity_centers"
+        "q_available_postactivity_centers",
+
+        "q_esigned",
+        "q_esigned_date"
     ];
 }

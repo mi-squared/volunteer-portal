@@ -49,6 +49,7 @@ export default class StudentFields extends BaseSection {
                     type="text"
                     fieldName="data.q_date_graduation"
                     ref="data.q_date_graduation"
+                    placeholder="mm/dd/yyyy"
                     value={this.props.data.q_date_graduation}
                     onChange={this.handleChange}
                 />

@@ -8,13 +8,6 @@ import ContactFields from './contact-fields.jsx';
 
 export default class RegistrationFields extends BaseSection {
 
-    handleDateChange(date) {
-        this.props.updateField( {
-            key : 'q_dob',
-            value : date
-        });
-    }
-
     render() {
         return (
             <div className="col-md-7">
@@ -22,15 +15,15 @@ export default class RegistrationFields extends BaseSection {
 
                 <ContactFields {...this.props} onChange={this.handleChange}/>
 
-                <DateField
+                <ValidatedInput
                     {...this.props}
-                    label="Date of birth (mm/yy/dddd)"
+                    label="Date of birth"
                     value={this.props.data.q_dob}
                     required={true}
                     fieldName="data.q_dob"
                     ref="data.q_dob"
-                    onChange={this.handleDateChange}
-                />
+                    placeholder="mm/dd/yyyy"
+                    onChange={this.handleChange}/>
 
                 <ValidatedInput
                     {...this.props}

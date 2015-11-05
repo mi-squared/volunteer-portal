@@ -18,12 +18,14 @@ export default class DemographicsFields extends BaseSection {
             <div className="col-md-7">
                 <IdentityFields {...this.props} onChange={this.handleChange}/>
 
-                <ValidatedInput {...this.props}
+                <ValidatedInput
+                    {...this.props}
+                    label="Date of birth"
+                    value={this.props.data.q_dob}
                     required={true}
-                    label="Date of birth" type="text"
                     fieldName="data.q_dob"
                     ref="data.q_dob"
-                    value={this.props.data.q_dob}
+                    placeholder="mm/dd/yyyy"
                     onChange={this.handleChange}/>
 
                 <ContactFields {...this.props} onChange={this.handleChange}/>
@@ -65,13 +67,14 @@ export default class DemographicsFields extends BaseSection {
                         <DropdownField {...this.props}
                             label="Gender"
                             selectValue={this.props.data['q_gender']}
-                            field="data.q_gender"
+                            fieldName="data.q_gender"
                             ref="data.q_gender"
                             onChange={this.handleChange}>
+                            <option value="">-- select --</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                             <option value="trans-male">Transgendered Male</option>
-                            <option value="trans-female">Transgendered Male</option>
+                            <option value="trans-female">Transgendered female</option>
                         </DropdownField>
                     </div>
                     <div className="col-md-6">
@@ -81,6 +84,7 @@ export default class DemographicsFields extends BaseSection {
                             fieldName="data.q_race_ethnicity"
                             ref="data.q_race_ethnicity"
                             onChange={this.handleChange}>
+                            <option value="">-- select --</option>
                             <option value="white">White</option>
                             <option value="african-american">African American</option>
                             <option value="asian">Asian</option>
@@ -91,11 +95,12 @@ export default class DemographicsFields extends BaseSection {
                 </div>
 
                 <DropdownField {...this.props}
-                    label="Shirt size"
                     selectValue={this.props.data['q_tshirt']}
+                    label="Shirt size"
                     fieldName="data.q_tshirt"
                     ref="data.q_tshirt"
                     onChange={this.handleChange}>
+                    <option value="">-- select --</option>
                     <option value="xsm">Extra small</option>
                     <option value="sm">Small</option>
                     <option value="med">Medium</option>
