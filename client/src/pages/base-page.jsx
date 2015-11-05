@@ -3,9 +3,10 @@ import Router, {Route, DefaultRoute, Link} from 'react-router';
 import Button from 'react-bootstrap/lib/Button.js';
 import Alert from 'react-bootstrap/lib/Alert.js';
 import Revalidator from 'revalidator/lib/revalidator.js'
+import Q from 'q/q.js';
 
 import * as actionCreators from '../action_creators';
-import {saveApplication}  from '../client.js';
+import {saveApplicationRemote} from '../client.js';
 
 export default function composePage(Component) {
 
@@ -84,6 +85,32 @@ export default function composePage(Component) {
             this.transitionTo(route);
         },
 
+        saveApplication: function() {
+            var stateJSON = this.props;
+            var token = stateJSON['jwt'];
+            var application = stateJSON.data;
+            var deferred = Q.defer();
+
+            var self = this;
+            saveApplicationRemote(token, application).then(
+                function(response) {
+                    console.log("save success", response);
+                    setTimeout( function() {
+                        self.props.setState( response );
+                        deferred.resolve();
+                    }, 1);
+                },
+
+                function(error) {
+                    console.log("save error", error);
+                    alert("error saving application! " + error);
+                    deferred.reject(error);
+                }
+            );
+
+            return deferred.promise;
+        },
+
         render: function() {
             var alert;
             if (this.state.alertVisible) {
@@ -108,6 +135,7 @@ export default function composePage(Component) {
                     errorFields={this.state.errorFields}
                     submitTS={this.state.submitTS}
                     focusElement={this.state.focusElement}
+                    saveApplication={this.saveApplication}
                 />;
         }
     })

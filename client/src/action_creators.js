@@ -44,9 +44,3 @@ export function loadApplication( applicationSpec ) {
         applicationSpec
     };
 }
-
-export function saveApplication() {
-    return {
-        type: 'SAVE_APPLICATION'
-    };
-}
