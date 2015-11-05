@@ -32,7 +32,7 @@ export function updateField(state, fieldSpec ) {
 export function addChild(state, childSpec ) {
     var toMerge = {};
     toMerge[childSpec.childID] = childSpec;
-    return state.mergeIn(['children'], Map( toMerge ));
+    return state.mergeIn(['data', 'children'], fromJS( toMerge ));
 }
 
 export function updateChild(state, childSpec ) {
