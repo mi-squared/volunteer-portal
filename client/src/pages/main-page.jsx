@@ -105,7 +105,7 @@ class MainPage extends React.Component {
                     submitTS={this.props.submitTS}
                     focusElement={this.props.focusElement||this.state.focusElement}
                     errorFields={this.props.errorFields}
-                    />
+                />
 
                 <div className="j-page-nav col-md-7">
                     <Button onClick={this.doContinue}>Continue</Button>

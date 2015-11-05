@@ -25,3 +25,9 @@ $factory->define(App\VolunteerApplication::class, function ($faker) {
         'user_id' => $faker->user_id
     ];
 });
+
+$factory->define(App\VolunteerChild::class, function ($faker) {
+    return [
+        'application_id' => $faker->application_id
+    ];
+});

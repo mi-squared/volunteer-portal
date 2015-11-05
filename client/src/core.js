@@ -2,7 +2,7 @@ import {Map, List, fromJS} from 'immutable';
 
 var initialStateTemplate = {
     data: {
-        children: {},
+        children: [],
         q_is_adventist: "false",
         q_volunteered_before : 'false',
         q_languages: 'English',
@@ -17,8 +17,6 @@ export const INITIAL_STATE =  fromJS(JSON.parse(JSON.stringify(initialStateTempl
 
 export function reset() {
     var defaultState = JSON.parse(JSON.stringify(initialStateTemplate));
-    var childID = new Date().getTime();
-    defaultState.data.children[childID]= { childID : childID };
     return fromJS(defaultState);
 }
 
@@ -30,16 +28,20 @@ export function updateField(state, fieldSpec ) {
 }
 
 export function addChild(state, childSpec ) {
-    var toMerge = {};
-    toMerge[childSpec.childID] = childSpec;
-    return state.mergeIn(['children'], Map( toMerge ));
+    debugger;
+    var toMerge = state.get("data").get("children").toJSON();
+    toMerge.push( childSpec );
+    var newstate = state.mergeIn(['data', 'children'], fromJS(toMerge));
+    return newstate;
 }
 
 export function updateChild(state, childSpec ) {
-    return state.setIn(
+    debugger;
+    var newstate = state.setIn(
         ['data', 'children', childSpec.childID],
         childSpec
     );
+    return newstate;
 }
 
 export function login( state, accountInfo ) {

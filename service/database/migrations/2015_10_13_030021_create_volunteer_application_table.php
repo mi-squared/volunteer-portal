@@ -24,6 +24,7 @@ class CreateVolunteerApplicationTable extends Migration
             $table->string('q_middle_name')->default("");
             $table->string('q_last_name')->default("");
             $table->string('q_email')->default("");
+            $table->string("q_languages")->default("");
 
             // contact
             $table->string("q_address_1")->default("");
@@ -33,6 +34,7 @@ class CreateVolunteerApplicationTable extends Migration
             $table->string("q_address_zip")->default("");
             $table->string("q_phone_mobile")->default("");
             $table->string("q_phone_home")->default("");
+            $table->string("q_address_country")->default("");
 
             // emergency contact
             $table->string("q_emergency_contact_name")->default("");
@@ -51,6 +53,8 @@ class CreateVolunteerApplicationTable extends Migration
             $table->string("q_is_student")->default("");
             $table->string("q_school_level")->default("");
             $table->string("q_school_name")->default("");
+            $table->string("q_school_studied_area")->default("");
+            $table->string("q_school_sponsor")->default("");
             $table->string("q_date_graduation")->default("");
 
             // volunteer
@@ -73,6 +77,9 @@ class CreateVolunteerApplicationTable extends Migration
 
             // legal
             $table->string("q_is_legal_professional")->default("");
+
+            // children
+            $table->string("q_bringing_children")->default("");
 
             $table->timestamps();
         });

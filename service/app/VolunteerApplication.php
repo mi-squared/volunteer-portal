@@ -1,5 +1,6 @@
 <?php namespace App;
 
+use App\VolunteerChild as VolunteerChild;
 use Illuminate\Database\Eloquent\Model;
 
 class VolunteerApplication extends Model
@@ -101,4 +102,9 @@ class VolunteerApplication extends Model
         "q_esigned",
         "q_esigned_date"
     ];
+
+    public function children()
+    {
+        return $this->hasMany('App\VolunteerChild','application_id');
+    }
 }

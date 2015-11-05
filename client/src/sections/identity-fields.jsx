@@ -17,7 +17,7 @@ export default class IdentityFields extends BaseSection {
                             fieldName="data.q_first_name"
                             ref="data.q_first_name"
                             value={this.props.data.q_first_name}
-                            onChange={this.handleChange}
+                            onChange={this.props.onChange || this.handleChange}
                         />
                     </div>
                     <div className="col-md-3">
@@ -26,7 +26,7 @@ export default class IdentityFields extends BaseSection {
                             fieldName="data.q_middle_name"
                             ref="data.q_middle_name"
                             value={this.props.data.q_middle_name}
-                            onChange={this.handleChange}
+                            onChange={this.props.onChange || this.handleChange}
                         />
                     </div>
                     <div className="col-md-4">
@@ -37,7 +37,7 @@ export default class IdentityFields extends BaseSection {
                             fieldName="data.q_last_name"
                             ref="data.q_last_name"
                             value={this.props.data.q_last_name}
-                            onChange={this.handleChange}
+                            onChange={this.props.onChange || this.handleChange}
                         />
                     </div>
                 </div>

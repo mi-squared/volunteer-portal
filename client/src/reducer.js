@@ -26,7 +26,6 @@ export default function reducer(state = INITIAL_STATE, action) {
             return updateChild(state, action.childSpec);
         }
         case 'SET_STATE': {
-            debugger;
             return updateField( state, {
                 key : [ "data" ],
                 value: fromJS( action.state )
