@@ -46,6 +46,7 @@ export default React.createClass({
 
         var text =
             <input label={this.props.label}
+               type={this.props.type}
                className="form-control"
                value={this.getValue()}
                onChange={this.handleChange}
@@ -61,7 +62,7 @@ export default React.createClass({
                    onBlur={this.commitChange}
             >{this.getValue()}</textarea>;
 
-        var toShow = ( this.props.type == 'text' || this.props.type=='password' || !this.props.type ) ? text : textArea;
+        var toShow = this.props.type == 'textarea' ? textArea : text;
 
         return(
             <div className={classNames('form-group', message ? 'has-error' : '')}>
