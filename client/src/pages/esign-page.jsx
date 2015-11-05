@@ -4,33 +4,48 @@ import Router, {Route, DefaultRoute, Link} from 'react-router';
 import Button from 'react-bootstrap/lib/Button.js';
 
 import * as actionCreators from '../action_creators';
+import composePage from './base-page.jsx';
 
-export const EsignPage = React.createClass({
-    mixins: [ Router.Navigation ],
+class EsignPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.doBack = this.doBack.bind(this);
+        this.doCancel = this.doCancel.bind(this);
+        this.doContinue = this.doContinue.bind(this);
+    }
 
-    doContinue: function() {
-        // todo - reinitialize state
-        this.transitionTo('/done-application');
-    },
+    doBack() {
+        this.props.transitionTo('/volunteering-detail');
+    }
 
-    render: function() {
+    doCancel() {
+        this.props.transitionTo('/');
+    }
+
+    doContinue() {
+        this.props.transitionTo('/done-application');
+    }
+
+    render() {
         return (
             <div className="container">
                 <h1>ESign</h1>
 
                 <div className="j-page-nav">
-                    <Button onClick={this.doContinue}>Continue</Button>
+                    <Button onClick={this.doBack}>Back</Button>
+                    <Button onClick={this.doContinue}>Accept</Button>
+                    <Button onClick={this.doCancel}>Cancel</Button>
                 </div>
 
             </div>
         );
     }
-});
+}
 
 function mapStateToProps(state) {
     return state.toJSON();
 }
 
 export const EsignPageContainer = connect(
-    mapStateToProps, actionCreators
-)(EsignPage);
+    (state) => state.toJSON(), actionCreators
+)(composePage(EsignPage));
