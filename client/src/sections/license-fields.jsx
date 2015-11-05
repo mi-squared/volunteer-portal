@@ -11,17 +11,10 @@ export default class LicenseFields extends BaseSection {
 
     render () {
         return (
-            <div>
-
-                <hr/>
-
-                <StateField
-                    {...this.props}
-                    label="State of license"
-                    ref="data.q_licensed_state"
-                    fieldName="data.q_licensed_state"
-                    onChange={this.handleChange}
-                />
+            <div >
+                <div>
+                    <hr/>
+                </div>
 
                 <ValidatedInput
                     {...this.props}
@@ -31,16 +24,32 @@ export default class LicenseFields extends BaseSection {
                     ref="data.q_licensed_discipline"
                     onChange={this.handleChange}/>
 
-                <ValidatedInput
-                    {...this.props}
-                    label="Expiration date of license (mm/yy/dddd)"
-                    value={this.props.data.q_license_expiration}
-                    fieldName="data.q_license_expiration"
-                    ref="data.q_license_expiration"
-                    onChange={this.handleChange}/>
+                <div className="row">
+                    <div className="col-md-3">
+                        <StateField
+                            {...this.props}
+                            label="State of license"
+                            ref="data.q_licensed_state"
+                            fieldName="data.q_licensed_state"
+                            onChange={this.handleChange}
+                            />
+                    </div>
+                    <div className="col-md-9">
+                        <ValidatedInput
+                            {...this.props}
+                            label="Expiration date of license"
+                            value={this.props.data.q_license_expiration}
+                            fieldName="data.q_license_expiration"
+                            ref="data.q_license_expiration"
+                            placeholder="MM/DD/YYYY"
+                            onChange={this.handleChange}
+                            />
+                    </div>
+                </div>
 
-                <hr/>
-
+                <div>
+                    <hr/>
+                </div>
             </div>
         );
     }
