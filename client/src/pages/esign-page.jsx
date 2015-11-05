@@ -42,7 +42,7 @@ class EsignPage extends React.Component {
         return (
             <div className="container">
                 <div className="col-md-7">
-                    <h1>ESign {this.props.data.q_esigned} {this.props.data.q_esigned_date}</h1>
+                    <h1>Signature & Acceptance</h1>
                     <div>
                         I, <b>{this.props.data.q_first_name} {this.props.data.q_last_name}</b> agree to volunteer, and
                         authorize Your Best Pathway To Health to use the information I provided to help me get started.
