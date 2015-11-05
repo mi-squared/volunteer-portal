@@ -78,6 +78,7 @@ class VolunteerApplication extends Model
 
         // availability
         "q_available_entire_time",
+        "q_share_room",
 
         "q_available_day_mon",
         "q_available_day_tue",
