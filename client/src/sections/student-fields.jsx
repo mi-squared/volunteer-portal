@@ -12,47 +12,57 @@ export default class StudentFields extends BaseSection {
             <QuestionContainer {...this.props}
                 criteria={ {key : 'q_is_student', value : "true" } }>
 
-                <DropdownField {...this.props}
-                    label="School level"
-                    selectValue={this.props.data['q_school_level']}
-                    fieldName="data.q_school_level"
-                    ref="data.q_school_level"
-                    onChange={this.handleChange}>
-                    <option value="highschool">High school</option>
-                    <option value="college">College</option>
-                    <option value="university">University</option>
-                </DropdownField>
+                <div className="row">
+                    <div className="col-md-6">
+                        <ValidatedInput
+                            {...this.props}
+                            label="Name of school"
+                            type="text"
+                            fieldName="data.q_school_name"
+                            ref="data.q_school_name"
+                            value={this.props.data.q_school_name}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <div className="col-md-6">
+                        <DropdownField {...this.props}
+                            label="School level"
+                            selectValue={this.props.data['q_school_level']}
+                            fieldName="data.q_school_level"
+                            ref="data.q_school_level"
+                            onChange={this.handleChange}>
+                            <option value="highschool">High school</option>
+                            <option value="college">College</option>
+                            <option value="university">University</option>
+                        </DropdownField>
+                    </div>
+                </div>
 
-                <ValidatedInput
-                    {...this.props}
-                    label="Name of school"
-                    type="text"
-                    fieldName="data.q_school_name"
-                    ref="data.q_school_name"
-                    value={this.props.data.q_school_name}
-                    onChange={this.handleChange}
-                />
-
-                <ValidatedInput
-                    {...this.props}
-                    label="Area of study"
-                    type="text"
-                    fieldName="data.q_school_studied_area"
-                    ref="data.q_school_studied_area"
-                    value={this.props.data.q_school_studied_area}
-                    onChange={this.handleChange}
-                />
-
-                <ValidatedInput
-                    {...this.props}
-                    label="Date of anticipated graduation"
-                    type="text"
-                    fieldName="data.q_date_graduation"
-                    ref="data.q_date_graduation"
-                    placeholder="mm/dd/yyyy"
-                    value={this.props.data.q_date_graduation}
-                    onChange={this.handleChange}
-                />
+                <div className="row">
+                    <div className="col-md-6">
+                        <ValidatedInput
+                            {...this.props}
+                            label="Area of study"
+                            type="text"
+                            fieldName="data.q_school_studied_area"
+                            ref="data.q_school_studied_area"
+                            value={this.props.data.q_school_studied_area}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <div className="col-md-6">
+                        <ValidatedInput
+                            {...this.props}
+                            label="Date of anticipated graduation"
+                            type="text"
+                            fieldName="data.q_date_graduation"
+                            ref="data.q_date_graduation"
+                            placeholder="mm/dd/yyyy"
+                            value={this.props.data.q_date_graduation}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                </div>
 
                 <ValidatedInput
                     {...this.props}

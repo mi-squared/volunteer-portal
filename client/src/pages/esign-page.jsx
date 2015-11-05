@@ -34,8 +34,12 @@ class EsignPage extends React.Component {
         });
 
         var self = this;
-        self.props.saveApplication();
-        self.props.transitionTo('/done-application');
+        setTimeout( function() {
+            self.props.saveApplication().then( function() {
+                // then move on to next page
+                self.props.transitionTo('/done-application');
+            });
+        }, 1 );
     }
 
     render() {

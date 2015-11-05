@@ -80,10 +80,12 @@ class MainPage extends React.Component {
     doContinue() {
         if ( this.props.doValidate( this.schema ) ) {
             // save the application if passes validation
-            this.props.saveApplication();
-            // then move on to next page
-            this.props.transitionTo(this.props.data['q_bringing_children'] === 'true' ?
-                '/children-page' : '/volunteering-detail');
+            var self = this;
+            this.props.saveApplication().then( function() {
+                // then move on to next page
+                self.props.transitionTo(self.props.data['q_bringing_children'] === 'true' ?
+                    '/children-page' : '/volunteering-detail');
+            });
         } else {
             this.props.handleAlertShow();
         }

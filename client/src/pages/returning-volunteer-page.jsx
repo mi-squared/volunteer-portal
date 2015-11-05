@@ -63,8 +63,6 @@ class ReturningVolunteerPage extends React.Component {
                             console.log("Loading app " + applicationID);
                             getApplication(token, applicationID).then(
                                 function(response) {
-                                    response['application_id'] = response['id'];
-                                    delete response['id'];
                                     self.props.loadApplication(response);
                                     self.props.transitionTo('/main');
                                 },

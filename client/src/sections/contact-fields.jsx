@@ -15,7 +15,7 @@ export default class ContactFields extends BaseSection {
                 <div className="form-group">
                     <ValidatedInput {...this.props}
                         required={true}
-                        label="Address 1" type="text"
+                        label="Address 1"
                         ref="data.q_address_1"
                         fieldName="data.q_address_1"
                         value={this.props.data.q_address_1}
@@ -36,7 +36,7 @@ export default class ContactFields extends BaseSection {
                     <div className="col-md-6">
                         <ValidatedInput {...this.props}
                             required={true}
-                            label="City" type="text"
+                            label="City"
                             ref="data.q_address_city"
                             fieldName="data.q_address_city"
                             value={this.props.data.q_address_city}
@@ -57,7 +57,7 @@ export default class ContactFields extends BaseSection {
                     <div className="col-md-3">
                         <ValidatedInput {...this.props}
                             required={true}
-                            label="Zip" type="text"
+                            label="Zip"
                             ref="data.q_address_zip"
                             fieldName="data.q_address_zip"
                             value={this.props.data.q_address_zip}
@@ -80,7 +80,7 @@ export default class ContactFields extends BaseSection {
                     <div className="col-md-6">
                         <div className="form-group">
                             <ValidatedInput {...this.props}
-                                label="Email address" type="text"
+                                label="Email address"
                                 value={this.props.data.q_email}
                                 required={true}
                                 ref="data.q_email"
@@ -91,24 +91,24 @@ export default class ContactFields extends BaseSection {
                     </div>
                     <div className="col-md-3">
                         <div className="form-group">
-                            <Input
+                            <ValidatedInput {...this.props}
                                 label="Mobile phone"
-                                type="text"
                                 value={this.props.data.q_phone_mobile}
                                 ref="data.q_phone_mobile"
+                                fieldName="data.q_phone_mobile"
                                 onChange={this.handleChange}
                             />
                         </div>
                     </div>
                     <div className="col-md-3">
                         <div className="form-group">
-                            <Input
+                            <ValidatedInput {...this.props}
                                 label="Home phone"
-                                type="text"
                                 value={this.props.data.q_phone_home}
                                 ref="data.q_phone_home"
+                                fieldName="data.q_phone_home"
                                 onChange={this.handleChange}
-                            />
+                                />
                         </div>
                     </div>
                 </div>
