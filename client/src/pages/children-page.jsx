@@ -26,8 +26,10 @@ class ChildrenPage extends React.Component {
     }
 
     addChild() {
+        var childrenCount = this.props.data.children.length;
         this.props.addChild( {
-            childID: new Date().getTime()
+            childID: childrenCount,
+            application_id : this.props.data.id
         } );
     }
 

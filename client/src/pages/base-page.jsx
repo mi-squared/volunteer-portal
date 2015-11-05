@@ -96,6 +96,9 @@ export default function composePage(Component) {
                 function(response) {
                     console.log("save success", response);
                     setTimeout( function() {
+                        if ( !response.children ) {
+                            response.children = [];
+                        }
                         self.props.setState( response );
                         deferred.resolve();
                     }, 1);

@@ -14,6 +14,7 @@ import BaseSection from './base-section.jsx'
 export default class ChildFields extends BaseSection {
 
     handleChange(field, e) {
+        debugger;
         var thisChild = this.getChild();
         var childField = field.split(".")[1];
         thisChild[childField] = e.target.value;
@@ -21,7 +22,11 @@ export default class ChildFields extends BaseSection {
     }
 
     getChild() {
-        return this.props.data['children'][this.props.childID];
+        var data = this.props.data['children'];
+        if ( !data ) {
+            return {};
+        }
+        return data[this.props.childID] || {};
     }
 
     getChildValue(key) {
