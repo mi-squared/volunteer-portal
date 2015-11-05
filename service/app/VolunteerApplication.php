@@ -95,6 +95,9 @@ class VolunteerApplication extends Model
         "q_available_postactivity_truck",
         "q_available_postactivity_followup",
         "q_available_postactivity_follow2",
-        "q_available_postactivity_centers"
+        "q_available_postactivity_centers",
+
+        "q_esigned",
+        "q_esigned_date"
     ];
 }
