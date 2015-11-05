@@ -25,7 +25,12 @@ class VolunteeringDetailPage extends React.Component {
         // save the application if passes validation
         this.props.saveApplication();
 
-        this.props.transitionTo('/esign');
+        var isEsigned = this.props.data['q_esigned'] === 'true';
+        if ( isEsigned ) {
+            this.props.transitionTo('/done-application');
+        } else {
+            this.props.transitionTo('/esign');
+        }
     }
 
     doBack() {
