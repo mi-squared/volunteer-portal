@@ -18,12 +18,13 @@ export default class DemographicsFields extends BaseSection {
             <div className="col-md-7">
                 <IdentityFields {...this.props} onChange={this.handleChange}/>
 
-                <ValidatedInput {...this.props}
+                <ValidatedInput
+                    {...this.props}
+                    label="Date of birth"
+                    value={this.props.data.q_dob}
                     required={true}
-                    label="Date of birth" type="text"
                     fieldName="data.q_dob"
                     ref="data.q_dob"
-                    value={this.props.data.q_dob}
                     placeholder="mm/dd/yyyy"
                     onChange={this.handleChange}/>
 
