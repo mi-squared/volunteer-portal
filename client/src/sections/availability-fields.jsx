@@ -10,7 +10,7 @@ import BaseSection from './base-section.jsx'
 export default class AvailabilityFields extends BaseSection {
     render() {
         return (
-            <div>
+            <div className="col-md-7">
 
                 <YesNoField
                     {...this.props}

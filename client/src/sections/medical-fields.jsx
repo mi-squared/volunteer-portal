@@ -50,7 +50,7 @@ export default class MedicalFields extends BaseSection {
 
                 <ValidatedInput
                     {...this.props}
-                    label="NPI"
+                    label="National Provider Identifier"
                     value={this.props.data.q_medical_npi}
                     fieldName="data.q_medical_npi"
                     ref="data.q_medical_npi"
@@ -58,7 +58,7 @@ export default class MedicalFields extends BaseSection {
 
                 <ValidatedInput
                     {...this.props}
-                    label="DEA (Optional)"
+                    label="DEA"
                     value={this.props.data.q_medical_dea}
                     fieldName="data.q_medical_dea"
                     ref="data.q_medical_dea"

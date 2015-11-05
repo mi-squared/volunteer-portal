@@ -15,6 +15,7 @@ export default React.createClass({
                 {...this.props}
                 value={this.props.data[this.getFieldName()]}
                 placeHolder="Click to choose languages">
+                    <option>English</option>
                     <option>Spanish</option>
                     <option>French</option>
                     <option>German</option>

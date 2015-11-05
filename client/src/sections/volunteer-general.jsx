@@ -13,7 +13,7 @@ import BaseSection from './base-section.jsx'
 export default class VolunteerGeneral extends BaseSection {
     render() {
         return (
-            <div>
+            <div className="col-md-7">
 
                 <YesNoField {...this.props}
                     fieldName="data.q_volunteered_before"
