@@ -65,14 +65,14 @@ export default class DemographicsFields extends BaseSection {
                         <DropdownField {...this.props}
                             label="Gender"
                             selectValue={this.props.data['q_gender']}
-                            field="data.q_gender"
+                            fieldName="data.q_gender"
                             ref="data.q_gender"
                             onChange={this.handleChange}>
                             <option value="">-- select --</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                             <option value="trans-male">Transgendered Male</option>
-                            <option value="trans-female">Transgendered Male</option>
+                            <option value="trans-female">Transgendered female</option>
                         </DropdownField>
                     </div>
                     <div className="col-md-6">
