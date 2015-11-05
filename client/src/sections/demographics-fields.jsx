@@ -24,6 +24,7 @@ export default class DemographicsFields extends BaseSection {
                     fieldName="data.q_dob"
                     ref="data.q_dob"
                     value={this.props.data.q_dob}
+                    placeholder="mm/dd/yyyy"
                     onChange={this.handleChange}/>
 
                 <ContactFields {...this.props} onChange={this.handleChange}/>

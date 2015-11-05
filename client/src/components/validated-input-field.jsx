@@ -52,6 +52,7 @@ export default React.createClass({
                onChange={this.handleChange}
                ref={this.props.ref}
                onBlur={this.commitChange}
+               placeholder={this.props.placeholder}
             />;
 
         var textArea =
