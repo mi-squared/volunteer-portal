@@ -71,6 +71,7 @@ class VolunteerApplication extends Model
         // medical
         "q_is_medical_professional",
         "q_medical_specialties",
+        "q_medical_subspecialties",
 
         // legal
         "q_is_legal_professional",
