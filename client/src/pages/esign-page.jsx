@@ -48,8 +48,24 @@ class EsignPage extends React.Component {
                 <div className="col-md-7">
                     <h1>Signature & Acceptance</h1>
                     <div>
-                        I, <b>{this.props.data.q_first_name} {this.props.data.q_last_name}</b> agree to volunteer, and
-                        authorize Your Best Pathway To Health to use the information I provided to help me get started.
+                        <p>
+                        By submitting this form, you're granting the following permission to email you:
+                        </p>
+                        <p>
+                            <b>Pathway to health</b>
+                            <br/>
+                            1234 happy street
+                            <br/>
+                            Silver Spring, MD 55555
+                            <br/>
+                            United States
+                            <br/>
+                            <a href='http://www.pathwaytohealthvolunteer.org'>http://www.pathwaytohealthvolunteer.org</a>
+                        </p>
+
+                        <p>
+                            You can revoke permission to mail to your email address at any time using the SafeUnsubscribe<sup>(TM)</sup> found at the bottom of every email.
+                        </p>
                     </div>
                 </div>
 
