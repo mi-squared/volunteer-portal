@@ -109,6 +109,7 @@ class NewVolunteerPage extends React.Component {
                     self.props.transitionTo('/do-register');
                 },
                 function(error) {
+                    debugger;
                     self.props.handleAlertShow({
                         errorMessage: "You may have already registered another account under that email.",
                         errorFields : [
@@ -116,7 +117,8 @@ class NewVolunteerPage extends React.Component {
                                 field: 'data.q_email',
                                 message: ''
                             }
-                        ]
+                        ],
+                        focusElement: 'q_first_name'
                     });
                 }
             );
@@ -136,7 +138,7 @@ class NewVolunteerPage extends React.Component {
                 <div className="col-md-7">
                     <h1>Volunteer Profile</h1>
 
-                    {alert}
+                    {this.props.alert}
                 </div>
 
                 <RegistrationFields
