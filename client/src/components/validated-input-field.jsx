@@ -27,6 +27,10 @@ export default React.createClass({
         if ( this.props.focusElement === this.props.fieldName ) {
             this.getInputDOMNode().focus();
         }
+
+        if ( this.props.mask ) {
+            $(this.getInputDOMNode()).mask(this.props.mask);
+        }
     },
 
     getValue: function() {

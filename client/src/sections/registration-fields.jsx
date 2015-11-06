@@ -23,6 +23,7 @@ export default class RegistrationFields extends BaseSection {
                     fieldName="data.q_dob"
                     ref="data.q_dob"
                     placeholder="mm/dd/yyyy"
+                    mask="99/99/9999"
                     onChange={this.handleChange}/>
 
                 <ValidatedInput

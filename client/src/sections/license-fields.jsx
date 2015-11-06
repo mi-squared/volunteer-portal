@@ -41,7 +41,8 @@ export default class LicenseFields extends BaseSection {
                             value={this.props.data.q_license_expiration}
                             fieldName="data.q_license_expiration"
                             ref="data.q_license_expiration"
-                            placeholder="MM/DD/YYYY"
+                            placeholder="mm/dd/yyyy"
+                            mask="99/99/9999"
                             onChange={this.handleChange}
                             />
                     </div>
