@@ -60,8 +60,8 @@ class ChildrenPage extends React.Component {
     render() {
         var self = this;
         return (
-            <div className="container">
-                <div className="col-md-7">
+            <div className="container well">
+                <div className="col-md-12">
                     <h1>Children under 13</h1>
 
                     <h4>Please provide details for the children you are bringing to the event who are under 13 years of age.</h4>
@@ -77,10 +77,10 @@ class ChildrenPage extends React.Component {
                     />
                 )}
 
-                <div className="j-page-nav col-md-7">
+                <div className="j-page-nav col-md-12">
+                    <Button onClick={this.doContinue} className="btn btn-primary">Continue</Button>
                     <Button onClick={this.addChild }>Add another child</Button>
                     <Button onClick={this.doBack}>Back</Button>
-                    <Button onClick={this.doContinue}>Continue</Button>
                 </div>
 
             </div>

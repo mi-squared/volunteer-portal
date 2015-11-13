@@ -15,7 +15,7 @@ import BaseSection from './base-section.jsx'
 export default class DemographicsFields extends BaseSection {
     render() {
         return (
-            <div className="col-md-7">
+            <div className="col-md-12">
                 <IdentityFields {...this.props} onChange={this.handleChange}/>
 
                 <ValidatedInput

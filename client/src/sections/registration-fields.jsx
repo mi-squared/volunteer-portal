@@ -10,7 +10,7 @@ export default class RegistrationFields extends BaseSection {
 
     render() {
         return (
-            <div className="col-md-7">
+            <div className="col-md-12">
                 <IdentityFields {...this.props} />
 
                 <ContactFields {...this.props} onChange={this.handleChange}/>

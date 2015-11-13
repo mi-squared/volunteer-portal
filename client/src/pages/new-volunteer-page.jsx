@@ -134,8 +134,8 @@ class NewVolunteerPage extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <div className="col-md-7">
+            <div className="container well">
+                <div className="col-md-12">
                     <h1>Volunteer Profile</h1>
 
                     {this.props.alert}
@@ -149,8 +149,8 @@ class NewVolunteerPage extends React.Component {
                     errorFields={this.props.errorFields}
                 />
 
-                <div className="j-page-nav col-md-7">
-                    <Button onClick={this.doRegister}>Create</Button>
+                <div className="j-page-nav col-md-12">
+                    <Button onClick={this.doRegister} className="btn btn-primary">Create</Button>
                     <Button onClick={this.doCancel}>Cancel</Button>
                 </div>
 

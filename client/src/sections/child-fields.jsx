@@ -40,7 +40,7 @@ export default class ChildFields extends BaseSection {
 
     render() {
         return (
-            <div className="col-md-7">
+            <div className="col-md-12">
                 <IdentityFields
                     data={this.getChild()}
                     onChange={this.handleChange}

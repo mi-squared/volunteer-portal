@@ -44,8 +44,8 @@ class EsignPage extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <div className="col-md-7">
+            <div className="container well">
+                <div className="col-md-12">
                     <h1>Signature & Acceptance</h1>
                     <div>
                         <p>
@@ -69,9 +69,9 @@ class EsignPage extends React.Component {
                     </div>
                 </div>
 
-                <div className="j-page-nav col-md-7">
+                <div className="j-page-nav col-md-12">
                     <Button onClick={this.doBack}>Back</Button>
-                    <Button onClick={this.doContinue}>Accept</Button>
+                    <Button onClick={this.doContinue} className="btn btn-primary">Accept</Button>
                     <Button onClick={this.doCancel}>Cancel</Button>
                 </div>
 

@@ -103,8 +103,8 @@ class MainPage extends React.Component {
 
     render() {
         return (
-            <div className="container">
-                <div className="col-md-7">
+            <div className="container well">
+                <div className="col-md-12">
                     <h1>Volunteer Application</h1>
 
                     {this.props.alert}
@@ -117,8 +117,8 @@ class MainPage extends React.Component {
                     errorFields={this.props.errorFields}
                 />
 
-                <div className="j-page-nav col-md-7">
-                    <Button onClick={this.doContinue}>Continue</Button>
+                <div className="j-page-nav col-md-12">
+                    <Button onClick={this.doContinue} className="btn btn-primary">Continue</Button>
                 </div>
             </div>
         );
