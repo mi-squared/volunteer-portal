@@ -190,6 +190,27 @@ export default class DemographicsFields extends BaseSection {
                 />
 
                 <StudentFields {...this.props} onChange={this.handleChange}/>
+
+                <YesNoField {...this.props}
+                    fieldName="data.q_volunteer_organization_member"
+                    ref="data.q_volunteer_organization_member"
+                    label="Are you part of a volunteer group?"
+                    value={this.props.data.q_volunteer_organization_member}
+                    onChange={this.handleChange}
+                />
+
+                <QuestionContainer {...this.props}
+                    criteria={ {key : 'q_volunteer_organization_member', value : "true" } }>
+
+                    <ValidatedInput {...this.props}
+                        label="What is the name of your volunteer group?"
+                        fieldName="data.q_volunteer_organization"
+                        ref="data.q_volunteer_organization"
+                        value={this.props.data.q_volunteer_organization}
+                        onChange={this.handleChange}
+                    />
+
+                </QuestionContainer>
             </div>
         );
     }
