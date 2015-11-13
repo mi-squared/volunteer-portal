@@ -83,11 +83,11 @@ export default class VolunteerGeneral extends BaseSection {
                         <option value="Beautician/Barber Service">Beautician/Barber Service</option>
                         <option value="Central Supply">Central Supply</option>
                         <option value="Chaplaincy">Chaplaincy</option>
-                        <option value="Children’s Department Adult Volunteer">hildren’s Department Adult Volunteer</option>
+                        <option value="Children’s Department Adult Volunteer">Children’s Department Adult Volunteer</option>
                         <option value="Communications-Media">Communications-Media</option>
                         <option value="Director’s/Assistant Director’s">Director’s/Assistant Director’s</option>
                         <option value="Exit Management">Exit Management</option>
-                        <option value="Eye Care">Eye Care"</option>
+                        <option value="Eye Care">Eye Care</option>
                         <option value="Food Demonstration">Food Demonstration</option>
                         <option value="Food Services">Food Services</option>
                         <option value="Hospitality">Hospitality</option>
