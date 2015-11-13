@@ -22,7 +22,8 @@ export default class LicenseFields extends BaseSection {
                     label="Professional license or certification in:"
                     fieldName="data.q_licensed_discipline"
                     ref="data.q_licensed_discipline"
-                    onChange={this.handleChange}>
+                    onChange={this.handleChange}
+                    required={true}>
                     <option value="">-- select --</option>
                     <option value="Advanced Registered Nurse Practitioner">Advanced Registered Nurse Practitioner</option>
                     <option value="Audiologist">Audiologist</option>
@@ -73,6 +74,7 @@ export default class LicenseFields extends BaseSection {
                         fieldName="data.q_licensed_discipline_other"
                         ref="data.q_licensed_discipline_other"
                         onChange={this.handleChange}
+                        required={true}
                     />
                 </QuestionContainer>
 
@@ -84,7 +86,8 @@ export default class LicenseFields extends BaseSection {
                             ref="data.q_licensed_state"
                             fieldName="data.q_licensed_state"
                             onChange={this.handleChange}
-                            />
+                            required={true}
+                        />
                     </div>
                     <div className="col-md-9">
                         <ValidatedInput
@@ -96,6 +99,7 @@ export default class LicenseFields extends BaseSection {
                             placeholder="mm/dd/yyyy"
                             mask="99/99/9999"
                             onChange={this.handleChange}
+                            required={true}
                             />
                     </div>
 
@@ -107,7 +111,9 @@ export default class LicenseFields extends BaseSection {
                     value={this.props.data.q_licensed_number}
                     fieldName="data.q_licensed_number"
                     ref="data.q_licensed_number"
-                    onChange={this.handleChange}/>
+                    onChange={this.handleChange}
+                    required={true}
+                />
 
                 <ValidatedInput
                     {...this.props}
