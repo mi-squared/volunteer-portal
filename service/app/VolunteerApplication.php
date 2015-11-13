@@ -100,7 +100,12 @@ class VolunteerApplication extends Model
         "q_available_postactivity_centers",
 
         "q_esigned",
-        "q_esigned_date"
+        "q_esigned_date",
+
+        "q_cpr_certified",
+        "q_cpr_expiration",
+        "q_cpr_org",
+        "q_cpr_org_other"
     ];
 
     public function children()
