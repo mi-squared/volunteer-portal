@@ -67,6 +67,8 @@ class VolunteerApplication extends Model
         "q_volunteering_in_licensed_area",
         "q_licensed_state",
         "q_licensed_discipline",
+        "q_licensed_discipline_other",
+        "q_licensed_number",
         "q_licensed_expiration_date",
 
         // medical
