@@ -57,22 +57,6 @@ export default class MedicalFields extends BaseSection {
                     ref="data.q_medical_subspecialties"
                     onChange={this.handleChange}/>
 
-                <ValidatedInput
-                    {...this.props}
-                    label="National Provider Identifier"
-                    value={this.props.data.q_medical_npi}
-                    fieldName="data.q_medical_npi"
-                    ref="data.q_medical_npi"
-                    onChange={this.handleChange}/>
-
-                <ValidatedInput
-                    {...this.props}
-                    label="DEA"
-                    value={this.props.data.q_medical_dea}
-                    fieldName="data.q_medical_dea"
-                    ref="data.q_medical_dea"
-                    onChange={this.handleChange}/>
-
                 <hr/>
 
             </div>
