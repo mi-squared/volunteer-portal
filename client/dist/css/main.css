@@ -1,3 +1,6 @@
+@charset "utf-8";
+/* CSS Document */
+
 html, body {
     -webkit-tap-highlight-color: transparent;
 }
@@ -71,6 +74,7 @@ html, body {
     width:320px;
 }
 .col-min {
+    /* custom min width */
     /* custom min width */
     min-width:320px;
 }

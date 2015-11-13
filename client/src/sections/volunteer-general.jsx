@@ -131,6 +131,52 @@ export default class VolunteerGeneral extends BaseSection {
                 </QuestionContainer>
 
                 <YesNoField {...this.props}
+                    fieldName="data.q_cpr_certified"
+                    ref="data.q_cpr_certified"
+                    label="Are you CPR certified?"
+                    value={this.props.data.q_cpr_certified}
+                    onChange={this.handleChange}
+                />
+
+                <QuestionContainer {...this.props}
+                    criteria={ {key : 'q_cpr_certified', value : "true" } }>
+                    <ValidatedInput {...this.props}
+                        label="CPR certification expiration date:"
+                        value={this.props.data.q_cpr_expiration}
+                        fieldName="data.q_cpr_expiration"
+                        ref="data.q_cpr_expiration"
+                        placeholder="mm/dd/yyyy"
+                        mask="99/99/9999"
+                        onChange={this.handleChange}
+                    />
+
+                    <DropdownField {...this.props}
+                        selectValue={this.props.data['q_cpr_org']}
+                        label="CPR certification organization:"
+                        fieldName="data.q_cpr_org"
+                        ref="data.q_cpr_org"
+                        onChange={this.handleChange}>
+                        <option value="">-- select --</option>
+                        <option value="aha">AHA</option>
+                        <option value="sm">Red Cross</option>
+                        <option value="other">Other</option>
+                    </DropdownField>
+
+                    <QuestionContainer {...this.props}
+                        criteria={ {key : 'q_cpr_org', value : "other" } }>
+                        <ValidatedInput {...this.props}
+                            label=""
+                            value={this.props.data.q_cpr_org_other}
+                            fieldName="data.q_cpr_org_other"
+                            ref="data.q_cpr_org_other"
+                            onChange={this.handleChange}
+                        />
+
+                    </QuestionContainer>
+
+                </QuestionContainer>
+
+                <YesNoField {...this.props}
                     fieldName="data.q_is_medical_professional"
                     ref="data.q_is_medical_professional"
                     label="Are you volunteering as a medical professional?"

@@ -4,6 +4,7 @@
   "description": "Fronend for the volunteer portal client",
   "main": "index.js",
   "scripts": {
+    "dev": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "test": "mocha --compilers js:babel/register --require ./test/test_helper.js  --recursive",
     "test:watch": "npm run test -- --watch"
   },

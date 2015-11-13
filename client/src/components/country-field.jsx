@@ -15,6 +15,7 @@ export default React.createClass({
                 field={this.props.fieldName}
                 ref={this.props.ref}
                 onChange={this.props.onChange}>
+                <option value="">--</option>
                 <option value="AFG">Afghanistan</option>
                 <option value="ALA">Åland Islands</option>
                 <option value="ALB">Albania</option>

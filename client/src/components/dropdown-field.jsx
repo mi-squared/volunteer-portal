@@ -35,10 +35,9 @@ export default React.createClass({
                         fieldName={this.props.fieldName}
                         onChange={this.commitChange}
                         placeholder={this.props.placeHolder}>
-                            <option key="--" value="--">--</option>
                         {this.props.children.map(entry =>
                             <option key={entry.props.value} value={entry.props.value}>{entry.props.children}</option>
-                    )}
+                        )}
                     </select>
                 </div>
             </div>

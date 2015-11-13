@@ -69,11 +69,13 @@ export default React.createClass({
 
         var toShow = this.props.type == 'textarea' ? textArea : text;
 
+        var label = <label className="control-label">
+            <span>{requiredLabel}{this.props.label}</span>
+        </label>;
+
         return(
             <div className={classNames('form-group', message ? 'has-error' : '')}>
-                <label className="control-label">
-                    <span>{requiredLabel}{this.props.label}</span>
-                </label>
+                {this.props.label ? label : ''}
                 {errorMessage}
                 {toShow}
             </div>
