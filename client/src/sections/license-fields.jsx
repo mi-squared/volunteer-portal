@@ -28,7 +28,7 @@ export default class LicenseFields extends BaseSection {
                     <option value="Audiologist">Audiologist</option>
                     <option value="Certified Counselor">Certified Counselor</option>
                     <option value="Certified Massage Therapist">Certified Massage Therapist</option>
-                    <option value="Certified Midwife">"Certified Midwife</option>
+                    <option value="Certified Midwife">Certified Midwife</option>
                     <option value="Certified Nurse Midwife">Certified Nurse Midwife</option>
                     <option value="Certified Nursing Assistant">Certified Nursing Assistant</option>
                     <option value="Certified Radiologic Technologist">Certified Radiologic Technologist</option>
