@@ -14,7 +14,6 @@ import BaseSection from './base-section.jsx'
 export default class ChildFields extends BaseSection {
 
     handleChange(field, e) {
-        debugger;
         var thisChild = this.getChild();
         var childField = field.split(".")[1];
         thisChild[childField] = e.target.value;

@@ -109,7 +109,6 @@ class NewVolunteerPage extends React.Component {
                     self.props.transitionTo('/do-register');
                 },
                 function(error) {
-                    debugger;
                     self.props.handleAlertShow({
                         errorMessage: "You may have already registered another account under that email.",
                         errorFields : [

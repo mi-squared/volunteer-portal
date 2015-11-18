@@ -17,23 +17,74 @@ class VolunteeringDetailPage extends React.Component {
             errorMessage : ''
         };
 
+        var that = this;
+        this.schema =
+        {
+            fieldPrefix: 'data.',
+            properties: {
+                q_licensed_discipline: {
+                    type: 'string',
+                    maxLength: 255,
+                    required: function() {
+                        return that.props.data['q_volunteering_in_licensed_area'] == 'true';
+                    },
+                    allowEmpty: function() {
+                        return that.props.data['q_volunteering_in_licensed_area'] !== 'true';
+                    },
+                },
+                q_licensed_state: {
+                    type: 'string',
+                    maxLength: 255,
+                    required: function() {
+                        return that.props.data['q_volunteering_in_licensed_area'] == 'true';
+                    },
+                    allowEmpty: function() {
+                        return that.props.data['q_volunteering_in_licensed_area'] !== 'true';
+                    },
+                },
+                q_license_expiration: {
+                    type: 'string',
+                    pattern: /^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$/,
+                    required: function() {
+                        return that.props.data['q_volunteering_in_licensed_area'] == 'true';
+                    },
+                    allowEmpty: function() {
+                        return that.props.data['q_volunteering_in_licensed_area'] !== 'true';
+                    },
+                },
+                q_licensed_number: {
+                    type: 'string',
+                    maxLength: 255,
+                    required: function() {
+                        return that.props.data['q_volunteering_in_licensed_area'] == 'true';
+                    },
+                    allowEmpty: function() {
+                        return that.props.data['q_volunteering_in_licensed_area'] !== 'true';
+                    },
+                },
+            }
+        };
+
         this.doContinue = this.doContinue.bind(this);
         this.doBack = this.doBack.bind(this);
     }
 
     doContinue() {
-        // save the application if passes validation
-        var self = this;
-        this.props.saveApplication().then( function() {
-            // then move on to next page
-            var isEsigned = self.props.data['q_esigned'] === 'true';
-            if ( isEsigned ) {
-                self.props.transitionTo('/done-application');
-            } else {
-                self.props.transitionTo('/esign');
-            }
-        });
-
+        if ( this.props.doValidate( this.schema ) ) {
+            // save the application if passes validation
+            var self = this;
+            this.props.saveApplication().then( function() {
+                // then move on to next page
+                var isEsigned = self.props.data['q_esigned'] === 'true';
+                if ( isEsigned ) {
+                    self.props.transitionTo('/done-application');
+                } else {
+                    self.props.transitionTo('/esign');
+                }
+            });
+        } else {
+            this.props.handleAlertShow();
+        }
     }
 
     doBack() {

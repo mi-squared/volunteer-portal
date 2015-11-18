@@ -51,9 +51,28 @@ export default function composePage(Component) {
             }, 1);
         },
 
-        doValidate: function (schema, data) {
+        doValidate: function (schemaSource, data) {
             var fieldsInError = {};
             data = data || this.props.data;
+
+            var schema = $.extend(true, {}, schemaSource);
+
+            var keys = Object.keys(schema.properties);
+            for ( var idx in keys ) {
+                var key = keys[idx];
+                var property = schema.properties[key];
+                var required = property['required'];
+                var allowEmpty = property['allowEmpty'];
+                if ( typeof required === 'function' ) {
+                    var requiredValue = required();
+                    property['required'] = requiredValue;
+                }
+                if ( typeof allowEmpty === 'function' ) {
+                    var allowEmptyValue = allowEmpty();
+                    property['allowEmpty'] = allowEmptyValue;
+                }
+            }
+
             var res = Revalidator.validate(data, schema);
             var fieldPrefix = schema.fieldPrefix || 'data.';
             if (!res.valid) {
