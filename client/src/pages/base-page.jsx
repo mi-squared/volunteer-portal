@@ -41,7 +41,7 @@ export default function composePage(Component) {
                 }
                 $.growl.error({
                     size: 'large',
-                    location: 'tc',
+                    location: 'bc',
                     message: errors.errorMessage || "There are fields in error. Please correct them to continue."
                 });
                 console.log("state: ", self.state);
