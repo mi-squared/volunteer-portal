@@ -79,7 +79,7 @@ class ChildrenPage extends React.Component {
 
                 <div className="j-page-nav col-md-12">
                     <Button onClick={this.doContinue} className="btn btn-primary">Continue</Button>
-                    <Button onClick={this.addChild }>Add another child</Button>
+                    <Button onClick={this.addChild }>Add child</Button>
                     <Button onClick={this.doBack}>Back</Button>
                 </div>
 
