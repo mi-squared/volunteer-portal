@@ -73,7 +73,7 @@ export default class VolunteerGeneral extends BaseSection {
                 <YesNoField {...this.props}
                     fieldName="data.q_is_medical_professional"
                     ref="data.q_is_medical_professional"
-                    label="Are you volunteering as a medical professional?"
+                    label="Are you volunteering as a medical or dental professional?"
                     value={this.props.data.q_is_medical_professional}
                     onChange={this.handleChange}
                 />
