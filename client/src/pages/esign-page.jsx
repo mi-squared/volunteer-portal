@@ -66,6 +66,13 @@ class EsignPage extends React.Component {
                         <p>
                             You can revoke permission to mail to your email address at any time using the SafeUnsubscribe<sup>(TM)</sup> found at the bottom of every email.
                         </p>
+
+                        <p>
+                            Please download the <a target="_blank" href="/static/volunteer-agreement.pdf"><b>Volunteer Agreement</b></a> pdf and review it.
+                            By electronically signing on this page, you are agreeing to the terms and conditions described in the async Voltuneer Agreement
+                            pdf.
+                        </p>
+
                     </div>
                 </div>
 
