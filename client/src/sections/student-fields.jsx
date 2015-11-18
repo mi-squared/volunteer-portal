@@ -54,13 +54,12 @@ export default class StudentFields extends BaseSection {
                         <ValidatedInput
                             {...this.props}
                             label="Date of anticipated graduation"
-                            type="text"
+                            value={this.props.data.q_date_graduation}
                             fieldName="data.q_date_graduation"
                             ref="data.q_date_graduation"
                             placeholder="mm/dd/yyyy"
-                            value={this.props.data.q_date_graduation}
-                            onChange={this.handleChange}
-                        />
+                            mask="99/99/9999"
+                            onChange={this.handleChange}/>
                     </div>
                 </div>
 

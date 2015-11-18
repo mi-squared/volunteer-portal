@@ -10,14 +10,14 @@ import BaseSection from './base-section.jsx'
 export default class AvailabilityFields extends BaseSection {
     render() {
         return (
-            <div className="col-md-7">
+            <div className="col-md-12">
 
                 <YesNoField
                     {...this.props}
                     fieldName="data.q_share_room"
                     ref="data.q_share_room"
                     value={this.props.data.q_share_room}
-                    label="Are you able and willing to share a room?"
+                    label="We have volunteers looking to share accommodations. Are you willing to share a room?"
                     onChange={this.handleChange}
                 />
 
@@ -26,7 +26,7 @@ export default class AvailabilityFields extends BaseSection {
                     fieldName="data.q_available_entire_time"
                     ref="data.q_available_entire_time"
                     value={this.props.data.q_available_entire_time}
-                    label="Aside from any emergencies are you able to help the entire time?"
+                    label="Aside from any emergencies are you able to help the entire time (4/26/2016 - 4/30/2016)?"
                     onChange={this.handleChange}
                 />
 
@@ -88,75 +88,76 @@ export default class AvailabilityFields extends BaseSection {
                         />
                     </div>
 
-                    <div>
-                        <label>Which pre-event activities can you help with?</label>
-                    </div>
-                    <div>
-                        <AvailabilityField {...this.props}
-                            label="Logistics-Truck Unloading"
-                            fieldName="data.q_available_preactivity_trucks"
-                            ref="data.q_available_preactivity_trucks"
-                            value={this.props.data.q_available_preactivity_trucks}
-                            onChange={this.handleChange}
-                        />
-                        <AvailabilityField {...this.props}
-                            label="Central Supply/ Inventory"
-                            fieldName="data.q_available_preactivity_central"
-                            ref="data.q_available_preactivity_central"
-                            value={this.props.data.q_available_preactivity_central}
-                            onChange={this.handleChange}
-                        />
-                        <AvailabilityField {...this.props}
-                            label="Departmental set up/organization"
-                            fieldName="data.q_available_preactivity_dept"
-                            ref="data.q_available_preactivity_dept"
-                            value={this.props.data.q_available_preactivity_dept}
-                            onChange={this.handleChange}
-                        />
-                    </div>
-
-                    <div>
-                        <label>Which post-event activities can you help with?</label>
-                    </div>
-                    <div>
-                        <AvailabilityField {...this.props}
-                            label="Logistics tear down"
-                            fieldName="data.q_available_postactivity_teardown"
-                            ref="data.q_available_postactivity_teardown"
-                            value={this.props.data.q_available_postactivity_teardown}
-                            onChange={this.handleChange}
-                        />
-                        <AvailabilityField {...this.props}
-                            label="Logistics Truck loading"
-                            fieldName="data.q_available_postactivity_truck"
-                            ref="data.q_available_postactivity_truck"
-                            value={this.props.data.q_available_postactivity_truck}
-                            onChange={this.handleChange}
-                        />
-                        <AvailabilityField {...this.props}
-                            label="Part I- Patient Follow up (labs sorting/organizing)"
-                            fieldName="data.q_available_postactivity_followup"
-                            ref="data.q_available_postactivity_followup"
-                            value={this.props.data.q_available_postactivity_followup}
-                            onChange={this.handleChange}
-                        />
-                        <AvailabilityField {...this.props}
-                            label="Part II-Patient Follow up (labs sorting/organizing)"
-                            fieldName="data.q_available_postactivity_follow2"
-                            ref="data.q_available_postactivity_follow2"
-                            value={this.props.data.q_available_postactivity_follow2}
-                            onChange={this.handleChange}
-                        />
-                        <AvailabilityField {...this.props}
-                            label="Health Information Centers follow up"
-                            fieldName="data.q_available_postactivity_centers"
-                            ref="data.q_available_postactivity_centers"
-                            value={this.props.data.q_available_postactivity_centers}
-                            onChange={this.handleChange}
-                        />
-                    </div>
 
                 </QuestionContainer>
+
+                <div>
+                    <label>Which pre-event activities can you help with?</label>
+                </div>
+                <div>
+                    <AvailabilityField {...this.props}
+                        label="Logistics-Truck Unloading"
+                        fieldName="data.q_available_preactivity_trucks"
+                        ref="data.q_available_preactivity_trucks"
+                        value={this.props.data.q_available_preactivity_trucks}
+                        onChange={this.handleChange}
+                    />
+                    <AvailabilityField {...this.props}
+                        label="Central Supply/ Inventory"
+                        fieldName="data.q_available_preactivity_central"
+                        ref="data.q_available_preactivity_central"
+                        value={this.props.data.q_available_preactivity_central}
+                        onChange={this.handleChange}
+                    />
+                    <AvailabilityField {...this.props}
+                        label="Departmental set up/organization"
+                        fieldName="data.q_available_preactivity_dept"
+                        ref="data.q_available_preactivity_dept"
+                        value={this.props.data.q_available_preactivity_dept}
+                        onChange={this.handleChange}
+                    />
+                </div>
+
+                <div>
+                    <label>Which post-event activities can you help with?</label>
+                </div>
+                <div>
+                    <AvailabilityField {...this.props}
+                        label="Logistics tear down"
+                        fieldName="data.q_available_postactivity_teardown"
+                        ref="data.q_available_postactivity_teardown"
+                        value={this.props.data.q_available_postactivity_teardown}
+                        onChange={this.handleChange}
+                    />
+                    <AvailabilityField {...this.props}
+                        label="Logistics Truck loading"
+                        fieldName="data.q_available_postactivity_truck"
+                        ref="data.q_available_postactivity_truck"
+                        value={this.props.data.q_available_postactivity_truck}
+                        onChange={this.handleChange}
+                    />
+                    <AvailabilityField {...this.props}
+                        label="Part I- Patient Follow up (labs sorting/organizing)"
+                        fieldName="data.q_available_postactivity_followup"
+                        ref="data.q_available_postactivity_followup"
+                        value={this.props.data.q_available_postactivity_followup}
+                        onChange={this.handleChange}
+                    />
+                    <AvailabilityField {...this.props}
+                        label="Part II-Patient Follow up (labs sorting/organizing)"
+                        fieldName="data.q_available_postactivity_follow2"
+                        ref="data.q_available_postactivity_follow2"
+                        value={this.props.data.q_available_postactivity_follow2}
+                        onChange={this.handleChange}
+                    />
+                    <AvailabilityField {...this.props}
+                        label="Health Information Centers follow up"
+                        fieldName="data.q_available_postactivity_centers"
+                        ref="data.q_available_postactivity_centers"
+                        value={this.props.data.q_available_postactivity_centers}
+                        onChange={this.handleChange}
+                    />
+                </div>
 
             </div>
         );

@@ -23,27 +23,39 @@ export default class MedicalFields extends BaseSection {
                         fieldName="data.q_medical_specialties"
                         onChange={this.handleChange}>
 
-                        <option>Primary care</option>
-                        <option>Internal Medicine</option>
-                        <option>Pediatrics</option>
-                        <option>Pulmonary</option>
-                        <option>Cardiiology</option>
-                        <option>Endocrinology</option>
-                        <option>Infectious Disease</option>
-                        <option>GI</option>
-                        <option>Obstetrics & Gynecology</option>
-                        <option>Gyn Onc</option>
-                        <option>Urogynecology</option>
-                        <option>General Surgery</option>
-                        <option>Urology</option>
-                        <option>Podiatry</option>
+                        <option>Anesthesiology</option>
+                        <option>Cardiology</option>
                         <option>Colorectal Surgery</option>
+                        <option>Dentistry</option>
                         <option>Dermatology</option>
-                        <option>Plastic Surgery</option>
-                        <option>Opthalmology</option>
-                        <option>Radiology</option>
-                        <option>Pharmacy</option>
+                        <option>Ear Nose & Throat</option>
+                        <option>Emergency</option>
+                        <option>Endocrinology</option>
+                        <option>Gastroenterology</option>
+                        <option>General Surgery</option>
+                        <option>Gerontology</option>
+                        <option>Gynecology Oncology</option>
+                        <option>Infectious Disease</option>
+                        <option>Internal Medicine</option>
                         <option>Medical Laboratory</option>
+                        <option>Obstetrics & Gynecology</option>
+                        <option>Oncology</option>
+                        <option>Ophthalmology</option>
+                        <option>Oral Surgery</option>
+                        <option>Orthodontia</option>
+                        <option>Orthopedics</option>
+                        <option>Pediatrics</option>
+                        <option>Pharmacy</option>
+                        <option>Physical Therapy / Occupational Therapy</option>
+                        <option>Plastic Surgery</option>
+                        <option>Podiatry</option>
+                        <option>Primary care</option>
+                        <option>Psychiatry</option>
+                        <option>Public Health</option>
+                        <option>Pulmonary</option>
+                        <option>Radiology</option>
+                        <option>Urogynecology</option>
+                        <option>Urology</option>
 
                     </MultiselectField>
                 </div>
@@ -55,22 +67,6 @@ export default class MedicalFields extends BaseSection {
                     value={this.props.data.q_medical_subspecialties}
                     fieldName="data.q_medical_subspecialties"
                     ref="data.q_medical_subspecialties"
-                    onChange={this.handleChange}/>
-
-                <ValidatedInput
-                    {...this.props}
-                    label="National Provider Identifier"
-                    value={this.props.data.q_medical_npi}
-                    fieldName="data.q_medical_npi"
-                    ref="data.q_medical_npi"
-                    onChange={this.handleChange}/>
-
-                <ValidatedInput
-                    {...this.props}
-                    label="DEA"
-                    value={this.props.data.q_medical_dea}
-                    fieldName="data.q_medical_dea"
-                    ref="data.q_medical_dea"
                     onChange={this.handleChange}/>
 
                 <hr/>

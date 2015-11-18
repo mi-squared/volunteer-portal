@@ -27,6 +27,10 @@ export default React.createClass({
         if ( this.props.focusElement === this.props.fieldName ) {
             this.getInputDOMNode().focus();
         }
+
+        if ( this.props.mask ) {
+            $(this.getInputDOMNode()).mask(this.props.mask);
+        }
     },
 
     getValue: function() {
@@ -36,10 +40,12 @@ export default React.createClass({
     render: function() {
         var requiredLabel = this.props.required ? <span className='j-required'>*</span> : '';
         var message;
+        var fieldClassName = "form-control";
         if (this.props.errorFields) {
             var errorField = this.props.errorFields[this.props.fieldName];
             if ( errorField ) {
                 message = errorField['message'];
+                fieldClassName += " error";
             }
         }
         var errorMessage = message ? <span className='j-error-message'>{message}</span> : '';
@@ -47,7 +53,7 @@ export default React.createClass({
         var text =
             <input label={this.props.label}
                type={this.props.type}
-               className="form-control"
+               className={fieldClassName}
                value={this.getValue()}
                onChange={this.handleChange}
                ref={this.props.ref}
@@ -57,7 +63,7 @@ export default React.createClass({
 
         var textArea =
             <textarea label={this.props.label}
-                   className="form-control"
+                   className={fieldClassName}
                    onChange={this.handleChange}
                    ref={this.props.ref}
                    onBlur={this.commitChange}
@@ -65,11 +71,13 @@ export default React.createClass({
 
         var toShow = this.props.type == 'textarea' ? textArea : text;
 
+        var label = <label className="control-label">
+            <span>{requiredLabel}{this.props.label}</span>
+        </label>;
+
         return(
             <div className={classNames('form-group', message ? 'has-error' : '')}>
-                <label className="control-label">
-                    <span>{requiredLabel}{this.props.label}</span>
-                </label>
+                {this.props.label ? label : ''}
                 {errorMessage}
                 {toShow}
             </div>

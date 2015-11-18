@@ -67,6 +67,8 @@ class VolunteerApplication extends Model
         "q_volunteering_in_licensed_area",
         "q_licensed_state",
         "q_licensed_discipline",
+        "q_licensed_discipline_other",
+        "q_licensed_number",
         "q_licensed_expiration_date",
 
         // medical
@@ -100,7 +102,12 @@ class VolunteerApplication extends Model
         "q_available_postactivity_centers",
 
         "q_esigned",
-        "q_esigned_date"
+        "q_esigned_date",
+
+        "q_cpr_certified",
+        "q_cpr_expiration",
+        "q_cpr_org",
+        "q_cpr_org_other"
     ];
 
     public function children()

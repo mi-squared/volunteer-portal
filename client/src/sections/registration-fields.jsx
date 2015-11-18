@@ -10,7 +10,7 @@ export default class RegistrationFields extends BaseSection {
 
     render() {
         return (
-            <div className="col-md-7">
+            <div className="col-md-12">
                 <IdentityFields {...this.props} />
 
                 <ContactFields {...this.props} onChange={this.handleChange}/>
@@ -23,6 +23,7 @@ export default class RegistrationFields extends BaseSection {
                     fieldName="data.q_dob"
                     ref="data.q_dob"
                     placeholder="mm/dd/yyyy"
+                    mask="99/99/9999"
                     onChange={this.handleChange}/>
 
                 <ValidatedInput

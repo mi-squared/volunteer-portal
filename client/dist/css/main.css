@@ -1,3 +1,6 @@
+@charset "utf-8";
+/* CSS Document */
+
 html, body {
     -webkit-tap-highlight-color: transparent;
 }
@@ -77,4 +80,8 @@ html, body {
 .col-max {
     /* custom max width */
     max-width:320px;
+}
+
+.form-control.error {
+    background: lightpink;
 }

@@ -7,6 +7,7 @@ export default React.createClass({
 
     getStates: function() {
         return [
+            { name: '--', abbreviation: ''},
             { name: 'ALABAMA', abbreviation: 'AL'},
             { name: 'ALASKA', abbreviation: 'AK'},
             { name: 'AMERICAN SAMOA', abbreviation: 'AS'},

@@ -37,8 +37,13 @@ export default function composePage(Component) {
                     partialState.focusElement = errors.focusElement
                 }
                 if ( errors.errorMessage ) {
-                    partialState.errorMessage = errors.errorMessage
+                    partialState.errorMessage = errors.errorMessage;
                 }
+                $.growl.error({
+                    size: 'large',
+                    location: 'bc',
+                    message: errors.errorMessage || "There are fields in error. Please correct them to continue."
+                });
                 console.log("state: ", self.state);
                 console.log("partial state: ", partialState);
                 self.setState(partialState)
@@ -115,21 +120,8 @@ export default function composePage(Component) {
         },
 
         render: function() {
-            var alert;
-            if (this.state.alertVisible) {
-                alert = (
-                    <Alert bsStyle="danger" onDismiss={ () => this.handleAlertDismiss.call(this) }>
-                        <h4>{this.state.errorMessage}</h4>
-                        <p>Please update the fields in error to continue.</p>
-                    </Alert>
-                );
-            } else {
-                alert = <div/>;
-            }
-
             return <Component
                     {...this.props}
-                    alert={alert}
                     state={this.state}
                     doValidate={this.doValidate}
                     onBlur={this.onBlur}
