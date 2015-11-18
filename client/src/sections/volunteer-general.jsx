@@ -71,6 +71,19 @@ export default class VolunteerGeneral extends BaseSection {
                 </QuestionContainer>
 
                 <YesNoField {...this.props}
+                    fieldName="data.q_is_medical_professional"
+                    ref="data.q_is_medical_professional"
+                    label="Are you volunteering as a medical professional?"
+                    value={this.props.data.q_is_medical_professional}
+                    onChange={this.handleChange}
+                />
+
+                <QuestionContainer {...this.props}
+                    criteria={ {key : 'q_is_medical_professional', value : "true" } }>
+                    <MedicalFields {...this.props} />
+                </QuestionContainer>
+
+                <YesNoField {...this.props}
                     fieldName="data.q_cpr_certified"
                     ref="data.q_cpr_certified"
                     label="Are you CPR certified?"
@@ -114,19 +127,6 @@ export default class VolunteerGeneral extends BaseSection {
 
                     </QuestionContainer>
 
-                </QuestionContainer>
-
-                <YesNoField {...this.props}
-                    fieldName="data.q_is_medical_professional"
-                    ref="data.q_is_medical_professional"
-                    label="Are you volunteering as a medical professional?"
-                    value={this.props.data.q_is_medical_professional}
-                    onChange={this.handleChange}
-                />
-
-                <QuestionContainer {...this.props}
-                    criteria={ {key : 'q_is_medical_professional', value : "true" } }>
-                    <MedicalFields {...this.props} />
                 </QuestionContainer>
 
             </div>
