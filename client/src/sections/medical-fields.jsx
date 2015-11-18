@@ -63,7 +63,7 @@ export default class MedicalFields extends BaseSection {
                 <ValidatedInput
                     {...this.props}
                     type="textarea"
-                    label="List any medical sub-specialties:"
+                    label="List any sub-specialties:"
                     value={this.props.data.q_medical_subspecialties}
                     fieldName="data.q_medical_subspecialties"
                     ref="data.q_medical_subspecialties"
