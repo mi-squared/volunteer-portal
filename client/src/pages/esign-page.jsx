@@ -68,7 +68,7 @@ class EsignPage extends React.Component {
                         </p>
 
                         <p>
-                            Please download the <a target="_blank" href="/static/volunteer-agreement.pdf"><b>Volunteer Agreement</b></a> pdf and review it.
+                            Please download the <a target="_blank" href="/client/dist/static/volunteer-agreement.pdf"><b>Volunteer Agreement</b></a> pdf and review it.
                             By electronically signing on this page, you are agreeing to the terms and conditions described in the async Voltuneer Agreement
                             pdf.
                         </p>
