@@ -81,3 +81,7 @@ html, body {
     /* custom max width */
     max-width:320px;
 }
+
+.form-control.error {
+    background: lightpink;
+}
