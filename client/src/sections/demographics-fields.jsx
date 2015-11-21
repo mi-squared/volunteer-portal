@@ -124,6 +124,12 @@ export default class DemographicsFields extends BaseSection {
                     label="Are you a committed Seventh-day Adventist in good standing and do you believe in all the fundamental beliefs of the church?"
                     value={this.props.data.q_is_adventist}
                     onChange={this.handleChange}
+                    clearIf={ { isNot : "true", fields: [
+                        'data.q_church_name',
+                        'data.q_church_pastor_name',
+                        'data.q_church_pastor_email',
+                        'data.q_church_pastor_phone',
+                    ] } }
                 />
 
                 <QuestionContainer {...this.props} criteria={ {key : 'q_is_adventist', value : "true" } }>
@@ -187,6 +193,13 @@ export default class DemographicsFields extends BaseSection {
                     label="Are you a student volunteer?"
                     value={this.props.data.q_is_student}
                     onChange={this.handleChange}
+                    clearIf={ { isNot : "true", fields: [
+                        'data.q_school_name',
+                        'data.q_school_level',
+                        'data.q_school_studied_area',
+                        'data.q_date_graduation',
+                        'data.q_school_sponsor',
+                    ] } }
                 />
 
                 <StudentFields {...this.props} onChange={this.handleChange}/>
@@ -196,7 +209,9 @@ export default class DemographicsFields extends BaseSection {
                     ref="data.q_volunteer_organization_member"
                     label="Are you part of a volunteer group?"
                     value={this.props.data.q_volunteer_organization_member}
-                    onChange={this.handleChange}
+                    onChange={this.handleChange}clearIf={ { isNot : "true", fields: [
+                        'data.q_volunteer_organization',
+                    ] } }
                 />
 
                 <QuestionContainer {...this.props}

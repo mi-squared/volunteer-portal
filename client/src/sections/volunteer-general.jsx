@@ -22,6 +22,10 @@ export default class VolunteerGeneral extends BaseSection {
                     label="Have you volunteered for Your Best Pathway To Health before?"
                     value={this.props.data.q_volunteered_before}
                     onChange={this.handleChange}
+                    clearIf={ { isNot : "true", fields: [
+                        'data.q_volunteered_area',
+                        'data.q_volunteered_capacity',
+                    ] } }
                 />
 
                 <QuestionContainer {...this.props}
@@ -63,6 +67,13 @@ export default class VolunteerGeneral extends BaseSection {
                     label="Do you want to volunteer in your currently licensed area?"
                     value={this.props.data.q_volunteering_in_licensed_area}
                     onChange={this.handleChange}
+                    clearIf={ { isNot : "true", fields: [
+                        'data.q_licensed_discipline',
+                        'data.q_licensed_discipline_other',
+                        'data.q_licensed_state',
+                        'data.q_license_expiration',
+                        'data.q_licensed_number',
+                    ] } }
                 />
 
                 <QuestionContainer {...this.props}
@@ -76,6 +87,12 @@ export default class VolunteerGeneral extends BaseSection {
                     label="Are you volunteering as a medical or dental professional?"
                     value={this.props.data.q_is_medical_professional}
                     onChange={this.handleChange}
+                    clearIf={ { isNot : "true", fields: [
+                        'data.q_medical_specialties',
+                        'data.q_medical_subspecialties',
+                        'data.q_medical_npi',
+                        'data.q_medical_dea',
+                    ] } }
                 />
 
                 <QuestionContainer {...this.props}
@@ -89,6 +106,11 @@ export default class VolunteerGeneral extends BaseSection {
                     label="Are you CPR certified?"
                     value={this.props.data.q_cpr_certified}
                     onChange={this.handleChange}
+                    clearIf={ { isNot : "true", fields: [
+                        'data.q_cpr_expiration',
+                        'data.q_cpr_org',
+                        'data.q_cpr_org_other',
+                    ] } }
                 />
 
                 <QuestionContainer {...this.props}
