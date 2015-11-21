@@ -17,7 +17,6 @@ class VolunteeringDetailPage extends React.Component {
             errorMessage : ''
         };
 
-        var that = this;
         this.schema =
         {
             fieldPrefix: 'data.',
@@ -25,42 +24,26 @@ class VolunteeringDetailPage extends React.Component {
                 q_licensed_discipline: {
                     type: 'string',
                     maxLength: 255,
-                    required: function() {
-                        return that.props.data['q_volunteering_in_licensed_area'] == 'true';
-                    },
-                    allowEmpty: function() {
-                        return that.props.data['q_volunteering_in_licensed_area'] !== 'true';
-                    },
+                    required: () => this.props.data['q_volunteering_in_licensed_area'] == 'true',
+                    allowEmpty: () => this.props.data['q_volunteering_in_licensed_area'] !== 'true'
                 },
                 q_licensed_state: {
                     type: 'string',
                     maxLength: 255,
-                    required: function() {
-                        return that.props.data['q_volunteering_in_licensed_area'] == 'true';
-                    },
-                    allowEmpty: function() {
-                        return that.props.data['q_volunteering_in_licensed_area'] !== 'true';
-                    },
+                    required: () => this.props.data['q_volunteering_in_licensed_area'] == 'true',
+                    allowEmpty: () => this.props.data['q_volunteering_in_licensed_area'] !== 'true'
                 },
                 q_license_expiration: {
                     type: 'string',
                     pattern: /^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$/,
-                    required: function() {
-                        return that.props.data['q_volunteering_in_licensed_area'] == 'true';
-                    },
-                    allowEmpty: function() {
-                        return that.props.data['q_volunteering_in_licensed_area'] !== 'true';
-                    },
+                    required: () => this.props.data['q_volunteering_in_licensed_area'] == 'true',
+                    allowEmpty: () => this.props.data['q_volunteering_in_licensed_area'] !== 'true'
                 },
                 q_licensed_number: {
                     type: 'string',
                     maxLength: 255,
-                    required: function() {
-                        return that.props.data['q_volunteering_in_licensed_area'] == 'true';
-                    },
-                    allowEmpty: function() {
-                        return that.props.data['q_volunteering_in_licensed_area'] !== 'true';
-                    },
+                    required: () => this.props.data['q_volunteering_in_licensed_area'] == 'true',
+                    allowEmpty: () => this.props.data['q_volunteering_in_licensed_area'] !== 'true'
                 },
             }
         };
