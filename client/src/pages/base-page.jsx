@@ -62,6 +62,8 @@ export default function composePage(Component) {
                 var key = keys[idx];
                 var property = schema.properties[key];
                 var required = property['required'];
+                var pattern = property['pattern'];
+                var format = property['format'];
                 var allowEmpty = property['allowEmpty'];
                 if ( typeof required === 'function' ) {
                     var requiredValue = required();
@@ -70,6 +72,14 @@ export default function composePage(Component) {
                 if ( typeof allowEmpty === 'function' ) {
                     var allowEmptyValue = allowEmpty();
                     property['allowEmpty'] = allowEmptyValue;
+                }
+                if ( typeof pattern === 'function' ) {
+                    var patternValue = pattern();
+                    property['pattern'] = patternValue;
+                }                
+                if ( typeof format === 'function' ) {
+                    var formatValue = format();
+                    property['format'] = formatValue;
                 }
             }
 
