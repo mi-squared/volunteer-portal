@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Router, {Route, DefaultRoute, Link} from 'react-router';
+import {Router, Route, Link} from 'react-router';
 import Button from 'react-bootstrap/lib/Button.js';
 
 import {getBuildInfo} from '../build_info.js';

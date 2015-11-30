@@ -1,8 +1,11 @@
 import React from 'react';
-import {RouteHandler} from 'react-router';
+import {Router, Route, IndexRoute} from 'react-router';
+
 
 export default React.createClass({
     render: function() {
-        return <RouteHandler />
+        return <div>
+          {this.props.children}
+        </div>
     }
 });
