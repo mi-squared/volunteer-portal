@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from "react-dom";
 
 import classNames from 'classnames'
 
@@ -15,7 +16,7 @@ export default React.createClass({
     },
 
     componentDidMount: function() {
-        var targetField = $(React.findDOMNode(this)).find("select");
+        var targetField = $(ReactDOM.findDOMNode(this)).find("select");
         targetField.select2(
             { placeholder : this.props.placeHolder }
         );
@@ -52,7 +53,7 @@ export default React.createClass({
                         ref={this.props.ref}
                         value={this.getValue()}
                         fieldName={this.props.fieldName}
-                        style={{width: "100%"}}>>
+                        style={{width: "100%"}}>
                         {this.props.children.map(entry =>
                             <option key={entry.props.value || entry.props.children} value={entry.props.value || entry.props.children}>{entry.props.children}</option>
                         )}
