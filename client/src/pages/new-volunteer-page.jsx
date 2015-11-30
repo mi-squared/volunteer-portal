@@ -8,7 +8,6 @@ import * as actionCreators from '../action_creators';
 import composePage from './base-page.jsx';
 
 class NewVolunteerPage extends React.Component {
-
     constructor(props) {
         super(props);
 
@@ -83,6 +82,7 @@ class NewVolunteerPage extends React.Component {
         this.doCancel = this.doCancel.bind(this);
     }
 
+
     componentWillMount() {
         // reset to initial state whenever this form appears
         this.props.reset();
@@ -106,7 +106,7 @@ class NewVolunteerPage extends React.Component {
                     self.props.login({
                         token: response.token
                     });
-                    self.props.transitionTo('/do-register');
+                    self.props.history.pushState(null, '/do-register');
                 },
                 function(error) {
                     self.props.handleAlertShow({
@@ -157,6 +157,7 @@ class NewVolunteerPage extends React.Component {
         );
     }
 }
+
 
 export const NewVolunteerPageContainer = connect(
     (state) => state.toJSON(), actionCreators
