@@ -45,13 +45,14 @@ class MainPage extends React.Component {
                 q_church_pastor_email: {
                     type: 'string',
                     maxLength: 255,
-                    format: 'email',
+                    format: () => this.props.data['q_is_adventist'] === 'true' ? 'email' : '',
                     allowEmpty: true
                 },
                 q_dob: {
                     type: 'string',
                     pattern: /^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$/,
-                    required: true
+                    required: true,
+                    allowEmpty: false
                 },
                 q_date_graduation: {
                     type: 'string',

@@ -28,7 +28,6 @@ export function updateField(state, fieldSpec ) {
 }
 
 export function addChild(state, childSpec ) {
-    debugger;
     var toMerge = state.get("data").get("children").toJSON();
     toMerge.push( childSpec );
     var newstate = state.mergeIn(['data', 'children'], fromJS(toMerge));
@@ -36,7 +35,6 @@ export function addChild(state, childSpec ) {
 }
 
 export function updateChild(state, childSpec ) {
-    debugger;
     var newstate = state.setIn(
         ['data', 'children', childSpec.childID],
         childSpec

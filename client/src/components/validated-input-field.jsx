@@ -28,9 +28,13 @@ export default React.createClass({
             this.getInputDOMNode().focus();
         }
 
+        var that = this;
         if ( this.props.mask ) {
             $(this.getInputDOMNode()).mask(this.props.mask);
         }
+        $(this.getInputDOMNode()).blur( function(e) {
+            that.commitChange(e);
+        });
     },
 
     getValue: function() {
@@ -57,7 +61,6 @@ export default React.createClass({
                value={this.getValue()}
                onChange={this.handleChange}
                ref={this.props.ref}
-               onBlur={this.commitChange}
                placeholder={this.props.placeholder}
             />;
 

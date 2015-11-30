@@ -8,6 +8,20 @@ export default React.createClass({
     commitChange: function(e) {
         if ( this.props.onChange ) {
             this.props.onChange(this.props.fieldName, e);
+
+            var clearIf = this.props.clearIf;
+            if ( !clearIf ) {
+                return;
+            }
+
+            if ( clearIf.isNot ) {
+                for ( var i = 0; i < clearIf.fields.length; i++ ) {
+                    var field = clearIf.fields[i];
+                    if ( this.props.data[field] !== clearIf.isNot ) {
+                        this.props.onChange(field, "");
+                    }
+                }
+            }
         }
     },
 

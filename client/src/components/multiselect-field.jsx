@@ -29,10 +29,12 @@ export default React.createClass({
     render: function() {
         var requiredLabel = this.props.required ? <span className='j-required'>*</span> : '';
         var message;
+        var fieldClassName = "form-control";
         if (this.props.errorFields) {
             var errorField = this.props.errorFields[this.props.fieldName];
             if ( errorField ) {
                 message = errorField['message'];
+                fieldClassName += " error";
             }
         }
         var errorMessage = message ? <span className='j-error-message'>{message}</span> : '';
@@ -46,7 +48,7 @@ export default React.createClass({
                 <div>
                     <select
                         multiple="true"
-                        className="form-control"
+                        className={fieldClassName}
                         ref={this.props.ref}
                         value={this.getValue()}
                         fieldName={this.props.fieldName}
