@@ -94,7 +94,7 @@ class MainPage extends React.Component {
             var self = this;
             this.props.saveApplication().then( function() {
                 // then move on to next page
-                self.props.transitionTo(self.props.data['q_bringing_children'] === 'true' ?
+                self.props.history.pushState(null, self.props.data['q_bringing_children'] === 'true' ?
                     '/children-page' : '/volunteering-detail');
             });
         } else {

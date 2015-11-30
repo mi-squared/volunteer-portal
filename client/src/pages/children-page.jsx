@@ -49,12 +49,12 @@ class ChildrenPage extends React.Component {
         var self = this;
         this.props.saveApplication().then( function() {
             // then move on to next page
-            self.props.transitionTo('/volunteering-detail');
+            self.props.history.pushState(null, '/volunteering-detail');
         });
     }
 
     doBack() {
-        this.props.transitionTo('/main');
+        this.props.history.pushState(null, '/main');
     }
 
     render() {

@@ -116,7 +116,7 @@ export default function composePage(Component) {
         },
 
         transitionToRoute: function(route) {
-            this.transitionTo(route);
+            this.props.history.pushState(null, route);
         },
 
         saveApplication: function() {

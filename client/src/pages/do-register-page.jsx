@@ -11,7 +11,7 @@ export const DoRegisterPage = React.createClass({
 
     doContinue: function() {
         // todo - reinitialize state
-        this.transitionTo('/main');
+        this.props.history.pushState(null, '/main');
     },
 
     render: function() {

@@ -10,7 +10,7 @@ export const DoneApplicationPage = React.createClass({
 
     doContinue: function() {
         // todo - reinitialize state
-        this.transitionTo('/');
+        this.props.history.pushState(null, '/');
     },
 
     render: function() {

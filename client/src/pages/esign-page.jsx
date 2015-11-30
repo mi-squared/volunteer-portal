@@ -15,11 +15,11 @@ class EsignPage extends React.Component {
     }
 
     doBack() {
-        this.props.transitionTo('/volunteering-detail');
+        this.props.history.pushState(null, '/volunteering-detail');
     }
 
     doCancel() {
-        this.props.transitionTo('/');
+        this.props.history.pushState(null, '/');
     }
 
     doContinue() {
@@ -37,7 +37,7 @@ class EsignPage extends React.Component {
         setTimeout( function() {
             self.props.saveApplication().then( function() {
                 // then move on to next page
-                self.props.transitionTo('/done-application');
+                self.props.history.pushState(null, '/done-application');
             });
         }, 1 );
     }
