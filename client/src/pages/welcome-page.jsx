@@ -33,10 +33,10 @@ export const WelcomePage = React.createClass({
                         <h5>last build: <b>{this.lastBuilt()}</b></h5>
 
                         <p>
-                            <Button className="nav-button" onClick={this.doNew}>New volunteer</Button>
+                            <Link to="/new-volunteer" className="nav-button btn btn-default">New volunteer</Link>
                         </p>
                         <p>
-                            <Button className="nav-button" onClick={this.doReturning}>Returning volunteer</Button>
+                            <Link to="/returning-volunteer" className="nav-button btn btn-default">Returning volunteer</Link>
                         </p>
                     </div>
                 </div>
