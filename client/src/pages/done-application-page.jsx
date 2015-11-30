@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import Router, {Route, DefaultRoute, Link} from 'react-router';
+import {Router, Route, Link} from 'react-router';
 import Button from 'react-bootstrap/lib/Button.js';
 
 import * as actionCreators from '../action_creators';
@@ -10,7 +10,7 @@ export const DoneApplicationPage = React.createClass({
 
     doContinue: function() {
         // todo - reinitialize state
-        this.transitionTo('/');
+        this.props.history.pushState(null, '/');
     },
 
     render: function() {

@@ -8,7 +8,6 @@ import * as actionCreators from '../action_creators';
 import composePage from './base-page.jsx';
 
 class NewVolunteerPage extends React.Component {
-
     constructor(props) {
         super(props);
 
@@ -83,6 +82,7 @@ class NewVolunteerPage extends React.Component {
         this.doCancel = this.doCancel.bind(this);
     }
 
+
     componentWillMount() {
         // reset to initial state whenever this form appears
         this.props.reset();
@@ -102,13 +102,13 @@ class NewVolunteerPage extends React.Component {
             };
 
             register(data).then(
-                function(response) {
+                (response) => {
                     self.props.login({
                         token: response.token
                     });
-                    self.props.transitionTo('/do-register');
+                    self.props.history.pushState(null, '/do-register');
                 },
-                function(error) {
+                (error) => {
                     self.props.handleAlertShow({
                         errorMessage: "You may have already registered another account under that email.",
                         errorFields : [
@@ -128,7 +128,7 @@ class NewVolunteerPage extends React.Component {
 
     doCancel() {
         this.props.reset();
-        this.props.transitionTo('/');
+        this.props.history.goBack();
     }
 
     render() {
@@ -157,6 +157,7 @@ class NewVolunteerPage extends React.Component {
         );
     }
 }
+
 
 export const NewVolunteerPageContainer = connect(
     (state) => state.toJSON(), actionCreators

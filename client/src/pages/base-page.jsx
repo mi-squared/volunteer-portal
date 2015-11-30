@@ -1,5 +1,5 @@
 import React from 'react';
-import Router, {Route, DefaultRoute, Link} from 'react-router';
+import {Router, Route, Link} from 'react-router';
 import Button from 'react-bootstrap/lib/Button.js';
 import Alert from 'react-bootstrap/lib/Alert.js';
 import Revalidator from 'revalidator/lib/revalidator.js'
@@ -76,7 +76,7 @@ export default function composePage(Component) {
                 if ( typeof pattern === 'function' ) {
                     var patternValue = pattern();
                     property['pattern'] = patternValue;
-                }                
+                }
                 if ( typeof format === 'function' ) {
                     var formatValue = format();
                     property['format'] = formatValue;
@@ -116,7 +116,7 @@ export default function composePage(Component) {
         },
 
         transitionToRoute: function(route) {
-            this.transitionTo(route);
+            this.props.history.pushState(null, route);
         },
 
         saveApplication: function() {
@@ -164,4 +164,3 @@ export default function composePage(Component) {
         }
     })
 }
-

@@ -1,10 +1,11 @@
 import React from 'react';
+import ReactDOM from "react-dom";
 
 import classNames from 'classnames'
 
 export default React.createClass({
     getInputDOMNode: function() {
-        return $(this.getDOMNode()).find("input").get(0);
+        return $(ReactDOM.findDOMNode(this)).find("input").get(0);
     },
 
     handleChange: function(e) {
@@ -87,4 +88,3 @@ export default React.createClass({
         );
     }
 });
-

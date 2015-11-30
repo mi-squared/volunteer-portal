@@ -64,7 +64,7 @@ class ReturningVolunteerPage extends React.Component {
                             getApplication(token, applicationID).then(
                                 function(response) {
                                     self.props.loadApplication(response);
-                                    self.props.transitionTo('/main');
+                                    self.props.history.pushState(null, '/main');
                                 },
                                 function(error) {
                                     console.log(error);
@@ -72,7 +72,7 @@ class ReturningVolunteerPage extends React.Component {
                             );
                         } else {
                             console.log("New app.");
-                            self.props.transitionTo('/main');
+                            self.props.history.pushState(null, '/main');
                         }
                     },
                     function(error) {
@@ -102,7 +102,7 @@ class ReturningVolunteerPage extends React.Component {
     }
 
     doCancel() {
-        this.props.transitionTo('/');
+        this.props.history.pushState(null, '/');
     }
 
     render() {

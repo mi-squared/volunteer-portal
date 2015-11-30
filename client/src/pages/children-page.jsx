@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import Router, {Route, DefaultRoute, Link} from 'react-router';
+import {Router, Route, Link} from 'react-router';
 import Button from 'react-bootstrap/lib/Button.js';
 
 import ChildFields from '../sections/child-fields.jsx';
@@ -49,12 +49,12 @@ class ChildrenPage extends React.Component {
         var self = this;
         this.props.saveApplication().then( function() {
             // then move on to next page
-            self.props.transitionTo('/volunteering-detail');
+            self.props.history.pushState(null, '/volunteering-detail');
         });
     }
 
     doBack() {
-        this.props.transitionTo('/main');
+        this.props.history.pushState(null, '/main');
     }
 
     render() {

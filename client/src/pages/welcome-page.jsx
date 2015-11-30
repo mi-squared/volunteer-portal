@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Router, {Route, DefaultRoute, Link} from 'react-router';
+import {Router, Route, Link} from 'react-router';
 import Button from 'react-bootstrap/lib/Button.js';
 
 import {getBuildInfo} from '../build_info.js';
@@ -10,11 +10,11 @@ export const WelcomePage = React.createClass({
     mixins: [ Router.Navigation ],
 
     doNew : function() {
-        this.transitionTo('/new-volunteer');
+        this.props.history.pushState(null, '/new-volunteer');
     },
 
     doReturning : function() {
-        this.transitionTo('/returning-volunteer');
+        this.props.history.pushState(null, '/returning-volunteer');
     },
 
     lastBuilt: function() {

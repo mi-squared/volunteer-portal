@@ -34,16 +34,17 @@
   },
   "dependencies": {
     "classnames": "2.1.5",
+    "history": "^1.13.1",
     "immutable": "3.7.5",
     "q": "1.4.1",
-    "react": "0.13.3",
-    "react-bootstrap": "0.25.2",
+    "react": "*",
+    "react-bootstrap": "^0.28.1",
     "react-bootstrap-datetimepicker": "0.0.20",
-    "react-fastclick": "1.0.3",
+    "react-dom": "^0.14.3",
     "react-notification": "2.3.0",
-    "react-redux": "2.1.2",
-    "react-router": "0.13",
-    "redux": "3.0.0",
+    "react-redux": "*",
+    "react-router": "*",
+    "redux": "*",
     "revalidator": "0.3.1"
   }
 }

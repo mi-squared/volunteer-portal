@@ -1,6 +1,6 @@
 import React from 'react';
-require('react-fastclick');
-import Router, {Route, DefaultRoute} from 'react-router';
+import ReactDOM from "react-dom";
+import {Router, Route, IndexRoute} from 'react-router';
 import App from './components/app.jsx';
 import {createStore} from 'redux';
 import reducer from './reducer';
@@ -17,27 +17,28 @@ import {DoneApplicationPage} from './pages/done-application-page.jsx';
 import {EsignPageContainer} from './pages/esign-page.jsx';
 
 const store = createStore(reducer);
-const routes = <Route handler={App}>
-    <Route path="/new-volunteer" handler={NewVolunteerPageContainer} />
-    <Route path="/do-register" handler={DoRegisterPage} />
-    <Route path="/returning-volunteer" handler={ReturningVolunteerPageContainer} />
-    <Route path="/children-page" handler={ChildrenPageContainer} />
-    <Route path="/volunteering-detail" handler={VolunteeringDetailPageContainer} />
-    <Route path="/main" handler={MainPageContainer} />
-    <Route path="/done-application" handler={DoneApplicationPage} />
-    <Route path="/esign" handler={EsignPageContainer} />
-    <DefaultRoute handler={WelcomePage} />
+const routes = <Route path="/" component={App}>
+    <Route path="/new-volunteer" component={NewVolunteerPageContainer} />
+    <Route path="/do-register" component={DoRegisterPage} />
+    <Route path="/returning-volunteer" component={ReturningVolunteerPageContainer} />
+    <Route path="/children-page" component={ChildrenPageContainer} />
+    <Route path="/volunteering-detail" component={VolunteeringDetailPageContainer} />
+    <Route path="/main" component={MainPageContainer} />
+    <Route path="/done-application" component={DoneApplicationPage} />
+    <Route path="/esign" component={EsignPageContainer} />
+    <IndexRoute component={WelcomePage} />
 </Route>;
 
 store.dispatch({
     type: 'RESET'
 });
 
-Router.run(routes, (Root) => {
-    React.render(
-        <Provider store={store}>
-            {() => <Root />}
-        </Provider>,
-        document.getElementById('app')
-    );
-});
+ReactDOM.render(
+
+  <Provider store={store}>
+    <Router>
+      {routes}
+    </Router>
+  </Provider>,
+  document.getElementById('app')
+);

@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import Router, {Route, DefaultRoute, Link} from 'react-router';
+import {Router, Route, Link} from 'react-router';
 import Button from 'react-bootstrap/lib/Button.js';
 
 import RegistrationFields from '../sections/registration-fields.jsx';
@@ -11,7 +11,7 @@ export const DoRegisterPage = React.createClass({
 
     doContinue: function() {
         // todo - reinitialize state
-        this.transitionTo('/main');
+        this.props.history.pushState(null, '/main');
     },
 
     render: function() {

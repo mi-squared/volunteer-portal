@@ -60,9 +60,9 @@ class VolunteeringDetailPage extends React.Component {
                 // then move on to next page
                 var isEsigned = self.props.data['q_esigned'] === 'true';
                 if ( isEsigned ) {
-                    self.props.transitionTo('/done-application');
+                    self.props.history.pushState(null, '/done-application');
                 } else {
-                    self.props.transitionTo('/esign');
+                    self.props.history.pushState(null, '/esign');
                 }
             });
         } else {
@@ -72,7 +72,7 @@ class VolunteeringDetailPage extends React.Component {
 
     doBack() {
         var isBringingChildren = this.props.data['q_bringing_children'] === 'true';
-        this.props.transitionTo(isBringingChildren ? '/children-page' : '/main');
+        this.props.history.pushState(null, isBringingChildren ? '/children-page' : '/main');
     }
 
     render() {
