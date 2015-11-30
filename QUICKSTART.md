@@ -33,12 +33,12 @@ Please find the instructions below for your operating system and follow the step
   * Download the Windows installer from the [Node.js website](https://nodejs.org/en/download/)
   * Run the installer and follow the prompts
   * Restart your computer
-2. Install PHP
-  * Follow the instructions on the [SitePoint website](http://www.sitepoint.com/how-to-install-php-on-windows/)
-3. Install Composer
+2. Install Composer
   * Download the [Windows installer](https://getcomposer.org/Composer-Setup.exe)
   * Run the installer and follow the prompts
   * Restart your computer
+3. Install PHP
+  * Follow the instructions on the [SitePoint website](http://www.sitepoint.com/how-to-install-php-on-windows/)
 4. Install Laravel
   * `composer global require "laravel/installer=~1.1"`
   * *To add the composer executable to the Path environment, so to that the* `laravel` *executable can be found:*
