@@ -90,7 +90,7 @@ class NewVolunteerPage extends React.Component {
 
     doRegister() {
         // validation
-        // var self = this;
+        var self = this;
         if ( this.props.doValidate(this.schema, this.props.data) ) {
             var data = {
                 'username' : this.props.data['q_email'],
@@ -103,11 +103,11 @@ class NewVolunteerPage extends React.Component {
 
             register(data).then(
                 (response) => {
-                    this.props.login({
+                    self.props.login({
                         token: response.token
                     });
-                    this.props.history.pushState(null, '/do-register');
-                }.bind(this),
+                    self.props.history.pushState(null, '/do-register');
+                },
                 (error) => {
                     self.props.handleAlertShow({
                         errorMessage: "You may have already registered another account under that email.",
@@ -119,7 +119,7 @@ class NewVolunteerPage extends React.Component {
                         ],
                         focusElement: 'q_first_name'
                     });
-                }.bind(this)
+                }
             );
         } else {
             this.props.handleAlertShow();
