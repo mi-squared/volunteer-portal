@@ -1,7 +1,10 @@
 #Developer Quickstart Guide
-Find the instructions below for your operating system and follow the steps to setup your development environment.
+Follow the steps below to setup your development environment.
 
-##Linux
+##Install Packages
+Find the instructions below for your operating system and follow the steps to install the necessary packages.
+
+###Linux
 1. Prepare to install packages.
   * `sudo apt-get update`
   * `sudo apt-get upgrade`
@@ -17,14 +20,8 @@ Find the instructions below for your operating system and follow the steps to se
   * `sudo apt-get install mysql-server`
 6. Install Node.js & npm
   * `sudo apt-get install nodejs`
-7. Clone repository.
-  * `git clone https://github.com/mi-squared/volunteer-portal.git`
-8. Install client dependency packages.
-  * `cd volunteer-portal/client`
-  * `npm install` or `npm i`
 
-
-##OSX
+###OSX
 1. Install Homebrew
   * `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
   * *If Homebrew is already installed, update it so it is ready to install new packages*
@@ -45,13 +42,8 @@ Find the instructions below for your operating system and follow the steps to se
   * `brew install mysql`
 6. Install Node.js & npm
   * `brew install node`
-7. Clone repository.
-  * `git clone https://github.com/mi-squared/volunteer-portal.git`
-8. Install client dependency packages.
-  * `cd volunteer-portal/client`
-  * `npm install` or `npm i`
 
-##Windows
+###Windows
 1. Install PHP
   * Follow the instructions on the [SitePoint website](http://www.sitepoint.com/how-to-install-php-on-windows/)
 2. Install Composer
@@ -70,8 +62,16 @@ Find the instructions below for your operating system and follow the steps to se
   * Download the Windows installer from the [Node.js website](https://nodejs.org/en/download/)
   * Run the installer and follow the prompts
   * Restart your computer
-6. Clone repository.
+
+##Setup Repository
+1. Clone repository
   * `git clone https://github.com/mi-squared/volunteer-portal.git`
-7. Install client dependency packages.
+2. Install client dependency packages
   * `cd volunteer-portal/client`
   * `npm install` or `npm i`
+
+##Local Test Server
+1. Start local server
+  * `npm run dev`
+2. Visit development application in browser
+  * `localhost:8080`
