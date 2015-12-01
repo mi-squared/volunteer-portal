@@ -24,4 +24,11 @@ describe('NewVolunteerPage', () => {
         })
         .call(done);
   });
+
+  it("correctly loads next page on form submission", (done) => {
+    client
+        .init()
+        .url(pageUrl)
+        .setValue('input', 'asdf bowow') 
+  });
 });
