@@ -8,11 +8,12 @@ Follow the steps below to setup your development environment.
 2. [Setup repository](#setup-repository)
 3. [Test on local server](#test-on-local-server)
 
-
-##Install Packages <a id="install-packages"></a>
+<a id="install-packages"></a>
+##Install Packages
 Find the instructions below for your operating system and follow the steps to install the necessary packages.
 
-###Linux <a id="linux"></a>
+<a id="linux"></a>
+###Linux
 1. Prepare to install packages.
   * `sudo apt-get update`
   * `sudo apt-get upgrade`
@@ -29,7 +30,8 @@ Find the instructions below for your operating system and follow the steps to in
 6. Install Node.js & npm
   * `sudo apt-get install nodejs`
 
-###OSX <a id="osx"></a>
+<a id="osx"></a>
+###OSX
 1. Install Homebrew
   * `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
   * *If Homebrew is already installed, update it so it is ready to install new packages*
@@ -51,7 +53,8 @@ Find the instructions below for your operating system and follow the steps to in
 6. Install Node.js & npm
   * `brew install node`
 
-###Windows <a id="windows"></a>
+<a id="windows"></a>
+###Windows
 1. Install PHP
   * Follow the instructions on the [SitePoint website](http://www.sitepoint.com/how-to-install-php-on-windows/)
 2. Install Composer
@@ -72,7 +75,8 @@ Find the instructions below for your operating system and follow the steps to in
   * Restart your computer
 
 
-##Setup Repository <a id="setup-repository"></a>
+<a id="setup-repository"></a>
+##Setup Repository
 1. Clone repository
   * `git clone https://github.com/mi-squared/volunteer-portal.git`
 2. Install client dependency packages
@@ -80,7 +84,8 @@ Find the instructions below for your operating system and follow the steps to in
   * `npm install` or `npm i`
 
 
-##Test on Local Server <a id="test-on-local-server"></a>
+<a id="test-on-local-server"></a>
+##Test on Local Server
 1. Start local server
   * `npm run dev`
 2. Visit development application in browser
