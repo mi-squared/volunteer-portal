@@ -33,16 +33,15 @@ describe('NewVolunteerPage', () => {
         .addValue('#email', Math.random() * 10000 + '@gmail.com')
         .selectByIndex('select', 1)
         .click('#submit')
-        .waitUntil(client.getText('h1') === 'Volunteer Application').then(
-        )
+        .waitForVisible('#thank-you', 10000)
+        .waitUntil(() => {
+          return client.getUrl().then(
+            (url) => {return url.match(/^http:\/\/localhost:8080\/\#\/do-register.+/)}
+          )
+        })
+        .getText('h1').then((text) => {
+          assert.strictEqual(text, 'Volunteer Application')
+        }).call(done)
 
-        // .waitUntil(() => {
-        //   return this.getText('h1').then(
-        //     (text) => {return text === "Volunteer Application"}
-        //   ).then(
-        //   // this.getUrl().match(/^http:\/\/localhost:8080\/\#\/do-register.+/).then(
-        //     console.log('hello')
-        //   )
-        // })
   });
 });
