@@ -29,6 +29,20 @@ describe('NewVolunteerPage', () => {
     client
         .init()
         .url(pageUrl)
-        .setValue('input', 'asdf bowow') 
+        .setValue('input', 'asdfbowow')
+        .addValue('#email', Math.random() * 10000 + '@gmail.com')
+        .selectByIndex('select', 1)
+        .click('#submit')
+        .waitUntil(client.getText('h1') === 'Volunteer Application').then(
+        )
+
+        // .waitUntil(() => {
+        //   return this.getText('h1').then(
+        //     (text) => {return text === "Volunteer Application"}
+        //   ).then(
+        //   // this.getUrl().match(/^http:\/\/localhost:8080\/\#\/do-register.+/).then(
+        //     console.log('hello')
+        //   )
+        // })
   });
 });
