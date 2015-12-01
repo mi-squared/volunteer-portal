@@ -1,5 +1,6 @@
 #Developer Quickstart Guide
 Follow the steps below to setup your development environment.
+
 1. [Install packages](#install-packages)
   * [Linux](#linux)
   * [OSX](#osx)
@@ -8,10 +9,10 @@ Follow the steps below to setup your development environment.
 3. [Test on local server](#test-on-local-server)
 
 
-##Install Packages <a id="#install-packages"></a>
+##Install Packages <a id="install-packages"></a>
 Find the instructions below for your operating system and follow the steps to install the necessary packages.
 
-###Linux <a id="#linux"></a>
+###Linux <a id="linux"></a>
 1. Prepare to install packages.
   * `sudo apt-get update`
   * `sudo apt-get upgrade`
@@ -27,7 +28,7 @@ Find the instructions below for your operating system and follow the steps to in
   * `sudo apt-get install mysql-server`
 6. Install Node.js & npm
   * `sudo apt-get install nodejs`
-###OSX <a id="#osx"></a>
+###OSX <a id="osx"></a>
 1. Install Homebrew
   * `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
   * *If Homebrew is already installed, update it so it is ready to install new packages*
@@ -48,7 +49,7 @@ Find the instructions below for your operating system and follow the steps to in
   * `brew install mysql`
 6. Install Node.js & npm
   * `brew install node`
-###Windows <a id="#windows"></a>
+###Windows <a id="windows"></a>
 1. Install PHP
   * Follow the instructions on the [SitePoint website](http://www.sitepoint.com/how-to-install-php-on-windows/)
 2. Install Composer
@@ -69,7 +70,7 @@ Find the instructions below for your operating system and follow the steps to in
   * Restart your computer
 
 
-##Setup Repository <a id="#setup-repository"></a>
+##Setup Repository <a id="setup-repository"></a>
 1. Clone repository
   * `git clone https://github.com/mi-squared/volunteer-portal.git`
 2. Install client dependency packages
@@ -77,7 +78,7 @@ Find the instructions below for your operating system and follow the steps to in
   * `npm install` or `npm i`
 
 
-##Test on Local Server <a id="#test-on-local-server"></a>
+##Test on Local Server <a id="test-on-local-server"></a>
 1. Start local server
   * `npm run dev`
 2. Visit development application in browser
