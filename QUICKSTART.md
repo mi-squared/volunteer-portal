@@ -28,6 +28,7 @@ Find the instructions below for your operating system and follow the steps to in
   * `sudo apt-get install mysql-server`
 6. Install Node.js & npm
   * `sudo apt-get install nodejs`
+
 ###OSX <a id="osx"></a>
 1. Install Homebrew
   * `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
@@ -49,6 +50,7 @@ Find the instructions below for your operating system and follow the steps to in
   * `brew install mysql`
 6. Install Node.js & npm
   * `brew install node`
+
 ###Windows <a id="windows"></a>
 1. Install PHP
   * Follow the instructions on the [SitePoint website](http://www.sitepoint.com/how-to-install-php-on-windows/)
