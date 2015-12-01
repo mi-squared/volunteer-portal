@@ -3,88 +3,102 @@ import ReactDOM from "react-dom";
 
 import classNames from 'classnames'
 
-export default React.createClass({
-    getInputDOMNode: function() {
-        return $(ReactDOM.findDOMNode(this)).find("input").get(0);
-    },
+class ValidatedInput extends React.Component {
 
-    handleChange: function(e) {
-        this.dirty = true;
-        this.setState({ value: e.target.value });
-    },
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.commitChange = this.commitChange.bind(this);
+    this.getValue = this.getValue.bind(this);
+    this.getInputDOMNode = this.getInputDOMNode.bind(this);
+    this.state = {
+      value: []
+    };
+  }
 
-    commitChange: function(e) {
-        if ( this.props.onChange ) {
-            this.props.onChange(this.props.fieldName, e);
-        }
-        this.dirty = false;
-    },
+  getInputDOMNode() {
+      return $(ReactDOM.findDOMNode(this)).find("input").get(0);
+  }
 
-    componentWillMount: function() {
-        this.setState({ value: this.props.value });
-    },
+  handleChange(e) {
+      this.dirty = true;
+      this.setState({ value: e.target.value });
+  }
 
-    componentDidMount: function() {
-        if ( this.props.focusElement === this.props.fieldName ) {
-            this.getInputDOMNode().focus();
-        }
+  commitChange(e) {
+      if ( this.props.onChange ) {
+          this.props.onChange(this.props.fieldName, e);
+      }
+      this.dirty = false;
+  }
 
-        var that = this;
-        if ( this.props.mask ) {
-            $(this.getInputDOMNode()).mask(this.props.mask);
-        }
-        $(this.getInputDOMNode()).blur( function(e) {
-            that.commitChange(e);
-        });
-    },
+  getValue() {
+      return this.dirty ? this.state.value : this.props.value;
+  }
 
-    getValue: function() {
-        return this.dirty ? this.state.value : this.props.value;
-    },
+  componentWillMount() {
+      this.setState({ value: this.props.value });
+  }
 
-    render: function() {
-        var requiredLabel = this.props.required ? <span className='j-required'>*</span> : '';
-        var message;
-        var fieldClassName = "form-control";
-        if (this.props.errorFields) {
-            var errorField = this.props.errorFields[this.props.fieldName];
-            if ( errorField ) {
-                message = errorField['message'];
-                fieldClassName += " error";
-            }
-        }
-        var errorMessage = message ? <span className='j-error-message'>{message}</span> : '';
+  componentDidMount() {
+      if ( this.props.focusElement === this.props.fieldName ) {
+          this.getInputDOMNode().focus();
+      }
 
-        var text =
-            <input label={this.props.label}
-               type={this.props.type}
-               className={fieldClassName}
-               value={this.getValue()}
-               onChange={this.handleChange}
-               ref={this.props.ref}
-               placeholder={this.props.placeholder}
-            />;
+      var that = this;
+      if ( this.props.mask ) {
+          $(this.getInputDOMNode()).mask(this.props.mask);
+      }
+      $(this.getInputDOMNode()).blur( function(e) {
+          that.commitChange(e);
+      });
+  }
 
-        var textArea =
-            <textarea label={this.props.label}
-                   className={fieldClassName}
-                   onChange={this.handleChange}
-                   ref={this.props.ref}
-                   onBlur={this.commitChange}
-            >{this.getValue()}</textarea>;
+  render() {
+      var requiredLabel = this.props.required ? <span className='j-required'>*</span> : '';
+      var message;
+      var fieldClassName = "form-control";
+      if (this.props.errorFields) {
+          var errorField = this.props.errorFields[this.props.fieldName];
+          if ( errorField ) {
+              message = errorField['message'];
+              fieldClassName += " error";
+          }
+      }
+      var errorMessage = message ? <span className='j-error-message'>{message}</span> : '';
 
-        var toShow = this.props.type == 'textarea' ? textArea : text;
+      var text =
+          <input label={this.props.label}
+             type={this.props.type}
+             className={fieldClassName}
+             value={this.getValue()}
+             onChange={this.handleChange}
+             ref={this.props.ref}
+             placeholder={this.props.placeholder}
+          />;
 
-        var label = <label className="control-label">
-            <span>{requiredLabel}{this.props.label}</span>
-        </label>;
+      var textArea =
+          <textarea label={this.props.label}
+                 className={fieldClassName}
+                 onChange={this.handleChange}
+                 ref={this.props.ref}
+                 onBlur={this.commitChange}
+          >{this.getValue()}</textarea>;
 
-        return(
-            <div className={classNames('form-group', message ? 'has-error' : '')}>
-                {this.props.label ? label : ''}
-                {errorMessage}
-                {toShow}
-            </div>
-        );
-    }
-});
+      var toShow = this.props.type == 'textarea' ? textArea : text;
+
+      var label = <label className="control-label">
+          <span>{requiredLabel}{this.props.label}</span>
+      </label>;
+
+      return(
+          <div className={classNames('form-group', message ? 'has-error' : '')}>
+              {this.props.label ? label : ''}
+              {errorMessage}
+              {toShow}
+          </div>
+      );
+  }
+};
+
+export default ValidatedInput;
