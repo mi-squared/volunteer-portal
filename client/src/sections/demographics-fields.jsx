@@ -72,8 +72,6 @@ export default class DemographicsFields extends BaseSection {
                     <option value="">-- select --</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
-                    <option value="trans-male">Transgendered Male</option>
-                    <option value="trans-female">Transgendered female</option>
                 </DropdownField>
 
                 <DropdownField {...this.props}
