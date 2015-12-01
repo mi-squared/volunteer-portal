@@ -2,21 +2,21 @@ import React from 'react';
 import ReactDOM from "react-dom";
 import classNames from 'classnames'
 
-// export default React.createClass({
 
 class MultiselectField extends React.Component {
 
   constructor(props) {
-   super(props);
-   this.handleChange = this.handleChange.bind(this);
-   this.commitChange = this.commitChange.bind(this);
-   this.state = {
-     value: []
-   };
- }
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.commitChange = this.commitChange.bind(this);
+    this.getValue = this.getValue.bind(this);
+    this.state = {
+      value: []
+    };
+  }
 
   getValue() {
-      return this.props.value ? this.props.value.split(","): []
+      return this.props.value ? this.props.value.split(","): [];
   }
 
   handleChange(event) {
@@ -66,8 +66,7 @@ class MultiselectField extends React.Component {
                       multiple="true"
                       className={fieldClassName}
                       ref={this.props.ref}
-                      value={value}
-                      onChange={this.handleChange}
+                      value={this.getValue()}
                       fieldName={this.props.fieldName}
                       style={{width: "100%"}}>
                       {this.props.children.map(entry =>

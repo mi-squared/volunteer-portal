@@ -4,6 +4,18 @@ import ReactDOM from "react-dom";
 import classNames from 'classnames'
 
 class ValidatedInput extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.commitChange = this.commitChange.bind(this);
+    this.getValue = this.getValue.bind(this);
+    this.getInputDOMNode = this.getInputDOMNode.bind(this);
+    this.state = {
+      value: []
+    };
+  }
+
   getInputDOMNode() {
       return $(ReactDOM.findDOMNode(this)).find("input").get(0);
   }
@@ -18,6 +30,10 @@ class ValidatedInput extends React.Component {
           this.props.onChange(this.props.fieldName, e);
       }
       this.dirty = false;
+  }
+
+  getValue() {
+      return this.dirty ? this.state.value : this.props.value;
   }
 
   componentWillMount() {
@@ -36,10 +52,6 @@ class ValidatedInput extends React.Component {
       $(this.getInputDOMNode()).blur( function(e) {
           that.commitChange(e);
       });
-  }
-
-  getValue() {
-      return this.dirty ? this.state.value : this.props.value;
   }
 
   render() {
