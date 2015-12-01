@@ -1,5 +1,12 @@
 #Developer Quickstart Guide
 Follow the steps below to setup your development environment.
+1. [Install packages](##Install Packages)
+  * [Linux](###Linux)
+  * [OSX](###OSX)
+  * [Windows](###Windows)
+2. [Setup repository](##Setup Repository)
+3. [Test on local server](##Test on Local Server)
+
 
 ##Install Packages
 Find the instructions below for your operating system and follow the steps to install the necessary packages.
@@ -20,7 +27,6 @@ Find the instructions below for your operating system and follow the steps to in
   * `sudo apt-get install mysql-server`
 6. Install Node.js & npm
   * `sudo apt-get install nodejs`
-
 ###OSX
 1. Install Homebrew
   * `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
@@ -42,7 +48,6 @@ Find the instructions below for your operating system and follow the steps to in
   * `brew install mysql`
 6. Install Node.js & npm
   * `brew install node`
-
 ###Windows
 1. Install PHP
   * Follow the instructions on the [SitePoint website](http://www.sitepoint.com/how-to-install-php-on-windows/)
@@ -63,6 +68,7 @@ Find the instructions below for your operating system and follow the steps to in
   * Run the installer and follow the prompts
   * Restart your computer
 
+
 ##Setup Repository
 1. Clone repository
   * `git clone https://github.com/mi-squared/volunteer-portal.git`
@@ -70,7 +76,8 @@ Find the instructions below for your operating system and follow the steps to in
   * `cd volunteer-portal/client`
   * `npm install` or `npm i`
 
-##Local Test Server
+
+##Test on Local Server
 1. Start local server
   * `npm run dev`
 2. Visit development application in browser
