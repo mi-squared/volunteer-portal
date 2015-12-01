@@ -67,6 +67,7 @@ class MultiselectField extends React.Component {
                       className={fieldClassName}
                       ref={this.props.ref}
                       value={this.getValue()}
+                      onChange={this.props.onChange}
                       fieldName={this.props.fieldName}
                       style={{width: "100%"}}>
                       {this.props.children.map(entry =>
@@ -78,6 +79,6 @@ class MultiselectField extends React.Component {
       );
   }
 }
-// );
+
 
 export default MultiselectField;
