@@ -1,41 +1,63 @@
 #Developer Quickstart Guide
-Please find the instructions below for your operating system and follow the steps to setup your development environment.
+Find the instructions below for your operating system and follow the steps to setup your development environment.
 
 ##Linux
+1. Prepare to install packages.
+  * `sudo apt-get update`
+  * `sudo apt-get upgrade`
+2. Install PHP
+  * `sudo apt-get install php5`
+3. Install Composer
+  * `curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer`
+4. Install Laravel
+  * `composer global require "laravel/installer=~1.1"`
+  * Add `alias laravel='~/.composer/vendor/bin/laravel'` to `.bashrc` (or `.zshrc` if you use `zsh`)
+  * `source ~/.bashrc` (or `source ~/.zshrc`)
+5. Install MySQL
+  * `sudo apt-get install mysql-server`
+6. Install Node.js & npm
+  * `sudo apt-get install nodejs`
+7. Clone repository.
+  * `git clone https://github.com/mi-squared/volunteer-portal.git`
+8. Install client dependency packages.
+  * `cd volunteer-portal/client`
+  * `npm install` or `npm i`
+
 
 ##OSX
 1. Install Homebrew
   * `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
-2. If Homebrew is already installed, update it so it is ready to install new packages
-  * `brew update`
-  * `brew upgrade`
-3. Install Composer
-  * `brew install composer`
-4. Install PHP
+  * *If Homebrew is already installed, update it so it is ready to install new packages*
+    * `brew update`
+    * `brew doctor`
+    * `brew upgrade`
+2. Install PHP
   * `brew install php56`
   * *To configure system to use Homebrewed PHP 5.6 instead of pre-installed version:*
     * `open -a TextEdit ~/.bash_profile` and add `export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"` to the end of the file
-5. Install Laravel
+3. Install Composer
+  * `brew install composer`
+4. Install Laravel
   * `composer global require "laravel/installer=~1.1"`
   * *To add the composer executable to the Path environment, so to that the* `laravel` *executable can be found:*
     * `PATH=$PATH:~/.composer/vendor/bin`
-6. Install MySQL
+5. Install MySQL
   * `brew install mysql`
-7. Install Node.js & npm
+6. Install Node.js & npm
   * `brew install node`
-8. Clone repository.
+7. Clone repository.
   * `git clone https://github.com/mi-squared/volunteer-portal.git`
-9. Install client dependency packages.
+8. Install client dependency packages.
   * `cd volunteer-portal/client`
   * `npm install` or `npm i`
 
 ##Windows
-1. Install Composer
+1. Install PHP
+  * Follow the instructions on the [SitePoint website](http://www.sitepoint.com/how-to-install-php-on-windows/)
+2. Install Composer
   * Download the [Windows installer](https://getcomposer.org/Composer-Setup.exe)
   * Run the installer and follow the prompts
   * Restart your computer
-2. Install PHP
-  * Follow the instructions on the [SitePoint website](http://www.sitepoint.com/how-to-install-php-on-windows/)
 3. Install Laravel
   * `composer global require "laravel/installer=~1.1"`
   * *To add the composer executable to the Path environment, so to that the* `laravel` *executable can be found:*
