@@ -63,37 +63,18 @@ export default class DemographicsFields extends BaseSection {
                     onChange={this.handleChange}
                 />
 
-                <div className="row">
-                    <div className="col-md-6">
-                        <DropdownField {...this.props}
-                            label="Gender"
-                            selectValue={this.props.data['q_gender']}
-                            fieldName="data.q_gender"
-                            ref="data.q_gender"
-                            onChange={this.handleChange}>
-                            <option value="">-- select --</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="trans-male">Transgendered Male</option>
-                            <option value="trans-female">Transgendered female</option>
-                        </DropdownField>
-                    </div>
-                    <div className="col-md-6">
-                        <DropdownField {...this.props}
-                            label="Race / Ethnicity"
-                            selectValue={this.props.data['q_race_ethnicity']}
-                            fieldName="data.q_race_ethnicity"
-                            ref="data.q_race_ethnicity"
-                            onChange={this.handleChange}>
-                            <option value="">-- select --</option>
-                            <option value="white">White</option>
-                            <option value="african-american">African American</option>
-                            <option value="asian">Asian</option>
-                            <option value="pacific-islander">Pacific Islander</option>
-                            <option value="other">Other</option>
-                        </DropdownField>
-                    </div>
-                </div>
+                <DropdownField {...this.props}
+                    label="Gender"
+                    selectValue={this.props.data['q_gender']}
+                    fieldName="data.q_gender"
+                    ref="data.q_gender"
+                    onChange={this.handleChange}>
+                    <option value="">-- select --</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="trans-male">Transgendered Male</option>
+                    <option value="trans-female">Transgendered female</option>
+                </DropdownField>
 
                 <DropdownField {...this.props}
                     selectValue={this.props.data['q_tshirt']}
