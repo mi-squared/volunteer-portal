@@ -38,14 +38,16 @@
     "history": "^1.13.1",
     "immutable": "3.7.5",
     "q": "1.4.1",
-    "react": "*",
+    "react": "^0.14.3",
     "react-bootstrap": "^0.28.1",
     "react-bootstrap-datetimepicker": "0.0.20",
     "react-dom": "^0.14.3",
     "react-notification": "2.3.0",
-    "react-redux": "*",
-    "react-router": "*",
-    "redux": "*",
+    "react-redux": "^4.0.0",
+    "react-router": "^1.0.0",
+    "redux": "^3.0.4",
+    "redux-logger": "^2.0.4",
+    "redux-thunk": "^1.0.0",
     "revalidator": "0.3.1"
   }
 }
