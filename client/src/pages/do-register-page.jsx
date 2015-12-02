@@ -21,7 +21,7 @@ export const DoRegisterPage = React.createClass({
                     <h1>Volunteer Application</h1>
                 </div>
 
-                <div className="col-md-12">
+                <div className="col-md-12" id="thank-you">
                     Thank you for registering. You will receive an email notification containing your account information.
                     Please click 'Apply' to proceed to the volunteer application form.
                 </div>

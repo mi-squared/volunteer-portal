@@ -101,8 +101,8 @@ class VolunteeringDetailPage extends React.Component {
                 <hr/>
 
                 <div className="j-page-nav col-md-12">
-                    <Button onClick={this.doContinue} className="btn btn-primary">Continue</Button>
-                    <Button onClick={this.doBack}>Back</Button>
+                    <Button onClick={this.doContinue} id="submit-detail" className="btn btn-primary">Continue</Button>
+                    <Button onClick={this.doBack} id="back-detail">Back</Button>
                 </div>
 
             </div>

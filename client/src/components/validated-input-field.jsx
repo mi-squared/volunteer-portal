@@ -75,6 +75,7 @@ class ValidatedInput extends React.Component {
              onChange={this.handleChange}
              ref={this.props.ref}
              placeholder={this.props.placeholder}
+             id={this.props.id ? this.props.id : this.props.fieldName.replace('data.q_', '').replace('session.', '')}
           />;
 
       var textArea =
@@ -83,6 +84,7 @@ class ValidatedInput extends React.Component {
                  onChange={this.handleChange}
                  ref={this.props.ref}
                  onBlur={this.commitChange}
+                 id={this.props.id ? this.props.id : this.props.fieldName}
           >{this.getValue()}</textarea>;
 
       var toShow = this.props.type == 'textarea' ? textArea : text;

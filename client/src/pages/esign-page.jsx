@@ -77,9 +77,9 @@ class EsignPage extends React.Component {
                 </div>
 
                 <div className="j-page-nav col-md-12">
-                    <Button onClick={this.doBack}>Back</Button>
-                    <Button onClick={this.doContinue} className="btn btn-primary">Accept</Button>
-                    <Button onClick={this.doCancel}>Cancel</Button>
+                    <Button onClick={this.doBack} id="back-esign">Back</Button>
+                    <Button onClick={this.doContinue} id="submit-esign" className="btn btn-primary">Accept</Button>
+                    <Button onClick={this.doCancel} id="cancel-esign">Cancel</Button>
                 </div>
 
             </div>

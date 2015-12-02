@@ -149,10 +149,9 @@ class NewVolunteerPage extends React.Component {
                 />
 
                 <div className="j-page-nav col-md-12">
-                    <Button onClick={this.doRegister} className="btn btn-primary">Create</Button>
+                    <Button onClick={this.doRegister} id="submit" type="submit" className="btn btn-primary">Create</Button>
                     <Button onClick={this.doCancel}>Cancel</Button>
                 </div>
-
             </div>
         );
     }

@@ -128,8 +128,8 @@ class ReturningVolunteerPage extends React.Component {
                 <hr/>
 
                 <div className="j-page-nav col-md-12">
-                    <Button onClick={this.doSignIn} className="btn btn-primary">Log in</Button>
-                    <Button onClick={this.doCancel}>Cancel</Button>
+                    <Button onClick={this.doSignIn} id="submit-login" className="btn btn-primary">Log in</Button>
+                    <Button onClick={this.doCancel} id="cancel-login">Cancel</Button>
                 </div>
 
             </div>
