@@ -14,7 +14,9 @@ class VolunteeringDetailPage extends React.Component {
         this.state = {
             alertVisible: false,
             errorFields: {},
-            errorMessage : ''
+            errorMessage : '',
+            disabled: false,
+            value: "Continue"
         };
 
         this.schema =
@@ -54,6 +56,11 @@ class VolunteeringDetailPage extends React.Component {
 
     doContinue() {
         if ( this.props.doValidate( this.schema ) ) {
+            // disable button on click to prevent multiple clicks
+            this.setState({
+              disabled: true,
+              value: "Please Wait"
+            });
             // save the application if passes validation
             var self = this;
             this.props.saveApplication().then( function() {
@@ -101,7 +108,7 @@ class VolunteeringDetailPage extends React.Component {
                 <hr/>
 
                 <div className="j-page-nav col-md-12">
-                    <Button onClick={this.doContinue} className="btn btn-primary">Continue</Button>
+                    <Button onClick={this.doContinue} className="btn btn-primary" disabled={this.state.disabled}>{this.state.value}</Button>
                     <Button onClick={this.doBack}>Back</Button>
                 </div>
 
