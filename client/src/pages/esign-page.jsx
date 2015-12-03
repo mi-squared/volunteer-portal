@@ -9,6 +9,11 @@ import composePage from './base-page.jsx';
 class EsignPage extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            disabled: false,
+            value: "Accept"
+        };
+
         this.doBack = this.doBack.bind(this);
         this.doCancel = this.doCancel.bind(this);
         this.doContinue = this.doContinue.bind(this);
@@ -33,6 +38,11 @@ class EsignPage extends React.Component {
             value : new Date().getTime()
         });
 
+        // disable button on click to prevent multiple clicks
+        this.setState({
+          disabled: true,
+          value: "Please Wait"
+        });
         var self = this;
         setTimeout( function() {
             self.props.saveApplication().then( function() {
@@ -78,7 +88,7 @@ class EsignPage extends React.Component {
 
                 <div className="j-page-nav col-md-12">
                     <Button onClick={this.doBack}>Back</Button>
-                    <Button onClick={this.doContinue} className="btn btn-primary">Accept</Button>
+                    <Button onClick={this.doContinue} className="btn btn-primary" disabled={this.state.disabled}>{this.state.value}</Button>
                     <Button onClick={this.doCancel}>Cancel</Button>
                 </div>
 

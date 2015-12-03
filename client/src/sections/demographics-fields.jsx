@@ -207,10 +207,10 @@ export default class DemographicsFields extends BaseSection {
                 </QuestionContainer>
 
                 <DropdownField {...this.props}
-                    selectValue={this.props.data['q_cpr_org']}
+                    selectValue={this.props.data['q_ybpth_ref']}
                     label="How did you hear about YBPTH?"
-                    fieldName="data.q_yppth_ref"
-                    ref="data.q_yppth_ref"
+                    fieldName="data.q_ybpth_ref"
+                    ref="data.q_ybpth_ref"
                     onChange={this.handleChange}>
                     <option value="">-- select --</option>
                     <option value="advertisement">Advertisement</option>
@@ -226,12 +226,12 @@ export default class DemographicsFields extends BaseSection {
                 </DropdownField>
 
                 <QuestionContainer {...this.props}
-                    criteria={ {key : 'q_yppth_ref', value : "other" } }>
+                    criteria={ {key : 'q_ybpth_ref', value : "other" } }>
                     <ValidatedInput {...this.props}
                         label=""
-                        value={this.props.data.q_yppth_ref_other}
-                        fieldName="data.q_yppth_ref_other"
-                        ref="data.q_yppth_ref_other"
+                        value={this.props.data.q_ybpth_ref_other}
+                        fieldName="data.q_ybpth_ref_other"
+                        ref="data.q_ybpth_ref_other"
                         onChange={this.handleChange}
                     />
 
