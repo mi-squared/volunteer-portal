@@ -15,7 +15,9 @@ class ReturningVolunteerPage extends React.Component {
             focusElement: "session.f_username",
             alertVisible: false,
             errorFields: {},
-            errorMessage : 'Form error'
+            errorMessage : 'Form error',
+            disabled: false,
+            value: "Log in"
         };
 
         this.schema =
@@ -51,6 +53,10 @@ class ReturningVolunteerPage extends React.Component {
         // validation
         if ( this.props.doValidate( this.schema, this.props.session) ) {
             var self = this;
+            this.setState({
+              disabled: true,
+              value: "Please Wait"
+            });
             login(this.props.session['f_username'], this.props.session['f_password'])
                 .then(
                     function(response) {
@@ -128,7 +134,7 @@ class ReturningVolunteerPage extends React.Component {
                 <hr/>
 
                 <div className="j-page-nav col-md-12">
-                    <Button onClick={this.doSignIn} className="btn btn-primary">Log in</Button>
+                    <Button onClick={this.doSignIn} className="btn btn-primary" disabled={this.state.disabled}>{this.state.value}</Button>
                     <Button onClick={this.doCancel}>Cancel</Button>
                 </div>
 
