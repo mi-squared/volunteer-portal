@@ -31,6 +31,7 @@ export default class StudentFields extends BaseSection {
                             fieldName="data.q_school_level"
                             ref="data.q_school_level"
                             onChange={this.handleChange}>
+                            <option value="">-- select --</option>
                             <option value="highschool">High school</option>
                             <option value="college">College</option>
                             <option value="university">University</option>
