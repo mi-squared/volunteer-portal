@@ -16,7 +16,9 @@ class ChildrenPage extends React.Component {
         this.state = {
             alertVisible: false,
             errorFields: {},
-            errorMessage : ''
+            errorMessage : '',
+            disabled: false,
+            value: "Continue"
         };
 
         this.doBack = this.doBack.bind(this);
@@ -46,6 +48,11 @@ class ChildrenPage extends React.Component {
     }
 
     doContinue() {
+        // disable button on click to prevent multiple clicks
+        this.setState({
+          disabled: true,
+          value: "Please Wait"
+        });
         var self = this;
         this.props.saveApplication().then( function() {
             // then move on to next page
@@ -78,7 +85,7 @@ class ChildrenPage extends React.Component {
                 )}
 
                 <div className="j-page-nav col-md-12">
-                    <Button onClick={this.doContinue} className="btn btn-primary">Continue</Button>
+                    <Button onClick={this.doContinue} className="btn btn-primary" disabled={this.state.disabled}>{this.state.value}</Button>
                     <Button onClick={this.addChild }>Add child</Button>
                     <Button onClick={this.doBack}>Back</Button>
                 </div>
