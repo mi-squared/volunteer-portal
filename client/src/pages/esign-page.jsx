@@ -87,8 +87,8 @@ class EsignPage extends React.Component {
                 </div>
 
                 <div className="j-page-nav col-md-12">
-                    <Button onClick={this.doBack}>Back</Button>
                     <Button onClick={this.doContinue} className="btn btn-primary" disabled={this.state.disabled}>{this.state.value}</Button>
+                    <Button onClick={this.doBack}>Back</Button>
                     <Button onClick={this.doCancel}>Cancel</Button>
                 </div>
 
