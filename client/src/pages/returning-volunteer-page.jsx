@@ -52,12 +52,12 @@ class ReturningVolunteerPage extends React.Component {
     doSignIn() {
         // validation
         if ( this.props.doValidate( this.schema, this.props.session) ) {
-            var self = this;
             // disable button on click to prevent multiple clicks
             this.setState({
               disabled: true,
               value: "Please Wait"
             });
+            var self = this;
             login(this.props.session['f_username'], this.props.session['f_password'])
                 .then(
                     function(response) {
