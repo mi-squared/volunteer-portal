@@ -125,7 +125,7 @@ describe('NewVolunteerPage', () => {
           (ids) => {
             ids.forEach((id) => {
               if (id === 'email') {
-                emailPassword = id + randNum100() * randNum100() + randNum100() + '@gmail.com';
+                emailPassword = id + randNum100() * randNum100() * randNum100() + '@gmail.com';
                 clientApplicationObj[id] = emailPassword;
                 client.setValue(`#${id}`, emailPassword)
               } else if (id === 'password') {
@@ -221,18 +221,33 @@ describe('NewVolunteerPage', () => {
       )
       .getAttribute('input[value="true"]', "id").then((ids) => {
         ids.forEach((id) => {
+          // console.log(id)
           client.click(`#${id}`)
         })
-      }) /////////////// user deatil page
+      })
+      .waitUntil(() => {
+        return client.getValue('#available_postactivity_centers_checkbox').then((value) => {
+          // console.log(value)
+          return value === 'true'
+        })
+      }, 10000)
+      // .getValue("input[type='checkbox']").then((value) => {
+      //   console.log(value)
+      // })
       .getAttribute('input:not([type="radio"]):not([type="search"]):not([type="hidden"]):not([type="checkbox"])', 'id').then(
         (ids) => {
           ids.forEach((id) => {
-            console.log(id)
+            // console.log(id)
             if (id.match(/expiration/)) {
               let date = '12122020';
-              clientApplicationObj[id] = date;
-              client.moveToObject(`#${id}`, 0, 0) //dob value gets scrambled without moveToObject and date validation prevents form from submitting
-              .setValue(`#${id}`, date)
+              if (id.match(/license/)) {
+                // clientApplicationObj["licensed_expiration_date"] = date; // this field is randomly called licensed_expiration_date on the server
+              } else {
+                clientApplicationObj[id] = date;
+              }
+              client.moveToObject(`#${id}`, 0, 0) //date value gets scrambled without moveToObject and date validation prevents form from submitting
+              .addValue(`#${id}`, date)
+
             } else {
               clientApplicationObj[id] = id + randNum100();
               client.setValue(`#${id}`, clientApplicationObj[id])
@@ -245,39 +260,45 @@ describe('NewVolunteerPage', () => {
           ids.forEach((id) => {
             client.selectByIndex(`#${id}`, 1).then(() => {
               client.getValue(`#${id}`).then((value) => {
-                clientApplicationObj[id] = value
+                if (Array.isArray(value)) {
+                  clientApplicationObj[id] = value.pop()
+                } else {
+                  clientApplicationObj[id] = value
+                }
               })
             })
           })
         }
       )
-      .waitForValue('select', 10000)
-      // .click('#submit-detail')
-      // .waitUntil(() => {
-      //   return client.getUrl().then(
-      //     (url) => {return url.match(/^http:\/\/localhost:8080\/\#\/esign.+/)}
-      //   )
-      // }, 10000)
-      // .click('#submit-esign')
-      // .waitUntil(() => {
-      //   return client.getUrl().then(
-      //     (url) => {return url.match(/^http:\/\/localhost:8080\/\#\/done-application.+/)}
-      //   )
-      // }, 10000)
-      // .then(() => {
-      //   let options = {
-      //     host: 'pth.mi-squared.com',
-      //     port: '80',
-      //     path: '/api/v1/applications/' + applicationID,
-      //     method: 'GET',
-      //     headers: {
-      //         'Authorization':'Bearer ' + token,
-      //         'Content-Type':'application/json'
-      //     }
-      //   };
-      //   http.request(options, getCallback).end();
-      //   console.log("client OBJ : " + JSON.stringify(clientApplicationObj))
-      // }).call(done)
+      .waitForValue('#available_postactivity_centers', 10000)
+      .waitForValue('#license_expiration', 10000)
+      .waitForValue('#cpr_expiration', 10000)
+      .click('#submit-detail')
+      .waitUntil(() => {
+        return client.getUrl().then(
+          (url) => {return url.match(/^http:\/\/localhost:8080\/\#\/esign.+/)}
+        )
+      }, 10000)
+      .click('#submit-esign')
+      .waitUntil(() => {
+        return client.getUrl().then(
+          (url) => {return url.match(/^http:\/\/localhost:8080\/\#\/done-application.+/)}
+        )
+      }, 10000)
+      .then(() => {
+        let options = {
+          host: 'pth.mi-squared.com',
+          port: '80',
+          path: '/api/v1/applications/' + applicationID,
+          method: 'GET',
+          headers: {
+              'Authorization':'Bearer ' + token,
+              'Content-Type':'application/json'
+          }
+        };
+        http.request(options, getCallback).end();
+        console.log("client OBJ : " + JSON.stringify(clientApplicationObj))
+      }).call(done)
 
     let postCallback = (response) => {
       let str = '';
