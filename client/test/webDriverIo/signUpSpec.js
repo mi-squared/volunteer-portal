@@ -115,7 +115,7 @@ describe('NewVolunteerPage', () => {
         clientApplicationObj = {},
         serverApplicationObj = {},
         token,
-        id;
+        applicationID;
 
     client
         .init()
@@ -196,17 +196,16 @@ describe('NewVolunteerPage', () => {
       )
       .click('.select2-results__option--highlighted')
       .waitForValue('input', 10000)
-      .getAttribute('input[type="radio"]:checked', 'name').then((names) => {
-        names.forEach((name) => {
-          client.getValue(`input[name=${name}]`).then((value) => {
-            console.log('this block doesn\'t fire')
-            clientApplicationObj[name.replace('data.q_', "")] = value;
-          })
-        })
-      }
-      )
-      // .getValue('input[checked=true]').then(
-      //   (values) => values.forEach((value) => {clientApplicationObj})
+      // .getAttribute('input[type="radio"]:checked', 'id').then(
+      //   (ids) => {
+      //     ids.forEach((id) => {
+      //       client.getValue(`#${id}`).then((value) => {
+      //         let groomedId = id.replace('_no', "").replace('_yes', "");      // server is receiving "" instead of false
+      //         console.log(groomedId, " -- " + value)
+      //         clientApplicationObj[groomedId] = value;
+      //       })
+      //     })
+      //   }
       // )
       .click('#submit-main')
       .waitUntil(() => {
@@ -217,35 +216,68 @@ describe('NewVolunteerPage', () => {
       .getValue('#application-id')
       .then(
         (appId) => {
-          id = appId;
+          applicationID = appId;
         }
       )
-      .click('#submit-detail')
-      .waitUntil(() => {
-        return client.getUrl().then(
-          (url) => {return url.match(/^http:\/\/localhost:8080\/\#\/esign.+/)}
-        )
-      }, 10000)
-      .click('#submit-esign')
-      .waitUntil(() => {
-        return client.getUrl().then(
-          (url) => {return url.match(/^http:\/\/localhost:8080\/\#\/done-application.+/)}
-        )
-      }, 10000)
-      .then(() => {
-        let options = {
-          host: 'pth.mi-squared.com',
-          port: '80',
-          path: '/api/v1/applications/' + id,
-          method: 'GET',
-          headers: {
-              'Authorization':'Bearer ' + token,
-              'Content-Type':'application/json'
-          }
-        };
-        http.request(options, getCallback).end();
-        console.log("client OBJ : " + JSON.stringify(clientApplicationObj))
-      }).call(done)
+      .getAttribute('input[value="true"]', "id").then((ids) => {
+        ids.forEach((id) => {
+          client.click(`#${id}`)
+        })
+      }) /////////////// user deatil page
+      .getAttribute('input:not([type="radio"]):not([type="search"]):not([type="hidden"]):not([type="checkbox"])', 'id').then(
+        (ids) => {
+          ids.forEach((id) => {
+            console.log(id)
+            if (id.match(/expiration/)) {
+              let date = '12122020';
+              clientApplicationObj[id] = date;
+              client.moveToObject(`#${id}`, 0, 0) //dob value gets scrambled without moveToObject and date validation prevents form from submitting
+              .setValue(`#${id}`, date)
+            } else {
+              clientApplicationObj[id] = id + randNum100();
+              client.setValue(`#${id}`, clientApplicationObj[id])
+            }
+          })
+        }
+      )
+      .getAttribute('select', 'id').then(
+        (ids) => {
+          ids.forEach((id) => {
+            client.selectByIndex(`#${id}`, 1).then(() => {
+              client.getValue(`#${id}`).then((value) => {
+                clientApplicationObj[id] = value
+              })
+            })
+          })
+        }
+      )
+      .waitForValue('select', 10000)
+      // .click('#submit-detail')
+      // .waitUntil(() => {
+      //   return client.getUrl().then(
+      //     (url) => {return url.match(/^http:\/\/localhost:8080\/\#\/esign.+/)}
+      //   )
+      // }, 10000)
+      // .click('#submit-esign')
+      // .waitUntil(() => {
+      //   return client.getUrl().then(
+      //     (url) => {return url.match(/^http:\/\/localhost:8080\/\#\/done-application.+/)}
+      //   )
+      // }, 10000)
+      // .then(() => {
+      //   let options = {
+      //     host: 'pth.mi-squared.com',
+      //     port: '80',
+      //     path: '/api/v1/applications/' + applicationID,
+      //     method: 'GET',
+      //     headers: {
+      //         'Authorization':'Bearer ' + token,
+      //         'Content-Type':'application/json'
+      //     }
+      //   };
+      //   http.request(options, getCallback).end();
+      //   console.log("client OBJ : " + JSON.stringify(clientApplicationObj))
+      // }).call(done)
 
     let postCallback = (response) => {
       let str = '';
@@ -265,9 +297,9 @@ describe('NewVolunteerPage', () => {
       });
       response.on('end', function () {
         serverApplicationObj = JSON.parse(str)
-        // console.log('/////////////////////////////')
-        // console.log(str);
-        // console.log('/////////////////////////////')
+        console.log('/////////////////////////////')
+        console.log(str);
+        console.log('/////////////////////////////')
         comparePayloads(serverApplicationObj, clientApplicationObj)
       });
     }

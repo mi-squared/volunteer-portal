@@ -153,6 +153,7 @@ export default class AvailabilityField extends React.Component {
                         value="true"
                         checked={this.state.available}
                         onChange={this.changeAvailable.bind(this)}
+                        id={this.props.fieldName && this.props.fieldName.replace('data.q_', '')}
                     />
                     {this.props.label}
                 </label>
