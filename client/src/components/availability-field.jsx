@@ -60,7 +60,7 @@ export default class AvailabilityField extends React.Component {
 
         this.state = state;
 
-        console.log(props.fieldName, ":", props.value, ":", this.state);
+        // console.log(props.fieldName, ":", props.value, ":", this.state);
     }
 
     //componentWillMount() {
@@ -119,7 +119,7 @@ export default class AvailabilityField extends React.Component {
                 }
             }
 
-            console.log(this.props.fieldName, fieldValue);
+            // console.log(this.props.fieldName, fieldValue);
 
             this.props.onChange(this.props.fieldName, fieldValue);
         }

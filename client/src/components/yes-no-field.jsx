@@ -26,6 +26,7 @@ export default React.createClass({
     },
 
     render: function() {
+      let groomedId = this.props.fieldName.replace('data.q_', "")
         return (
             <div  className="form-group">
                 <label className="control-label">
@@ -36,12 +37,24 @@ export default React.createClass({
                     <label className="radio-inline">
                         <input onChange={this.commitChange}
                             checked={this.props.value === "true"}
-                            type="radio" name={this.props.fieldName} ref={this.props.fieldName} value="true" />Yes
+                            type="radio"
+                            name={this.props.fieldName}
+                            ref={this.props.fieldName}
+                            value="true"
+                            id={groomedId + "_yes"}
+                            />
+                          Yes
                     </label>
                     <label className="radio-inline">
                         <input onChange={this.commitChange}
                             checked={this.props.value !== "true"}
-                            type="radio" name={this.props.fieldName} ref={this.props.fieldName} value="false" />No
+                            type="radio"
+                            name={this.props.fieldName}
+                            ref={this.props.fieldName}
+                            value="false"
+                            id={groomedId + "_no"}
+                             />
+                          No
                     </label>
                 </div>
             </div>

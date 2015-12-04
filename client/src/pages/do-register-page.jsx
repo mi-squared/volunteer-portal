@@ -27,7 +27,7 @@ export const DoRegisterPage = React.createClass({
                 </div>
 
                 <div className="j-page-nav col-md-12">
-                    <Button onClick={this.doContinue} className="btn btn-primary">Apply</Button>
+                    <Button onClick={this.doContinue} id="submit-register" className="btn btn-primary">Apply</Button>
                 </div>
 
             </div>

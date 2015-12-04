@@ -10,7 +10,7 @@ export default React.createClass({
             <DropdownField
                 required={this.props.required}
                 label={this.props.label}
-                selectValue={this.props.data[this.props.fieldName] || "USA"}
+                selectValue={this.props.data[this.props.fieldName.replace('data.', '')] || "USA"}
                 {...this.props}
                 field={this.props.fieldName}
                 ref={this.props.ref}

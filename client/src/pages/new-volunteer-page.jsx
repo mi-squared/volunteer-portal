@@ -100,7 +100,6 @@ class NewVolunteerPage extends React.Component {
                 'email': this.props.data['q_email'],
                 'password' : this.props.data['q_password']
             };
-
             register(data).then(
                 (response) => {
                     self.props.login({
