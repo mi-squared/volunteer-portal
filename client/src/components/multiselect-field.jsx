@@ -57,6 +57,9 @@ class MultiselectField extends React.Component {
       targetField.on("select2:select", function (e) {
           self.commitChange(e);
       });
+      targetField.on("select2:unselect", function (e) {
+          self.commitChange(e);
+      });
   }
 
   render() {
