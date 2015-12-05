@@ -33,24 +33,24 @@ class MultiselectField extends React.Component {
       var targetField = $(ReactDOM.findDOMNode(this)).find("select");
       var found = false;
       targetField.select2({
-        tags: true,
+        // tags: true,
         placeholder : this.props.placeHolder,
-        createTag: function(tag) {
-            // check if the option is already there
-            targetField.find("option").each(function() {
-                if ($.trim(tag.term).toUpperCase() == $.trim($(this).text()).toUpperCase()) {
-                    found = true;
-                }
-            });
-            // show the suggestion only if a match was not found
-            if (!found) {
-                  return {
-                  id: tag.term,
-                  text: tag.term,
-                  isNew: true
-              };
-            }
-        }
+        // createTag: function(tag) {
+        //     // check if the option is already there
+        //     targetField.find("option").each(function() {
+        //         if ($.trim(tag.term).toUpperCase() == $.trim($(this).text()).toUpperCase()) {
+        //             found = true;
+        //         }
+        //     });
+        //     // show the suggestion only if a match was not found
+        //     if (!found) {
+        //           return {
+        //           id: tag.term,
+        //           text: tag.term,
+        //           isNew: true
+        //       };
+        //     }
+        // }
       });
 
       var self = this;
