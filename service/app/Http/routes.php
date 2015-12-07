@@ -125,6 +125,11 @@ $app->get(
     'FormListsController@getFormList'
 );
 
+$app->get(
+    '/api/v1/form-lists/{formListID}/options',
+    'FormListsController@getFormListOptions'
+);
+
 
 ///////////////////////////////////////////////////////////
 // Applications

@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
       'order'
     ];
 
-    public function list()
+    public function formList()
     {
         return $this->belongsTo('FormList');
     }

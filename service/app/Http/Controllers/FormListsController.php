@@ -7,9 +7,14 @@ use App\Option;
 
 class FormListsController extends BaseController
 {
-  public function getFormList($formListId) {
-    $formList = FormList::where('id', '=', $formListId);
+  public function getFormList($formListID) {
+    $formList = FormList::find($formListID);
     return response()->json($formList);
+  }
+
+  public function getFormListOptions($formListID) {
+    $options = Option::where('form_list_id', '=', $formListID)->get();
+    return response()->json($options);
   }
 
 
