@@ -96,6 +96,18 @@ export default class DemographicsFields extends BaseSection {
                     onChange={this.handleChange}
                 />
 
+                <QuestionContainer {...this.props}
+                    criteria={ {key : 'q_languages', value : "Other" } }>
+                    <ValidatedInput {...this.props}
+                        label=""
+                        value={this.props.data.q_languages_other}
+                        fieldName="data.q_languages_other"
+                        ref="data.q_languages_other"
+                        onChange={this.handleChange}
+                    />
+
+                </QuestionContainer>
+
                 <YesNoField
                     {...this.props}
                     fieldName="data.q_is_adventist"
@@ -201,6 +213,37 @@ export default class DemographicsFields extends BaseSection {
                         fieldName="data.q_volunteer_organization"
                         ref="data.q_volunteer_organization"
                         value={this.props.data.q_volunteer_organization}
+                        onChange={this.handleChange}
+                    />
+
+                </QuestionContainer>
+
+                <DropdownField {...this.props}
+                    selectValue={this.props.data['q_ybpth_ref']}
+                    label="How did you hear about YBPTH?"
+                    fieldName="data.q_ybpth_ref"
+                    ref="data.q_ybpth_ref"
+                    onChange={this.handleChange}>
+                    <option value="">-- select --</option>
+                    <option value="advertisement">Advertisement</option>
+                    <option value="email-newsletter">Email/Newsletter</option>
+                    <option value="facebook">Facebook</option>
+                    <option value="family-friend">Family or Friend</option>
+                    <option value="newspaper">Newspaper Story</option>
+                    <option value="tv">TV</option>
+                    <option value="twitter">Twitter</option>
+                    <option value="website-search-engine">Website/Search Engine</option>
+                    <option value="youtube">YouTube</option>
+                    <option value="other">Other</option>
+                </DropdownField>
+
+                <QuestionContainer {...this.props}
+                    criteria={ {key : 'q_ybpth_ref', value : "other" } }>
+                    <ValidatedInput {...this.props}
+                        label=""
+                        value={this.props.data.q_ybpth_ref_other}
+                        fieldName="data.q_ybpth_ref_other"
+                        ref="data.q_ybpth_ref_other"
                         onChange={this.handleChange}
                     />
 

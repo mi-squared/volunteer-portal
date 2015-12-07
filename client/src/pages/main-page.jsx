@@ -16,7 +16,9 @@ class MainPage extends React.Component {
             focusElement: "data.q_first_name",
             alertVisible: false,
             errorFields: {},
-            errorMessage : ''
+            errorMessage : '',
+            disabled: false,
+            value: "Continue"
         };
 
         this.schema =
@@ -90,6 +92,11 @@ class MainPage extends React.Component {
 
     doContinue() {
         if ( this.props.doValidate( this.schema ) ) {
+            // disable button on click to prevent multiple clicks
+            this.setState({
+              disabled: true,
+              value: "Please Wait"
+            });
             // save the application if passes validation
             var self = this;
             this.props.saveApplication().then( function() {
@@ -119,7 +126,8 @@ class MainPage extends React.Component {
                 />
 
                 <div className="j-page-nav col-md-12">
-                    <Button onClick={this.doContinue} id="submit-main" className="btn btn-primary">Continue</Button>
+                    <Button onClick={this.doContinue} id="submit-main" className="btn btn-primary" disabled={this.state.disabled}>{this.state.value}</Button>
+
                 </div>
             </div>
         );

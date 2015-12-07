@@ -15,7 +15,9 @@ class NewVolunteerPage extends React.Component {
             focusElement: "data.q_first_name",
             alertVisible: false,
             errorFields: {},
-            errorMessage : 'Form error'
+            errorMessage : 'Form error',
+            disabled: false,
+            value: "Create"
         };
 
         this.schema = {
@@ -100,6 +102,12 @@ class NewVolunteerPage extends React.Component {
                 'email': this.props.data['q_email'],
                 'password' : this.props.data['q_password']
             };
+            // disable button on click to prevent multiple clicks
+            this.setState({
+              disabled: true,
+              value: "Please Wait"
+            });
+
             register(data).then(
                 (response) => {
                     self.props.login({
@@ -148,7 +156,9 @@ class NewVolunteerPage extends React.Component {
                 />
 
                 <div className="j-page-nav col-md-12">
-                    <Button onClick={this.doRegister} id="submit" type="submit" className="btn btn-primary">Create</Button>
+
+                    <Button onClick={this.doRegister} id="submit" className="btn btn-primary" disabled={this.state.disabled}>{this.state.value}</Button>
+
                     <Button onClick={this.doCancel}>Cancel</Button>
                 </div>
             </div>

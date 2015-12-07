@@ -21,7 +21,7 @@ export default React.createClass({
                     show = true;
                 } else if (!value && !this.props.data[key] ){
                     show = true;
-                } else if ( this.props.data[key] == value) {
+                } else if ( this.props.data[key] && this.props.data[key].match(value)) {
                     show = true;
                 }
             } else if ( typeof criteria === 'function' ) {
