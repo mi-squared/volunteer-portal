@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 
     public function list()
     {
-        return $this->belongsTo('List');
+        return $this->belongsTo('FormList');
     }
 
   }
