@@ -36,6 +36,7 @@ export default React.createClass({
                         ref={this.props.ref}
                         fieldName={this.props.fieldName}
                         onChange={this.commitChange}
+                        id={this.props.id ? this.props.id : this.props.fieldName.replace('data.q_', '').replace('session.', '')}
                         placeholder={this.props.placeHolder}>
                         {this.props.children.map(entry =>
                             <option key={entry.props.value} value={entry.props.value}>{entry.props.children}</option>

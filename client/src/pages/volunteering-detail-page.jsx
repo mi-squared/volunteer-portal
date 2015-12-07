@@ -105,11 +105,13 @@ class VolunteeringDetailPage extends React.Component {
                     errorFields={this.props.errorFields}
                 />
 
+              <input id="application-id" type="hidden" value={this.props.data.id && this.props.data.id}/>
+
                 <hr/>
 
                 <div className="j-page-nav col-md-12">
-                    <Button onClick={this.doContinue} className="btn btn-primary" disabled={this.state.disabled}>{this.state.value}</Button>
-                    <Button onClick={this.doBack}>Back</Button>
+                    <Button onClick={this.doContinue} id="submit-detail" className="btn btn-primary" disabled={this.state.disabled}>{this.state.value}</Button>
+                    <Button onClick={this.doBack} id="back-detail">Back</Button>
                 </div>
 
             </div>

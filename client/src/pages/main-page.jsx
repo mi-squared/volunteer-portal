@@ -126,7 +126,8 @@ class MainPage extends React.Component {
                 />
 
                 <div className="j-page-nav col-md-12">
-                    <Button onClick={this.doContinue} className="btn btn-primary" disabled={this.state.disabled}>{this.state.value}</Button>
+                    <Button onClick={this.doContinue} id="submit-main" className="btn btn-primary" disabled={this.state.disabled}>{this.state.value}</Button>
+
                 </div>
             </div>
         );

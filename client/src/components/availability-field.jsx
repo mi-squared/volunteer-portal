@@ -9,7 +9,9 @@ class DayLength extends React.Component {
         return (
             <select
                 value={this.props.value}
-                onChange={this.props.onChange}>
+                onChange={this.props.onChange}
+                id={this.props.id}
+                >
                 <option value="full">Full day</option>
                 <option value="half">Half day</option>
             </select>
@@ -22,7 +24,9 @@ class DayHalf extends React.Component {
         return (
             <select
                 value={this.props.value}
-                onChange={this.props.onChange}>
+                onChange={this.props.onChange}
+                id={this.props.id}
+                >
                 <option value="am">AM</option>
                 <option value="pm">PM</option>
             </select>
@@ -60,7 +64,7 @@ export default class AvailabilityField extends React.Component {
 
         this.state = state;
 
-        console.log(props.fieldName, ":", props.value, ":", this.state);
+        // console.log(props.fieldName, ":", props.value, ":", this.state);
     }
 
     //componentWillMount() {
@@ -119,7 +123,7 @@ export default class AvailabilityField extends React.Component {
                 }
             }
 
-            console.log(this.props.fieldName, fieldValue);
+            // console.log(this.props.fieldName, fieldValue);
 
             this.props.onChange(this.props.fieldName, fieldValue);
         }
@@ -127,11 +131,13 @@ export default class AvailabilityField extends React.Component {
 
     render() {
         var dayHalf;
+        let groomedId = this.props.fieldName && this.props.fieldName.replace('data.q_', '');
         if ( this.state.available && this.state.dayLength === 'half') {
             dayHalf = <DayHalf
                 onChange={this.changeDayHalf.bind(this)}
                 value={this.state.dayHalf}
                 ref="dayHalf"
+                id={groomedId}
             />;
         }
 
@@ -141,6 +147,7 @@ export default class AvailabilityField extends React.Component {
                 onChange={this.changeDayLength.bind(this)}
                 value={this.state.dayLength}
                 ref="dayLength"
+                id={groomedId}
             />;
         }
 
@@ -153,6 +160,7 @@ export default class AvailabilityField extends React.Component {
                         value="true"
                         checked={this.state.available}
                         onChange={this.changeAvailable.bind(this)}
+                        id={groomedId + "_checkbox"}
                     />
                     {this.props.label}
                 </label>
