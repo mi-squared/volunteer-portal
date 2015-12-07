@@ -1,6 +1,6 @@
 var webdriverio = require('webdriverio');
-var options = { desiredCapabilities: { browserName: 'chrome' } };
-var client = webdriverio.remote(options);
+// var options = { desiredCapabilities: { browserName: 'chrome' } };
+var client = webdriverio.remote();
 var chai = require('chai');
 var assert = chai.assert;
 
