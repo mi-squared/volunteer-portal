@@ -198,8 +198,8 @@ describe('NewVolunteerPage', () => {
       .waitForValue('#available_postactivity_centers', 10000)
       .setValue('#cpr_expiration', '12122020')
       .waitForValue('#cpr_expiration', 10000)
-      .setValue('#license_expiration', '12122020')
-      .waitForValue('#license_expiration', 10000)
+      .setValue('#licensed_expiration_date', '12122020')
+      .waitForValue('#licensed_expiration_date', 10000)
       .click('#submit-detail')
       .waitUntil(() => {
         return client.getUrl().then(
@@ -256,7 +256,7 @@ describe('NewVolunteerPage', () => {
 
     let comparePayloads = (serverObj, clientObj) => {
       Object.keys(clientObj).forEach((key) => {
-          if (key !== 'medical_npi' && key !== 'medical_dea' && key !== 'license_expiration' && key !== 'ybpth_ref') { // BUG** these aren't getting returned from the server
+          if (key !== 'medical_npi' && key !== 'medical_dea' && key !== 'licensed_expiration_date' && key !== 'ybpth_ref') { // BUG** these aren't getting returned from the server
         console.log(`key ${key} client ${clientObj[key]} server ${serverObj['q_' + key]}`)
         assert.strictEqual(clientObj[key], serverObj['q_' + key].replace(/\//g, "")) // date mask adds "/" between date values
         }
