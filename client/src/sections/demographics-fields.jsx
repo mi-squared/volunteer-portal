@@ -96,6 +96,18 @@ export default class DemographicsFields extends BaseSection {
                     onChange={this.handleChange}
                 />
 
+                <QuestionContainer {...this.props}
+                    criteria={ {key : 'q_languages', value : "Other" } }>
+                    <ValidatedInput {...this.props}
+                        label=""
+                        value={this.props.data.q_languages_other}
+                        fieldName="data.q_languages_other"
+                        ref="data.q_languages_other"
+                        onChange={this.handleChange}
+                    />
+
+                </QuestionContainer>
+
                 <YesNoField
                     {...this.props}
                     fieldName="data.q_is_adventist"

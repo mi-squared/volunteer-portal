@@ -47,6 +47,7 @@ export default React.createClass({
                     <option>Mon-khmer (cambodian)</option>
                     <option>Navaho</option>
                     <option>Norwegian</option>
+                    <option>Other</option>
                     <option>Panjabi</option>
                     <option>Persian</option>
                     <option>Pennsylvania Dutch</option>
