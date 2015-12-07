@@ -12,9 +12,19 @@ class FormListsController extends BaseController
     return response()->json($formList);
   }
 
-  public function getFormListOptions($formListID) {
+  public function getOptions($formListID) {
     $options = Option::where('form_list_id', '=', $formListID)->get();
     return response()->json($options);
+  }
+
+  public function getFormListsOptions() {
+    $formLists = FormList::all();
+    $formListsOptions = [];
+    foreach ($formLists as $formList) {
+      $id = $formList->id;
+      $formListsOptions[$id] = Option::where('form_list_id', '=', $id)->get();
+    }
+    return response()->json($formListsOptions);
   }
 
 
