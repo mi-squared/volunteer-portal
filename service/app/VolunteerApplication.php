@@ -56,7 +56,7 @@ class VolunteerApplication extends Model
         "q_school_studied_area",
         "q_school_sponsor",
 
-        //referral
+        // referral
         "q_ybpth_ref",
         "q_ybpth_ref_other",
 
