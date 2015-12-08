@@ -43,6 +43,12 @@ class FormListsSeeder extends Seeder {
         FormList::create( [
             'name' => 'medical_specialties'
         ] );
+        FormList::create( [
+            'name' => 'child_age'
+        ] );
+        FormList::create( [
+            'name' => 'gender'
+        ] );
 
     }
 }
