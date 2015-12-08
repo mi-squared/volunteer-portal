@@ -120,6 +120,21 @@ $app->post(
     'AccountsController@createAccount'
 );
 
+$app->get(
+    '/api/v1/form-lists/{formListID}',
+    'FormListsController@getFormList'
+);
+
+$app->get(
+    '/api/v1/form-lists/{formListID}/options',
+    'FormListsController@getOptions'
+);
+
+$app->get(
+    '/api/v1/form-lists',
+    'FormListsController@getFormListsOptions'
+);
+
 
 ///////////////////////////////////////////////////////////
 // Applications
