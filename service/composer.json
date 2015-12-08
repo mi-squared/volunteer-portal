@@ -9,7 +9,8 @@
         "laravel/lumen-framework": "5.1.*",
         "vlucas/phpdotenv": "~1.0",
         "tymon/jwt-auth": "0.5.*",
-        "illuminate/routing": "^5.1"
+        "illuminate/routing": "^5.1",
+        "aws/aws-sdk-php": "2.*"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
