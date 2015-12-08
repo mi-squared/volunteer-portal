@@ -1,3 +1,4 @@
 node_modules
 service/.env
 vendor
+service/npm-debug.log
