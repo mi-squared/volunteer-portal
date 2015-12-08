@@ -60,6 +60,6 @@ export function loadApplication( state, applicationSpec ) {
 }
 
 export function getServiceBaseURL() {
-    // return 'http://pth.mi-squared.com';
-    return 'http://localhost:7771';
+    return 'http://pth.mi-squared.com';
+    //return 'http://localhost:7771';
 }
