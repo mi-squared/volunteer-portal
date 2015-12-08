@@ -55,6 +55,10 @@ class VolunteerApplication extends Model
         "q_school_studied_area",
         "q_school_sponsor",
 
+        //referral
+        "q_ybpth_ref",
+        "q_ybpth_ref_other",
+
         // volunteer
         "q_volunteer_organization_member",
         "q_volunteer_organization",
@@ -75,6 +79,8 @@ class VolunteerApplication extends Model
         "q_is_medical_professional",
         "q_medical_specialties",
         "q_medical_subspecialties",
+        "q_medical_npi",
+        "q_medical_dea",
 
         // legal
         "q_is_legal_professional",

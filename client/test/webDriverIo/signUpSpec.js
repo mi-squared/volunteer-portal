@@ -8,6 +8,10 @@ import querystring from "querystring";
 
 const regUrl = "http://localhost:8080/#/new-volunteer";
 const loginUrl = "http://localhost:8080/#/returning-volunteer";
+const prodHost = 'pth.mi-squared.com';
+const prodPort = '80';
+const devHost = 'localhost';
+const devPort = '7771';
 
 let randNum100 = () => {
   return Math.floor(Math.random() * 100)
@@ -87,8 +91,8 @@ describe('NewVolunteerPage', () => {
               'password' : emailPassword
             });
             let options = {
-              host: 'pth.mi-squared.com',
-              port: '80',
+              host: devHost,
+              port: devPort,
               path: '/api/v1/accounts/login',
               method: 'POST',
               headers: {
@@ -198,8 +202,8 @@ describe('NewVolunteerPage', () => {
       .waitForValue('#available_postactivity_centers', 10000)
       .setValue('#cpr_expiration', '12122020')
       .waitForValue('#cpr_expiration', 10000)
-      .setValue('#license_expiration', '12122020')
-      .waitForValue('#license_expiration', 10000)
+      .setValue('#licensed_expiration_date', '12122020')
+      .waitForValue('#licensed_expiration_date', 10000)
       .click('#submit-detail')
       .waitUntil(() => {
         return client.getUrl().then(
@@ -214,8 +218,8 @@ describe('NewVolunteerPage', () => {
       }, 10000)
       .then(() => {
         let options = {
-          host: 'pth.mi-squared.com',
-          port: '80',
+          host: devHost,
+          port: devPort,
           path: '/api/v1/applications/' + applicationID,
           method: 'GET',
           headers: {
@@ -247,19 +251,19 @@ describe('NewVolunteerPage', () => {
       });
       response.on('end', function () {
         serverApplicationObj = JSON.parse(str)
-        // console.log('/////////////////////////////')
-        // console.log(str);
-        // console.log('/////////////////////////////')
+        console.log('/////////////////////////////')
+        console.log(str);
+        console.log('/////////////////////////////')
         comparePayloads(serverApplicationObj, clientApplicationObj)
       });
     }
 
     let comparePayloads = (serverObj, clientObj) => {
       Object.keys(clientObj).forEach((key) => {
-          if (key !== 'medical_npi' && key !== 'medical_dea' && key !== 'license_expiration' && key !== 'ybpth_ref') { // BUG** these aren't getting returned from the server
+          // if (key !== 'medical_npi' && key !== 'medical_dea' && key !== 'licensed_expiration_date' && key !== 'ybpth_ref') { // BUG** these aren't getting returned from the server
         console.log(`key ${key} client ${clientObj[key]} server ${serverObj['q_' + key]}`)
         assert.strictEqual(clientObj[key], serverObj['q_' + key].replace(/\//g, "")) // date mask adds "/" between date values
-        }
+        // }
       })
     }
 

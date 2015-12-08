@@ -35,7 +35,7 @@ class VolunteeringDetailPage extends React.Component {
                     required: () => this.props.data['q_volunteering_in_licensed_area'] == 'true',
                     allowEmpty: () => this.props.data['q_volunteering_in_licensed_area'] !== 'true'
                 },
-                q_license_expiration: {
+                q_licensed_expiration_date: {
                     type: 'string',
                     pattern: /^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$/,
                     required: () => this.props.data['q_volunteering_in_licensed_area'] == 'true',

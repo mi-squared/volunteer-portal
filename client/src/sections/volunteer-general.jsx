@@ -71,7 +71,7 @@ export default class VolunteerGeneral extends BaseSection {
                         'data.q_licensed_discipline',
                         'data.q_licensed_discipline_other',
                         'data.q_licensed_state',
-                        'data.q_license_expiration',
+                        'data.q_licensed_expiration_date',
                         'data.q_licensed_number',
                     ] } }
                 />
