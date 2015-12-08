@@ -1,6 +1,5 @@
 import Q from 'q/q.js';
 import {getServiceBaseURL}  from './core.js';
-import "isomorphic-fetch";
 
 
 
@@ -68,7 +67,7 @@ export function register(data) {
     $.ajax({
         type: "POST",
         url: getServiceBaseURL() + '/api/v1/accounts',
-        data: data, 
+        data: data,
         success: function(response) {
             // successfull registration; try logging in
             login(data.username, data.password)

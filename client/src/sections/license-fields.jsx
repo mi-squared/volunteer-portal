@@ -93,9 +93,9 @@ export default class LicenseFields extends BaseSection {
                         <ValidatedInput
                             {...this.props}
                             label="Expiration date of license"
-                            value={this.props.data.q_license_expiration}
-                            fieldName="data.q_license_expiration"
-                            ref="data.q_license_expiration"
+                            value={this.props.data.q_licensed_expiration_date}
+                            fieldName="data.q_licensed_expiration_date"
+                            ref="data.q_licensed_expiration_date"
                             placeholder="mm/dd/yyyy"
                             mask="99/99/9999"
                             onChange={this.handleChange}
