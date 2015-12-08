@@ -10,6 +10,7 @@ class DatabaseSeeder extends Seeder {
         Model::unguard();
 
         $this->call( FormListsSeeder::class );
+        $this->call( OptionsSeeder::class );
 
         Model::reguard();
 
