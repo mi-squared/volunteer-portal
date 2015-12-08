@@ -49,6 +49,15 @@ class FormListsSeeder extends Seeder {
         FormList::create( [
             'name' => 'gender'
         ] );
+        FormList::create( [
+            'name' => 'school_level'
+        ] );
+        FormList::create( [
+            'name' => 'avaiable_full_half'
+        ] );
+        FormList::create( [
+            'name' => 'avaiable_am_pm'
+        ] );
 
     }
 }
