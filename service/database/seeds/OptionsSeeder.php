@@ -1467,6 +1467,11 @@ class OptionsSeeder extends Seeder {
         	'form_list_id' => '9'
         ] );
         Option::create( [
+          'name' => '-- select --',
+          'value' => '',
+          'form_list_id' => '11'
+        ] );
+        Option::create( [
         	'name' => '0-23mos',
         	'value' => '0-23mos',
         	'form_list_id' => '11'
@@ -1490,6 +1495,11 @@ class OptionsSeeder extends Seeder {
         	'name' => '10-12',
         	'value' => '10-12',
         	'form_list_id' => '11'
+        ] );
+        Option::create( [
+          'name' => '-- select --',
+          'value' => '',
+          'form_list_id' => '3'
         ] );
         Option::create( [
         	'name' => 'Extra small',
@@ -1517,6 +1527,11 @@ class OptionsSeeder extends Seeder {
         	'form_list_id' => '3'
         ] );
         Option::create( [
+          'name' => '-- select --',
+          'value' => '',
+          'form_list_id' => '12'
+        ] );
+        Option::create( [
         	'name' => 'Male',
         	'value' => 'male',
         	'form_list_id' => '12'
@@ -1525,6 +1540,11 @@ class OptionsSeeder extends Seeder {
         	'name' => 'Female',
         	'value' => 'female',
         	'form_list_id' => '12'
+        ] );
+        Option::create( [
+        	'name' => '-- select --',
+        	'value' => '',
+        	'form_list_id' => '5'
         ] );
         Option::create( [
         	'name' => 'Advertisement',
@@ -1575,6 +1595,11 @@ class OptionsSeeder extends Seeder {
         	'name' => 'Other',
         	'value' => 'other',
         	'form_list_id' => '5'
+        ] );
+        Option::create( [
+        	'name' => '-- select --',
+        	'value' => '',
+        	'form_list_id' => '6'
         ] );
         Option::create( [
         	'name' => 'Advanced Registered Nurse Practitioner',
@@ -1772,6 +1797,11 @@ class OptionsSeeder extends Seeder {
         	'form_list_id' => '6'
         ] );
         Option::create( [
+          'name' => '-- select --',
+          'value' => '',
+          'form_list_id' => '8'
+        ] );
+        Option::create( [
         	'name' => 'AHA',
         	'value' => 'aha',
         	'form_list_id' => '8'
@@ -1787,6 +1817,11 @@ class OptionsSeeder extends Seeder {
         	'form_list_id' => '8'
         ] );
         Option::create( [
+        	'name' => '-- select --',
+        	'value' => '',
+        	'form_list_id' => '13'
+        ] );
+        Option::create( [
         	'name' => 'High school',
         	'value' => 'highschool',
         	'form_list_id' => '13'
@@ -1800,6 +1835,11 @@ class OptionsSeeder extends Seeder {
         	'name' => 'University',
         	'value' => 'university',
         	'form_list_id' => '13'
+        ] );
+        Option::create( [
+          'name' => '--',
+          'value' => '',
+          'form_list_id' => '1'
         ] );
         Option::create( [
         	'name' => 'AL',
@@ -2520,6 +2560,11 @@ class OptionsSeeder extends Seeder {
         	'name' => 'Urology',
         	'value' => 'Urology',
         	'form_list_id' => '10'
+        ] );
+        Option::create( [
+          'name' => '--',
+          'value' => '',
+          'form_list_id' => '7'
         ] );
         Option::create( [
           'name' => 'AL',

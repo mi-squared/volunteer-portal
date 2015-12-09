@@ -4,7 +4,6 @@ import ReactAddons from 'react/addons';
 import ValidatedInput from '../components/validated-input-field.jsx';
 import QuestionContainer from '../components/question-container.jsx';
 import DropdownField from '../components/dropdown-field.jsx';
-import MultiselectField from '../components/multiselect-field.jsx';
 import VolunteerAreaField from '../components/volunteer-area-field.jsx';
 import YesNoField from '../components/yes-no-field.jsx';
 import MedicalFields from './medical-fields.jsx';
@@ -131,10 +130,7 @@ export default class VolunteerGeneral extends BaseSection {
                         fieldName="data.q_cpr_org"
                         ref="data.q_cpr_org"
                         onChange={this.handleChange}>
-                        <option value="">-- select --</option>
-                        <option value="aha">AHA</option>
-                        <option value="sm">Red Cross</option>
-                        <option value="other">Other</option>
+
                     </DropdownField>
 
                     <QuestionContainer {...this.props}
