@@ -6,6 +6,7 @@ import {
     login,
     saveApplication,
     loadApplication,
+    receiveOptions,
     INITIAL_STATE
 } from './core';
 
@@ -36,6 +37,9 @@ export default function reducer(state = INITIAL_STATE, action) {
         }
         case 'LOAD_APPLICATION': {
             return loadApplication(state, action.applicationSpec);
+        }
+        case 'RECEIVE_OPTIONS': {
+          return receiveOptions(state, action.json);
         }
     }
     return state;

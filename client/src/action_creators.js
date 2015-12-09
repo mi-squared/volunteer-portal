@@ -1,3 +1,5 @@
+import fetchClient from "./fetchClient";
+
 export function setState(state) {
     return {
         type: 'SET_STATE',
@@ -43,4 +45,23 @@ export function loadApplication( applicationSpec ) {
         type: 'LOAD_APPLICATION',
         applicationSpec
     };
+}
+
+export function receiveOptions(json) {
+  return {
+    type: 'RECEIVE_OPTIONS',
+    json
+  }
+}
+
+export function fetchOptions() {
+    return (dispatch, getState) => {
+      if (!getState().get('formLists')) {
+        return fetchClient.getOptionsDev()
+          .then(response => response.json())
+          .then(json =>
+            dispatch(receiveOptions(json))
+          )
+      }
+    }
 }

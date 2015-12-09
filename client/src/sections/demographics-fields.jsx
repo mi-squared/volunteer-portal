@@ -69,9 +69,7 @@ export default class DemographicsFields extends BaseSection {
                     fieldName="data.q_gender"
                     ref="data.q_gender"
                     onChange={this.handleChange}>
-                    <option value="">-- select --</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+
                 </DropdownField>
 
                 <DropdownField {...this.props}
@@ -80,12 +78,6 @@ export default class DemographicsFields extends BaseSection {
                     fieldName="data.q_tshirt"
                     ref="data.q_tshirt"
                     onChange={this.handleChange}>
-                    <option value="">-- select --</option>
-                    <option value="xsm">Extra small</option>
-                    <option value="sm">Small</option>
-                    <option value="med">Medium</option>
-                    <option value="lrg">Large</option>
-                    <option value="xlrg">Extra large</option>
                 </DropdownField>
 
                 <LanguageField {...this.props}
@@ -224,17 +216,6 @@ export default class DemographicsFields extends BaseSection {
                     fieldName="data.q_ybpth_ref"
                     ref="data.q_ybpth_ref"
                     onChange={this.handleChange}>
-                    <option value="">-- select --</option>
-                    <option value="advertisement">Advertisement</option>
-                    <option value="email-newsletter">Email/Newsletter</option>
-                    <option value="facebook">Facebook</option>
-                    <option value="family-friend">Family or Friend</option>
-                    <option value="newspaper">Newspaper Story</option>
-                    <option value="tv">TV</option>
-                    <option value="twitter">Twitter</option>
-                    <option value="website-search-engine">Website/Search Engine</option>
-                    <option value="youtube">YouTube</option>
-                    <option value="other">Other</option>
                 </DropdownField>
 
                 <QuestionContainer {...this.props}

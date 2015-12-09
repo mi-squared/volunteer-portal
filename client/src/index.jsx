@@ -5,6 +5,10 @@ import App from './components/app.jsx';
 import {createStore} from 'redux';
 import reducer from './reducer';
 import {Provider} from 'react-redux';
+import {createHashHistory} from "history";
+import { fetchOptions } from "./action_creators.js";
+import makeStore from "./store";
+
 
 import {WelcomePage} from './pages/welcome-page.jsx';
 import {NewVolunteerPageContainer} from './pages/new-volunteer-page.jsx';
@@ -16,7 +20,9 @@ import {VolunteeringDetailPageContainer} from './pages/volunteering-detail-page.
 import {DoneApplicationPage} from './pages/done-application-page.jsx';
 import {EsignPageContainer} from './pages/esign-page.jsx';
 
-const store = createStore(reducer);
+// const store = createStore(reducer);
+const store = makeStore();
+
 const routes = <Route path="/" component={App}>
     <Route path="/new-volunteer" component={NewVolunteerPageContainer} />
     <Route path="/do-register" component={DoRegisterPage} />
@@ -32,6 +38,12 @@ const routes = <Route path="/" component={App}>
 store.dispatch({
     type: 'RESET'
 });
+
+let history = createHashHistory();
+history.listen(location => {
+  //fetch issues here
+  store.dispatch(fetchOptions())
+})
 
 ReactDOM.render(
 

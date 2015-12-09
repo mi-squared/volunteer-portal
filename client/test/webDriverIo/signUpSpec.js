@@ -168,16 +168,9 @@ describe('NewVolunteerPage', () => {
       .getAttribute('input:not([type="radio"]):not([type="search"]):not([type="hidden"]):not([type="checkbox"])', 'id').then(
         (ids) => {
           ids.forEach((id) => {
-            // console.log(id)
-            if (id.match(/expiration/)) {
-              let date = '12122020';
-              clientApplicationObj[id] = date;
-              client
-                .moveToObject(`#${id}`, 0, 10) //date value gets scrambled without moveToObject and date validation prevents form from submitting
-                .setValue(`#${id}`, date)
-            } else {
-                clientApplicationObj[id] = id + randNum100();
-                client.setValue(`#${id}`, clientApplicationObj[id])
+            if (!id.match(/expiration/)) {
+              clientApplicationObj[id] = id + randNum100();
+              client.setValue(`#${id}`, clientApplicationObj[id])
             }
           })
         }

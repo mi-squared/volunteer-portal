@@ -11,6 +11,7 @@ var initialStateTemplate = {
     },
     session: {
     }
+    
 };
 
 export const INITIAL_STATE =  fromJS(JSON.parse(JSON.stringify(initialStateTemplate)));
@@ -58,6 +59,13 @@ export function loadApplication( state, applicationSpec ) {
         fromJS(applicationSpec)
     );
 }
+
+export function receiveOptions( state, json ) {
+  return state.set(
+    'formLists',
+    fromJS(json)
+  );
+};
 
 export function getServiceBaseURL() {
     // return 'http://pth.mi-squared.com';
