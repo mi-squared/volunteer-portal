@@ -23,7 +23,9 @@ export default React.createClass({
                 {...this.props}
                 value={this.props.data[this.getFieldName()]}
                 placeHolder="Click to choose languages">
-
+                {this.getOptions().map(option =>
+                    <option key={option.value} value={option.value}>{option.name}</option>
+                )}
             </MultiselectField>
         );
     }
