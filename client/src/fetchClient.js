@@ -7,7 +7,7 @@ const fetchClient = {
   },
 
   getOptionsProd: function () {
-    return fetch('/* realURL */ /api/v1/form-lists/') 
+    return fetch('http://pth.mi-squared.com/api/v1/form-lists/') 
   }
 
 }
