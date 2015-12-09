@@ -62,6 +62,14 @@ class MultiselectField extends React.Component {
       });
   }
 
+  getOptions() {
+    if (this.props.formLists) {
+      return this.props.formLists[this.props.fieldName.replace('data.q_', '')];
+    } else {
+      return [];
+    }
+  }
+
   render() {
       var requiredLabel = this.props.required ? <span className='j-required'>*</span> : '';
       var message;
@@ -91,8 +99,8 @@ class MultiselectField extends React.Component {
                       onChange={this.props.onChange}
                       fieldName={this.props.fieldName}
                       style={{width: "100%"}}>
-                      {this.props.children.map(entry =>
-                          <option key={entry.props.value || entry.props.children} value={entry.props.value || entry.props.children}>{entry.props.children}</option>
+                      {this.getOptions().map(option =>
+                          <option key={option.value} value={option.value}>{option.name}</option>
                       )}
                   </select>
               </div>
