@@ -1,5 +1,6 @@
 node_modules
 service/.env
 vendor
+service/npm-debug.log
 composer.lock
 service/npm-debug.log
