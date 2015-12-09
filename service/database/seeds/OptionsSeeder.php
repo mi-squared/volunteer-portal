@@ -1597,13 +1597,13 @@ class OptionsSeeder extends Seeder {
         	'form_list_id' => '5'
         ] );
         Option::create( [
-        	'name' => 'Advanced Registered Nurse Practitioner',
-        	'value' => 'Advanced Registered Nurse Practitioner',
+        	'name' => '-- select --',
+        	'value' => '',
         	'form_list_id' => '6'
         ] );
         Option::create( [
-        	'name' => '-- select --',
-        	'value' => '',
+        	'name' => 'Advanced Registered Nurse Practitioner',
+        	'value' => 'Advanced Registered Nurse Practitioner',
         	'form_list_id' => '6'
         ] );
         Option::create( [
