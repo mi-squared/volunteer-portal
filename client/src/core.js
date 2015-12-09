@@ -69,10 +69,5 @@ export function receiveOptions( state, json ) {
 };
 
 export function getServiceBaseURL() {
-<<<<<<< HEAD
     return URL;
-=======
-    return 'http://pth.mi-squared.com';
-    // return 'http://localhost:7771';
->>>>>>> a6fb27ea932d23e338450911b95fc8561032c94d
 }
