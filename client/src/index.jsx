@@ -42,7 +42,7 @@ store.dispatch({
 let history = createHashHistory();
 history.listen(location => {
   //fetch issues here
-  store.dispatch(fetchOptions())
+  store.dispatch(fetchOptions()) // add conditional reset based on url params remove from component life cycle
 })
 
 ReactDOM.render(

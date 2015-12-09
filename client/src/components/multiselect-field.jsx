@@ -63,7 +63,7 @@ class MultiselectField extends React.Component {
   }
 
   getOptions() {
-    var id = this.props.fieldName.replace('data.q_', '').replace('ed', 'ing');
+    var id = this.props.fieldName.replace('data.q_', '').replace('ed', 'ing'); // this is how the list is labeled in the database
     if (this.props.formLists && this.props.formLists[id]) {
       return this.props.formLists[id]; //volunteered_area and volunteering_area share same list options
     } else {

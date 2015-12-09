@@ -2,3 +2,4 @@ node_modules
 service/.env
 .env
 vendor
+composer.lock
