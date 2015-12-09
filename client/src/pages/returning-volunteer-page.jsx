@@ -47,6 +47,9 @@ class ReturningVolunteerPage extends React.Component {
     componentWillMount() {
         // reset to initial state whenever this form appears
         this.props.reset();
+        // and hydrate select lists with options
+        this.props.fetchOptions();
+
     }
 
     doSignIn() {

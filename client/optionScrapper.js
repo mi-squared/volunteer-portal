@@ -21,8 +21,8 @@ var scrapeOptions = function(dir, outputFile) {
             // console.log(file, '===========================================');
             lines = data.split('\n');
             lines.forEach(function(line) {
-              //arr = line.match(/<option.*value=\"(.+)\".*>(.+)<\/option>/); //capture groups
-              arr = line.match(/<option>(.+)<\/option>/); //capture groups
+              // arr = line.match(/<option.*value=\"(.+)\".*>(.+)<\/option>/); //capture groups with values
+              arr = line.match(/<option>(.+)<\/option>/); //capture groups without values
               if (arr) {
                 // console.log(arr[1], ' ', arr[2])
                 if (!arr[2]) {

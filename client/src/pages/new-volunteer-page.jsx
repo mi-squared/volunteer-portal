@@ -88,6 +88,9 @@ class NewVolunteerPage extends React.Component {
     componentWillMount() {
         // reset to initial state whenever this form appears
         this.props.reset();
+        this.props.fetchOptions();
+        // fetch list options
+
     }
 
     doRegister() {
@@ -135,6 +138,7 @@ class NewVolunteerPage extends React.Component {
 
     doCancel() {
         this.props.reset();
+
         this.props.history.goBack();
     }
 

@@ -10,6 +10,14 @@ export default React.createClass({
         }
     },
 
+    getOptions: function () {
+      if (this.props.formLists) {
+        return this.props.formLists[this.props.fieldName.replace('data.q_', '').replace('session.', '')];
+      } else {
+        return [];
+      }
+    },
+
     render: function() {
         var requiredLabel = this.props.required ? <span className='j-required'>*</span> : '';
         var message;
@@ -38,8 +46,8 @@ export default React.createClass({
                         onChange={this.commitChange}
                         id={this.props.id ? this.props.id : this.props.fieldName.replace('data.q_', '').replace('session.', '')}
                         placeholder={this.props.placeHolder}>
-                        {this.props.children.map(entry =>
-                            <option key={entry.props.value} value={entry.props.value}>{entry.props.children}</option>
+                        {this.getOptions().map(entry =>
+                            <option key={entry.value} value={entry.value}>{entry.name}</option>
                         )}
                     </select>
                 </div>
