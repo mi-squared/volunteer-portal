@@ -1,4 +1,5 @@
 import {Map, List, fromJS} from 'immutable';
+import {URL} from './url';
 
 var initialStateTemplate = {
     data: {
@@ -60,6 +61,5 @@ export function loadApplication( state, applicationSpec ) {
 }
 
 export function getServiceBaseURL() {
-    return 'http://pth.mi-squared.com';
-    //return 'http://localhost:7771';
+    return URL;
 }
