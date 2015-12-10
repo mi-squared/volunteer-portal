@@ -47,7 +47,7 @@ class EsignPage extends React.Component {
         setTimeout( function() {
             self.props.saveApplication().then( function() {
                 // then move on to next page
-                self.props.history.pushState(null, '/done-application');
+                self.props.history.pushState(null, '/upload-forms');
             });
         }, 1 );
     }

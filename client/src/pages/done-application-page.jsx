@@ -17,7 +17,6 @@ export const DoneApplicationPage = React.createClass({
         return (
             <div className="container well">
                 <h1>Thank you</h1>
-
                 <div className="j-page-nav">
                     <Button onClick={this.doContinue} className="btn btn-primary">Continue</Button>
                 </div>

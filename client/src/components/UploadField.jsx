@@ -90,7 +90,7 @@ class UploadField extends React.Component {
         // const document = this.document()
         const btnClass = document ? "btn btn-default btn-xs" : "btn btn-default"
         return (
-            <div className="form-group center" style={{border: '1px solid #ccc', borderRadius: '3px', padding: '0 15px 15px 15px', width: '80%'}}>
+            <div className="form-group center" style={{border: '1px solid #ccc', borderRadius: '3px', padding: '0 15px 15px 15px'}}>
                 <h2>{this.props.title}</h2>
                 {uploadState === "uploading" && this.renderProgressBar(uploadPercent)}
                 <form ref="theForm" method="POST" encType="multipart/form-data">

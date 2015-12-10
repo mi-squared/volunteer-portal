@@ -3,8 +3,10 @@ var options = { desiredCapabilities: { browserName: 'chrome' } };
 var client = webdriverio.remote(options);
 var chai = require('chai');
 var assert = chai.assert;
+// var url = require()
 
 const loginUrl = "http://localhost:8080/#/returning-volunteer";
+// const loginUrl = "http://pth.mi-squared.com/#/returning-volunteer";
 
 describe("ReturningVolunteerPage", () => {
 
