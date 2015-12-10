@@ -97,10 +97,6 @@ class EsignPage extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
-    return state.toJSON();
-}
-
 export const EsignPageContainer = connect(
     (state) => state.toJSON(), actionCreators
 )(composePage(EsignPage));

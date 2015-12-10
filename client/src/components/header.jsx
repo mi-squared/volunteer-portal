@@ -6,6 +6,7 @@ export default class Header extends React.Component {
         super(props);
 
         this.logout = this.logout.bind(this);
+        this.account = this.account.bind(this);
     }
 
     logout() {
@@ -13,11 +14,15 @@ export default class Header extends React.Component {
         this.props.history.pushState(null, '/');
     }
 
+    account() {
+        this.props.history.pushState(null, '/account');
+    }
+
     render() {
         return (
             <div className="container well">
                 <div className="col-md-12" style={{"text-align" : "right"}}>
-                    <div>{this.props.session.f_username || this.props.data.q_email} <button onClick={this.logout}>logout</button></div>
+                    <div>{this.props.session.f_username || this.props.data.q_email} | <a href='javascript:;' onClick={this.account}>Account</a> | <a href="javascript:;" onClick={this.logout}>Log out</a></div>
                 </div>
             </div>
         );

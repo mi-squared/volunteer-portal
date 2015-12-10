@@ -41,8 +41,17 @@ class AccountsController extends BaseController
         return response()->json($User);
     }
 
-    public function updateAccount() {
-        return "{}";
+    public function updateAccount(Request $request) {
+        // update the account - to get here, should have survived jwt middleware auth check
+        $credentials = $this->getCredentials($request);
+        $plainPassword = $credentials['password'];
+        $User = User::where('username', '=', $credentials['username'])
+            ->firstOrFail();
+        $hashedPassword = Hash::make($plainPassword);
+
+        $update = [ "password" => $hashedPassword ];
+        $User->update($update);
+        return response()->json($User);
     }
 
     public function loginAccount(Request $request) {
