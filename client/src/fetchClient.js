@@ -1,13 +1,10 @@
 import "whatwg-fetch";
+import {URL} from "./url";
 
 const fetchClient = {
 
-  getOptionsDev: function() {
-    return fetch('http://localhost:7771/api/v1/form-lists/')
-  },
-
-  getOptionsProd: function () {
-    return fetch('http://pth.mi-squared.com/api/v1/form-lists/') 
+  getOptions: function() {
+    return fetch(URL + '/api/v1/form-lists/')
   }
 
 }
