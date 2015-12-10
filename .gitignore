@@ -2,4 +2,6 @@ node_modules
 service/.env
 vendor
 service/npm-debug.log
+npm-debug.log
 composer.lock
+client/optionScrapper

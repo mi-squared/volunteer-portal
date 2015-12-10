@@ -19,6 +19,7 @@ import {ChildrenPageContainer} from './pages/children-page.jsx';
 import {VolunteeringDetailPageContainer} from './pages/volunteering-detail-page.jsx';
 import {DoneApplicationPage} from './pages/done-application-page.jsx';
 import {EsignPageContainer} from './pages/esign-page.jsx';
+import {UploadPageContainer} from './pages/upload-page.jsx';
 
 // const store = createStore(reducer);
 const store = makeStore();
@@ -32,6 +33,7 @@ const routes = <Route path="/" component={App}>
     <Route path="/main" component={MainPageContainer} />
     <Route path="/done-application" component={DoneApplicationPage} />
     <Route path="/esign" component={EsignPageContainer} />
+    <Route path="/upload-forms" component={UploadPageContainer} />
     <IndexRoute component={WelcomePage} />
 </Route>;
 

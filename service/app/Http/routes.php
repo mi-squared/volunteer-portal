@@ -166,4 +166,11 @@ $app->group(['middleware' => 'jwt.auth'], function($app) {
         '/api/v1/applications/{volunteerApplicationID}',
         'App\Http\Controllers\VolunteerApplicationController@updateVolunteerApplication'
     );
+    /**
+     * Upload files to an application
+     */
+    $app->post(
+        '/api/v1/documents/{uploadUrl}',
+        'App\Http\Controllers\UploadsController@createUpload'
+    );
 });
