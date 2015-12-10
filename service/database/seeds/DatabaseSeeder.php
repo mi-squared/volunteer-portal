@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder {
 
         $this->call( FormListsSeeder::class );
         $this->call( OptionsSeeder::class );
+        $this->call( UsersSeeder::class );
 
         Model::reguard();
 
