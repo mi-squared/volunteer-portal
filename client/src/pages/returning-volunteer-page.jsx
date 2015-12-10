@@ -52,6 +52,13 @@ class ReturningVolunteerPage extends React.Component {
 
     }
 
+    componentWillReceiveProps(nextProps) {
+      console.log('============', nextProps.data['q_esigned']);
+      if (nextProps.data['q_esigned'] === 'true') {
+        this.props.history.pushState(null, '/upload-forms');
+      }
+    }
+
     doSignIn() {
         // validation
         if ( this.props.doValidate( this.schema, this.props.session) ) {
@@ -83,6 +90,7 @@ class ReturningVolunteerPage extends React.Component {
                         } else {
                             console.log("New app.");
                             self.props.history.pushState(null, '/main');
+
                         }
                     },
                     function(error) {
