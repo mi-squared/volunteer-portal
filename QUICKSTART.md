@@ -7,8 +7,9 @@ Follow the steps below to setup your development environment.
   * [Windows](#windows)
 2. [Setup repository](#setup-repository)
 3. [Setup database](#setup-database)
-4. [Run local server](#run-local-server)
-5. [Run tests](#run-tests)
+4. [Setup S3](#setup-s3)
+5. [Run local server](#run-local-server)
+6. [Run tests](#run-tests)
 
 <a id="install-packages"></a>
 ##Install Packages
@@ -115,6 +116,11 @@ Find the instructions below for your operating system and follow the steps to in
   * `cd volunteer-portal/service`
   * `php artisan migrate`
   * `php artisan db:seed`
+
+
+<a id="setup-s3"></a>
+##Setup S3
+1. *tbd*
 
 
 <a id="run-local-server"></a>
