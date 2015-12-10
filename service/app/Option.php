@@ -19,5 +19,3 @@ use Illuminate\Database\Eloquent\Model;
     }
 
   }
-
-?>

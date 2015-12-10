@@ -25,5 +25,3 @@ class UsersSeeder extends Seeder {
 
     }
 }
-
-?>
