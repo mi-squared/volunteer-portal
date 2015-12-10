@@ -16,7 +16,7 @@ Follow the steps below to setup your development environment.
 Find the instructions below for your operating system and follow the steps to install the necessary packages.
 
 <a id="linux"></a>
-###Linux
+####Linux
 1. Prepare to install packages.
   * `sudo apt-get update`
   * `sudo apt-get upgrade`
@@ -34,7 +34,7 @@ Find the instructions below for your operating system and follow the steps to in
   * `sudo apt-get install nodejs`
 
 <a id="osx"></a>
-###OSX
+####OSX
 1. Install Homebrew
   * `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
   * *If Homebrew is already installed, update it so it is ready to install new packages*
@@ -59,7 +59,7 @@ Find the instructions below for your operating system and follow the steps to in
   * `brew install node`
 
 <a id="windows"></a>
-###Windows
+####Windows
 1. Install PHP
   * Follow the instructions on the [SitePoint website](http://www.sitepoint.com/how-to-install-php-on-windows/)
 2. Install Composer
