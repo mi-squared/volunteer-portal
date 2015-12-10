@@ -17,7 +17,7 @@ class ReturningVolunteerPage extends React.Component {
             errorFields: {},
             errorMessage : 'Form error',
             disabled: false,
-            value: "Log in"
+            value: "Log In"
         };
 
         this.schema =
@@ -96,6 +96,10 @@ class ReturningVolunteerPage extends React.Component {
     }
 
     doInvalidCredentials() {
+        this.setState({
+          disabled: false,
+          value: "Log In"
+        });
         this.props.handleAlertShow({
             focusElement: 'session.f_password',
             errorMessage: "Invalid username or password",

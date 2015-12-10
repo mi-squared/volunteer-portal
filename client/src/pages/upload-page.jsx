@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import Button from 'react-bootstrap/lib/Button.js';
 import UploadField from '../components/UploadField.jsx';
 import composePage from './base-page.jsx';
+import * as actionCreators from '../action_creators';
 
 
 class UploadPage extends React.Component {
@@ -76,4 +77,4 @@ function mapStateToProps(state) {
     return state.toJSON();
 }
 
-export const UploadPageContainer = connect(mapStateToProps)(composePage(UploadPage));
+export const UploadPageContainer = connect(mapStateToProps, actionCreators)(composePage(UploadPage));

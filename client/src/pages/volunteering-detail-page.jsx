@@ -67,13 +67,17 @@ class VolunteeringDetailPage extends React.Component {
                 // then move on to next page
                 var isEsigned = self.props.data['q_esigned'] === 'true';
                 if ( isEsigned ) {
-                    self.props.history.pushState(null, '/done-application');
+                    self.props.history.pushState(null, '/upload-forms');
                 } else {
                     self.props.history.pushState(null, '/esign');
                 }
             });
         } else {
             this.props.handleAlertShow();
+            this.setState({
+              disabled: false,
+              value: "Continue"
+            });
         }
     }
 
