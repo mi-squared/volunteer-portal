@@ -34,7 +34,7 @@ class AccountPage extends React.Component {
         };
 
         this.state = {
-            focusElement: "data.q_password",
+            focusElement: "q_password",
             alertVisible: false,
             errorFields: {},
             errorMessage : '',
