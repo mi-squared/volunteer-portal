@@ -17,7 +17,7 @@ export default class Header extends React.Component {
         return (
             <div className="container well">
                 <div className="col-md-12" style={{"text-align" : "right"}}>
-                    <div>{this.props.session.f_username} <button onClick={this.logout}>logout</button></div>
+                    <div>{this.props.session.f_username || this.props.data.q_email} <button onClick={this.logout}>logout</button></div>
                 </div>
             </div>
         );
