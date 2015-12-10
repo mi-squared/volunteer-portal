@@ -6,6 +6,7 @@ import Demographics from '../sections/demographics-fields.jsx';
 import * as actionCreators from '../action_creators';
 import {saveApplication}  from '../client.js';
 import composePage from './base-page.jsx';
+import UploadAlert from '../components/upload-alert.jsx'
 
 class MainPage extends React.Component {
 
@@ -110,7 +111,10 @@ class MainPage extends React.Component {
 
     render() {
         return (
+
             <div className="container well">
+                <UploadAlert {...this.props}/>
+
                 <div className="col-md-12">
                     <h1>Volunteer Application</h1>
 
