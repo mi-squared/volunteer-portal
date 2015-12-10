@@ -57,8 +57,7 @@ export function receiveOptions(json) {
 export function fetchOptions() {
     return (dispatch, getState) => {
       if (!getState().get('formLists')) {
-        //return fetchClient.getOptionsDev()
-         return fetchClient.getOptionsProd()
+        return fetchClient.getOptions()
           .then(response => response.json())
           .then(json =>
             dispatch(receiveOptions(json))
