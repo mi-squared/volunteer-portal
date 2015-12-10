@@ -213,7 +213,7 @@ describe('NewVolunteerPage', () => {
       .click('#submit-esign')
       .waitUntil(() => {
         return client.getUrl().then(
-          (url) => {return url.match(/^http:\/\/localhost:8080\/\#\/done-application.+/)}
+          (url) => {return url.match(/^http:\/\/localhost:8080\/\#\/upload-forms.+/)}
         )
       }, 10000)
       .then(() => {
