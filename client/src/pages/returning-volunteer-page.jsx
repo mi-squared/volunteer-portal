@@ -83,6 +83,7 @@ class ReturningVolunteerPage extends React.Component {
                         } else {
                             console.log("New app.");
                             self.props.history.pushState(null, '/main');
+
                         }
                     },
                     function(error) {
