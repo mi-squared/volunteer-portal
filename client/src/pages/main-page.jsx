@@ -47,7 +47,6 @@ class MainPage extends React.Component {
                 q_church_pastor_email: {
                     type: 'string',
                     maxLength: 255,
-                    format: () => this.props.data['q_is_adventist'] === 'true' ? 'email' : '',
                     allowEmpty: true
                 },
                 q_dob: {

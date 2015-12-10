@@ -7,6 +7,7 @@ import Q from 'q/q.js';
 
 import * as actionCreators from '../action_creators';
 import {saveApplicationRemote} from '../client.js';
+import Header from '../components/header.jsx'
 
 export default function composePage(Component) {
 
@@ -149,18 +150,24 @@ export default function composePage(Component) {
         },
 
         render: function() {
-            return <Component
-                    {...this.props}
-                    state={this.state}
-                    doValidate={this.doValidate}
-                    onBlur={this.onBlur}
-                    handleAlertShow={this.handleAlertShow}
-                    transitionTo={this.transitionToRoute}
-                    errorFields={this.state.errorFields}
-                    submitTS={this.state.submitTS}
-                    focusElement={this.state.focusElement}
-                    saveApplication={this.saveApplication}
-                />;
+            return (
+                <div>
+                    {this.props.jwt && this.props.jwt && <Header {...this.props}/>}
+                     <Component
+                        {...this.props}
+                        state={this.state}
+                        doValidate={this.doValidate}
+                        onBlur={this.onBlur}
+                        handleAlertShow={this.handleAlertShow}
+                        transitionTo={this.transitionToRoute}
+                        errorFields={this.state.errorFields}
+                        submitTS={this.state.submitTS}
+                        focusElement={this.state.focusElement}
+                        saveApplication={this.saveApplication}
+                    />;
+
+                </div>
+            );
         }
     })
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\VolunteerApplication;
 use App\Exceptions\ModelExistsException;
+use Illuminate\Support\Facades\Hash as Hash;
 
 class AccountsController extends BaseController
 {
@@ -24,7 +25,13 @@ class AccountsController extends BaseController
         if ( $User['id'] ) {
             throw new ModelExistsException();
         } else {
-            $User = User::create($request->all());
+            // hash the password
+            $password = $accountMeta['password'];
+            $hashedPassword = Hash::make($password);
+
+            $accountMeta['password'] = $hashedPassword;
+            $User = User::create($accountMeta);
+
             return response()->json($User);
         }
     }
@@ -41,13 +48,19 @@ class AccountsController extends BaseController
     public function loginAccount(Request $request) {
         $credentials = $this->getCredentials($request);
 
+        $plainPassword = $credentials['password'];
+
         $User = User::where('username', '=', $credentials['username'])
-            ->where( 'password', '=', $credentials['password'])
             ->firstOrFail();
+
+        $hashedPassword = $User['password'];
+        if (!Hash::check($plainPassword, $hashedPassword)) {
+            return response()->json(['error' => 'unauthorized'], 400);
+        }
 
         $VolunteerApplication =
             VolunteerApplication::where('user_id', '=', $User['id'])
-            ->first();
+                ->first();
 
         try
         {
