@@ -11,5 +11,3 @@ class OptionsController extends BaseController
 
 
 }
-
-?>
