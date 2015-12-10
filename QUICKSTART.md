@@ -132,8 +132,6 @@ Find the instructions below for your operating system and follow the steps to in
   * `cd volunteer-portal/client/src`
   * open `url.js` in text editor
     * comment out `export const URL = 'http://pth.mi-squared.com';` and uncomment `export const URL = 'http://localhost:7771';`
-  * open `action_creators.js` in text editor
-    * comment out `return fetchClient.getOptionsProd()` and uncomment `return fetchClient.getOptionsDev()`
 2. Start Laravel server
   * open new tab in command line
   * `cd volunteer-portal/service`
