@@ -21,11 +21,10 @@ export default class Header extends React.Component {
     render() {
         return (
             <div className="container well">
-                <div className="col-md-12" style={{"text-align" : "right"}}>
+                <div className="col-md-12" style={{"textAlign" : "right"}}>
                     <div>{this.props.session.f_username || this.props.data.q_email} | <a href='javascript:;' onClick={this.account}>Account</a> | <a href="javascript:;" onClick={this.logout}>Log out</a></div>
                 </div>
             </div>
         );
     }
 }
-

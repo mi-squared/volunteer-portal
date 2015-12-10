@@ -17,5 +17,3 @@ class DatabaseSeeder extends Seeder {
 
     }
 }
-
-?>
