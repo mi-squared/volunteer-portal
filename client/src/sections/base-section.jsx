@@ -21,6 +21,7 @@ export default class BaseSection extends React.Component {
                 var ref = self.refs[nextProps.focusElement];
                 if (ref && ref.getInputDOMNode ) {
                     ref.getInputDOMNode().focus();
+                    ref.getInputDOMNode().select();
                 }
             }, 1);
         }

@@ -85,7 +85,7 @@ export default function composePage(Component) {
             }
 
             var res = Revalidator.validate(data, schema);
-            var fieldPrefix = schema.fieldPrefix || 'data.';
+            var fieldPrefix = schema.noPrefix ? '' : schema.fieldPrefix || 'data.';
             if (!res.valid) {
                 for (var i in res.errors) {
                     var error = res.errors[i];
