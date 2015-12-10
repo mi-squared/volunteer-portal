@@ -120,6 +120,8 @@ $app->post(
     'AccountsController@createAccount'
 );
 
+
+// FormLists and Options
 $app->get(
     '/api/v1/form-lists/{formListID}',
     'FormListsController@getFormList'
@@ -133,6 +135,20 @@ $app->get(
 $app->get(
     '/api/v1/form-lists',
     'FormListsController@getFormListsOptions'
+);
+
+// Download Forms
+
+$app->get(
+    '/api/v1/documents',
+    'UploadsController@getDownloadUrls'
+);
+
+// Upload Forms
+
+$app->post(
+    '/api/v1/documents/{uploadUrl}',
+    'App\Http\Controllers\UploadsController@createUpload'
 );
 
 
@@ -166,11 +182,5 @@ $app->group(['middleware' => 'jwt.auth'], function($app) {
         '/api/v1/applications/{volunteerApplicationID}',
         'App\Http\Controllers\VolunteerApplicationController@updateVolunteerApplication'
     );
-    /**
-     * Upload files to an application
-     */
-    $app->post(
-        '/api/v1/documents/{uploadUrl}',
-        'App\Http\Controllers\UploadsController@createUpload'
-    );
+
 });

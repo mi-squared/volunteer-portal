@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-// use App\Database\Seeds\FormListsSeeder as FormListsSeeder;
 
 class DatabaseSeeder extends Seeder {
 
