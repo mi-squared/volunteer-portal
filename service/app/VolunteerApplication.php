@@ -121,4 +121,9 @@ class VolunteerApplication extends Model
     {
         return $this->hasMany('App\VolunteerChild','application_id');
     }
+
+    public function uploads()
+    {
+        return $this->hasMany('App\Upload','application_id');
+    }
 }
