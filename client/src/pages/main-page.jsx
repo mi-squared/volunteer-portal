@@ -105,6 +105,10 @@ class MainPage extends React.Component {
             });
         } else {
             this.props.handleAlertShow();
+            this.setState({
+              disabled: false,
+              value: "Continue"
+            });
         }
     }
 
