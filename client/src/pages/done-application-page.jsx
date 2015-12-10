@@ -10,14 +10,14 @@ export const DoneApplicationPage = React.createClass({
 
     doContinue: function() {
         // todo - reinitialize state
-        this.props.history.pushState(null, '/');
+        this.props.history.pushState(null, '/upload-forms');
     },
 
     render: function() {
         return (
             <div className="container well">
                 <h1>Thank you</h1>
-
+                <p className="lead">Press 'Continue' to upload and complete additional documents</p>
                 <div className="j-page-nav">
                     <Button onClick={this.doContinue} className="btn btn-primary">Continue</Button>
                 </div>
