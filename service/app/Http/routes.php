@@ -92,6 +92,14 @@ $app->group(['middleware' => 'jwt.auth'], function($app) {
     );
 
     /**
+     * Fetch a specific account by username
+     */
+    $app->get(
+        '/api/v1/users/{username}/account',
+        'App\Http\Controllers\AccountsController@getAccountByUsername'
+    );
+
+    /**
      * Update an existing account
      */
     $app->put(

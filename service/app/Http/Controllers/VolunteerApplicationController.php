@@ -5,6 +5,7 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\VolunteerApplication;
 use App\VolunteerChild;
+use App\User;
 
 class VolunteerApplicationController extends BaseController
 {
@@ -44,6 +45,16 @@ class VolunteerApplicationController extends BaseController
         try
         {
             $applicationMeta = $request->all();
+
+            $userID = $applicationMeta['user_id'];
+            $User  = User::where('id', '=', $userID)->firstOrFail();
+
+            // only a user may update their own application
+            $error = $this->authCheck($User);
+            if ( $error ) {
+                return $error;
+            }
+
             $VolunteerApplication  = VolunteerApplication::where('id', '=', $volunteerApplicationID)->firstOrFail();
             $VolunteerApplication->update($applicationMeta);
             if ( array_key_exists('children', $applicationMeta) ) {
@@ -69,8 +80,29 @@ class VolunteerApplicationController extends BaseController
 
     public function getVolunteerApplication($volunteerApplicationID) {
         $VolunteerApplication  = VolunteerApplication::where('id', '=', $volunteerApplicationID)->firstOrFail();
+
+        $userID = $VolunteerApplication['user_id'];
+        $User  = User::where('id', '=', $userID)->firstOrFail();
+
+        // only a user may view their own application
+        $error = $this->authCheck($User);
+        if ( $error ) {
+            return $error;
+        }
+
         $VolunteerApplication->children;
         return response()->json($VolunteerApplication);
     }
+
+    public function authCheck($User) {
+        // xxx todo - centralize this logic for DRY
+        $payload = JWTAuth::getPayload(JWTAuth::getToken());
+        $subjectAccountID = $payload['sub'];
+        if ( $User['id'] != $subjectAccountID ) {
+            return response()->json([ "error" => "unauthorized" ], 400);
+        }
+        return null;
+    }
+
 
 }
