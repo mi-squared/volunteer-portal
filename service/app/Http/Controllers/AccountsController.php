@@ -107,8 +107,10 @@ class AccountsController extends BaseController
 
         // its a valid account - construct a temporary login URL and send it to the user
 
+        $token = "XXXX";
+
         $host = env('HOST_URL', 'http://pth.mi-squared.com/client/dist/index.html');
-        $loginLink = $host . "#/prep-account?token=XXXX";
+        $loginLink = $host . "#/url-login?token=" . $token . "&next=account";
 
         $to      =  $email;
         $subject = 'Password reset link';
