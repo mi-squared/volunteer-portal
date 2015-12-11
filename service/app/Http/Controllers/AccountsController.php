@@ -95,7 +95,8 @@ class AccountsController extends BaseController
     public function forgotPassword(Request $request) {
         $accountMeta = $request->all();
 
-        $User = User::where('username', '=', $accountMeta['email'])
+        $email = $accountMeta['email'];
+        $User = User::where('username', '=', $email)
             ->first();
 
         if ( !$User ) {
@@ -106,11 +107,14 @@ class AccountsController extends BaseController
 
         // its a valid account - construct a temporary login URL and send it to the user
 
-        $to      = 'aron@olioapps.com';
-        $subject = 'the subject';
-        $message = 'hello';
-        $headers = 'From: webmaster@example.com' . "\r\n" .
-            'Reply-To: webmaster@example.com' . "\r\n" .
+        $host = getenv('HOST_URL', 'http://pth.mi-squared.com/client/dist/index.html');
+        $loginLink = $host . "#/templogin?token=XXXX";
+
+        $to      =  $email;
+        $subject = 'Password reset link';
+        $message = 'Please use this temporary link to reset Your Best Pathway to Health Volunteer Account password:\n\n' . $loginLink;
+        $headers = 'From: do_not_reply@pth.mi-squared.com' . "\r\n" .
+            'Reply-To: do_not_reply@pth.mi-squared.com' . "\r\n" .
             'X-Mailer: PHP/' . phpversion();
 
         mail($to, $subject, $message, $headers);
