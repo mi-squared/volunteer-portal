@@ -1,11 +1,7 @@
 import React from 'react'
 import $ from 'jquery'
-// import { postDocumentUploadURL } from '../mirador_client'
-// import { putEndpointFileRaw } from '../mirador_client/api'
+import Button from 'react-bootstrap/lib/Button.js';
 
-// type Props = {
-//     'onUpload': Function,
-// }
 
 class UploadField extends React.Component {
     constructor(props) {
@@ -16,6 +12,10 @@ class UploadField extends React.Component {
         event.preventDefault()
         this.setState({uploadState: 'uploading'})
         this.refs.theFile.click()
+    }
+    handleDownloadClick(event) {
+        event.preventDefault()
+        
     }
     handleFileChange(event) {
         let localFile = event.currentTarget.files[0]
@@ -88,15 +88,15 @@ class UploadField extends React.Component {
     render() {
         const { uploadState, uploadPercent } = this.state
         // const document = this.document()
-        const btnClass = document ? "btn btn-default btn-xs" : "btn btn-default"
+        // const btnClass = document ? "btn btn-default btn-xs" : "btn btn-default"
         return (
             <div className="form-group center" style={{border: '1px solid #ccc', borderRadius: '3px', padding: '0 15px 15px 15px'}}>
-                <h2>{this.props.title}</h2>
+                <h3>{this.props.fileName} <Button className="btn-info btn-sm" onClick={this.handleDownloadClick.bind(this)}>Download</Button></h3>
                 {uploadState === "uploading" && this.renderProgressBar(uploadPercent)}
                 <form ref="theForm" method="POST" encType="multipart/form-data">
                     <input ref="theFile" name="file" type="file" style={{ visibility: 'hidden', width: '1px', height: '1px' }} onChange={this.handleFileChange.bind(this)} />
                     {document && <strong>{document.fileName}&nbsp;</strong>}
-                    <button ref="theButton" type="button" className={btnClass} onClick={this.handleUploadClick.bind(this)}>{this.buttonText(uploadState, document)}</button>
+                    <Button ref="theButton" type="button" className="btn-sm" onClick={this.handleUploadClick.bind(this)}>{this.buttonText(uploadState, document)}</Button>
                 </form>
             </div>
         )
