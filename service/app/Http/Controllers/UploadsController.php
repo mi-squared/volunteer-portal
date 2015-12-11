@@ -12,8 +12,6 @@ class UploadsController extends BaseController
 {
 
   public function listDocuments() {
-    //
-    // $app = VolunteerApplication::find($appID);
 
     $s3Client = new S3Client([
       'region'  => getenv('S3_REGION'),
@@ -22,7 +20,7 @@ class UploadsController extends BaseController
 
     $params = [
       'Bucket' => getenv('S3_BUCKET'),
-      'Key' => 'documents/'
+      'Key' => '/documents/'
     ];
 
     $cmd = $s3Client->getCommand('ListObjects', $params);
@@ -31,13 +29,27 @@ class UploadsController extends BaseController
 
     // Get the actual presigned-url
     $presignedUrl = (string) $request->getUri();
+    $contents = file_get_contents($presignedUrl);
+    $xml = (array) simplexml_load_string($contents);
+    $xmlContents = (array) $xml['Contents'];
+    $filteredXml = [];
+    foreach($xmlContents as $obj ) {
+      $obj = (array) $obj;
+      if (preg_match('/^documents\\/.+\.pdf/', $obj["Key"])) { //match if in documents/ and .pdf
+        array_push($filteredXml, $obj["Key"]);
+      }
+    };
 
-    return $presignedUrl;
+    $json = json_encode($filteredXml);
+
+    return $json;
 
   }
 
   public function getUploadUrl($value='') {
 
+    //
+    // $app = VolunteerApplication::find($appID);
 
     $s3Client = new S3Client([
       'region'  => getenv('S3_REGION')

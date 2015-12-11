@@ -154,13 +154,14 @@ $app->get(
 );
 
 // Download Forms
-
+  // Get list of All docs
 $app->get(
     '/api/v1/documents',
     'UploadsController@listDocuments'
 );
 
 // Upload Forms
+
 $app->post(
     '/api/v1/documents/uploads/{appID}',
     'App\Http\Controllers\UploadsController@createUpload'

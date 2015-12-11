@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash as Hash;
 class UsersSeeder extends Seeder {
     public function run() {
         // clear table
-        User::truncate();
+        User::truncate(); /////////////////////////////////////// FIX ME
         // add 1st row
             // hash the password
         $password = 'catmandudu';

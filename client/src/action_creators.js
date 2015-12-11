@@ -54,6 +54,13 @@ export function receiveOptions(json) {
   }
 }
 
+export function receiveDocumentsList(json) {
+  return {
+    type: 'RECEIVE_DOCUMENTS_LIST',
+    json
+  }
+}
+
 export function fetchOptions() {
     return (dispatch, getState) => {
       if (!getState().get('formLists')) {
@@ -61,6 +68,20 @@ export function fetchOptions() {
           .then(response => response.json())
           .then(json =>
             dispatch(receiveOptions(json))
+          )
+      }
+    }
+}
+
+export function fetchDocumentsList() {
+    return (dispatch, getState) => {
+      let noDocumentsLoaded = !getState().get('documentsList');
+      let eSigned = getState().toJSON()['data']["q_esigned"] === 'true';
+      if (noDocumentsLoaded && eSigned) {
+        return fetchClient.getDocumentsJson()
+          .then(response => response.json())
+          .then(json =>
+            dispatch(receiveDocumentsList(json))
           )
       }
     }

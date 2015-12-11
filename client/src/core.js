@@ -68,6 +68,13 @@ export function receiveOptions( state, json ) {
   );
 };
 
+export function receiveDocumentsList( state, json ) {
+  return state.set(
+    'documentsList',
+    fromJS(json)
+  );
+};
+
 export function getServiceBaseURL() {
     return URL;
 }

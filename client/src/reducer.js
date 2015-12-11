@@ -7,6 +7,7 @@ import {
     saveApplication,
     loadApplication,
     receiveOptions,
+    receiveDocumentsList,
     INITIAL_STATE
 } from './core';
 
@@ -40,6 +41,9 @@ export default function reducer(state = INITIAL_STATE, action) {
         }
         case 'RECEIVE_OPTIONS': {
           return receiveOptions(state, action.json);
+        }
+        case 'RECEIVE_DOCUMENTS_LIST': {
+          return receiveDocumentsList(state, action.json);
         }
     }
     return state;
