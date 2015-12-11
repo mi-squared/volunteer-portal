@@ -3,13 +3,17 @@
 use Aws\S3\S3Client;
 use JWTAuth;
 use App\Upload;
+use App\VolunteerApplication;
+
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 
 class UploadsController extends BaseController
 {
 
-  public function getDownloadUrls($value='') {
+  public function getDownloadUrls($appID) {
+
+    $app = VolunteerApplication::find($appID);
 
     $s3Client = new S3Client([
       'region'  => getenv('S3_REGION'),
@@ -18,17 +22,17 @@ class UploadsController extends BaseController
 
     $params = [
       'Bucket' => getenv('S3_BUCKET'),
-      'Key' => 'documents'
+      'Key' => 'documents/DOC_B.pdf'
     ];
 
-    $cmd = $s3Client->getCommand('GetObject', $params);
+    $cmd = $s3Client->getCommand('getObject', $params);
 
     $request = $s3Client->createPresignedRequest($cmd, '+2 minutes');
 
     // Get the actual presigned-url
     $presignedUrl = $request->getUri();
 
-    return $presignedUrl;
+      return $presignedUrl;
 
   }
 

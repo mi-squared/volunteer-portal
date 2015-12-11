@@ -140,14 +140,13 @@ $app->get(
 // Download Forms
 
 $app->get(
-    '/api/v1/documents',
+    '/api/v1/documents/{appID}',
     'UploadsController@getDownloadUrls'
 );
 
 // Upload Forms
-
 $app->post(
-    '/api/v1/documents/{uploadUrl}',
+    '/api/v1/documents/uploads/{$appID}',
     'App\Http\Controllers\UploadsController@createUpload'
 );
 
