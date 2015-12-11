@@ -55,7 +55,6 @@ history.listen(location => {
 
 store.subscribe(() => {
   store.dispatch(fetchDocumentsList());
-  console.log('======', store.getState().toJSON()['documentsList']);
   }
 );
 
