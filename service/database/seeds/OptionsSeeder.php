@@ -2870,5 +2870,3 @@ class OptionsSeeder extends Seeder {
 
     }
 }
-
-?>

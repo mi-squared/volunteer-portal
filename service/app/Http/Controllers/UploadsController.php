@@ -11,9 +11,9 @@ use Illuminate\Http\Request;
 class UploadsController extends BaseController
 {
 
-  public function getDownloadUrls($appID) {
-
-    $app = VolunteerApplication::find($appID);
+  public function listDocuments() {
+    //
+    // $app = VolunteerApplication::find($appID);
 
     $s3Client = new S3Client([
       'region'  => getenv('S3_REGION'),
@@ -22,17 +22,17 @@ class UploadsController extends BaseController
 
     $params = [
       'Bucket' => getenv('S3_BUCKET'),
-      'Key' => 'documents/DOC_B.pdf'
+      'Key' => 'documents/'
     ];
 
-    $cmd = $s3Client->getCommand('getObject', $params);
+    $cmd = $s3Client->getCommand('ListObjects', $params);
 
     $request = $s3Client->createPresignedRequest($cmd, '+2 minutes');
 
     // Get the actual presigned-url
-    $presignedUrl = $request->getUri();
+    $presignedUrl = (string) $request->getUri();
 
-      return $presignedUrl;
+    return $presignedUrl;
 
   }
 

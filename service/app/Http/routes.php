@@ -92,6 +92,14 @@ $app->group(['middleware' => 'jwt.auth'], function($app) {
     );
 
     /**
+     * Fetch a specific account by username
+     */
+    $app->get(
+        '/api/v1/users/{username}/account',
+        'App\Http\Controllers\AccountsController@getAccountByUsername'
+    );
+
+    /**
      * Update an existing account
      */
     $app->put(
@@ -120,6 +128,14 @@ $app->post(
     'AccountsController@createAccount'
 );
 
+/**
+ * Create a forgot account password
+ */
+$app->post(
+    '/api/v1/accounts/forgotPassword',
+    'AccountsController@forgotPassword'
+);
+
 
 // FormLists and Options
 $app->get(
@@ -140,13 +156,13 @@ $app->get(
 // Download Forms
 
 $app->get(
-    '/api/v1/documents/{appID}',
-    'UploadsController@getDownloadUrls'
+    '/api/v1/documents',
+    'UploadsController@listDocuments'
 );
 
 // Upload Forms
 $app->post(
-    '/api/v1/documents/uploads/{$appID}',
+    '/api/v1/documents/uploads/{appID}',
     'App\Http\Controllers\UploadsController@createUpload'
 );
 

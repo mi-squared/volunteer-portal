@@ -7,15 +7,16 @@ Follow the steps below to setup your development environment.
   * [Windows](#windows)
 2. [Setup repository](#setup-repository)
 3. [Setup database](#setup-database)
-4. [Run local server](#run-local-server)
-5. [Run tests](#run-tests)
+4. [Setup S3](#setup-s3)
+5. [Run local server](#run-local-server)
+6. [Run tests](#run-tests)
 
 <a id="install-packages"></a>
 ##Install Packages
 Find the instructions below for your operating system and follow the steps to install the necessary packages.
 
 <a id="linux"></a>
-###Linux
+####Linux
 1. Prepare to install packages.
   * `sudo apt-get update`
   * `sudo apt-get upgrade`
@@ -33,7 +34,7 @@ Find the instructions below for your operating system and follow the steps to in
   * `sudo apt-get install nodejs`
 
 <a id="osx"></a>
-###OSX
+####OSX
 1. Install Homebrew
   * `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
   * *If Homebrew is already installed, update it so it is ready to install new packages*
@@ -58,7 +59,7 @@ Find the instructions below for your operating system and follow the steps to in
   * `brew install node`
 
 <a id="windows"></a>
-###Windows
+####Windows
 1. Install PHP
   * Follow the instructions on the [SitePoint website](http://www.sitepoint.com/how-to-install-php-on-windows/)
 2. Install Composer
@@ -117,6 +118,11 @@ Find the instructions below for your operating system and follow the steps to in
   * `php artisan db:seed`
 
 
+<a id="setup-s3"></a>
+##Setup S3
+1. *tbd*
+
+
 <a id="run-local-server"></a>
 ##Run Local Server
 1. Start local server
@@ -132,8 +138,6 @@ Find the instructions below for your operating system and follow the steps to in
   * `cd volunteer-portal/client/src`
   * open `url.js` in text editor
     * comment out `export const URL = 'http://pth.mi-squared.com';` and uncomment `export const URL = 'http://localhost:7771';`
-  * open `action_creators.js` in text editor
-    * comment out `return fetchClient.getOptionsProd()` and uncomment `return fetchClient.getOptionsDev()`
 2. Start Laravel server
   * open new tab in command line
   * `cd volunteer-portal/service`

@@ -38,11 +38,72 @@ class AccountsController extends BaseController
 
     public function getAccount($accountID) {
         $User  = User::where('id', '=', $accountID)->firstOrFail();
-        return response()->json($User);
+        $error = $this->authCheck($User);
+
+        // auth: only the token owner can retrieve their own account
+        if ( $error ) {
+            return $error;
+        }
+
+        return $this->returnAccount($User);
     }
 
-    public function updateAccount() {
-        return "{}";
+    public function getAccountByUsername($username) {
+        $User  = User::where('username', '=', $username)->firstOrFail();
+
+        // auth: only the token owner can retrieve their own account
+        $error = $this->authCheck($User);
+        if ( $error ) {
+            return $error;
+        }
+
+        return $this->returnAccount($User);
+    }
+
+    public function authCheck($User) {
+        // xxx todo - centralize this logic for DRY
+        $payload = JWTAuth::getPayload(JWTAuth::getToken());
+        $subjectAccountID = $payload['sub'];
+        if ( $User['id'] != $subjectAccountID ) {
+            return response()->json([ "error" => "unauthorized" ], 400);
+        }
+        return null;
+    }
+
+    /**
+     * @param $User
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function returnAccount($User) {
+        $VolunteerApplication =
+            VolunteerApplication::where('user_id', '=', $User['id'])
+                ->first();
+
+        $responseMeta = ['account' => $User];
+        if ($VolunteerApplication && $VolunteerApplication['id']) {
+            $responseMeta['application_id'] = $VolunteerApplication['id'];
+        }
+        return response()->json($responseMeta, 200);
+    }
+
+    public function updateAccount(Request $request) {
+        // update the account - to get here, should have survived jwt middleware auth check
+        $credentials = $this->getCredentials($request);
+        $plainPassword = $credentials['password'];
+        $User = User::where('username', '=', $credentials['username'])
+            ->firstOrFail();
+
+        // auth: only the token owner can perform an update on the account
+        $error = $this->authCheck($User);
+        if ( $error ) {
+            return $error;
+        }
+
+        $hashedPassword = Hash::make($plainPassword);
+
+        $update = [ "password" => $hashedPassword ];
+        $User->update($update);
+        return response()->json($User);
     }
 
     public function loginAccount(Request $request) {
@@ -82,4 +143,38 @@ class AccountsController extends BaseController
     {
         return $request->only('username', 'password');
     }
+
+    public function forgotPassword(Request $request) {
+        $accountMeta = $request->all();
+
+        $email = $accountMeta['email'];
+        $User = User::where('username', '=', $email)
+            ->first();
+
+        if ( !$User ) {
+            // send a 200 OK even though its not a registered user, to prevent spammers from fishing
+            // for valid emails
+            return response()->json("{}");
+        }
+
+        // its a valid account - construct a temporary login URL and send it to the user
+
+        // xxx - todo - make this expiring!
+        $token = JWTAuth::fromUser($User);
+
+        $host = env('HOST_URL', 'http://pth.mi-squared.com/client/dist/index.html');
+        $loginLink = $host . "#/external-login?token=" . $token . "&username=". $email . "&next=account";
+
+        $to      =  $email;
+        $subject = 'Password reset link';
+        $message = 'Hello! Please use this temporary link to reset Your Best Pathway to Health Volunteer Account password: ' . $loginLink;
+        $headers = 'From: do_not_reply@pth.mi-squared.com' . "\r\n" .
+            'Reply-To: do_not_reply@pth.mi-squared.com' . "\r\n" .
+            'X-Mailer: PHP/' . phpversion();
+
+        mail($to, $subject, $message, $headers);
+
+        return response()->json("{}");
+    }
+
 }
