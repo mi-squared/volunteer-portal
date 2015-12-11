@@ -108,11 +108,11 @@ class AccountsController extends BaseController
         // its a valid account - construct a temporary login URL and send it to the user
 
         $host = env('HOST_URL', 'http://pth.mi-squared.com/client/dist/index.html');
-        $loginLink = $host . "#/templogin?token=XXXX";
+        $loginLink = $host . "#/prep-account?token=XXXX";
 
         $to      =  $email;
         $subject = 'Password reset link';
-        $message = 'Please use this temporary link to reset Your Best Pathway to Health Volunteer Account password:\n\n' . $loginLink;
+        $message = 'Hello! Please use this temporary link to reset Your Best Pathway to Health Volunteer Account password: ' . $loginLink;
         $headers = 'From: do_not_reply@pth.mi-squared.com' . "\r\n" .
             'Reply-To: do_not_reply@pth.mi-squared.com' . "\r\n" .
             'X-Mailer: PHP/' . phpversion();
