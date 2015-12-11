@@ -22,6 +22,7 @@ import {EsignPageContainer} from './pages/esign-page.jsx';
 import {UploadPageContainer} from './pages/upload-page.jsx';
 import {AccountPageContainer} from './pages/account-page.jsx';
 import {ForgotPasswordPageContainer} from './pages/forgot-password-page.jsx';
+import {ExternalLoginPageContainer} from './pages/external-login-page.jsx';
 
 // const store = createStore(reducer);
 const store = makeStore();
@@ -38,6 +39,7 @@ const routes = <Route path="/" component={App}>
     <Route path="/upload-forms" component={UploadPageContainer} />
     <Route path="/account" component={AccountPageContainer} />
     <Route path="/forgot-password" component={ForgotPasswordPageContainer} />
+    <Route path="/external-login" component={ExternalLoginPageContainer} />
     <IndexRoute component={WelcomePage} />
 </Route>;
 

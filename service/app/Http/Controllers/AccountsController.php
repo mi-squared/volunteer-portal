@@ -107,10 +107,11 @@ class AccountsController extends BaseController
 
         // its a valid account - construct a temporary login URL and send it to the user
 
-        $token = "XXXX";
+        // xxx - todo - make this expiring!
+        $token = JWTAuth::fromUser($User);
 
         $host = env('HOST_URL', 'http://pth.mi-squared.com/client/dist/index.html');
-        $loginLink = $host . "#/url-login?token=" . $token . "&next=account";
+        $loginLink = $host . "#/external-login?token=" . $token . "&username=". $email . "&next=account";
 
         $to      =  $email;
         $subject = 'Password reset link';
