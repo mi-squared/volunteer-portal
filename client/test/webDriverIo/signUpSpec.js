@@ -5,13 +5,21 @@ var chai = require('chai');
 var assert = chai.assert;
 import http from "http";
 import querystring from "querystring";
+import { URL } from "../../src/url";
 
+let HOST,
+    PORT;
+
+if (URL.match(/localhost/)) {
+  HOST = 'localhost';
+  PORT = '7771';
+} else if (URL.match(/pth\.mi-squared\.com/)) {
+  HOST = 'pth.mi-squared.com';
+  PORT = '80';
+}
 const regUrl = "http://localhost:8080/#/new-volunteer";
 const loginUrl = "http://localhost:8080/#/returning-volunteer";
-const prodHost = 'pth.mi-squared.com';
-const prodPort = '80';
-const devHost = 'localhost';
-const devPort = '7771';
+
 
 let randNum100 = () => {
   return Math.floor(Math.random() * 100)
@@ -91,8 +99,8 @@ describe('NewVolunteerPage', () => {
               'password' : emailPassword
             });
             let options = {
-              host: devHost,
-              port: devPort,
+              host: HOST,
+              port: PORT,
               path: '/api/v1/accounts/login',
               method: 'POST',
               headers: {
@@ -218,8 +226,8 @@ describe('NewVolunteerPage', () => {
       }, 10000)
       .then(() => {
         let options = {
-          host: devHost,
-          port: devPort,
+          host: HOST,
+          port: PORT,
           path: '/api/v1/applications/' + applicationID,
           method: 'GET',
           headers: {
