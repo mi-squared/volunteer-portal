@@ -129,6 +129,10 @@ class NewVolunteerPage extends React.Component {
                         ],
                         focusElement: 'q_first_name'
                     });
+                    self.setState({
+                        disabled: false,
+                        value: "Continue"
+                    });
                 }
             );
         } else {
