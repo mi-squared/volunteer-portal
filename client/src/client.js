@@ -92,6 +92,25 @@ export function updateAccount(token, data) {
     return deferred.promise;
 }
 
+export function forgotPassword(data) {
+    var deferred = Q.defer();
+
+    $.ajax({
+        type: "POST",
+        url: getServiceBaseURL() + '/api/v1/accounts/forgotPassword',
+        data: JSON.stringify(data),
+        success: function(response) {
+            deferred.resolve(response);
+        },
+        error: function(request, status, error) {
+            deferred.reject(request.responseText)
+        },
+        dataType: 'json'
+    });
+
+    return deferred.promise;
+}
+
 export function saveApplicationRemote(token, application) {
     var deferred = Q.defer();
     var applicationID = application['id'];

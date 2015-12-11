@@ -42,6 +42,7 @@ class ReturningVolunteerPage extends React.Component {
         this.doSignIn = this.doSignIn.bind(this);
         this.doCancel = this.doCancel.bind(this);
         this.doInvalidCredentials = this.doInvalidCredentials.bind(this);
+        this.doForgotPassword = this.doForgotPassword.bind(this);
     }
 
     componentWillMount() {
@@ -120,6 +121,10 @@ class ReturningVolunteerPage extends React.Component {
         this.props.history.pushState(null, '/');
     }
 
+    doForgotPassword() {
+        this.props.history.pushState(null, '/forgot-password');
+    }
+
     render() {
         return (
             <div className="container well">
@@ -139,6 +144,10 @@ class ReturningVolunteerPage extends React.Component {
                     focusElement={this.props.focusElement||this.state.focusElement}
                     errorFields={this.props.errorFields}
                 />
+
+                <div className="col-md-12">
+                    <a href="javascript:;" onClick={this.doForgotPassword}>Forgot password</a>
+                </div>
 
                 <hr/>
 
