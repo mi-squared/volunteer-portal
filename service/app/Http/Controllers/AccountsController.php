@@ -107,7 +107,7 @@ class AccountsController extends BaseController
 
         // its a valid account - construct a temporary login URL and send it to the user
 
-        $host = getenv('HOST_URL', 'http://pth.mi-squared.com/client/dist/index.html');
+        $host = env('HOST_URL', 'http://pth.mi-squared.com/client/dist/index.html');
         $loginLink = $host . "#/templogin?token=XXXX";
 
         $to      =  $email;
