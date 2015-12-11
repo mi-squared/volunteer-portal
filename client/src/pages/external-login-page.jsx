@@ -13,28 +13,15 @@ class ExternalLoginPage extends React.Component {
     }
 
     componentDidMount() {
-        // xxx there should be a better way to do this
-        var parameters = window.location.href.split("?")[1].split("&");
-        let token;
-        let next;
-        let username;
-        parameters.map( (pair) => {
+        // xxx there should be a better way to do this?
+        var params = {};
+        window.location.href.split("?")[1].split("&").map( (pair) => {
             let pairVals = pair.split("=");
-            if ( pairVals[0] === 'token' ) {
-                token = pairVals[1];
-            }
-            if ( pairVals[0] === 'next' ) {
-                next = pairVals[1];
-            }
-            if ( pairVals[0] === 'username' ) {
-                username = pairVals[1];
-            }
+            params[pairVals[0]] = pairVals[1];
         });
 
-        debugger;
-
         // a token, username, and the next destination are all required to proceed
-        if ( !token || !username || !next ) {
+        if ( !params.token || !params.username || !params.next ) {
             this.props.history.pushState(null, '/');
             return;
         }
@@ -42,15 +29,15 @@ class ExternalLoginPage extends React.Component {
         // set the username in props
         this.props.updateField( {
             key: [ 'session', 'f_username' ],
-            value: username
+            value: params.username
         });
 
         // set the token in props as is -- it will be validated downstream during use
         this.props.login({
-            token: token
+            token: params.token
         });
 
-        this.props.history.pushState(null, '/' + next);
+        this.props.history.pushState(null, '/' + params.next);
     }
 
     render() {
