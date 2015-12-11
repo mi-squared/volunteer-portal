@@ -91,4 +91,31 @@ class AccountsController extends BaseController
     {
         return $request->only('username', 'password');
     }
+
+    public function forgotPassword(Request $request) {
+        $accountMeta = $request->all();
+
+        $User = User::where('username', '=', $accountMeta['email'])
+            ->first();
+
+        if ( !$User ) {
+            // send a 200 OK even though its not a registered user, to prevent spammers from fishing
+            // for valid emails
+            return response()->json("{}");
+        }
+
+        // its a valid account - construct a temporary login URL and send it to the user
+
+        $to      = 'aron@olioapps.com';
+        $subject = 'the subject';
+        $message = 'hello';
+        $headers = 'From: webmaster@example.com' . "\r\n" .
+            'Reply-To: webmaster@example.com' . "\r\n" .
+            'X-Mailer: PHP/' . phpversion();
+
+        mail($to, $subject, $message, $headers);
+
+        return response()->json("{}");
+    }
+
 }

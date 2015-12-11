@@ -51,7 +51,7 @@ class ForgotPasswordPage extends React.Component {
                     $.growl.notice({
                         size: 'large',
                         location: 'bc',
-                        message: "Temporary credentials sent."
+                        message: "Temporary login sent. Please check your email."
                     });
                     this.props.history.pushState(null, '/');
                 },

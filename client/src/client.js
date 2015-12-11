@@ -98,7 +98,7 @@ export function forgotPassword(data) {
     $.ajax({
         type: "POST",
         url: getServiceBaseURL() + '/api/v1/accounts/forgotPassword',
-        data: JSON.stringify(data),
+        data: data,
         success: function(response) {
             deferred.resolve(response);
         },

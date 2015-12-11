@@ -120,6 +120,14 @@ $app->post(
     'AccountsController@createAccount'
 );
 
+/**
+ * Create a forgot account password
+ */
+$app->post(
+    '/api/v1/accounts/forgotPassword',
+    'AccountsController@forgotPassword'
+);
+
 
 // FormLists and Options
 $app->get(
