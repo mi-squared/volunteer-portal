@@ -83,6 +83,11 @@ $app->group(['middleware' => 'jwt.auth'], function($app) {
         'App\Http\Controllers\AccountsController@getAllAccounts'
     );
 
+    $app->get(
+        '/api/v1/accounts/me',
+        'App\Http\Controllers\AccountsController@getAccountFromToken'
+    );
+
     /**
      * Fetch a specific account by ID
      */
