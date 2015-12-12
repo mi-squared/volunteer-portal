@@ -1,12 +1,14 @@
 import React from 'react'
 import $ from 'jquery'
 import Button from 'react-bootstrap/lib/Button.js';
+import fetchClient from "../fetchClient";
 
 
 class UploadField extends React.Component {
     constructor(props) {
         super(props)
         this.state = {uploadState: '', uploadPercent: 0}
+        this.handleDownloadClick = this.handleDownloadClick.bind(this);
     }
     handleUploadClick(event) {
         event.preventDefault()
@@ -15,7 +17,19 @@ class UploadField extends React.Component {
     }
     handleDownloadClick(event) {
         event.preventDefault()
-        
+        fetchClient.getDocumentUrl(this.props.fileName).then(
+          (response) => {
+            let reader = response.body.getReader();
+            let decoder = new TextDecoder();
+            reader.read().then(
+              (result) => {
+                let payLoad = decoder.decode(result.value)
+                this.setState({downloadUrl: payLoad})
+                this.refs.downloadLink.click();
+              }
+            )
+          }
+        );
     }
     handleFileChange(event) {
         let localFile = event.currentTarget.files[0]
@@ -91,13 +105,17 @@ class UploadField extends React.Component {
         // const btnClass = document ? "btn btn-default btn-xs" : "btn btn-default"
         return (
             <div className="form-group center" style={{border: '1px solid #ccc', borderRadius: '3px', padding: '0 15px 15px 15px'}}>
-                <h3>{this.props.fileName} <Button className="btn-info btn-sm" onClick={this.handleDownloadClick.bind(this)}>Download</Button></h3>
+
+                <h3>{this.props.fileName} <Button className="btn-primary btn-sm" onClick={this.handleDownloadClick}>Download</Button></h3>
                 {uploadState === "uploading" && this.renderProgressBar(uploadPercent)}
+                <a ref="downloadLink" href={this.state.downloadUrl} target="_blank" style={{visibility: "hidden"}}></a>
+
                 <form ref="theForm" method="POST" encType="multipart/form-data">
                     <input ref="theFile" name="file" type="file" style={{ visibility: 'hidden', width: '1px', height: '1px' }} onChange={this.handleFileChange.bind(this)} />
                     {document && <strong>{document.fileName}&nbsp;</strong>}
                     <Button ref="theButton" type="button" className="btn-sm" onClick={this.handleUploadClick.bind(this)}>{this.buttonText(uploadState, document)}</Button>
                 </form>
+
             </div>
         )
     }

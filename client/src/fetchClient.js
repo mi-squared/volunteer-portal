@@ -9,6 +9,10 @@ const fetchClient = {
 
   getDocumentsJson: function() {
     return fetch(URL + '/api/v1/documents')
+  },
+
+  getDocumentUrl: function(fileName) {
+    return fetch(URL + '/api/v1/documents/' + fileName)
   }
 
 }

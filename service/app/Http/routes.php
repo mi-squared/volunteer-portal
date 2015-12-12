@@ -160,6 +160,12 @@ $app->get(
     'UploadsController@listDocuments'
 );
 
+  // Get url for a specific doc
+$app->get(
+    '/api/v1/documents/{key}',
+    'UploadsController@getDownloadUrl'
+);
+
 // Upload Forms
 
 $app->post(

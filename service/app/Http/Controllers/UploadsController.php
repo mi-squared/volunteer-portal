@@ -46,28 +46,29 @@ class UploadsController extends BaseController
 
   }
 
-  public function getUploadUrl($value='') {
-
-    //
-    // $app = VolunteerApplication::find($appID);
+  public function getDownloadUrl($key) {
 
     $s3Client = new S3Client([
-      'region'  => getenv('S3_REGION')
+      'region'  => getenv('S3_REGION'),
+      'version' => "2006-03-01"
     ]);
 
     $params = [
       'Bucket' => getenv('S3_BUCKET'),
-      'Key' => getenv('S3_KEY')
+      'Key' => 'documents/' . $key
     ];
 
-    $cmd = $s3Client->getCommand('PutObject', $params);
+    $cmd = $s3Client->getCommand('GetObject', $params);
 
     $request = $s3Client->createPresignedRequest($cmd, '+2 minutes');
 
     // Get the actual presigned-url
     $presignedUrl = $request->getUri();
 
+
     return $presignedUrl;
+
+    // return Redirect::to($presignedUrl);
 
     //$url = $s3Client->getObjectUrl('my-bucket', 'my-key'); // actually get the url to be stored in laravel
 
