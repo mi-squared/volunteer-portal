@@ -48,6 +48,13 @@ class AccountsController extends BaseController
         return $this->returnAccount($User);
     }
 
+    public function getAccountFromToken() {
+        $token = JWTAuth::parseToken()->getToken();
+        $User = JWTAuth::toUser($token);
+
+        return $this->returnAccount($User);
+    }
+
     public function getAccountByUsername($username) {
         $User  = User::where('username', '=', $username)->firstOrFail();
 
