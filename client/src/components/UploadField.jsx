@@ -108,6 +108,7 @@ class UploadField extends React.Component {
 
                 <h3>{this.props.fileName} <Button className="btn-primary btn-sm" onClick={this.handleDownloadClick}>Download</Button></h3>
                 {uploadState === "uploading" && this.renderProgressBar(uploadPercent)}
+
                 <a ref="downloadLink" href={this.state.downloadUrl} target="_blank" style={{visibility: "hidden"}}></a>
 
                 <form ref="theForm" method="POST" encType="multipart/form-data">
