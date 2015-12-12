@@ -145,15 +145,14 @@ class ReturningVolunteerPage extends React.Component {
                     errorFields={this.props.errorFields}
                 />
 
-                <div className="col-md-12">
-                    <a href="javascript:;" onClick={this.doForgotPassword}>Forgot password</a>
-                </div>
-
-                <hr/>
 
                 <div className="j-page-nav col-md-12">
                     <Button onClick={this.doSignIn}  id="submit-login" className="btn btn-primary" disabled={this.state.disabled}>{this.state.value}</Button>
                     <Button onClick={this.doCancel} id="cancel-login">Cancel</Button>
+                </div>
+
+                <div className="col-md-12">
+                    <a href="javascript:;" onClick={this.doForgotPassword} className="pull-right">Forgot password</a>
                 </div>
 
             </div>

@@ -56,10 +56,14 @@ class UploadPage extends React.Component {
         <div className="col-md-12">
           <h1>Upload Forms</h1>
           <div>
-            <UploadField
-              {...this.props}
-              >
-            </UploadField>
+            {this.props.documentsList && this.props.documentsList.map((key) =>
+              <UploadField
+                {...this.props}
+                key={key}
+                fileName={key.match(/\/(.+\.pdf)/)[1]}
+                >
+              </UploadField>
+            )}
 
             <div className="j-page-nav col-md-12">
                 <Button onClick={this.doContinue} id="submit-detail" className="btn btn-primary" disabled={this.state.disabled}>{this.state.value}</Button>

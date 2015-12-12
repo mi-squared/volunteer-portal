@@ -6,7 +6,7 @@ import {createStore} from 'redux';
 import reducer from './reducer';
 import {Provider} from 'react-redux';
 import {createHashHistory} from "history";
-import { fetchOptions } from "./action_creators.js";
+import { fetchOptions, fetchDocumentsList } from "./action_creators.js";
 import makeStore from "./store";
 
 
@@ -52,6 +52,11 @@ history.listen(location => {
   //fetch issues here
   store.dispatch(fetchOptions()) // add conditional reset based on url params remove from component life cycle
 })
+
+store.subscribe(() => {
+  store.dispatch(fetchDocumentsList());
+  }
+);
 
 ReactDOM.render(
 
