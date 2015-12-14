@@ -10,6 +10,17 @@ class UploadField extends React.Component {
         this.state = {uploadState: '', uploadPercent: 0}
         this.handleDownloadClick = this.handleDownloadClick.bind(this);
     }
+    // componentWillMount() {
+    //   // fetchClient.getDocumentUrl(this.props.fileName).then(
+    //   //   (response) => {
+    //   //     response.json().then(
+    //   //       (json) => {
+    //   //         this.setState({downloadUrl: json.url})
+    //   //       }
+    //   //     )
+    //   //   }
+    //   // )
+    // }
     handleUploadClick(event) {
         event.preventDefault()
         this.setState({uploadState: 'uploading'})
@@ -25,10 +36,9 @@ class UploadField extends React.Component {
                 this.refs.downloadLink.click();
               }
             )
-
-
           }
-        );
+        )
+        // this.refs.downloadLink.click();
     }
     handleFileChange(event) {
         let localFile = event.currentTarget.files[0]
@@ -105,10 +115,13 @@ class UploadField extends React.Component {
         return (
             <div className="form-group center" style={{border: '1px solid #ccc', borderRadius: '3px', padding: '0 15px 15px 15px'}}>
 
-                <h3>{this.props.fileName} <Button className="btn-primary btn-sm" onClick={this.handleDownloadClick}>Download</Button></h3>
+                <h3>{this.props.fileName} <Button className="btn-primary btn-sm"
+                                                  onClick={this.handleDownloadClick}
+                                                  href={this.state.downloadUrl}
+                                                  target="_blank">Download</Button></h3>
                 {uploadState === "uploading" && this.renderProgressBar(uploadPercent)}
 
-                <a ref="downloadLink" href={this.state.downloadUrl} target="_blank" style={{visibility: "hidden"}}></a>
+                <a ref="downloadLink" href={this.state.downloadUrl} target="_blank" style={{visibility: "hidden", cursor:'pointer'}}></a>
 
                 <form ref="theForm" method="POST" encType="multipart/form-data">
                     <input ref="theFile" name="file" type="file" style={{ visibility: 'hidden', width: '1px', height: '1px' }} onChange={this.handleFileChange.bind(this)} />
