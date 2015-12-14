@@ -10,35 +10,34 @@ class UploadField extends React.Component {
         this.state = {uploadState: '', uploadPercent: 0}
         this.handleDownloadClick = this.handleDownloadClick.bind(this);
     }
-    // componentWillMount() {
-    //   // fetchClient.getDocumentUrl(this.props.fileName).then(
-    //   //   (response) => {
-    //   //     response.json().then(
-    //   //       (json) => {
-    //   //         this.setState({downloadUrl: json.url})
-    //   //       }
-    //   //     )
-    //   //   }
-    //   // )
-    // }
+    componentWillMount() {
+      fetchClient.getDocumentUrl(this.props.fileName).then(
+        (response) => {
+          response.json().then(
+            (json) => {
+              this.setState({downloadUrl: json.url})
+            }
+          )
+        }
+      )
+    }
     handleUploadClick(event) {
         event.preventDefault()
         this.setState({uploadState: 'uploading'})
         this.refs.theFile.click()
     }
     handleDownloadClick(event) {
-        event.preventDefault()
-        fetchClient.getDocumentUrl(this.props.fileName).then(
-          (response) => {
-            response.json().then(
-              (json) => {
-                this.setState({downloadUrl: json.url})
-                this.refs.downloadLink.click();
-              }
-            )
-          }
-        )
-        // this.refs.downloadLink.click();
+        // event.preventDefault()
+        // fetchClient.getDocumentUrl(this.props.fileName).then(
+        //   (response) => {
+        //     response.json().then(
+        //       (json) => {
+        //         this.setState({downloadUrl: json.url})
+        //         this.refs.downloadLink.click();
+        //       }
+        //     )
+        //   }
+        // )
     }
     handleFileChange(event) {
         let localFile = event.currentTarget.files[0]
