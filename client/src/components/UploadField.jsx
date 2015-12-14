@@ -24,6 +24,17 @@ class UploadField extends React.Component {
     handleUploadClick(event) {
         event.preventDefault()
         this.setState({uploadState: 'uploading'})
+        let id = this.props.data.id;
+        let fileName = this.props.fileName;
+        fetchClient.getUploadUrl(id, fileName).then(
+          (response) => {
+            response.json().then(
+              (json) => {
+                this.setState({uploadUrl: json.url})
+              }
+            )
+          }
+        )
         this.refs.theFile.click()
     }
     handleDownloadClick(event) {
@@ -41,17 +52,18 @@ class UploadField extends React.Component {
     }
     handleFileChange(event) {
         let localFile = event.currentTarget.files[0]
-        let documentUploadMeta = {
-            applicationUuid: this.props.application.uuid,
-            fileName: localFile.name,
-            contentType: localFile.type,
-        }
+        // let documentUploadMeta = {
+        //     applicationUuid: this.props.application.uuid,
+        //     fileName: localFile.name,
+        //     contentType: localFile.type,
+        // }
+        // maybe get upload url here or insert it
         // postDocumentUploadURL(documentUploadMeta).then(this.uploadDocument.bind(this))
+        this.uploadDocument(localFile);
     }
     uploadDocument(documentResult) {
         const file = this.refs.theFile.files[0]
-        const uuid = documentResult.uuid
-        const url = documentResult.url
+        const url = this.state.uploadUrl
         $.ajax( {
             url: url,
             type: 'PUT',
@@ -60,8 +72,6 @@ class UploadField extends React.Component {
             contentType: file.type,
             cache: false,
             success: (response) => {
-                const doc = this.generateDoc(uuid, url)
-                this.props.onUpload(doc)
                 this.setState({uploadState: ''})
             },
             xhr: () => {
