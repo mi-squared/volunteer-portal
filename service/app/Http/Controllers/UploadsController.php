@@ -7,6 +7,7 @@ use App\VolunteerApplication;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
+use Redirect;
 
 class UploadsController extends BaseController
 {
@@ -65,9 +66,14 @@ class UploadsController extends BaseController
     // Get the actual presigned-url
     $presignedUrl = $request->getUri();
 
+    $presignedUrlArray = [
+        'url' => (string) $presignedUrl
+      ];
 
-    return $presignedUrl;
+    return json_encode($presignedUrlArray);
 
+    // Redirect::away($presignedUrl);
+    // return redirect($presignedUrl);
     // return Redirect::to($presignedUrl);
     // return response()->download($presignedUrl);
     //$url = $s3Client->getObjectUrl('my-bucket', 'my-key'); // actually get the url to be stored in laravel

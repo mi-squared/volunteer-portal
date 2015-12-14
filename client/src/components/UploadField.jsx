@@ -19,15 +19,14 @@ class UploadField extends React.Component {
         event.preventDefault()
         fetchClient.getDocumentUrl(this.props.fileName).then(
           (response) => {
-            let reader = response.body.getReader();
-            let decoder = new TextDecoder();
-            reader.read().then(
-              (result) => {
-                let payLoad = decoder.decode(result.value)
-                this.setState({downloadUrl: payLoad})
+            response.json().then(
+              (json) => {
+                this.setState({downloadUrl: json.url})
                 this.refs.downloadLink.click();
               }
             )
+
+
           }
         );
     }
