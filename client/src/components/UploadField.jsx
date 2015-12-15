@@ -140,7 +140,7 @@ class UploadField extends React.Component {
                 <form ref="theForm" method="POST" encType="multipart/form-data">
                     <input ref="theFile" name="file" type="file" style={{ visibility: 'hidden', width: '1px', height: '1px' }} onChange={this.handleFileChange.bind(this)} />
                     {upload && <strong>{upload.fileName}&nbsp;</strong>}
-                    <Button ref="theButton" type="button" className="btn-sm" onClick={this.handleUploadClick.bind(this)}>{this.buttonText(uploadState, upload)}</Button>
+                    <Button ref="theButton" type="button" className={btnClass} onClick={this.handleUploadClick.bind(this)}>{this.buttonText(uploadState, upload)}</Button>
                 </form>
 
                 <div style={{marginTop: '15px'}}>
