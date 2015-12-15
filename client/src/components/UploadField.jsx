@@ -91,17 +91,6 @@ class UploadField extends React.Component {
         const percent = Math.round( (event.loaded/event.total) * 100 )
         this.setState({uploadPercent: percent})
     }
-    generateDoc(uuid: string, url) {
-        let localFile = this.refs.theFile.files[0]
-        let urlWithoutQuerystring = url.split("?")[0]
-        return {
-            contentType: localFile.type,
-            fileName: localFile.name,
-            title: this.props.title,
-            url: urlWithoutQuerystring,
-            uuid: uuid,
-        }
-    }
     upload() {
         if (this.props.data.uploads) {
           return this.props.data.uploads.find(u => u.src_name === this.props.fileName)
