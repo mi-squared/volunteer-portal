@@ -173,9 +173,9 @@ $app->get(
 
 // Upload Forms
 
-$app->post(
-    '/api/v1/documents/uploads/{appID}',
-    'App\Http\Controllers\UploadsController@createUpload'
+$app->get(
+    '/api/v1/uploads/{appID}/{key}',
+    'UploadsController@getUploadUrl'
 );
 
 

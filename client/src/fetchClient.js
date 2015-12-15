@@ -13,6 +13,10 @@ const fetchClient = {
 
   getDocumentUrl: function(fileName) {
     return fetch(URL + '/api/v1/documents/' + fileName)
+  },
+
+  getUploadUrl: function(appID, fileName) {
+    return fetch(URL + '/api/v1/uploads/' + appID + '/' + fileName)
   }
 
 }

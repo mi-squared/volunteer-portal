@@ -80,7 +80,7 @@ class UploadsController extends BaseController
 
   }
 
-  public function createUpload() {
+  public function getUploadUrl($appID, $key) {
 
     $s3Client = new S3Client([
       'region'  => getenv('S3_REGION'),
@@ -89,7 +89,7 @@ class UploadsController extends BaseController
 
     $params = [
       'Bucket' => getenv('S3_BUCKET'),
-      'Key' => 'documents/' . $key
+      'Key' => 'completed_documents/' . $appID . '/' . $key
     ];
 
     $cmd = $s3Client->getCommand('PutObject', $params);

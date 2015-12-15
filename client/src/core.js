@@ -4,6 +4,7 @@ import {URL} from './url';
 var initialStateTemplate = {
     data: {
         children: [],
+        uploads: [],
         q_is_adventist: "false",
         q_volunteered_before : 'false',
         q_languages: 'English',
@@ -33,6 +34,13 @@ export function addChild(state, childSpec ) {
     var toMerge = state.get("data").get("children").toJSON();
     toMerge.push( childSpec );
     var newstate = state.mergeIn(['data', 'children'], fromJS(toMerge));
+    return newstate;
+}
+
+export function addUpload(state, upload ) {
+    var toMerge = state.get('data').get('uploads').toJSON();
+    toMerge.push( upload );
+    var newstate = state.mergeIn(['data', 'uploads'], fromJS(toMerge));
     return newstate;
 }
 
