@@ -72,7 +72,7 @@ class UploadField extends React.Component {
                 this.props.addUpload({
                   src_name: this.props.fileName,
                   size: file.size,
-                  type: file.type,
+                  content_type: file.type,
                   url: this.state.getUrl,
                   application_id: this.props.data.id
                 })
