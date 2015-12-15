@@ -1,7 +1,7 @@
 import React from 'react'
 import $ from 'jquery'
-import Button from 'react-bootstrap/lib/Button.js';
 import fetchClient from "../fetchClient";
+import { Button, Glyphicon } from 'react-bootstrap'
 
 
 class UploadField extends React.Component {
@@ -91,14 +91,19 @@ class UploadField extends React.Component {
         const percent = Math.round( (event.loaded/event.total) * 100 )
         this.setState({uploadPercent: percent})
     }
-    // document() {
-    //     return this.props.data.uploads.find(d => d.src_name === this.props.fileName)
-    // }
-    buttonText(uploadState, document) {
+
+    upload() {
+        if (this.props.data.uploads) {
+          return this.props.data.uploads.find(u => u.src_name === this.props.fileName)
+        }
+        return ""
+    }
+    buttonText(uploadState, upload) {
+
         if (uploadState === 'uploading') {
             return 'Uploading...'
         }
-        return document ? "Change" : "Upload"
+        return upload ? "Change" : "Upload"
     }
     renderProgressBar(uploadPercent) {
         return (
@@ -109,10 +114,19 @@ class UploadField extends React.Component {
             </div>
         )
     }
+    uploadIcon(upload) {
+      return upload ? "ok" : "remove"
+    }
+    iconColor(upload) {
+      return upload ? 'green' : 'red'
+    }
+    uploadStatus(upload) {
+        return upload ? "Your file has been uploaded." : "Please upload your file."
+    }
     render() {
-        // const { uploadState, uploadPercent } = this.state
-        // const document = this.document()
-        const btnClass = document ? "btn btn-default btn-xs" : "btn btn-default"
+        const { uploadState, uploadPercent } = this.state
+        const upload = this.upload()
+        const btnClass = upload ? "btn btn-default btn-xs" : "btn btn-default"
         return (
             <div className="form-group center" style={{border: '1px solid #ccc', borderRadius: '3px', padding: '0 15px 15px 15px'}}>
 
@@ -126,9 +140,13 @@ class UploadField extends React.Component {
 
                 <form ref="theForm" method="POST" encType="multipart/form-data">
                     <input ref="theFile" name="file" type="file" style={{ visibility: 'hidden', width: '1px', height: '1px' }} onChange={this.handleFileChange.bind(this)} />
-                    {document && <strong>{document.fileName}&nbsp;</strong>}
-                    <Button ref="theButton" type="button" className="btn-sm" onClick={this.handleUploadClick.bind(this)}>{this.buttonText(uploadState, document)}</Button>
+                    {upload && <strong>{upload.fileName}&nbsp;</strong>}
+                    <Button ref="theButton" type="button" className="btn-sm" onClick={this.handleUploadClick.bind(this)}>{this.buttonText(uploadState, upload)}</Button>
                 </form>
+
+                <div style={{marginTop: '15px'}}>
+                    <Glyphicon glyph={this.uploadIcon(upload)} style={{color: this.iconColor(upload) }}/> {this.uploadStatus(upload)}
+                </div>
 
             </div>
         )
