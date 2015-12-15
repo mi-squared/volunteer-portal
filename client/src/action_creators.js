@@ -1,4 +1,5 @@
 import fetchClient from "./fetchClient";
+import { getApplication } from "./client";
 
 export function setState(state) {
     return {
@@ -67,6 +68,25 @@ export function receiveDocumentsList(json) {
     json
   }
 }
+
+export function isLoggedIn(token, applicationID, stateInfo) {
+  return (dispatch, getState) => {
+    if (!getState().get('jwt') && token && applicationID) {
+      return getApplication(token, applicationID).then(
+        (response) => {
+          dispatch(loadApplication(response));
+          dispatch(login(stateInfo));
+        }
+      )
+    }
+  }
+}
+
+// export function bootstrap() {
+//   return (dispatch, getState) => {
+//
+//   }
+// }
 
 export function fetchOptions() {
     return (dispatch, getState) => {

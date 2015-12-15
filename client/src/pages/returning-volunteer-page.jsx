@@ -66,16 +66,17 @@ class ReturningVolunteerPage extends React.Component {
                 .then(
                     function(response) {
                         var token = response.token;
+                        var applicationID = response['application_id'];
+                        sessionStorage.setItem('token', token);
+                        sessionStorage.setItem('applicationID', applicationID);
                         self.props.login({
                             token: token
                         });
-                        var applicationID = response['application_id'];
                         if ( applicationID ) {
                             console.log("Loading app " + applicationID);
                             getApplication(token, applicationID).then(
                                 function(response) {
                                     self.props.loadApplication(response);
-                                    console.log(response);
                                     self.props.history.pushState(null, '/main');
                                 },
                                 function(error) {

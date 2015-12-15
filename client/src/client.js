@@ -10,8 +10,6 @@ export function login(username, password) {
     };
 
     var deferred = Q.defer();
-    // console.log(getServiceBaseURL() + '/api/v1/accounts/login')
-    // console.log(data)
 
     $.ajax({
         type: "POST",
