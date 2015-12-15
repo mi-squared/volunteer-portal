@@ -82,7 +82,7 @@ class VolunteerApplicationController extends BaseController
                     $VolunteerApplication->uploads()->save($Upload);
                 }
             }
-            // $VolunteerApplication->uploads;
+            $VolunteerApplication->uploads;
             return response()->json($VolunteerApplication);
         }
         catch (JWTException $e)
@@ -105,6 +105,7 @@ class VolunteerApplicationController extends BaseController
         }
 
         $VolunteerApplication->children;
+        $VolunteerApplication->uploads;
         return response()->json($VolunteerApplication);
     }
 
