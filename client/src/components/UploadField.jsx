@@ -91,19 +91,8 @@ class UploadField extends React.Component {
         const percent = Math.round( (event.loaded/event.total) * 100 )
         this.setState({uploadPercent: percent})
     }
-    generateDoc(uuid: string, url) {
-        let localFile = this.refs.theFile.files[0]
-        let urlWithoutQuerystring = url.split("?")[0]
-        return {
-            contentType: localFile.type,
-            fileName: localFile.name,
-            title: this.props.title,
-            url: urlWithoutQuerystring,
-            uuid: uuid,
-        }
-    }
     // document() {
-    //     return this.props.documents.find(d => d.title === this.props.title)
+    //     return this.props.data.uploads.find(d => d.src_name === this.props.fileName)
     // }
     buttonText(uploadState, document) {
         if (uploadState === 'uploading') {
@@ -121,9 +110,9 @@ class UploadField extends React.Component {
         )
     }
     render() {
-        const { uploadState, uploadPercent } = this.state
+        // const { uploadState, uploadPercent } = this.state
         // const document = this.document()
-        // const btnClass = document ? "btn btn-default btn-xs" : "btn btn-default"
+        const btnClass = document ? "btn btn-default btn-xs" : "btn btn-default"
         return (
             <div className="form-group center" style={{border: '1px solid #ccc', borderRadius: '3px', padding: '0 15px 15px 15px'}}>
 
