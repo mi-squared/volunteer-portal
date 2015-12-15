@@ -24,19 +24,13 @@ class UploadPage extends React.Component {
   }
 
   doContinue() {
-      // if ( this.props.doValidate( this.schema ) ) {
-      //     // disable button on click to prevent multiple clicks
-      //     this.setState({
-      //       disabled: true,
-      //       value: "Please Wait"
-      //     });
-      //     // save the application if passes validation
-      //     var self = this;
-      //     this.props.saveApplication().then( () => {
-      //         // then move on to next page
-      //         var isEsigned = this.props.data['q_esigned'] === 'true';
-      //         if ( isEsigned ) {
-                  this.props.history.pushState(null, '/done-application');
+    this.setState({
+      disabled: true,
+      value: "Please Wait"
+    });
+    this.props.saveApplication().then(() => {
+      this.props.history.pushState(null, '/done-application');
+    })
       //         } else {
       //             this.props.history.pushState(null, '/esign');
       //         }

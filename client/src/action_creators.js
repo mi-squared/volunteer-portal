@@ -33,6 +33,13 @@ export function updateChild( childSpec ) {
     };
 }
 
+export function addUpload( upload ) {
+    return {
+        type: 'ADD_UPLOAD',
+        upload
+    };
+}
+
 export function login( accountSpec ) {
     return {
         type: 'LOGIN',

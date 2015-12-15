@@ -134,6 +134,10 @@ export default function composePage(Component) {
                         if ( !response.children ) {
                             response.children = [];
                         }
+                        if ( !response.uploads ) {
+                            response.uploads = [];
+                        }
+                        console.log(response);
                         self.props.setState( response );
                         deferred.resolve();
                     }, 1);

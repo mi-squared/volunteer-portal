@@ -1,7 +1,7 @@
 import React from 'react'
 import $ from 'jquery'
-import Button from 'react-bootstrap/lib/Button.js';
 import fetchClient from "../fetchClient";
+import { Button, Glyphicon } from 'react-bootstrap'
 
 
 class UploadField extends React.Component {
@@ -24,6 +24,20 @@ class UploadField extends React.Component {
     handleUploadClick(event) {
         event.preventDefault()
         this.setState({uploadState: 'uploading'})
+        let id = this.props.data.id;
+        let fileName = this.props.fileName;
+        fetchClient.getUploadUrl(id, fileName).then(
+          (response) => {
+            response.json().then(
+              (json) => {
+                this.setState({
+                                postUrl: json.postUrl,
+                                getUrl: json.getUrl
+                              })
+              }
+            )
+          }
+        )
         this.refs.theFile.click()
     }
     handleDownloadClick(event) {
@@ -40,18 +54,12 @@ class UploadField extends React.Component {
         // )
     }
     handleFileChange(event) {
-        let localFile = event.currentTarget.files[0]
-        let documentUploadMeta = {
-            applicationUuid: this.props.application.uuid,
-            fileName: localFile.name,
-            contentType: localFile.type,
-        }
-        // postDocumentUploadURL(documentUploadMeta).then(this.uploadDocument.bind(this))
+        let localFile = event.currentTarget.files[0];
+        this.uploadDocument(localFile);
     }
     uploadDocument(documentResult) {
-        const file = this.refs.theFile.files[0]
-        const uuid = documentResult.uuid
-        const url = documentResult.url
+        const file = this.refs.theFile.files[0];
+        const url = this.state.postUrl;
         $.ajax( {
             url: url,
             type: 'PUT',
@@ -60,9 +68,14 @@ class UploadField extends React.Component {
             contentType: file.type,
             cache: false,
             success: (response) => {
-                const doc = this.generateDoc(uuid, url)
-                this.props.onUpload(doc)
                 this.setState({uploadState: ''})
+                this.props.addUpload({
+                  src_name: this.props.fileName,
+                  size: file.size,
+                  type: file.type,
+                  url: this.state.getUrl,
+                  application_id: this.props.data.id
+                })
             },
             xhr: () => {
                 let xhr = $.ajaxSettings.xhr()
@@ -78,25 +91,17 @@ class UploadField extends React.Component {
         const percent = Math.round( (event.loaded/event.total) * 100 )
         this.setState({uploadPercent: percent})
     }
-    generateDoc(uuid: string, url) {
-        let localFile = this.refs.theFile.files[0]
-        let urlWithoutQuerystring = url.split("?")[0]
-        return {
-            contentType: localFile.type,
-            fileName: localFile.name,
-            title: this.props.title,
-            url: urlWithoutQuerystring,
-            uuid: uuid,
+    upload() {
+        if (this.props.data.uploads) {
+          return this.props.data.uploads.find(u => u.src_name === this.props.fileName)
         }
+        return ""
     }
-    // document() {
-    //     return this.props.documents.find(d => d.title === this.props.title)
-    // }
-    buttonText(uploadState, document) {
+    buttonText(uploadState, upload) {
         if (uploadState === 'uploading') {
             return 'Uploading...'
         }
-        return document ? "Change" : "Upload"
+        return upload ? "Change" : "Upload"
     }
     renderProgressBar(uploadPercent) {
         return (
@@ -107,10 +112,19 @@ class UploadField extends React.Component {
             </div>
         )
     }
+    uploadIcon(upload) {
+      return upload ? "ok" : "remove"
+    }
+    iconColor(upload) {
+      return upload ? 'green' : 'red'
+    }
+    uploadStatus(upload) {
+        return upload ? "Your file has been uploaded." : "Please upload your file."
+    }
     render() {
         const { uploadState, uploadPercent } = this.state
-        // const document = this.document()
-        // const btnClass = document ? "btn btn-default btn-xs" : "btn btn-default"
+        const upload = this.upload()
+        const btnClass = upload ? "btn btn-default btn-xs" : "btn btn-default"
         return (
             <div className="form-group center" style={{border: '1px solid #ccc', borderRadius: '3px', padding: '0 15px 15px 15px'}}>
 
@@ -124,9 +138,13 @@ class UploadField extends React.Component {
 
                 <form ref="theForm" method="POST" encType="multipart/form-data">
                     <input ref="theFile" name="file" type="file" style={{ visibility: 'hidden', width: '1px', height: '1px' }} onChange={this.handleFileChange.bind(this)} />
-                    {document && <strong>{document.fileName}&nbsp;</strong>}
-                    <Button ref="theButton" type="button" className="btn-sm" onClick={this.handleUploadClick.bind(this)}>{this.buttonText(uploadState, document)}</Button>
+                    {upload && <strong>{upload.fileName}&nbsp;</strong>}
+                    <Button ref="theButton" type="button" className="btn-sm" onClick={this.handleUploadClick.bind(this)}>{this.buttonText(uploadState, upload)}</Button>
                 </form>
+
+                <div style={{marginTop: '15px'}}>
+                    <Glyphicon glyph={this.uploadIcon(upload)} style={{color: this.iconColor(upload) }}/> {this.uploadStatus(upload)}
+                </div>
 
             </div>
         )
