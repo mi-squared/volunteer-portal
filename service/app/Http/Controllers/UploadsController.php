@@ -76,7 +76,6 @@ class UploadsController extends BaseController
     // return redirect($presignedUrl);
     // return Redirect::to($presignedUrl);
     // return response()->download($presignedUrl);
-    //$url = $s3Client->getObjectUrl('my-bucket', 'my-key'); // actually get the url to be stored in laravel
 
   }
 
@@ -99,8 +98,11 @@ class UploadsController extends BaseController
     // Get the actual presigned-url
     $presignedUrl = $request->getUri();
 
+    $getUrl = $s3Client->getObjectUrl($params['Bucket'], $params['Key']); // actually get the url to be stored in laravel
+
     $presignedUrlArray = [
-        'url' => (string) $presignedUrl
+        'postUrl' => (string) $presignedUrl,
+        'getUrl'  => (string) $getUrl
       ];
 
     return json_encode($presignedUrlArray);
