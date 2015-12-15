@@ -58,8 +58,8 @@ class UploadField extends React.Component {
         this.uploadDocument(localFile);
     }
     uploadDocument(documentResult) {
-        const file = this.refs.theFile.files[0];
-        const url = this.state.postUrl;
+        let file = this.refs.theFile.files[0];
+        let url = this.state.postUrl;
         $.ajax( {
             url: url,
             type: 'PUT',
@@ -126,14 +126,12 @@ class UploadField extends React.Component {
                 <h3>
                     {this.props.fileName}
                     &nbsp;
-                    {
-                        this.state.downloadUrl ?
+                    {this.state.downloadUrl ?
                         <Button className="btn-primary btn-sm"
                                 onClick={this.handleDownloadClick}
                                 href={this.state.downloadUrl}
                                 target="_blank">Download</Button>
-                        : ""
-                    }
+                    : ""}
                 </h3>
                 {uploadState === "uploading" && this.renderProgressBar(uploadPercent)}
 
