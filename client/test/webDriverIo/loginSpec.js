@@ -33,7 +33,7 @@ describe("ReturningVolunteerPage", () => {
         })
         .elements('input', (err, elements) => {
           console.log(elements.value.length);
-          assert.strictEqual(elements.value.length, 24);
+          assert.strictEqual(elements.value.length, 28);
         })
         .call(done)
   });
