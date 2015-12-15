@@ -113,26 +113,28 @@ class UploadField extends React.Component {
             </div>
         )
     }
-    uploadIcon(upload) {
-      return upload ? "ok" : "remove"
-    }
-    iconColor(upload) {
-      return upload ? 'green' : 'red'
-    }
-    uploadStatus(upload) {
-        return upload ? "Your file has been uploaded." : "Please upload your file."
-    }
     render() {
         const { uploadState, uploadPercent } = this.state
         const upload = this.upload()
-        const btnClass = upload ? "btn btn-default btn-xs" : "btn btn-default"
+        let btnClass = upload ? "btn btn-default btn-xs" : "btn btn-default"
+        let uploadIcon = upload ? "ok" : "remove"
+        let iconColor = upload ? "green" : "red"
+        let uploadStatus = upload ? "Your file has been uploaded." : "Please upload your file."
         return (
             <div className="form-group center" style={{border: '1px solid #ccc', borderRadius: '3px', padding: '0 15px 15px 15px'}}>
 
-                <h3>{this.props.fileName} <Button className="btn-primary btn-sm"
-                                                  onClick={this.handleDownloadClick}
-                                                  href={this.state.downloadUrl}
-                                                  target="_blank">Download</Button></h3>
+                <h3>
+                    {this.props.fileName}
+                    &nbsp;
+                    {
+                        this.state.downloadUrl ?
+                        <Button className="btn-primary btn-sm"
+                                onClick={this.handleDownloadClick}
+                                href={this.state.downloadUrl}
+                                target="_blank">Download</Button>
+                        : ""
+                    }
+                </h3>
                 {uploadState === "uploading" && this.renderProgressBar(uploadPercent)}
 
                 <a ref="downloadLink" href={this.state.downloadUrl} target="_blank" style={{visibility: "hidden", cursor:'pointer'}}></a>
@@ -144,7 +146,7 @@ class UploadField extends React.Component {
                 </form>
 
                 <div style={{marginTop: '15px'}}>
-                    <Glyphicon glyph={this.uploadIcon(upload)} style={{color: this.iconColor(upload) }}/> {this.uploadStatus(upload)}
+                    <Glyphicon glyph={uploadIcon} style={{color: iconColor }}/> {uploadStatus}
                 </div>
 
             </div>
