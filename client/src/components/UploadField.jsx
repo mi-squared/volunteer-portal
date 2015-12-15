@@ -76,6 +76,7 @@ class UploadField extends React.Component {
                   url: this.state.getUrl,
                   application_id: this.props.data.id
                 })
+                this.props.saveApplication()
             },
             xhr: () => {
                 let xhr = $.ajaxSettings.xhr()
