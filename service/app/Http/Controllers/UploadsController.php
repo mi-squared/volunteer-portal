@@ -72,7 +72,7 @@ class UploadsController extends BaseController
 
     return json_encode($presignedUrlArray);
 
-    // Redirect::away($presignedUrl);
+    // Redirect::away($presignedUrl); // none of these actually work
     // return redirect($presignedUrl);
     // return Redirect::to($presignedUrl);
     // return response()->download($presignedUrl);

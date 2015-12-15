@@ -105,7 +105,7 @@ class VolunteerApplicationController extends BaseController
         }
 
         $VolunteerApplication->children;
-        $VolunteerApplication->uploads;
+        $VolunteerApplication->uploads; // don't know what this line does, but it is necessary
         return response()->json($VolunteerApplication);
     }
 

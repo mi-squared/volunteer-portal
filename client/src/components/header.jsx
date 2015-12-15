@@ -11,6 +11,7 @@ export default class Header extends React.Component {
 
     logout() {
         this.props.reset();
+        sessionStorage.clear();
         this.props.history.pushState(null, '/');
     }
 

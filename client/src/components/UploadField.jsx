@@ -92,6 +92,7 @@ class UploadField extends React.Component {
         const percent = Math.round( (event.loaded/event.total) * 100 )
         this.setState({uploadPercent: percent})
     }
+
     upload() {
         if (this.props.data.uploads) {
           return this.props.data.uploads.find(u => u.src_name === this.props.fileName)
@@ -99,6 +100,7 @@ class UploadField extends React.Component {
         return ""
     }
     buttonText(uploadState, upload) {
+
         if (uploadState === 'uploading') {
             return 'Uploading...'
         }

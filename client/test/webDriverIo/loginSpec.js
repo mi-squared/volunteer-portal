@@ -32,8 +32,8 @@ describe("ReturningVolunteerPage", () => {
           })
         })
         .elements('input', (err, elements) => {
-          assert.strictEqual(elements.value.length, 24);
           console.log(elements.value.length);
+          assert.strictEqual(elements.value.length, 28);
         })
         .call(done)
   });

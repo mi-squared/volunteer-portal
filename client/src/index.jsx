@@ -6,7 +6,7 @@ import {createStore} from 'redux';
 import reducer from './reducer';
 import {Provider} from 'react-redux';
 import {createHashHistory} from "history";
-import { fetchOptions, fetchDocumentsList } from "./action_creators.js";
+import { fetchOptions, fetchDocumentsList, isLoggedIn } from "./action_creators.js";
 import makeStore from "./store";
 
 
@@ -49,8 +49,12 @@ store.dispatch({
 
 let history = createHashHistory();
 history.listen(location => {
+  let token = sessionStorage.getItem('token');
+  let applicationID = sessionStorage.getItem('applicationID');
+  store.dispatch(isLoggedIn(token, applicationID, sessionStorage));
   //fetch issues here
   store.dispatch(fetchOptions()) // add conditional reset based on url params remove from component life cycle
+
 })
 
 store.subscribe(() => {

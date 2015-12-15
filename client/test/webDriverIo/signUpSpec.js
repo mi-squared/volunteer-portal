@@ -61,7 +61,6 @@ describe('NewVolunteerPage', () => {
     client
         .init()
         .url(regUrl)
-        .selectByIndex('select', 1)
         .getAttribute('input', 'id').then(
           (ids) => {
             ids.forEach((id) => {
@@ -84,6 +83,7 @@ describe('NewVolunteerPage', () => {
             })
           }
         )
+        .selectByIndex('select', 1)
         .waitForValue('input', 10000)
         .waitForValue('input#dob', 10000)
         .click('#submit')
