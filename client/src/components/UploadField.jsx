@@ -1,7 +1,7 @@
 import React from 'react'
 import $ from 'jquery'
-import Button from 'react-bootstrap/lib/Button.js';
 import fetchClient from "../fetchClient";
+import { Button, Glyphicon } from 'react-bootstrap'
 
 
 class UploadField extends React.Component {
@@ -104,7 +104,7 @@ class UploadField extends React.Component {
     }
     upload() {
         if (this.props.data.uploads) {
-          return this.props.data.uploads.find(u => u.fileName === this.props.fileName)
+          return this.props.data.uploads.find(u => u.src_name === this.props.fileName)
         }
         return ""
     }
@@ -122,6 +122,12 @@ class UploadField extends React.Component {
                 </div>
             </div>
         )
+    }
+    uploadIcon(upload) {
+      return upload ? "ok" : "remove"
+    }
+    iconColor(upload) {
+      return upload ? 'green' : 'red'
     }
     uploadStatus(upload) {
         return upload ? "Your file has been uploaded." : "Please upload your file."
@@ -148,7 +154,7 @@ class UploadField extends React.Component {
                 </form>
 
                 <div style={{marginTop: '15px'}}>
-                    {this.uploadStatus(upload)}
+                    <Glyphicon glyph={this.uploadIcon(upload)} style={{color: this.iconColor(upload) }}/> {this.uploadStatus(upload)}
                 </div>
 
             </div>
