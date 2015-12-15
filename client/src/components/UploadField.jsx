@@ -51,14 +51,7 @@ class UploadField extends React.Component {
         // )
     }
     handleFileChange(event) {
-        let localFile = event.currentTarget.files[0]
-        // let documentUploadMeta = {
-        //     applicationUuid: this.props.application.uuid,
-        //     fileName: localFile.name,
-        //     contentType: localFile.type,
-        // }
-        // maybe get upload url here or insert it
-        // postDocumentUploadURL(documentUploadMeta).then(this.uploadDocument.bind(this))
+        let localFile = event.currentTarget.files[0];
         this.uploadDocument(localFile);
     }
     uploadDocument(documentResult) {
@@ -73,6 +66,9 @@ class UploadField extends React.Component {
             cache: false,
             success: (response) => {
                 this.setState({uploadState: ''})
+                this.props.addUpload({
+                  applicationId: this.props.data.id
+                })
             },
             xhr: () => {
                 let xhr = $.ajaxSettings.xhr()

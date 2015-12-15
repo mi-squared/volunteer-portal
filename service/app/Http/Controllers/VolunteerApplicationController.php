@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\VolunteerApplication;
 use App\VolunteerChild;
 use App\User;
+use App\Upload;
 
 class VolunteerApplicationController extends BaseController
 {
@@ -69,6 +70,19 @@ class VolunteerApplicationController extends BaseController
                 }
             }
             $VolunteerApplication->children;
+            /// add uploads to app
+            if ( array_key_exists('uploads', $applicationMeta) ) {
+                foreach($applicationMeta['uploads'] as $upload) {
+                    if ( array_key_exists('id', $upload) ) {
+                        $Upload = Upload::where('id', '=', $upload['id'])->firstOrFail();
+                        $Upload->update($upload);
+                    } else {
+                        $Upload = Upload::create($upload);
+                    }
+                    $VolunteerApplication->uploads()->save($Upload);
+                }
+            }
+            // $VolunteerApplication->uploads;
             return response()->json($VolunteerApplication);
         }
         catch (JWTException $e)

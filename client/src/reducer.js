@@ -3,6 +3,7 @@ import {
     updateField,
     addChild,
     updateChild,
+    addUpload,
     login,
     saveApplication,
     loadApplication,
@@ -26,6 +27,9 @@ export default function reducer(state = INITIAL_STATE, action) {
         }
         case 'UPDATE_CHILD': {
             return updateChild(state, action.childSpec);
+        }
+        case 'ADD_UPLOAD': {
+            return addUpload(state, action.upload);
         }
         case 'SET_STATE': {
             return updateField( state, {
