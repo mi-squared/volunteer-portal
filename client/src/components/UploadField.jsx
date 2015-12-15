@@ -30,7 +30,10 @@ class UploadField extends React.Component {
           (response) => {
             response.json().then(
               (json) => {
-                this.setState({uploadUrl: json.url})
+                this.setState({
+                                postUrl: json.postUrl,
+                                getUrl: json.getUrl
+                              })
               }
             )
           }
@@ -55,8 +58,8 @@ class UploadField extends React.Component {
         this.uploadDocument(localFile);
     }
     uploadDocument(documentResult) {
-        const file = this.refs.theFile.files[0]
-        const url = this.state.uploadUrl
+        const file = this.refs.theFile.files[0];
+        const url = this.state.postUrl;
         $.ajax( {
             url: url,
             type: 'PUT',
@@ -67,7 +70,11 @@ class UploadField extends React.Component {
             success: (response) => {
                 this.setState({uploadState: ''})
                 this.props.addUpload({
-                  applicationId: this.props.data.id
+                  src_name: this.props.fileName,
+                  size: file.size,
+                  type: file.type,
+                  url: this.state.getUrl,
+                  application_id: this.props.data.id
                 })
             },
             xhr: () => {
