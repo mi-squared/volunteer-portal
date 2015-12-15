@@ -75,6 +75,7 @@ class ReturningVolunteerPage extends React.Component {
                             getApplication(token, applicationID).then(
                                 function(response) {
                                     self.props.loadApplication(response);
+                                    console.log(response);
                                     self.props.history.pushState(null, '/main');
                                 },
                                 function(error) {
