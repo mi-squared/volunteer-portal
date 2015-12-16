@@ -113,6 +113,9 @@ export default class DemographicsFields extends BaseSection {
                         'data.q_church_pastor_email',
                         'data.q_church_pastor_phone',
                     ] } }
+                    clearIf={ { isNot : "false", fields: [
+                        'data.q_church_affiliation'
+                    ] } }
                 />
 
                 <QuestionContainer {...this.props} criteria={ {key : 'q_is_adventist', value : "true" } }>
