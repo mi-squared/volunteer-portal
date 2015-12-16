@@ -125,10 +125,19 @@ Find the instructions below for your operating system and follow the steps to in
 
 <a id="run-local-server"></a>
 ##Run Local Server
-1. Start local server
+1. Update development URL
+  * `cd volunteer-portal/client/src`
+  * open `url.js` in text editor
+    * comment out `export const URL = 'http://pth.mi-squared.com';` and uncomment `export const URL = 'http://localhost:7771';`
+2. Start Laravel server
+  * open new tab in command line
+  * `cd volunteer-portal/service`
+  * `php artisan serve --port=7771`
+3. Start Webpack server
+  * open new tab in command line
   * `cd volunteer-portal/client`
   * `npm run dev`
-2. Visit development application in browser
+4. Visit development application in browser
   * `localhost:8080`
 
 
@@ -142,7 +151,7 @@ Find the instructions below for your operating system and follow the steps to in
   * open new tab in command line
   * `cd volunteer-portal/service`
   * `php artisan serve --port=7771`
-3. Start local server
+3. Start Webpack server
   * open new tab in command line
   * `cd volunteer-portal/client`
   * `npm run dev`
