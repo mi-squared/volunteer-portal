@@ -1,5 +1,7 @@
 import {Router, Route, IndexRoute} from 'react-router';
 import React from 'react';
+import { isLoggedIn } from "./client";
+import { history } from "./index";
 //components
 import App from './components/app.jsx';
 import {WelcomePage} from './pages/welcome-page.jsx';
@@ -16,7 +18,7 @@ import {AccountPageContainer} from './pages/account-page.jsx';
 import {ForgotPasswordPageContainer} from './pages/forgot-password-page.jsx';
 import {ExternalLoginPageContainer} from './pages/external-login-page.jsx';
 
-export const openRoutes = <Route path="/" component={App}>
+export const openRoutes = <Route path="/" component={App} onEnter={ifLoggedIn}>
   <IndexRoute component={WelcomePage} />
   <Route path="/new-volunteer" component={NewVolunteerPageContainer} />
   <Route path="/returning-volunteer" component={ReturningVolunteerPageContainer} />
@@ -24,7 +26,7 @@ export const openRoutes = <Route path="/" component={App}>
   <Route path="/external-login" component={ExternalLoginPageContainer} />
 </Route>;
 
-export const protectedRoutes = <Route  path="/" component={App}>
+export const protectedRoutes = <Route component={App} onEnter={requireLogin}>
     <Route path="/do-register" component={DoRegisterPage} />
     <Route path="/children-page" component={ChildrenPageContainer} />
     <Route path="/volunteering-detail" component={VolunteeringDetailPageContainer} />
@@ -38,13 +40,26 @@ export const protectedRoutes = <Route  path="/" component={App}>
 const protectedRouteArray = protectedRoutes.props.children.map(
   (child) => {return child.props.path});
 
-const openRouteArray = openRoutes.props.children.map(
-  (child) => {return child.props.path});
-
 export function isProtected(location) {
   return protectedRouteArray.indexOf(location.pathname) >= 0;
 }
 
-export function isOpen(location) {
-  return openRouteArray.indexOf(location.pathname) >= 0;
+function requireLogin(nextState, replaceState) {
+  if (sessionStorage.token) {
+    isLoggedIn(sessionStorage).then((LoggedIn) => {
+      if (!LoggedIn) {
+        history.replaceState(null, "/returning-volunteer") // using history from index because replaceState doesn't work
+      }
+    })
+  } else {
+    replaceState({ nextPathname: nextState.location.pathname }, '/returning-volunteer')
+  }
+}
+
+function ifLoggedIn(nextState, replaceState) {
+  isLoggedIn(sessionStorage).then((LoggedIn) => {
+    if (LoggedIn) {
+      history.replaceState(null, "/main")
+    }
+  })
 }
