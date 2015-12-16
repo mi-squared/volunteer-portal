@@ -149,7 +149,7 @@ export function getApplication(token, applicationID) {
             deferred.resolve(response);
         },
         error: function(request, status, error) {
-            deferred.reject(request.responseText)
+            deferred.reject(request.status)
         },
         dataType: 'json'
     });
