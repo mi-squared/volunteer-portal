@@ -69,26 +69,18 @@ export function receiveDocumentsList(json) {
   }
 }
 
-export function isLoggedIn(token, applicationID, stateInfo) {
+export function getSessionState(token, applicationID) {
   return (dispatch, getState) => {
-
-  }
-}
-
-export function getSessionState(token, applicationID, stateInfo) {
-  return (dispatch, getState) => {
-    if (!getState().get('jwt') && token && applicationID) {
-      return getApplication(token, applicationID).then(
-        (response) => {
-          dispatch(loadApplication(response));
-          dispatch(login(stateInfo));
-        },
-        (error) => {
-          console.log('go home')
-        })
-    } else {
-          console.log('go home 2')
-    }
+    return getApplication(token, applicationID).then(
+      (response) => {
+        dispatch(loadApplication(response));
+        dispatch(login({'token': token}));
+        return 200
+      },
+      (error) => {
+        return error
+      }
+    )
   }
 }
 

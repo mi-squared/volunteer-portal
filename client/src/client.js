@@ -156,3 +156,8 @@ export function getApplication(token, applicationID) {
 
     return deferred.promise;
 }
+
+
+export function isLoggedIn(token, applicationID, stateInfo) {
+  
+}
