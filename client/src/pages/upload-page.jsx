@@ -31,13 +31,8 @@ class UploadPage extends React.Component {
     this.props.saveApplication().then(() => {
       this.props.history.pushState(null, '/done-application');
     })
-      //         } else {
-      //             this.props.history.pushState(null, '/esign');
-      //         }
-      //     });
-      // } else {
       //     this.props.handleAlertShow();
-      // }
+
   }
 
   doBack() {
