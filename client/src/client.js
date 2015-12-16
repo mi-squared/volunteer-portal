@@ -158,6 +158,7 @@ export function getApplication(token, applicationID) {
 }
 
 
-export function isLoggedIn(token, applicationID, stateInfo) {
-  
+export function isLoggedIn(storedCredentials) {
+  let {token, applicationID} = storedCredentials;
+  return getApplication(token, applicationID).then((response) => {return true}, (error) => {return false})
 }

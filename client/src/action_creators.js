@@ -73,8 +73,9 @@ export function getSessionState(token, applicationID) {
   return (dispatch, getState) => {
     return getApplication(token, applicationID).then(
       (response) => {
-        dispatch(loadApplication(response));
         dispatch(login({'token': token}));
+        dispatch(loadApplication(response));
+        // dispatch(fetchDocumentsList())
         return 200
       },
       (error) => {
