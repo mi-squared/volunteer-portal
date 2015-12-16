@@ -5,3 +5,4 @@ service/npm-debug.log
 npm-debug.log
 composer.lock
 client/optionScrapper
+.elasticbeanstalk/
