@@ -91,22 +91,6 @@ class MainPage extends React.Component {
         this.doContinue = this.doContinue.bind(this);
     }
 
-    // isLoggedIn() {
-    //   let token = sessionStorage.getItem('token');
-    //   let applicationID = sessionStorage.getItem('applicationID');
-    //   getApplication(token, applicationID).then(
-    //     (response) => {
-    //       this.props.loadApplication(response)
-    //       this.props.login(sessionStorage)
-    //     }
-    //   )
-    // }
-    //
-    //
-    // componentWillMount() {
-    //   this.isLoggedIn();
-    // }
-
     doContinue() {
         if ( this.props.doValidate( this.schema ) ) {
             // disable button on click to prevent multiple clicks

@@ -149,10 +149,16 @@ export function getApplication(token, applicationID) {
             deferred.resolve(response);
         },
         error: function(request, status, error) {
-            deferred.reject(request.responseText)
+            deferred.reject(request.status)
         },
         dataType: 'json'
     });
 
     return deferred.promise;
+}
+
+
+export function isLoggedIn(storedCredentials) {
+  let {token, applicationID} = storedCredentials;
+  return getApplication(token, applicationID).then((response) => {return true}, (error) => {return false})
 }
