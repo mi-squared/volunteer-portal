@@ -1,0 +1,44 @@
+[
+  {
+    "name": "documents/DOC_A.pdf",
+    "display": {
+      "q_cpr_certified": "true"
+    }
+  },
+  {
+    "name": "documents/DOC_B.pdf",
+    "display": {
+      "q_is_student": "true"
+    }
+  },
+  {
+    "name": "documents/DOC_C.pdf",
+    "display": {
+      "q_is_medical_professional": "true"
+    }
+  },
+  {
+    "name": "documents/DOC_D.pdf",
+    "display": {
+      "q_is_adventist": "true"
+    }
+  },
+  {
+    "name": "documents/DOC_E.pdf",
+    "display": {
+      "q_is_legal_professional": "true"
+    }
+  },
+  {
+    "name": "documents/DOC_F.doc",
+    "display": {
+      "q_volunteer_organization_member": "true"
+    }
+  },
+  {
+    "name": "documents/DOC_G.docx",
+    "display": {
+      "q_bringin_children": "true"
+    }
+  }
+]
