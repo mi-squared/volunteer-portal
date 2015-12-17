@@ -65,7 +65,7 @@ class UploadField extends React.Component {
       } else {
         this.setState({
           uploadState: '',
-          warningMsg: `Please only upload ${requiredType} documents`
+          warningMsg: `Please only upload ${requiredType} documents for this form`
         })
         return false
       }
@@ -120,6 +120,7 @@ class UploadField extends React.Component {
         }
         return ""
     }
+    
     buttonText(uploadState, upload) {
 
         if (uploadState === 'uploading') {
