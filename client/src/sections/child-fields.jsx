@@ -17,9 +17,6 @@ export default class ChildFields extends BaseSection {
         var thisChild = this.getChild();
         var childField = field.split(".")[1];
         thisChild[childField] = e.target.value;
-        console.log(e.target.value);
-        console.log(childField);
-        console.log(thisChild);
         this.props.updateChild(thisChild);
     }
 
