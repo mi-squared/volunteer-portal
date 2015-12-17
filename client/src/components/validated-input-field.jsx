@@ -76,6 +76,7 @@ class ValidatedInput extends React.Component {
              ref={this.props.ref}
              placeholder={this.props.placeholder}
              id={this.props.id ? this.props.id : this.props.fieldName.replace('data.q_', '').replace('session.', '')}
+             onKeyDown={this.props.onKeyDown}
           />;
 
       var textArea =

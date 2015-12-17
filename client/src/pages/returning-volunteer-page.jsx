@@ -43,6 +43,7 @@ class ReturningVolunteerPage extends React.Component {
         this.doCancel = this.doCancel.bind(this);
         this.doInvalidCredentials = this.doInvalidCredentials.bind(this);
         this.doForgotPassword = this.doForgotPassword.bind(this);
+        this.handleKeyUp = this.handleKeyUp.bind(this)
     }
 
     componentWillMount() {
@@ -51,6 +52,12 @@ class ReturningVolunteerPage extends React.Component {
         // and hydrate select lists with options
         this.props.fetchOptions();
 
+    }
+
+    handleKeyUp(e) {
+      if (e.keyCode === 13) {
+        this.doSignIn();
+      }
     }
 
     doSignIn() {
@@ -129,7 +136,7 @@ class ReturningVolunteerPage extends React.Component {
 
     render() {
         return (
-            <div className="container well">
+            <div className="container well" onKeyUp={this.handleKeyUp}>
                 <div className="col-md-12">
                     <h1>Welcome back</h1>
                     <h3>
@@ -149,7 +156,7 @@ class ReturningVolunteerPage extends React.Component {
 
 
                 <div className="j-page-nav col-md-12">
-                    <Button onClick={this.doSignIn}  id="submit-login" className="btn btn-primary" disabled={this.state.disabled}>{this.state.value}</Button>
+                    <button ref="login" onClick={this.doSignIn} id="submit-login" className="btn btn-primary" disabled={this.state.disabled}>{this.state.value}</button>
                     <Button onClick={this.doCancel} id="cancel-login">Cancel</Button>
                 </div>
 
