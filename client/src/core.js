@@ -45,7 +45,7 @@ export function addUpload(state, upload ) {
 }
 
 export function updateChild(state, childSpec ) {
-    var newstate = state.setIn(
+    var newstate = state.updateIn(
         ['data', 'children', childSpec.childID],
         childSpec
     );

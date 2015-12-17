@@ -77,6 +77,7 @@ class ChildrenPage extends React.Component {
                 {self.getChildren().map(entry =>
                     <ChildFields {...this.props}
                         childID={entry.childID}
+                        key={entry.childID}
                         onBlur={this.onBlur}
                         submitTS={this.props.submitTS}
                         focusElement={this.props.focusElement||this.state.focusElement}
