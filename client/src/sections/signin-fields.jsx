@@ -4,6 +4,15 @@ import ValidatedInput from '../components/validated-input-field.jsx';
 import BaseSection from './base-section.jsx'
 
 export default class SigninFields extends BaseSection {
+  constructor(props) {
+    super(props);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+  }
+    handleKeyDown(e) {
+        let node =this.refs['session.f_password'];
+        let password = node.getValue();
+        node.commitChange(password);  //update the password as you type
+    }
 
     render() {
         return (
@@ -26,6 +35,7 @@ export default class SigninFields extends BaseSection {
                     fieldName="session.f_password"
                     ref="session.f_password"
                     onChange={this.handleChange}
+                    onKeyDown={this.handleKeyDown}
                 />
             </div>
         );
