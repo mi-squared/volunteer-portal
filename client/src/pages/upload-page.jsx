@@ -59,6 +59,7 @@ class UploadPage extends React.Component {
                 {...this.props}
                 key={documentSpec.name}
                 fileName={documentSpec.name}
+                fileType={documentSpec.type}
                 >
               </UploadField>
             )}
