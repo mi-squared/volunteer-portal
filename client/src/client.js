@@ -157,8 +157,30 @@ export function getApplication(token, applicationID) {
     return deferred.promise;
 }
 
+export function getAccount(token) {
+    var deferred = Q.defer();
+
+    $.ajax({
+        type: "GET",
+        url: getServiceBaseURL() + '/api/v1/accounts/me',
+        headers: {
+            'Authorization':'Bearer ' + token,
+            'Content-Type':'application/json'
+        },
+        success: function(response) {
+            deferred.resolve(response);
+        },
+        error: function(request, status, error) {
+            deferred.reject(request.status)
+        },
+        dataType: 'json'
+    });
+
+    return deferred.promise;
+}
+
 
 export function isLoggedIn(storedCredentials) {
   let {token, applicationID} = storedCredentials;
-  return getApplication(token, applicationID).then((response) => {return true}, (error) => {return false})
+  return getAccount(token).then((response) => {console.log(response);return true}, (error) => {return false})
 }
