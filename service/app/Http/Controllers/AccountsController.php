@@ -173,11 +173,12 @@ class AccountsController extends BaseController
         $loginLink = $host . "#/external-login?token=" . $token . "&username=". $email . "&next=account";
 
         $to      =  $email;
+        $from    =  "do_not_reply@" . env('HOST_NAME', 'pth-production-prwn5v7pi2.elasticbeanstalk.com');
         $subject = 'Password reset link';
         $message = 'Hello! Please use this temporary link to reset Your Best Pathway to Health Volunteer Account password: ' . $loginLink;
-        $headers = 'From: do_not_reply@pth.mi-squared.com' . "\r\n" .
-            'Reply-To: do_not_reply@pth.mi-squared.com' . "\r\n" .
-            'X-Mailer: PHP/' . phpversion();
+        $headers = 'From: '. $from . "\r\n" .
+                   'Reply-To: ' . $from . "\r\n" .
+                   'X-Mailer: PHP/' . phpversion();
 
         mail($to, $subject, $message, $headers);
 
