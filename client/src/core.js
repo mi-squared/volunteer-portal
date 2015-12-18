@@ -54,6 +54,16 @@ export function updateChild(state, childSpec ) {
     return newstate;
 }
 
+export function removeChild(state, childID ) {
+    var newstate = state.updateIn(
+        ['data', 'children'],
+        (childrenArray) => {
+          return childrenArray.delete(childID)
+        }
+    );
+    return newstate;
+}
+
 export function login( state, accountInfo ) {
     return state.updateIn(
         ['jwt'],
