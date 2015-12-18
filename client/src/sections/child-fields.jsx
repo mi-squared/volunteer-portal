@@ -13,6 +13,15 @@ import BaseSection from './base-section.jsx'
 
 export default class ChildFields extends BaseSection {
 
+  constructor(props) {
+      super(props);
+
+      this.getChild = this.getChild.bind(this);
+      this.getChildValue = this.getChildValue.bind(this);
+      this.handleChange = this.handleChange.bind(this);
+  }
+
+
     handleChange(field, e) {
         var thisChild = this.getChild();
         var childField = field.split(".")[1];
