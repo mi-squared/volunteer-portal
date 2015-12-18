@@ -115,8 +115,9 @@ class NewVolunteerPage extends React.Component {
                 (response) => {
                     self.props.login({
                         token: response.token
-                    });
+                    })
                     self.props.history.pushState(null, '/do-register');
+
                 },
                 (error) => {
                     self.props.handleAlertShow({

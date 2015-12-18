@@ -6,15 +6,20 @@ import Button from 'react-bootstrap/lib/Button.js';
 import RegistrationFields from '../sections/registration-fields.jsx';
 import * as actionCreators from '../action_creators';
 
-export const DoRegisterPage = React.createClass({
-    mixins: [ Router.Navigation ],
 
-    doContinue: function() {
+
+class DoRegisterPage extends React.Component {
+  constructor(props) {
+      super(props);
+      this.doContinue = this.doContinue.bind(this)
+  }
+
+    doContinue() {
         // todo - reinitialize state
         this.props.history.pushState(null, '/main');
-    },
+    }
 
-    render: function() {
+    render() {
         return (
             <div className="container well">
                 <div className="col-md-12">
@@ -33,7 +38,8 @@ export const DoRegisterPage = React.createClass({
             </div>
         );
     }
-});
+};
+
 
 function mapStateToProps(state) {
     return state.toJSON();

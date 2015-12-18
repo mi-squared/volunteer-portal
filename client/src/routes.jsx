@@ -6,7 +6,7 @@ import { history } from "./index";
 import App from './components/app.jsx';
 import {WelcomePage} from './pages/welcome-page.jsx';
 import {NewVolunteerPageContainer} from './pages/new-volunteer-page.jsx';
-import {DoRegisterPage} from './pages/do-register-page.jsx';
+import {DoRegisterPageContainer} from './pages/do-register-page.jsx';
 import {MainPageContainer} from './pages/main-page.jsx';
 import {ReturningVolunteerPageContainer} from './pages/returning-volunteer-page.jsx';
 import {ChildrenPageContainer} from './pages/children-page.jsx';
@@ -24,10 +24,10 @@ export const openRoutes = <Route path="/" component={App} onEnter={ifLoggedIn}>
   <Route path="/returning-volunteer" component={ReturningVolunteerPageContainer} />
   <Route path="/forgot-password" component={ForgotPasswordPageContainer} />
   <Route path="/external-login" component={ExternalLoginPageContainer} />
+  <Route path="/do-register" component={DoRegisterPageContainer} />
 </Route>;
 
 export const protectedRoutes = <Route component={App} onEnter={requireLogin}>
-    <Route path="/do-register" component={DoRegisterPage} />
     <Route path="/children-page" component={ChildrenPageContainer} />
     <Route path="/volunteering-detail" component={VolunteeringDetailPageContainer} />
     <Route path="/main" component={MainPageContainer} />
