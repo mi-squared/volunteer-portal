@@ -71,17 +71,21 @@ export function receiveDocumentsList(json) {
 
 export function getSessionState(token, applicationID) {
   return (dispatch, getState) => {
-    return getApplication(token, applicationID).then(
-      (response) => {
-        dispatch(login({'token': token}));
-        dispatch(loadApplication(response));
-        // dispatch(fetchDocumentsList())
-        return 200
-      },
-      (error) => {
-        return error
-      }
-    )
+    if (applicationID && applicationID !== 'undefined') { 
+      return getApplication(token, applicationID).then(
+        (response) => {
+          dispatch(login({'token': token}));
+          dispatch(loadApplication(response));
+          // dispatch(fetchDocumentsList())
+          return 200
+        },
+        (error) => {
+          return error
+        }
+      )
+    } else {
+      dispatch(login({'token': token}));
+    }
   }
 }
 

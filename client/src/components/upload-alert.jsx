@@ -24,7 +24,6 @@ class UploadAlert extends React.Component {
     }
 
     render() {
-      // console.log(this.unsignedDocs());
         let eSigned = this.props.data["q_esigned"]
         if (eSigned && this.unsignedDocs()) {
             return (
