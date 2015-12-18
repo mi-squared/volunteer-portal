@@ -42,14 +42,14 @@ class UploadPage extends React.Component {
 
   filterDocs() {
     return documentMap.filter((documentSpec) => {
-      return Object.keys(documentSpec.requirements).map((req) => {
+      return Object.keys(documentSpec.requirements).every((req) => {
         return this.props.data[req] === documentSpec.requirements[req]
-      }).indexOf(false) === -1
+      })
     })
   }
 
   render() {
-    console.log(this.filterDocs());
+    // console.log(this.filterDocs());
     return(
       <div className="container well">
         <div className="col-md-12">
