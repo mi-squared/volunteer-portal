@@ -34,6 +34,13 @@ export function updateChild( childSpec ) {
     };
 }
 
+export function removeChild( childSpec ) {
+    return {
+        type: 'REMOVE_CHILD',
+        childSpec
+    };
+}
+
 export function addUpload( upload ) {
     return {
         type: 'ADD_UPLOAD',
@@ -71,7 +78,7 @@ export function receiveDocumentsList(json) {
 
 export function getSessionState(token, applicationID) {
   return (dispatch, getState) => {
-    if (applicationID && applicationID !== 'undefined') { 
+    if (applicationID && applicationID !== 'undefined') {
       return getApplication(token, applicationID).then(
         (response) => {
           dispatch(login({'token': token}));

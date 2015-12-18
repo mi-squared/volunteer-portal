@@ -45,10 +45,27 @@ export function addUpload(state, upload ) {
 }
 
 export function updateChild(state, childSpec ) {
-    var newstate = state.updateIn(
-        ['data', 'children', childSpec.childID],
+    let childrenArray = state.getIn(['data', 'children'])
+    let childIndex = childrenArray.findIndex((item) => {
+      return item.get('id') === childSpec.id
+    })
+    let newstate = state.updateIn(
+        ['data', 'children', childIndex],
         () => {
           return fromJS(childSpec)
+        }
+    );
+    return newstate;
+}
+
+export function removeChild(state, childSpec ) {
+    var newstate = state.updateIn(
+        ['data', 'children'],
+        (childrenArray) => {
+          let childIndex = childrenArray.findIndex((item) => {
+            return item.get('id') === childSpec.id
+          })
+          return childrenArray.delete(childIndex)
         }
     );
     return newstate;
