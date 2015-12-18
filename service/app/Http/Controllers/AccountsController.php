@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use Mail;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Laravel\Lumen\Routing\Controller as BaseController;
@@ -171,15 +172,21 @@ class AccountsController extends BaseController
 
         $host = env('HOST_URL', 'http://pth.mi-squared.com/client/dist/index.html');
         $loginLink = $host . "#/external-login?token=" . $token . "&username=". $email . "&next=account";
+        //
+        // $to      =  $email;
+        // $subject = 'Password reset link';
+        // $message = 'Hello! Please use this temporary link to reset Your Best Pathway to Health Volunteer Account password: ' . $loginLink;
+        // $headers = 'From: do_not_reply@pth.mi-squared.com' . "\r\n" .
+        //     'Reply-To: do_not_reply@pth.mi-squared.com' . "\r\n" .
+        //     'X-Mailer: PHP/' . phpversion();
+        //
+        // mail($to, $subject, $message, $headers);
 
-        $to      =  $email;
-        $subject = 'Password reset link';
-        $message = 'Hello! Please use this temporary link to reset Your Best Pathway to Health Volunteer Account password: ' . $loginLink;
-        $headers = 'From: do_not_reply@pth.mi-squared.com' . "\r\n" .
-            'Reply-To: do_not_reply@pth.mi-squared.com' . "\r\n" .
-            'X-Mailer: PHP/' . phpversion();
+        Mail::send('emails.reset_password', ['user' => $User, 'loginLink' => $loginLink], function ($m) use ($User) {
+            $m->from('do_not_reply@pth.mi-squared.com', 'Password Reset Link(from)');
 
-        mail($to, $subject, $message, $headers);
+            $m->to($User->email, $User->last_name)->subject('Password Reset Link(to)');
+        });
 
         return response()->json("{}");
     }
