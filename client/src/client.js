@@ -182,5 +182,5 @@ export function getAccount(token) {
 
 export function isLoggedIn(storedCredentials) {
   let {token, applicationID} = storedCredentials;
-  return getAccount(token).then((response) => {console.log(response);return true}, (error) => {return false})
+  return getAccount(token).then((response) => {return true}, (error) => {return false})
 }
