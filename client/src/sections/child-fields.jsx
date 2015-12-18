@@ -29,11 +29,11 @@ export default class ChildFields extends BaseSection {
     }
 
     getChild() {
-        var data = this.props.data['children'];
-        if ( !data ) {
+        var childrenArr = this.props.data['children'];
+        if ( !childrenArr ) {
             return {};
         }
-        return data[this.props.childID] || {};
+        return childrenArr.find(child => child.id === this.props.childID) || {};
     }
 
     getChildValue(key) {
@@ -46,7 +46,7 @@ export default class ChildFields extends BaseSection {
     }
 
     removeChild() {
-      this.props.removeChild(this.props.childID)
+      this.props.removeChild(this.getChild())
     }
 
     render() {

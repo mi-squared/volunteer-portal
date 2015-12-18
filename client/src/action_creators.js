@@ -34,10 +34,10 @@ export function updateChild( childSpec ) {
     };
 }
 
-export function removeChild( childID ) {
+export function removeChild( childSpec ) {
     return {
         type: 'REMOVE_CHILD',
-        childID
+        childSpec
     };
 }
 

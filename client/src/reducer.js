@@ -30,7 +30,7 @@ export default function reducer(state = INITIAL_STATE, action) {
             return updateChild(state, action.childSpec);
         }
         case 'REMOVE_CHILD': {
-            return removeChild(state, action.childID);
+            return removeChild(state, action.childSpec);
         }
         case 'ADD_UPLOAD': {
             return addUpload(state, action.upload);
