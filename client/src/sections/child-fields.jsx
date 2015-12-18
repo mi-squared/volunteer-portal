@@ -1,8 +1,9 @@
 import React from 'react';
 
-import Input from 'react-bootstrap/lib/Input';
-import DropdownButton from 'react-bootstrap/lib/DropdownButton.js';
-import MenuItem from 'react-bootstrap/lib/MenuItem.js';
+// import Input from 'react-bootstrap/lib/Input';
+// import DropdownButton from 'react-bootstrap/lib/DropdownButton.js';
+// import MenuItem from 'react-bootstrap/lib/MenuItem.js';
+import { Button, Input, DropdownButton, MenuItem } from 'react-bootstrap'
 
 import ValidatedInput from '../components/validated-input-field.jsx';
 import QuestionContainer from '../components/question-container.jsx';
@@ -119,6 +120,8 @@ export default class ChildFields extends BaseSection {
                     onChange={this.handleChange}
                 />
 
+                <Button className="btn btn-danger btn-sm pull-right">Remove Child</Button>
+                <br/>
                 <div>
                     <hr/>
                 </div>
