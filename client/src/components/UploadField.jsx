@@ -23,7 +23,6 @@ class UploadField extends React.Component {
     }
     handleUploadClick(event) {
         event.preventDefault()
-        this.setState({uploadState: 'uploading'})
         let id = this.props.data.id;
         let fileName = this.props.fileName;
         fetchClient.getUploadUrl(id, fileName).then(
@@ -53,10 +52,32 @@ class UploadField extends React.Component {
         //   }
         // )
     }
-    handleFileChange(event) {
-        let localFile = event.currentTarget.files[0];
-        this.uploadDocument(localFile);
+
+    validateFileType(file) {
+      let requiredType = this.props.fileType;
+      let fileType = file.name.match(/\.(.+)/)[1];
+      if (fileType === requiredType) {
+        this.setState({
+          warningMsg: '',
+          uploadState: 'uploading'
+        })
+        return true;
+      } else {
+        this.setState({
+          uploadState: '',
+          warningMsg: `Please only upload ${requiredType} documents for this form`
+        })
+        return false
+      }
     }
+
+    handleFileChange(event) {
+      let localFile = event.currentTarget.files[0];
+      if (this.validateFileType(localFile)) {
+          this.uploadDocument(localFile);
+      }
+    }
+
     uploadDocument(documentResult) {
         let file = this.refs.theFile.files[0];
         let url = this.state.postUrl;
@@ -93,12 +114,13 @@ class UploadField extends React.Component {
         this.setState({uploadPercent: percent})
     }
 
-    upload() {
+    findUpload() {
         if (this.props.data.uploads) {
           return this.props.data.uploads.find(u => u.src_name === this.props.fileName)
         }
         return ""
     }
+    
     buttonText(uploadState, upload) {
 
         if (uploadState === 'uploading') {
@@ -117,11 +139,12 @@ class UploadField extends React.Component {
     }
     render() {
         const { uploadState, uploadPercent } = this.state
-        const upload = this.upload()
+        const upload = this.findUpload()
         let btnClass = upload ? "btn btn-default btn-xs" : "btn btn-default"
         let uploadIcon = upload ? "ok" : "remove"
         let iconColor = upload ? "green" : "red"
         let uploadStatus = upload ? "Your file has been uploaded." : "Please upload your file."
+        let alertClass = this.state.warningMsg ? "alert alert-danger" : "";
         return (
             <div className="form-group center" style={{border: '1px solid #ccc', borderRadius: '3px', padding: '0 15px 15px 15px'}}>
 
@@ -135,6 +158,7 @@ class UploadField extends React.Component {
                                 target="_blank">Download</Button>
                     : ""}
                 </h3>
+
                 {uploadState === "uploading" && this.renderProgressBar(uploadPercent)}
 
                 <a ref="downloadLink" href={this.state.downloadUrl} target="_blank" style={{visibility: "hidden", cursor:'pointer'}}></a>
@@ -142,7 +166,10 @@ class UploadField extends React.Component {
                 <form ref="theForm" method="POST" encType="multipart/form-data">
                     <input ref="theFile" name="file" type="file" style={{ visibility: 'hidden', width: '1px', height: '1px' }} onChange={this.handleFileChange.bind(this)} />
                     {upload && <strong>{upload.fileName}&nbsp;</strong>}
-                    <Button ref="theButton" type="button" className={btnClass} onClick={this.handleUploadClick.bind(this)}>{this.buttonText(uploadState, upload)}</Button>
+                      <div className={alertClass}>
+                        <Button ref="theButton" type="button" className={btnClass} onClick={this.handleUploadClick.bind(this)}>{this.buttonText(uploadState, upload)}</Button>
+                        &nbsp;{this.state.warningMsg}
+                      </div>
                 </form>
 
                 <div style={{marginTop: '15px'}}>

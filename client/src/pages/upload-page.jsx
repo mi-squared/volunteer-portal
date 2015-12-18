@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/lib/Button.js';
 import UploadField from '../components/UploadField.jsx';
 import composePage from './base-page.jsx';
 import * as actionCreators from '../action_creators';
+import documentMap from "../documents";
 
 
 class UploadPage extends React.Component {
@@ -39,17 +40,27 @@ class UploadPage extends React.Component {
       this.props.history.goBack();
   }
 
+  filterDocs() {
+    return documentMap.filter((documentSpec) => {
+      return Object.keys(documentSpec.requirements).every((req) => {
+        return this.props.data[req] === documentSpec.requirements[req]
+      })
+    })
+  }
+
   render() {
+    // console.log(this.filterDocs());
     return(
       <div className="container well">
         <div className="col-md-12">
           <h1>Upload Forms</h1>
           <div>
-            {this.props.documentsList && this.props.documentsList.map((key) =>
+            {this.filterDocs().map((documentSpec) =>
               <UploadField
                 {...this.props}
-                key={key}
-                fileName={key.match(/\/((.+\.pdf)|(.+\.docx)|(.+\.doc))/)[1]}
+                key={documentSpec.name}
+                fileName={documentSpec.name}
+                fileType={documentSpec.type}
                 >
               </UploadField>
             )}
