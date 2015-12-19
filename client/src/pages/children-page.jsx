@@ -30,7 +30,6 @@ class ChildrenPage extends React.Component {
     addChild() {
         var childrenCount = this.props.data.children.length;
         this.props.addChild( {
-            childID: childrenCount,
             application_id : this.props.data.id
         } );
     }
@@ -76,7 +75,7 @@ class ChildrenPage extends React.Component {
 
                 {self.getChildren().map(entry =>
                     <ChildFields {...this.props}
-                        childID={entry.childID}
+                        childID={entry.id}
                         key={entry.childID}
                         onBlur={this.onBlur}
                         submitTS={this.props.submitTS}

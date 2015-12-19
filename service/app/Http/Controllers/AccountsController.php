@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use Mail;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Laravel\Lumen\Routing\Controller as BaseController;
@@ -171,7 +172,7 @@ class AccountsController extends BaseController
 
         $host = env('HOST_URL', 'http://pth.mi-squared.com/client/dist/index.html');
         $loginLink = $host . "#/external-login?token=" . $token . "&username=". $email . "&next=account";
-
+        
         $to      =  $email;
         $from    =  "do_not_reply@" . env('HOST_NAME', 'pth-production-prwn5v7pi2.elasticbeanstalk.com');
         $subject = 'Password reset link';
@@ -181,6 +182,19 @@ class AccountsController extends BaseController
                    'X-Mailer: PHP/' . phpversion();
 
         mail($to, $subject, $message, $headers);
+
+        // Mail::send('emails.reset_password', ['user' => $User, 'loginLink' => $loginLink], function ($m) use ($User) {
+        //     $m->from('do_not_reply@pth.mi-squared.com', 'Password Reset Link(from)');
+        //
+        //     $m->to($User->email, $User->last_name . ', ' . $User->first_name)->subject('Password Reset Link(to)');
+        // });
+
+        // Mail::raw('Text to e-mail', function($message)
+        // {
+        //     $message->from('us@example.com', 'Laravel');
+        //
+        //     $message->to('ryan.broughan@gmail.com');
+        // });
 
         return response()->json("{}");
     }
