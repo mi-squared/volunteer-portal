@@ -83,7 +83,7 @@ export function getSessionState(token, applicationID) {
         (response) => {
           dispatch(login({'token': token}));
           dispatch(loadApplication(response));
-          // dispatch(fetchDocumentsList())
+          dispatch(fetchDocumentsList())
           return 200
         },
         (error) => {
