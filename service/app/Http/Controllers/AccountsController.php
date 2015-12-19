@@ -8,6 +8,7 @@ use App\User;
 use App\VolunteerApplication;
 use App\Exceptions\ModelExistsException;
 use Illuminate\Support\Facades\Hash as Hash;
+use PHPMailer;
 
 class AccountsController extends BaseController
 {
@@ -157,6 +158,7 @@ class AccountsController extends BaseController
         $email = $accountMeta['email'];
         $User = User::where('username', '=', $email)
             ->first();
+        $mail = new PHPMailer;
 
         if ( !$User ) {
             // send a 200 OK even though its not a registered user, to prevent spammers from fishing
@@ -169,17 +171,32 @@ class AccountsController extends BaseController
         // xxx - todo - make this expiring!
         $token = JWTAuth::fromUser($User);
 
-        $host = env('HOST_URL', 'http://pth.mi-squared.com/client/dist/index.html');
         $loginLink = $host . "#/external-login?token=" . $token . "&username=". $email . "&next=account";
 
-        $to      =  $email;
-        $subject = 'Password reset link';
-        $message = 'Hello! Please use this temporary link to reset Your Best Pathway to Health Volunteer Account password: ' . $loginLink;
-        $headers = 'From: do_not_reply@pth.mi-squared.com' . "\r\n" .
-            'Reply-To: do_not_reply@pth.mi-squared.com' . "\r\n" .
-            'X-Mailer: PHP/' . phpversion();
+        $mail->Host = env('HOST_URL', 'http://pth.mi-squared.com/client/dist/index.html');
+        $mail->isMail();
 
-        mail($to, $subject, $message, $headers);
+        $mail->setFrom('do_not_reply@pth.mi-squared.com', 'YBPTH');
+        $mail->addAddress($email);
+
+        $mail->Subject = 'Password reset link';
+        $mail->Body    = 'Hello! Please use this temporary link to reset Your Best Pathway to Health Volunteer Account password: ' . $loginLink;
+
+        // $to      =  $email;
+        // $subject = 'Password reset link';
+        // $message = 'Hello! Please use this temporary link to reset Your Best Pathway to Health Volunteer Account password: ' . $loginLink;
+        // $headers = 'From: do_not_reply@pth.mi-squared.com' . "\r\n" .
+        //     'Reply-To: do_not_reply@pth.mi-squared.com' . "\r\n" .
+        //     'X-Mailer: PHP/' . phpversion();
+
+        // mail($to, $subject, $message, $headers);
+
+        if(!$mail->send()) {
+            echo 'Message could not be sent.';
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
+        } else {
+            echo 'Message has been sent';
+        }
 
         return response()->json("{}");
     }
