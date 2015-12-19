@@ -49,7 +49,6 @@ class UploadPage extends React.Component {
   }
 
   render() {
-    console.log(this.filterDocs());
     return(
       <div className="container well">
         <div className="col-md-12">
