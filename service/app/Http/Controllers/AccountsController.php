@@ -32,7 +32,7 @@ class AccountsController extends BaseController
 
             $accountMeta['password'] = $hashedPassword;
             $User = User::create($accountMeta);
-
+            
             $to      =  $accountMeta['email'];
             $subject = 'Welcome to YBPTH';
             $message = 'Hello! Welcome to Your Best Pathway to Health Volunteer Group.';
