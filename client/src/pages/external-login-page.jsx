@@ -20,6 +20,8 @@ class ExternalLoginPage extends React.Component {
             params[pairVals[0]] = pairVals[1];
         });
 
+        sessionStorage.setItem('token', params.token);
+
         // a token, username, and the next destination are all required to proceed
         if ( !params.token || !params.username || !params.next ) {
             this.props.history.pushState(null, '/');
@@ -36,6 +38,7 @@ class ExternalLoginPage extends React.Component {
         this.props.login({
             token: params.token
         });
+
 
         this.props.history.pushState(null, '/' + params.next);
     }
