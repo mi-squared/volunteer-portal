@@ -32,6 +32,17 @@ class AccountsController extends BaseController
             $accountMeta['password'] = $hashedPassword;
             $User = User::create($accountMeta);
 
+            $to      =  $accountMeta['email'];
+            $subject = 'Welcome to YBPTH';
+            $message = 'Hello! Welcome to Your Best Pathway to Health Volunteer Group.';
+            $headers = 'From: do_not_reply@pth.mi-squared.com' . "\r\n" .
+                'Reply-To: do_not_reply@pth.mi-squared.com' . "\r\n" .
+                'X-Mailer: PHP/' . phpversion();
+
+            mail($to, $subject, $message, $headers);
+
+            return response()->json("{}");
+
             return response()->json($User);
         }
     }

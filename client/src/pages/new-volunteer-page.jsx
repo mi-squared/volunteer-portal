@@ -116,6 +116,7 @@ class NewVolunteerPage extends React.Component {
                     self.props.login({
                         token: response.token
                     })
+                    sessionStorage.setItem('token', token);
                     self.props.history.pushState(null, '/do-register');
 
                 },
