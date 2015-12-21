@@ -49,18 +49,17 @@ class UploadPage extends React.Component {
   }
 
   render() {
-    // console.log(this.filterDocs());
     return(
       <div className="container well">
         <div className="col-md-12">
           <h1>Upload Forms</h1>
           <div>
-            {this.filterDocs().map((documentSpec) =>
+            {this.props.documentsList && this.props.documentsList.map((documentSpec) =>
               <UploadField
                 {...this.props}
-                key={documentSpec.name}
-                fileName={documentSpec.name}
-                fileType={documentSpec.type}
+                key={documentSpec}
+                fileName={documentSpec}
+                fileType={documentSpec.match(/\.(pdf|docx|doc)/)[1]}
                 >
               </UploadField>
             )}

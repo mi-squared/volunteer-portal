@@ -28,10 +28,10 @@ history.listen((location) => {
   store.dispatch(fetchOptions()) // add conditional reset based on url params remove from component life cycle
 })
 
-// store.subscribe(() => {
-//   store.dispatch(fetchDocumentsList());
-//   }
-// );
+store.subscribe(() => {
+  store.dispatch(fetchDocumentsList());
+  }
+);
 
 ReactDOM.render(
 

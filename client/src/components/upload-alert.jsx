@@ -9,21 +9,34 @@ class UploadAlert extends React.Component {
 
     isUploaded(file) {
         if (this.props.data.uploads) {
-          return this.props.data.uploads.find(u => u.src_name === file.name)
+          return this.props.data.uploads.find(u => u.src_name === file)
         }
         return false
     }
 
-    filterDocs() {
-      return documentMap.filter((documentSpec) => {
-        return Object.keys(documentSpec.requirements).every((req) => {
-          return this.props.data[req] === documentSpec.requirements[req] && !this.isUploaded(documentSpec)
-        })
-      })
-    }
+    // for filtering docs by requirements
+
+    // filterDocs() {
+    //   return documentMap.filter((documentSpec) => {
+    //     return Object.keys(documentSpec.requirements).every((req) => {
+    //       return this.props.data[req] === documentSpec.requirements[req] && !this.isUploaded(documentSpec)
+    //     })
+    //   })
+    // }
 
     unsignedDocs() {
-      return this.filterDocs().length !== 0
+      if (this.props.documentsList) {
+        return this.filterUploaded().length !== 0
+      }
+    }
+
+    filterUploaded() {
+      if (this.props.documentsList) {
+        return this.props.documentsList.filter((documentSpec) => {
+          return !this.isUploaded(documentSpec)
+        })
+      }
+
     }
 
     render() {
