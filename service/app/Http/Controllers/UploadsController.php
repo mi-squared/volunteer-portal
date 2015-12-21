@@ -36,7 +36,7 @@ class UploadsController extends BaseController
     $filteredXml = [];
     foreach($xmlContents as $obj ) {
       $obj = (array) $obj;
-      if (preg_match('/^documents\\/(.+)/', $obj["Key"], $matches_out)) { //match if in documents/ and .pdf/.docx/.doc
+      if (preg_match('/^documents\\/(.+)/', $obj["Key"], $matches_out)) { 
         array_push($filteredXml, $matches_out[1]);
       }
     };

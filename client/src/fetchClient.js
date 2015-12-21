@@ -1,22 +1,22 @@
 import "whatwg-fetch";
-import {URL} from "./url";
+import {getServiceBaseURL} from "./core";
 
 const fetchClient = {
 
   getOptions: function() {
-    return fetch(URL + '/api/v1/form-lists')
+    return fetch(getServiceBaseURL() + '/api/v1/form-lists')
   },
 
   getDocumentsJson: function() {
-    return fetch(URL + '/api/v1/documents')
+    return fetch(getServiceBaseURL() + '/api/v1/documents')
   },
 
   getDocumentUrl: function(fileName) {
-    return fetch(URL + '/api/v1/documents/' + fileName)
+    return fetch(getServiceBaseURL() + '/api/v1/documents/' + fileName)
   },
 
   getUploadUrl: function(appID, fileName) {
-    return fetch(URL + '/api/v1/uploads/' + appID + '/' + fileName)
+    return fetch(getServiceBaseURL() + '/api/v1/uploads/' + appID + '/' + fileName)
   }
 
 }
