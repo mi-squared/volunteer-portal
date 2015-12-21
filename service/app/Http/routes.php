@@ -158,7 +158,9 @@ $app->get(
     'FormListsController@getFormListsOptions'
 );
 
-// Download Forms
+///////////////////////////////////////////////////////////
+// Downloads / Uploads
+///////////////////////////////////////////////////////////
   // Get list of All docs
 $app->get(
     '/api/v1/documents',

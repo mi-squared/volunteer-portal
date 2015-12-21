@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use Mail;
+use Aws\S3\S3Client;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Laravel\Lumen\Routing\Controller as BaseController;
@@ -32,10 +33,25 @@ class AccountsController extends BaseController
 
             $accountMeta['password'] = $hashedPassword;
             $User = User::create($accountMeta);
-            
+
+            // get email template from s3
+            $s3Client = new S3Client([
+              'region'  => getenv('S3_REGION'),
+              'version' => "2006-03-01"
+            ]);
+
+            $params = [
+              'Bucket' => getenv('S3_BUCKET'),
+              'Key' => 'emails/welcome.txt'
+            ];
+
+            $request = $s3Client->getObject($params);
+            $result = $request["Body"];
+
+            // build the email
             $to      =  $accountMeta['email'];
             $subject = 'Welcome to YBPTH';
-            $message = 'Hello! Welcome to Your Best Pathway to Health Volunteer Group.';
+            $message = $result;
             $headers = 'From: do_not_reply@pth.mi-squared.com' . "\r\n" .
                 'Reply-To: do_not_reply@pth.mi-squared.com' . "\r\n" .
                 'X-Mailer: PHP/' . phpversion();
