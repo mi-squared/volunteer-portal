@@ -42,8 +42,6 @@ class AccountsController extends BaseController
 
             mail($to, $subject, $message, $headers);
 
-            return response()->json("{}");
-
             return response()->json($User);
         }
     }
@@ -183,7 +181,7 @@ class AccountsController extends BaseController
 
         $host = env('HOST_URL', 'http://pth.mi-squared.com/client/dist/index.html');
         $loginLink = $host . "#/external-login?token=" . $token . "&username=". $email . "&next=account";
-        
+
         $to      =  $email;
         $from    =  "do_not_reply@" . env('HOST_NAME', 'pth-production-prwn5v7pi2.elasticbeanstalk.com');
         $subject = 'Password reset link';
@@ -199,7 +197,7 @@ class AccountsController extends BaseController
         //
         //     $m->to($User->email, $User->last_name . ', ' . $User->first_name)->subject('Password Reset Link(to)');
         // });
-
+        //
         // Mail::raw('Text to e-mail', function($message)
         // {
         //     $message->from('us@example.com', 'Laravel');
