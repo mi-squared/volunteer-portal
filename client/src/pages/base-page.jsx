@@ -137,7 +137,6 @@ export default function composePage(Component) {
                         if ( !response.uploads ) {
                             response.uploads = [];
                         }
-                        console.log(response.id);
                         sessionStorage.setItem('applicationID', response.id);
                         self.props.setState( response );
                         deferred.resolve();
