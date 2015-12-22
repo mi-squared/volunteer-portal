@@ -22,12 +22,12 @@ const fetchClient = {
   },
 
   getDocumentUrl: function(fileName) {
-    return fetch(getServiceBaseURL() + '/api/v1/documents/' + fileName)
+    return fetch(getServiceBaseURL() + '/api/v1/documents/' + encodeURI(fileName))
   },
 
   getUploadUrl: function(appID, fileName) {
     sessionStorage.getItem('token');
-    return fetch(getServiceBaseURL() + '/api/v1/uploads/' + appID + '/' + fileName, getFetchOptions())
+    return fetch(getServiceBaseURL() + '/api/v1/uploads/' + appID + '/' +  encodeURI(fileName), getFetchOptions())
   }
 
 }
