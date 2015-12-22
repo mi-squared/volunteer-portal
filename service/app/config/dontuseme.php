@@ -12,7 +12,7 @@ return [
     | Supported: "smtp", "mail", "sendmail", "mailgun", "mandrill", "ses", "log"
     |
     */
-    'driver' => 'mail',
+    'driver' => 'sendmail',
     /*
     |--------------------------------------------------------------------------
     | SMTP Host Address

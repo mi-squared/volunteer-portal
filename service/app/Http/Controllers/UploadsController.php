@@ -36,11 +36,12 @@ class UploadsController extends BaseController
     $filteredXml = [];
     foreach($xmlContents as $obj ) {
       $obj = (array) $obj;
-      if (preg_match('/^documents\\/(.+)(\.pdf|\.docx|\.doc)/', $obj["Key"], $matches_out)) { //match if in documents/ and .pdf/.docx/.doc
-        array_push($filteredXml, $matches_out[1] . $matches_out[2]);
+      if (preg_match('/^documents\\/(.+)/', $obj["Key"], $matches_out)) { //match if in documents/ and .pdf/.docx/.doc
+        array_push($filteredXml, $matches_out[1]);
       }
     };
 
+    // $json = json_encode($xmlContents); // uncomment to see entire bucket contents
     $json = json_encode($filteredXml);
 
     return $json;
