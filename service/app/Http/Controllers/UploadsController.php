@@ -79,7 +79,6 @@ class UploadsController extends BaseController
   public function getUploadUrl($appID, $key) {
 
     $VolunteerApplication  = VolunteerApplication::where('id', '=', $appID)->firstOrFail();
-
     $userID = $VolunteerApplication['user_id'];
     $User  = User::where('id', '=', $userID)->firstOrFail();
 
@@ -88,6 +87,10 @@ class UploadsController extends BaseController
     // if wrong
     if ($User->id !== $UserFromToken->id) {
       // respond with 401
+      error_log(json_encode('user ===============Error====================='));
+      error_log(json_encode($User));
+      error_log(json_encode('userFromToken ===============Error====================='));
+      error_log(json_encode($UserFromToken));
       return response()->json(['unauthorized'], 401);
     }
 

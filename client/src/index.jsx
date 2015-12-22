@@ -20,6 +20,7 @@ store.dispatch({
 export const history = createHashHistory();
 
 history.listen((location) => {
+  console.log("==token== ", sessionStorage.getItem('token'));
   if (isProtected(location)) {
     let {token, applicationID} = sessionStorage;
     store.dispatch(getSessionState(token, applicationID));

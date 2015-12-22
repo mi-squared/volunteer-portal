@@ -1,10 +1,13 @@
 import "whatwg-fetch";
 import {getServiceBaseURL} from "./core";
 
-const fetchOptions = {
-  method: "GET",
-  headers: {
-      'Authorization':'Bearer ' + sessionStorage.getItem('token')
+
+function getFetchOptions() {
+  return {
+    method: "GET",
+    headers: {
+        'Authorization':'Bearer ' + sessionStorage.getItem('token')
+    }
   }
 }
 
@@ -23,7 +26,8 @@ const fetchClient = {
   },
 
   getUploadUrl: function(appID, fileName) {
-    return fetch(getServiceBaseURL() + '/api/v1/uploads/' + appID + '/' + fileName, fetchOptions)
+    sessionStorage.getItem('token');
+    return fetch(getServiceBaseURL() + '/api/v1/uploads/' + appID + '/' + fileName, getFetchOptions())
   }
 
 }
