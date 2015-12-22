@@ -72,11 +72,9 @@ export function updateAccount(token, data) {
             login(data.username, data.password)
                 .then(
                     function(r) {
-                        debugger;
                         deferred.resolve(r);
                     },
                     function(e) {
-                        debugger;
                         deferred.reject(e);
                     }
             );

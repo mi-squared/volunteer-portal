@@ -174,12 +174,12 @@ $app->get(
 );
 
 // Upload Forms
-
-$app->get(
-    '/api/v1/uploads/{appID}/{key}',
-    'UploadsController@getUploadUrl'
-);
-
+// $app->group(['middleware' => 'jwt.auth'], function($app) {
+  $app->get(
+      '/api/v1/uploads/{appID}/{key}',
+      'UploadsController@getUploadUrl'
+  );
+// });
 
 ///////////////////////////////////////////////////////////
 // Applications

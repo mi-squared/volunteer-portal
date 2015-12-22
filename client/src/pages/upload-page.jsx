@@ -59,7 +59,7 @@ class UploadPage extends React.Component {
                 {...this.props}
                 key={documentSpec}
                 fileName={documentSpec}
-                fileType={documentSpec.match(/\.(pdf|docx|doc)/)[1]}
+                fileType={documentSpec.match(/\.(.+)/)[1]}
                 >
               </UploadField>
             )}
