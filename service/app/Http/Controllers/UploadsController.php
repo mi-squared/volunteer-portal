@@ -3,6 +3,7 @@
 use Aws\S3\S3Client;
 use JWTAuth;
 use App\Upload;
+use App\User;
 use App\VolunteerApplication;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
@@ -36,7 +37,7 @@ class UploadsController extends BaseController
     $filteredXml = [];
     foreach($xmlContents as $obj ) {
       $obj = (array) $obj;
-      if (preg_match('/^documents\\/(.+)/', $obj["Key"], $matches_out)) { 
+      if (preg_match('/^documents\\/(.+)/', $obj["Key"], $matches_out)) {
         array_push($filteredXml, $matches_out[1]);
       }
     };
@@ -73,41 +74,46 @@ class UploadsController extends BaseController
 
     return json_encode($presignedUrlArray);
 
-    // Redirect::away($presignedUrl); // none of these actually work
-    // return redirect($presignedUrl);
-    // return Redirect::to($presignedUrl);
-    // return response()->download($presignedUrl);
-
   }
 
   public function getUploadUrl($appID, $key) {
 
-    $s3Client = new S3Client([
-      'region'  => getenv('S3_REGION'),
-      'version' => "2006-03-01"
-    ]);
+    $VolunteerApplication  = VolunteerApplication::where('id', '=', $appID)->firstOrFail();
 
-    $params = [
-      'Bucket' => getenv('S3_BUCKET'),
-      'Key' => 'completed_documents/' . $appID . '/' . $key
-    ];
+    $userID = $VolunteerApplication['user_id'];
+    $User  = User::where('id', '=', $userID)->firstOrFail();
 
-    $cmd = $s3Client->getCommand('PutObject', $params);
+    $UserFromToken = JWTAuth::parseToken()->authenticate();
 
-    $request = $s3Client->createPresignedRequest($cmd, '+5 minutes');
+    if ($User->id === $UserFromToken->id) {
 
-    // Get the actual presigned-url
-    $presignedUrl = $request->getUri();
+      $s3Client = new S3Client([
+        'region'  => getenv('S3_REGION'),
+        'version' => "2006-03-01"
+      ]);
 
-    $getUrl = $s3Client->getObjectUrl($params['Bucket'], $params['Key']); // actually get the url to be stored in laravel
-
-    $presignedUrlArray = [
-        'postUrl' => (string) $presignedUrl,
-        'getUrl'  => (string) $getUrl
+      $params = [
+        'Bucket' => getenv('S3_BUCKET'),
+        'Key' => 'completed_documents/' . $appID . '/' . $key
       ];
 
-    return json_encode($presignedUrlArray);
+      $cmd = $s3Client->getCommand('PutObject', $params);
 
+      $request = $s3Client->createPresignedRequest($cmd, '+5 minutes');
+
+      // Get the actual presigned-url
+      $presignedUrl = $request->getUri();
+
+      $getUrl = $s3Client->getObjectUrl($params['Bucket'], $params['Key']); // actually get the url to be stored in laravel
+
+      $presignedUrlArray = [
+          'postUrl' => (string) $presignedUrl,
+          'getUrl'  => (string) $getUrl
+        ];
+
+      return json_encode($presignedUrlArray);
+
+    }
   }
 
 }
