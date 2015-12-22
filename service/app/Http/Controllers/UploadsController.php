@@ -3,6 +3,7 @@
 use Aws\S3\S3Client;
 use JWTAuth;
 use App\Upload;
+use App\User;
 use App\VolunteerApplication;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
@@ -36,7 +37,7 @@ class UploadsController extends BaseController
     $filteredXml = [];
     foreach($xmlContents as $obj ) {
       $obj = (array) $obj;
-      if (preg_match('/^documents\\/(.+)/', $obj["Key"], $matches_out)) { //match if in documents/ and .pdf/.docx/.doc
+      if (preg_match('/^documents\\/(.+)/', $obj["Key"], $matches_out)) {
         array_push($filteredXml, $matches_out[1]);
       }
     };
@@ -73,14 +74,25 @@ class UploadsController extends BaseController
 
     return json_encode($presignedUrlArray);
 
-    // Redirect::away($presignedUrl); // none of these actually work
-    // return redirect($presignedUrl);
-    // return Redirect::to($presignedUrl);
-    // return response()->download($presignedUrl);
-
   }
 
   public function getUploadUrl($appID, $key) {
+
+    $VolunteerApplication  = VolunteerApplication::where('id', '=', $appID)->firstOrFail();
+    $userID = $VolunteerApplication['user_id'];
+    $User  = User::where('id', '=', $userID)->firstOrFail();
+
+    $UserFromToken = JWTAuth::parseToken()->authenticate();
+
+    // if wrong
+    if ($User->id !== $UserFromToken->id) {
+      // respond with 401
+      error_log(json_encode('user ===============Error====================='));
+      error_log(json_encode($User));
+      error_log(json_encode('userFromToken ===============Error====================='));
+      error_log(json_encode($UserFromToken));
+      return response()->json(['unauthorized'], 401);
+    }
 
     $s3Client = new S3Client([
       'region'  => getenv('S3_REGION'),
