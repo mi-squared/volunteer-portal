@@ -56,9 +56,11 @@ class UploadsController extends BaseController
       'version' => "2006-03-01"
     ]);
 
+    $groomedKey = str_replace("%20", " ", $key); // s3 does not interpret %20 as whitespace
+
     $params = [
       'Bucket' => getenv('S3_BUCKET'),
-      'Key' => 'documents/' . $key
+      'Key' => 'documents/' . $groomedKey
     ];
 
     $cmd = $s3Client->getCommand('GetObject', $params);
@@ -99,9 +101,11 @@ class UploadsController extends BaseController
       'version' => "2006-03-01"
     ]);
 
+    $groomedKey = str_replace("%20", " ", $key); // s3 does not interpret %20 as whitespace
+
     $params = [
       'Bucket' => getenv('S3_BUCKET'),
-      'Key' => 'completed_documents/' . $appID . '/' . $key
+      'Key' => 'completed_documents/' . $appID . '/' . $groomedKey
     ];
 
     $cmd = $s3Client->getCommand('PutObject', $params);
