@@ -193,7 +193,6 @@ class AccountsController extends BaseController
         // its a valid account - construct a temporary login URL and send it to the user
         $tomorrow = time() + (86400); // 24 hr
         $customClaims = ['exp' => $tomorrow];
-        // xxx - todo - make this expiring!
         $token = JWTAuth::fromUser($User, $customClaims);
 
         $host = env('HOST_URL', 'http://pth.mi-squared.com/client/dist/index.html');
