@@ -85,35 +85,38 @@ class UploadsController extends BaseController
 
     $UserFromToken = JWTAuth::parseToken()->authenticate();
 
-    if ($User->id === $UserFromToken->id) {
+    // if wrong
+    if ($User->id !== $UserFromToken->id) {
+      // respond with 401
+      return response()->json(['unauthorized'], 401);
+    }
 
-      $s3Client = new S3Client([
-        'region'  => getenv('S3_REGION'),
-        'version' => "2006-03-01"
-      ]);
+    $s3Client = new S3Client([
+      'region'  => getenv('S3_REGION'),
+      'version' => "2006-03-01"
+    ]);
 
-      $params = [
-        'Bucket' => getenv('S3_BUCKET'),
-        'Key' => 'completed_documents/' . $appID . '/' . $key
+    $params = [
+      'Bucket' => getenv('S3_BUCKET'),
+      'Key' => 'completed_documents/' . $appID . '/' . $key
+    ];
+
+    $cmd = $s3Client->getCommand('PutObject', $params);
+
+    $request = $s3Client->createPresignedRequest($cmd, '+5 minutes');
+
+    // Get the actual presigned-url
+    $presignedUrl = $request->getUri();
+
+    $getUrl = $s3Client->getObjectUrl($params['Bucket'], $params['Key']); // actually get the url to be stored in laravel
+
+    $presignedUrlArray = [
+        'postUrl' => (string) $presignedUrl,
+        'getUrl'  => (string) $getUrl
       ];
 
-      $cmd = $s3Client->getCommand('PutObject', $params);
+    return json_encode($presignedUrlArray);
 
-      $request = $s3Client->createPresignedRequest($cmd, '+5 minutes');
-
-      // Get the actual presigned-url
-      $presignedUrl = $request->getUri();
-
-      $getUrl = $s3Client->getObjectUrl($params['Bucket'], $params['Key']); // actually get the url to be stored in laravel
-
-      $presignedUrlArray = [
-          'postUrl' => (string) $presignedUrl,
-          'getUrl'  => (string) $getUrl
-        ];
-
-      return json_encode($presignedUrlArray);
-
-    }
   }
 
 }
