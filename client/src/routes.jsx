@@ -18,7 +18,7 @@ import {AccountPageContainer} from './pages/account-page.jsx';
 import {ForgotPasswordPageContainer} from './pages/forgot-password-page.jsx';
 import {ExternalLoginPageContainer} from './pages/external-login-page.jsx';
 
-export const openRoutes = <Route path="/" component={App} onEnter={ifLoggedIn}>
+export const openRoutes = <Route path="/" component={App} onEnter={whenLoggedIn}>
   <IndexRoute component={WelcomePage} />
   <Route path="/new-volunteer" component={NewVolunteerPageContainer} />
   <Route path="/returning-volunteer" component={ReturningVolunteerPageContainer} />
@@ -56,7 +56,7 @@ function requireLogin(nextState, replaceState) {
   }
 }
 
-function ifLoggedIn(nextState, replaceState) {
+function whenLoggedIn(nextState, replaceState) {
   isLoggedIn(sessionStorage).then((LoggedIn) => {
     if (LoggedIn) {
       history.replaceState(null, "/main")

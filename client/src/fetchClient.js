@@ -26,7 +26,6 @@ const fetchClient = {
   },
 
   getUploadUrl: function(appID, fileName) {
-    sessionStorage.getItem('token');
     return fetch(getServiceBaseURL() + '/api/v1/uploads/' + appID + '/' + fileName, getFetchOptions())
   }
 

@@ -11,7 +11,7 @@ export function login(username, password) {
 
     var deferred = Q.defer();
 
-    $.ajax({
+    let req = $.ajax({
         type: "POST",
         url: getServiceBaseURL() + '/api/v1/accounts/login',
         data: data,
@@ -31,7 +31,7 @@ export function login(username, password) {
 export function register(data) {
     var deferred = Q.defer();
 
-    $.ajax({
+    let req = $.ajax({
         type: "POST",
         url: getServiceBaseURL() + '/api/v1/accounts',
         data: data,
@@ -59,7 +59,7 @@ export function register(data) {
 export function updateAccount(token, data) {
     var deferred = Q.defer();
 
-    $.ajax({
+    let req = $.ajax({
         type: "PUT",
         url: getServiceBaseURL() + '/api/v1/accounts',
         data: JSON.stringify(data),
@@ -68,6 +68,7 @@ export function updateAccount(token, data) {
             'Content-Type':'application/json'
         },
         success: function(response) {
+            refreshToken(req);
             // successfull registration; try logging in
             login(data.username, data.password)
                 .then(
@@ -91,7 +92,7 @@ export function updateAccount(token, data) {
 export function forgotPassword(data) {
     var deferred = Q.defer();
 
-    $.ajax({
+    let req = $.ajax({
         type: "POST",
         url: getServiceBaseURL() + '/api/v1/accounts/forgotPassword',
         data: data,
@@ -113,7 +114,7 @@ export function saveApplicationRemote(token, application) {
     var endpoint = (getServiceBaseURL() + '/api/v1/applications')
                  + (applicationID ?  '/' + applicationID : '');
 
-    $.ajax({
+    let req = $.ajax({
         type: applicationID ? "PUT" : "POST",
         url: endpoint,
         data: JSON.stringify(application),
@@ -122,6 +123,7 @@ export function saveApplicationRemote(token, application) {
             'Content-Type':'application/json'
         },
         success: function(response) {
+            refreshToken(req);
             deferred.resolve(response);
         },
         error: function(request, status, error) {
@@ -136,7 +138,7 @@ export function saveApplicationRemote(token, application) {
 export function getApplication(token, applicationID) {
     var deferred = Q.defer();
 
-    $.ajax({
+    let req = $.ajax({
         type: "GET",
         url: getServiceBaseURL() + '/api/v1/applications/' + applicationID,
         headers: {
@@ -158,7 +160,7 @@ export function getApplication(token, applicationID) {
 export function getAccount(token) {
     var deferred = Q.defer();
 
-    $.ajax({
+    let req = $.ajax({
         type: "GET",
         url: getServiceBaseURL() + '/api/v1/accounts/me',
         headers: {
@@ -166,6 +168,7 @@ export function getAccount(token) {
             'Content-Type':'application/json'
         },
         success: function(response) {
+            refreshToken(req);
             deferred.resolve(response);
         },
         error: function(request, status, error) {
@@ -181,4 +184,11 @@ export function getAccount(token) {
 export function isLoggedIn(storedCredentials) {
   let {token, applicationID} = storedCredentials;
   return getAccount(token).then((response) => {return true}, (error) => {return false})
+}
+
+function refreshToken(request) {
+  let newToken = request.getResponseHeader('Authorization');
+  if (newToken) {
+    sessionStorage.setItem('token', newToken.replace("Bearer ", ""));
+  }
 }

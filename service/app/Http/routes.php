@@ -74,7 +74,7 @@ $app->get('/', function () use ($app) {
 //
 // JWT protected routes
 //
-$app->group(['middleware' => 'jwt.auth'], function($app) {
+$app->group(['middleware' => ['jwt.auth', 'jwt.refresh']], function($app) {
     /**
      * Retrieve a list of all accounts
      */
@@ -174,7 +174,7 @@ $app->get(
 );
 
 // Upload Forms
-// $app->group(['middleware' => 'jwt.auth'], function($app) {
+// $app->group(['middleware' => ['jwt.auth', 'jwt.refresh']], function($app) {
   $app->get(
       '/api/v1/uploads/{appID}/{key}',
       'UploadsController@getUploadUrl'
@@ -188,7 +188,7 @@ $app->get(
 //
 // JWT protected routes
 //
-$app->group(['middleware' => 'jwt.auth'], function($app) {
+$app->group(['middleware' => ['jwt.auth', 'jwt.refresh']], function($app) {
     /**
      * Fetch a specific application by ID
      */

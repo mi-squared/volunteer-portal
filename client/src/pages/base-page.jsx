@@ -122,7 +122,7 @@ export default function composePage(Component) {
 
         saveApplication: function() {
             var stateJSON = this.props;
-            var token = stateJSON['jwt'];
+            var token = sessionStorage.getItem('token');
             var application = stateJSON.data;
             var deferred = Q.defer();
 

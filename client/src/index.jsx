@@ -8,7 +8,6 @@ import {createHashHistory} from "history";
 import { fetchOptions, fetchDocumentsList, getSessionState } from "./action_creators.js";
 import makeStore from "./store";
 import { openRoutes, protectedRoutes, isProtected } from "./routes";
-import { isLoggedIn } from "./client";
 
 
 const store = makeStore();
