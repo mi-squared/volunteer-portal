@@ -11,7 +11,7 @@ export function login(username, password) {
 
     var deferred = Q.defer();
 
-    var req = $.ajax({
+    let req = $.ajax({
         type: "POST",
         url: getServiceBaseURL() + '/api/v1/accounts/login',
         data: data,
@@ -139,7 +139,7 @@ export function saveApplicationRemote(token, application) {
 export function getApplication(token, applicationID) {
     var deferred = Q.defer();
 
-    var req = $.ajax({
+    let req = $.ajax({
         type: "GET",
         url: getServiceBaseURL() + '/api/v1/applications/' + applicationID,
         headers: {
@@ -163,7 +163,7 @@ export function getApplication(token, applicationID) {
 export function getAccount(token) {
     var deferred = Q.defer();
 
-    var req = $.ajax({
+    let req = $.ajax({
         type: "GET",
         url: getServiceBaseURL() + '/api/v1/accounts/me',
         headers: {
