@@ -97,7 +97,6 @@ export function forgotPassword(data) {
         url: getServiceBaseURL() + '/api/v1/accounts/forgotPassword',
         data: data,
         success: function(response) {
-            refreshToken(req);
             deferred.resolve(response);
         },
         error: function(request, status, error) {
@@ -147,8 +146,6 @@ export function getApplication(token, applicationID) {
             'Content-Type':'application/json'
         },
         success: function(response) {
-            var headers = req.getAllResponseHeaders();
-            refreshToken(req);
             deferred.resolve(response);
         },
         error: function(request, status, error) {
