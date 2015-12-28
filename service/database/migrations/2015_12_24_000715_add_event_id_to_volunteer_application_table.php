@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddEventNameToVolunteerApplicationTable extends Migration
+class AddEventIdToVolunteerApplicationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddEventNameToVolunteerApplicationTable extends Migration
     public function up()
     {
         Schema::table('volunteer_application', function (Blueprint $table) {
-          $table->string("event_name")->default("");
+          $table->string("event_id")->default("");
         });
     }
 
@@ -25,7 +25,7 @@ class AddEventNameToVolunteerApplicationTable extends Migration
     public function down()
     {
         Schema::table('volunteer_application', function (Blueprint $table) {
-          $table->dropColumn("event_name");
+          $table->dropColumn("event_id");
         });
     }
 }

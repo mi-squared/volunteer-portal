@@ -1,4 +1,0 @@
-client does not send:
-	* license expiration
-	* falsy yes_no fields are sometimes "false" sometimes ""
-	* medical_npi non existant as far as i can tell

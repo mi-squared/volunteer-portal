@@ -9,6 +9,7 @@ class VolunteerApplication extends Model
 
     protected $fillable = [
         'user_id',
+        'event_id',
 
         // personal
         "q_dob",
