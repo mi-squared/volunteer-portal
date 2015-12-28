@@ -109,11 +109,16 @@ class AccountsController extends BaseController
      */
     public function returnAccount($User) {
         $VolunteerApplication =
-            VolunteerApplication::where('user_id', '=', $User['id'])
+            VolunteerApplication::where('user_id', '=', $User['id']) // add desc order and if this.event_id !== get_env(event_id) don't serve application (aka new app) -- add save event_id to saveApplication
+                ->latest()
                 ->first();
 
         $responseMeta = ['account' => $User];
-        if ($VolunteerApplication && $VolunteerApplication['id']) {
+
+        $isCurrent = $VolunteerApplication['event_id'] === getenv('CURRENT_EVENT_ID');
+
+        if ($VolunteerApplication && $VolunteerApplication['id'] && $isCurrent) {
+
             $responseMeta['application_id'] = $VolunteerApplication['id'];
         }
         return response()->json($responseMeta, 200);
@@ -154,13 +159,17 @@ class AccountsController extends BaseController
 
         $VolunteerApplication =
             VolunteerApplication::where('user_id', '=', $User['id'])
+                ->latest()
                 ->first();
+
+        $isCurrent = $VolunteerApplication['event_id'] === getenv('CURRENT_EVENT_ID');
+
 
         try
         {
             $token = JWTAuth::fromUser($User);
             $responseMeta = ['token' => $token, 'account' => $User];
-            if ( $VolunteerApplication && $VolunteerApplication['id'] ) {
+            if ( $VolunteerApplication && $VolunteerApplication['id'] && $isCurrent ) {
                 $responseMeta['application_id'] = $VolunteerApplication['id'];
             }
             return response()->json($responseMeta, 200);

@@ -21,6 +21,7 @@ class VolunteerApplicationController extends BaseController
 
             $applicationMeta = $request->all();
             $applicationMeta['user_id'] = $userID;
+            $applicationMeta['event_id'] = getenv('CURRENT_EVENT_ID');
             $VolunteerApplication = VolunteerApplication::create($applicationMeta);
 
             if ( array_key_exists('children', $applicationMeta) ) {
