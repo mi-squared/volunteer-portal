@@ -56,7 +56,7 @@ class AccountsController extends BaseController
                 'Reply-To: do_not_reply@pth.mi-squared.com' . "\r\n" .
                 'X-Mailer: PHP/' . phpversion();
 
-            // mail($to, $subject, $message, $headers);
+            mail($to, $subject, $message, $headers);
 
             return response()->json($User);
         }
@@ -215,7 +215,7 @@ class AccountsController extends BaseController
                    'Reply-To: ' . $from . "\r\n" .
                    'X-Mailer: PHP/' . phpversion();
 
-        // mail($to, $subject, $message, $headers);
+        mail($to, $subject, $message, $headers);
 
         // Mail::send('emails.reset_password', ['user' => $User, 'loginLink' => $loginLink], function ($m) use ($User) {
         //     $m->from('do_not_reply@pth.mi-squared.com', 'Password Reset Link(from)');
