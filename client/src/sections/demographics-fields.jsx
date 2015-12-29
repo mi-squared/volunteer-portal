@@ -105,7 +105,7 @@ export default class DemographicsFields extends BaseSection {
                     {...this.props}
                     fieldName="data.q_is_adventist"
                     ref="data.q_is_adventist"
-                    label="Are you a committed Seventh-day Adventist in good standing and do you believe in all the fundamental beliefs of the church?"
+                    label="Are you a Seventh-day Adventist?"
                     value={this.props.data.q_is_adventist}
                     onChange={this.handleChange}
                     clearIf={ { isNot : "true", fields: [

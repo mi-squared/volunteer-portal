@@ -17,7 +17,7 @@ export default class AvailabilityFields extends BaseSection {
                     fieldName="data.q_share_room"
                     ref="data.q_share_room"
                     value={this.props.data.q_share_room}
-                    label="We have volunteers looking to share accommodations. Are you willing to share a room?"
+                    label="We have volunteers looking to share accommodations. Is this something you are interested in?"
                     onChange={this.handleChange}
                 />
 
