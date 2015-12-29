@@ -28,11 +28,11 @@ class DoRegisterPage extends React.Component {
 
                 <div className="col-md-12" id="thank-you">
                     Thank you for registering. You will receive an email notification containing your account information.
-                    Please click 'Apply' to proceed to the volunteer application form.
+                    Please click 'Continue' to proceed to the volunteer application form.
                 </div>
 
                 <div className="j-page-nav col-md-12">
-                    <Button onClick={this.doContinue} id="submit-register" className="btn btn-primary">Apply</Button>
+                    <Button onClick={this.doContinue} id="submit-register" className="btn btn-primary">Continue</Button>
                 </div>
 
             </div>

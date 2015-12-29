@@ -84,6 +84,12 @@ class MainPage extends React.Component {
                     maxLength: 255,
                     required: true,
                     allowEmpty: false
+                },
+                q_tshirt: {
+                    type: 'string',
+                    maxLength: 255,
+                    required: true,
+                    allowEmpty: false
                 }
             }
         };
