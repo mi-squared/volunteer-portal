@@ -1682,8 +1682,8 @@ class OptionsSeeder extends Seeder {
         	'form_list_id' => '6'
         ] );
         Option::create( [
-        	'name' => 'Doctor',
-        	'value' => 'Doctor',
+        	'name' => 'Medical Doctor',
+        	'value' => 'Medical Doctor',
         	'form_list_id' => '6'
         ] );
         Option::create( [
@@ -1722,8 +1722,8 @@ class OptionsSeeder extends Seeder {
         	'form_list_id' => '6'
         ] );
         Option::create( [
-        	'name' => 'Naturopath',
-        	'value' => 'Naturopath',
+        	'name' => 'Naturopathic Physician',
+        	'value' => 'Naturopathic Physician',
         	'form_list_id' => '6'
         ] );
         Option::create( [
@@ -1747,8 +1747,8 @@ class OptionsSeeder extends Seeder {
         	'form_list_id' => '6'
         ] );
         Option::create( [
-        	'name' => 'Osteopath',
-        	'value' => 'Osteopath',
+        	'name' => 'Osteopathic Physician',
+        	'value' => 'Osteopathic Physician',
         	'form_list_id' => '6'
         ] );
         Option::create( [

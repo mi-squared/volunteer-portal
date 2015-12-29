@@ -32,9 +32,9 @@ export default class VolunteerGeneral extends BaseSection {
 
                     <VolunteerAreaField
                         {...this.props}
-                        label="In what areas have you volunteered?"
+                        label="In what area(s) have you volunteered?"
                         value={this.props.data.q_volunteered_area}
-                        placeHolder="Click to choose volunteer areas"
+                        placeHolder="Click to choose volunteer area(s)"
                         ref="data.q_volunteered_area"
                         fieldName="data.q_volunteered_area"
                         onChange={this.handleChange}/>
@@ -52,9 +52,9 @@ export default class VolunteerGeneral extends BaseSection {
                 <div>
                     <VolunteerAreaField
                         {...this.props}
-                        label="What areas would you like to volunteer in?"
+                        label="What area(s) would you like to volunteer in?"
                         value={this.props.data.q_volunteering_area}
-                        placeHolder="Click to choose volunteer areas"
+                        placeHolder="Click to choose volunteer area(s)"
                         ref="data.q_volunteering_area"
                         fieldName="data.q_volunteering_area"
                         onChange={this.handleChange}/>
@@ -63,7 +63,7 @@ export default class VolunteerGeneral extends BaseSection {
                 <YesNoField {...this.props}
                     fieldName="data.q_volunteering_in_licensed_area"
                     ref="data.q_volunteering_in_licensed_area"
-                    label="Do you want to volunteer in your currently licensed area?"
+                    label="Do you wish to volunteer in an area where you are currently professionally licensed?"
                     value={this.props.data.q_volunteering_in_licensed_area}
                     onChange={this.handleChange}
                     clearIf={ { isNot : "true", fields: [
