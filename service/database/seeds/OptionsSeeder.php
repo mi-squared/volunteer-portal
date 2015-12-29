@@ -1552,6 +1552,11 @@ class OptionsSeeder extends Seeder {
         	'form_list_id' => '5'
         ] );
         Option::create( [
+        	'name' => 'Church',
+        	'value' => 'church',
+        	'form_list_id' => '5'
+        ] );
+        Option::create( [
         	'name' => 'Email/Newsletter',
         	'value' => 'email-newsletter',
         	'form_list_id' => '5'
@@ -1572,6 +1577,11 @@ class OptionsSeeder extends Seeder {
         	'form_list_id' => '5'
         ] );
         Option::create( [
+        	'name' => 'Read about it',
+        	'value' => 'read-about-it',
+        	'form_list_id' => '5'
+        ] );
+        Option::create( [
         	'name' => 'TV',
         	'value' => 'tv',
         	'form_list_id' => '5'
@@ -1584,6 +1594,11 @@ class OptionsSeeder extends Seeder {
         Option::create( [
         	'name' => 'Website/Search Engine',
         	'value' => 'website-search-engine',
+        	'form_list_id' => '5'
+        ] );
+        Option::create( [
+        	'name' => 'Work',
+        	'value' => 'work',
         	'form_list_id' => '5'
         ] );
         Option::create( [

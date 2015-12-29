@@ -230,8 +230,30 @@ export default class DemographicsFields extends BaseSection {
                         ref="data.q_ybpth_ref_other"
                         onChange={this.handleChange}
                     />
-
                 </QuestionContainer>
+
+                <QuestionContainer {...this.props}
+                    criteria={ {key : 'q_ybpth_ref', value : "read-about-it" } }>
+                    <ValidatedInput {...this.props}
+                        label="Where did you read about us?"
+                        value={this.props.data.q_ybpth_ref_other}
+                        fieldName="data.q_ybpth_ref_read_about_it"
+                        ref="data.q_ybpth_ref_read_about_it"
+                        onChange={this.handleChange}
+                    />
+                </QuestionContainer>
+
+                <QuestionContainer {...this.props}
+                    criteria={ {key : 'q_ybpth_ref', value : "work" } }>
+                    <ValidatedInput {...this.props}
+                        label="Where do you work?"
+                        value={this.props.data.q_ybpth_ref_other}
+                        fieldName="data.q_ybpth_ref_work"
+                        ref="data.q_ybpth_ref_work"
+                        onChange={this.handleChange}
+                    />
+                </QuestionContainer>
+
             </div>
         );
     }

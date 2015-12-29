@@ -60,6 +60,8 @@ class VolunteerApplication extends Model
         // referral
         "q_ybpth_ref",
         "q_ybpth_ref_other",
+        "q_ybpth_ref_read_about_it",
+        "q_ybpth_ref_work",
 
         // volunteer
         "q_volunteer_organization_member",
