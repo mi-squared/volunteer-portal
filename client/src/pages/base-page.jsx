@@ -153,9 +153,10 @@ export default function composePage(Component) {
         },
 
         render: function() {
+            let token = sessionStorage.getItem('token');
             return (
                 <div>
-                    {this.props.jwt && this.props.jwt && <Header {...this.props}/>}
+                    {this.props.jwt && token && <Header {...this.props}/>}
                      <Component
                         {...this.props}
                         state={this.state}
