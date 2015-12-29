@@ -113,9 +113,6 @@ class NewVolunteerPage extends React.Component {
 
             register(data).then(
                 (response) => {
-                  self.props.login({
-                      token: response.token
-                  })
                   sessionStorage.setItem('token', response.token);
                   this.props.saveApplication().then(
                     (success) => {
