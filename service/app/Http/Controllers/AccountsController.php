@@ -110,10 +110,7 @@ class AccountsController extends BaseController
     public function returnAccount($User) {
 
       $filterParams = ['user_id' => $User['id'], 'event_id' => getenv('CURRENT_EVENT_ID')];
-      $VolunteerApplication =
-          VolunteerApplication::where($filterParams)
-              ->latest()
-              ->first();
+      $VolunteerApplication = VolunteerApplication::where($filterParams)->first();
 
         $responseMeta = ['account' => $User];
 
@@ -159,10 +156,7 @@ class AccountsController extends BaseController
         }
 
         $filterParams = ['user_id' => $User['id'], 'event_id' => getenv('CURRENT_EVENT_ID')];
-        $VolunteerApplication =
-            VolunteerApplication::where($filterParams)
-                ->latest()
-                ->first();
+        $VolunteerApplication = VolunteerApplication::where($filterParams)->first();
 
         try
         {
