@@ -108,16 +108,16 @@ class AccountsController extends BaseController
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function returnAccount($User) {
-        $VolunteerApplication =
-            VolunteerApplication::where('user_id', '=', $User['id']) // add desc order and if this.event_id !== get_env(event_id) don't serve application (aka new app) -- add save event_id to saveApplication
-                ->latest()
-                ->first();
+
+      $filterParams = ['user_id' => $User['id'], 'event_id' => getenv('CURRENT_EVENT_ID')];
+      $VolunteerApplication =
+          VolunteerApplication::where($filterParams)
+              ->latest()
+              ->first();
 
         $responseMeta = ['account' => $User];
 
-        $isCurrent = $VolunteerApplication['event_id'] === getenv('CURRENT_EVENT_ID');
-
-        if ($VolunteerApplication && $VolunteerApplication['id'] && $isCurrent) {
+        if ($VolunteerApplication && $VolunteerApplication['id']) {
 
             $responseMeta['application_id'] = $VolunteerApplication['id'];
         }
@@ -149,6 +149,7 @@ class AccountsController extends BaseController
 
         $plainPassword = $credentials['password'];
 
+
         $User = User::where('username', '=', $credentials['username'])
             ->firstOrFail();
 
@@ -157,19 +158,17 @@ class AccountsController extends BaseController
             return response()->json(['error' => 'unauthorized'], 400);
         }
 
+        $filterParams = ['user_id' => $User['id'], 'event_id' => getenv('CURRENT_EVENT_ID')];
         $VolunteerApplication =
-            VolunteerApplication::where('user_id', '=', $User['id'])
+            VolunteerApplication::where($filterParams)
                 ->latest()
                 ->first();
-
-        $isCurrent = $VolunteerApplication['event_id'] === getenv('CURRENT_EVENT_ID');
-
 
         try
         {
             $token = JWTAuth::fromUser($User);
             $responseMeta = ['token' => $token, 'account' => $User];
-            if ( $VolunteerApplication && $VolunteerApplication['id'] && $isCurrent ) {
+            if ( $VolunteerApplication && $VolunteerApplication['id'] ) {
                 $responseMeta['application_id'] = $VolunteerApplication['id'];
             }
             return response()->json($responseMeta, 200);
