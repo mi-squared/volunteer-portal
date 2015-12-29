@@ -208,8 +208,8 @@ describe('NewVolunteerPage', () => {
 
 
       .waitForValue('#available_postactivity_centers', 10000)
-      .setValue('#cpr_expiration', '12122020')
-      .waitForValue('#cpr_expiration', 10000)
+      .setValue('#bls_acls_expiration', '12122020')
+      .waitForValue('#bls_acls_expiration', 10000)
       .setValue('#licensed_expiration_date', '12122020')
       .waitForValue('#licensed_expiration_date', 10000)
       .click('#submit-detail')

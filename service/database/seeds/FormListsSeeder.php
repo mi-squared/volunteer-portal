@@ -35,7 +35,7 @@ class FormListsSeeder extends Seeder {
             'name' => 'licensed_state'
         ] );
         FormList::create( [
-            'name' => 'cpr_org'
+            'name' => 'bls_acls_org'
         ] );
         FormList::create( [
             'name' => 'volunteering_area'
