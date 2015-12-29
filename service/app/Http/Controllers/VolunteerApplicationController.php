@@ -32,8 +32,7 @@ class VolunteerApplicationController extends BaseController
             }
 
             $VolunteerApplication->children;
-            // return response()->json($VolunteerApplication);
-            return response()->json(['error' => 'could_not_resolve_token_to_user'], 500);
+            return response()->json($VolunteerApplication);
         }
         catch (JWTException $e)
         {
