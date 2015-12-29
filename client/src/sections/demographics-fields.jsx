@@ -64,7 +64,7 @@ export default class DemographicsFields extends BaseSection {
                 />
 
                 <DropdownField {...this.props}
-                    label="Gender"
+                    label="Your gender"
                     selectValue={this.props.data['q_gender']}
                     fieldName="data.q_gender"
                     ref="data.q_gender"
@@ -74,6 +74,7 @@ export default class DemographicsFields extends BaseSection {
 
                 <DropdownField {...this.props}
                     selectValue={this.props.data['q_tshirt']}
+                    required={true}
                     label="Shirt size"
                     fieldName="data.q_tshirt"
                     ref="data.q_tshirt"
@@ -159,7 +160,7 @@ export default class DemographicsFields extends BaseSection {
 
                 <QuestionContainer {...this.props} criteria={ {key : 'q_is_adventist', value : "false" } }>
                     <ValidatedInput {...this.props}
-                        label="Church affiliation" type="text"
+                        label="Which church do you most frequently attend?" type="text"
                         fieldName="data.q_church_affiliation"
                         ref="data.q_church_affiliation"
                         value={this.props.data.q_church_affiliation}
