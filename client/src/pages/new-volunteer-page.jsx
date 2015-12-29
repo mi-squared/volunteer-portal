@@ -113,12 +113,23 @@ class NewVolunteerPage extends React.Component {
 
             register(data).then(
                 (response) => {
-                    self.props.login({
-                        token: response.token
-                    })
-                    sessionStorage.setItem('token', response.token);
-                    self.props.history.pushState(null, '/do-register');
-
+                  sessionStorage.setItem('token', response.token);
+                  this.props.saveApplication().then(
+                    (success) => {
+                      self.props.history.pushState(null, '/do-register');
+                    },
+                    (error) => {
+                      sessionStorage.clear();
+                      self.props.handleAlertShow({
+                          errorMessage: "Something went wrong, please try again in a little while",
+                          focusElement: 'q_first_name'
+                      });
+                      self.setState({
+                          disabled: false,
+                          value: "Continue"
+                      });
+                    }
+                  )
                 },
                 (error) => {
                     self.props.handleAlertShow({
