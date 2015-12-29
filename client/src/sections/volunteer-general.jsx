@@ -32,9 +32,9 @@ export default class VolunteerGeneral extends BaseSection {
 
                     <VolunteerAreaField
                         {...this.props}
-                        label="In what areas have you volunteered?"
+                        label="In what area(s) have you volunteered?"
                         value={this.props.data.q_volunteered_area}
-                        placeHolder="Click to choose volunteer areas"
+                        placeHolder="Click to choose volunteer area(s)"
                         ref="data.q_volunteered_area"
                         fieldName="data.q_volunteered_area"
                         onChange={this.handleChange}/>
@@ -52,9 +52,9 @@ export default class VolunteerGeneral extends BaseSection {
                 <div>
                     <VolunteerAreaField
                         {...this.props}
-                        label="What areas would you like to volunteer in?"
+                        label="What area(s) would you like to volunteer in?"
                         value={this.props.data.q_volunteering_area}
-                        placeHolder="Click to choose volunteer areas"
+                        placeHolder="Click to choose volunteer area(s)"
                         ref="data.q_volunteering_area"
                         fieldName="data.q_volunteering_area"
                         onChange={this.handleChange}/>
@@ -63,7 +63,7 @@ export default class VolunteerGeneral extends BaseSection {
                 <YesNoField {...this.props}
                     fieldName="data.q_volunteering_in_licensed_area"
                     ref="data.q_volunteering_in_licensed_area"
-                    label="Do you want to volunteer in your currently licensed area?"
+                    label="Do you wish to volunteer in an area where you are currently professionally licensed?"
                     value={this.props.data.q_volunteering_in_licensed_area}
                     onChange={this.handleChange}
                     clearIf={ { isNot : "true", fields: [
@@ -100,46 +100,46 @@ export default class VolunteerGeneral extends BaseSection {
                 </QuestionContainer>
 
                 <YesNoField {...this.props}
-                    fieldName="data.q_cpr_certified"
-                    ref="data.q_cpr_certified"
-                    label="Are you CPR certified?"
-                    value={this.props.data.q_cpr_certified}
+                    fieldName="data.q_bls_acls_certified"
+                    ref="data.q_bls_acls_certified"
+                    label="Are you BLS or ACLS certified?"
+                    value={this.props.data.q_bls_acls_certified}
                     onChange={this.handleChange}
                     clearIf={ { isNot : "true", fields: [
-                        'data.q_cpr_expiration',
-                        'data.q_cpr_org',
-                        'data.q_cpr_org_other',
+                        'data.q_bls_acls_expiration',
+                        'data.q_bls_acls_org',
+                        'data.q_bls_acls_org_other',
                     ] } }
                 />
 
                 <QuestionContainer {...this.props}
-                    criteria={ {key : 'q_cpr_certified', value : "true" } }>
+                    criteria={ {key : 'q_bls_acls_certified', value : "true" } }>
                     <ValidatedInput {...this.props}
-                        label="CPR certification expiration date:"
-                        value={this.props.data.q_cpr_expiration}
-                        fieldName="data.q_cpr_expiration"
-                        ref="data.q_cpr_expiration"
+                        label="BLS/ACLS certification expiration date:"
+                        value={this.props.data.q_bls_acls_expiration}
+                        fieldName="data.q_bls_acls_expiration"
+                        ref="data.q_bls_acls_expiration"
                         placeholder="mm/dd/yyyy"
                         mask="99/99/9999"
                         onChange={this.handleChange}
                     />
 
                     <DropdownField {...this.props}
-                        selectValue={this.props.data['q_cpr_org']}
-                        label="CPR certification organization:"
-                        fieldName="data.q_cpr_org"
-                        ref="data.q_cpr_org"
+                        selectValue={this.props.data['q_bls_acls_org']}
+                        label="BLS/ACLS certification organization:"
+                        fieldName="data.q_bls_acls_org"
+                        ref="data.q_bls_acls_org"
                         onChange={this.handleChange}>
 
                     </DropdownField>
 
                     <QuestionContainer {...this.props}
-                        criteria={ {key : 'q_cpr_org', value : "other" } }>
+                        criteria={ {key : 'q_bls_acls_org', value : "other" } }>
                         <ValidatedInput {...this.props}
                             label=""
-                            value={this.props.data.q_cpr_org_other}
-                            fieldName="data.q_cpr_org_other"
-                            ref="data.q_cpr_org_other"
+                            value={this.props.data.q_bls_acls_org_other}
+                            fieldName="data.q_bls_acls_org_other"
+                            ref="data.q_bls_acls_org_other"
                             onChange={this.handleChange}
                         />
 
