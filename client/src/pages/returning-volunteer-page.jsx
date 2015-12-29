@@ -140,7 +140,7 @@ class ReturningVolunteerPage extends React.Component {
                 <div className="col-md-12">
                     <h1>Welcome back</h1>
                     <h3>
-                        Please sign in to continue.
+                        Please Log In to continue.
                     </h3>
 
                     {this.props.alert}

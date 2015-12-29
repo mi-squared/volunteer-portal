@@ -59,14 +59,14 @@ class EsignPage extends React.Component {
                     <h1>Signature & Acceptance</h1>
                     <div>
                         <p>
-                        By submitting this form, you're granting the following permission to email you:
+                        By submitting this form, you're granting Your Best Pathway to Health permission to contact you by email.
                         </p>
                         <p>
-                            <b>Pathway to health</b>
+                            <b>Pathway to Health</b>
                             <br/>
-                            1234 happy street
+                            12501 Old Columbia Pike
                             <br/>
-                            Silver Spring, MD 55555
+                            Silver Spring, MD 20904
                             <br/>
                             United States
                             <br/>
@@ -74,13 +74,12 @@ class EsignPage extends React.Component {
                         </p>
 
                         <p>
-                            You can revoke permission to mail to your email address at any time using the SafeUnsubscribe<sup>(TM)</sup> found at the bottom of every email.
+                            You can revoke permission at any time using the SafeUnsubscribe<sup>(TM)</sup> application found at the bottom of every email.
                         </p>
 
                         <p>
-                            Please download the <a target="_blank" href="/client/dist/static/volunteer-agreement.pdf"><b>Volunteer Agreement</b></a> pdf and review it.
-                            By electronically signing on this page, you are agreeing to the terms and conditions described in the async Voltuneer Agreement
-                            pdf.
+                            Please download and review the <a target="_blank" href="/client/dist/static/volunteer-agreement.pdf"><b>Volunteer Agreement</b></a>.
+                            By electronically signing on this page, you are agreeing to the terms and conditions described therein.
                         </p>
 
                     </div>
