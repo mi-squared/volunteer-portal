@@ -145,7 +145,6 @@ export default function composePage(Component) {
 
                 function(error) {
                     console.log("save error", error);
-                    alert("error saving application! " + error);
                     deferred.reject(error);
                 }
             );
