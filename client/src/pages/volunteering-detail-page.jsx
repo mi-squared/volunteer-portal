@@ -90,7 +90,7 @@ class VolunteeringDetailPage extends React.Component {
         return (
             <div className="container well">
                 <div className="col-md-12">
-                    <h1>Volunteering detail</h1>
+                    <h1>Volunteering Detail</h1>
 
                     {this.props.alert}
                 </div>

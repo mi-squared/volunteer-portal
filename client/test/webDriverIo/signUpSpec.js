@@ -120,6 +120,7 @@ describe('NewVolunteerPage', () => {
         )
       }, 10000)
       .waitForValue('#dob', 10000)
+      .selectByIndex('#tshirt', 1)
       .getAttribute('select', 'id').then(
         (ids) => {
           ids.forEach((id) => {
