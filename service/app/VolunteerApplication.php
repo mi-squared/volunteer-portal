@@ -114,10 +114,14 @@ class VolunteerApplication extends Model
         "q_esigned",
         "q_esigned_date",
 
+        //cpr
         "q_bls_acls_certified",
         "q_bls_acls_expiration",
         "q_bls_acls_org",
         "q_bls_acls_org_other"
+
+        //misc
+        "q_comments"
     ];
 
     public function children()
