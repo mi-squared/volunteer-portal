@@ -70,6 +70,7 @@ class VolunteerApplication extends Model
         "q_volunteered_area",
         "q_volunteered_capacity",
         "q_volunteering_area",
+        "q_volunteering_capacity",
 
         // license
         "q_volunteering_in_licensed_area",
@@ -114,10 +115,14 @@ class VolunteerApplication extends Model
         "q_esigned",
         "q_esigned_date",
 
+        //cpr
         "q_bls_acls_certified",
         "q_bls_acls_expiration",
         "q_bls_acls_org",
-        "q_bls_acls_org_other"
+        "q_bls_acls_org_other",
+
+        //misc
+        "q_comments"
     ];
 
     public function children()
