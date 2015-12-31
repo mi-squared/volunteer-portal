@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {Router, Route, Link} from 'react-router';
 import {getApplication}  from '../client.js';
 
-
 import * as actionCreators from '../action_creators';
 import composePage from './base-page.jsx';
 

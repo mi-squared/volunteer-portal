@@ -236,6 +236,4 @@ class AccountsController extends BaseController
 
         return response()->json("{}");
     }
-
-
 }
