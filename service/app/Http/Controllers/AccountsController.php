@@ -32,12 +32,8 @@ class AccountsController extends BaseController
             // hash the password
             $password = $accountMeta['password'];
 
-            error_log("trying to hash...");
             $salt=$this->oemr_password_salt();
             $hashedPassword=$this->oemr_password_hash($password,$salt);
-
-            error_log("SALT: " . $salt);
-            error_log("HASH: " . $hashedPassword);
 
             $accountMeta['password'] = $hashedPassword;
             $accountMeta['salt'] = $salt;
