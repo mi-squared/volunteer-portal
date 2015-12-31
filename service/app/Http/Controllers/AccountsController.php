@@ -179,12 +179,23 @@ class AccountsController extends BaseController
         return $request->only('username', 'password');
     }
 
+    protected function getApplication($User)
+    {
+      $filterParams = ['user_id' => $User['id'], 'event_id' => getenv('CURRENT_EVENT_ID')];
+      $VolunteerApplication = VolunteerApplication::where($filterParams)->first();
+
+      return $VolunteerApplication;
+    }
+
     public function forgotPassword(Request $request) {
         $accountMeta = $request->all();
 
         $email = $accountMeta['email'];
         $User = User::where('username', '=', $email)
             ->first();
+        $App = $this->getApplication($User);
+        $AppID = $App['id'];
+        // $AppID = 'cat';
 
         if ( !$User ) {
             // send a 200 OK even though its not a registered user, to prevent spammers from fishing
@@ -198,7 +209,7 @@ class AccountsController extends BaseController
         $token = JWTAuth::fromUser($User, $customClaims);
 
         $host = env('HOST_URL', 'http://pth.mi-squared.com/client/dist/index.html');
-        $loginLink = $host . "#/external-login?token=" . $token . "&username=". $email . "&next=account";
+        $loginLink = $host . "#/external-login?token=" . $token . "&username=". $email . "&appID=" . $AppID . "&next=account";
 
         $to      =  $email;
         $from    =  "do_not_reply@" . env('HOST_NAME', 'pth-production-prwn5v7pi2.elasticbeanstalk.com');
@@ -225,5 +236,6 @@ class AccountsController extends BaseController
 
         return response()->json("{}");
     }
+
 
 }
