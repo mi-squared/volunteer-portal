@@ -21,7 +21,7 @@ class ExternalLoginPage extends React.Component {
             params[pairVals[0]] = pairVals[1];
         });
 
-        let { token, appID, username, next } = params;
+        let { token, username, next } = params;
 
         //write token to session
         sessionStorage.setItem('token', token);
