@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Router, Route, Link} from 'react-router';
-import {getApplication}  from '../client.js';
+import {getApplication, getAccount}  from '../client.js';
 
 import * as actionCreators from '../action_creators';
 import composePage from './base-page.jsx';
@@ -25,7 +25,6 @@ class ExternalLoginPage extends React.Component {
 
         //write token to session
         sessionStorage.setItem('token', token);
-        sessionStorage.setItem('applicationID', appID);
 
         // a token, username, and the next destination are all required to proceed
         if ( !params.token || !params.username || !params.next ) {
@@ -44,11 +43,16 @@ class ExternalLoginPage extends React.Component {
             token: token
         });
 
-        if ( appID ) {
-          console.log("Loading app " + appID);
-          getApplication(token, appID).then(
+        if ( token ) {
+          getAccount(token).then(
               (response) => {
-                this.props.loadApplication(response);
+                let appID = response['application_id'];
+                sessionStorage.setItem('applicationID', appID);
+                if (appID) {
+                  getApplication(token, appID).then((response) => {
+                    this.props.loadApplication(response);
+                  })
+                }
               },
               (error) => {
                 console.log(error);
