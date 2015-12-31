@@ -195,7 +195,6 @@ class AccountsController extends BaseController
             ->first();
         $App = $this->getApplication($User);
         $AppID = $App['id'];
-        // $AppID = 'cat';
 
         if ( !$User ) {
             // send a 200 OK even though its not a registered user, to prevent spammers from fishing

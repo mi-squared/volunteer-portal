@@ -45,16 +45,16 @@ class ExternalLoginPage extends React.Component {
         });
 
         if ( appID ) {
-            console.log("Loading app " + appID);
-            getApplication(token, appID).then(
-                (response) => {
-                    this.props.loadApplication(response);
-                },
-                (error) => {
-                    console.log(error);
-                }
-            );
-          }
+          console.log("Loading app " + appID);
+          getApplication(token, appID).then(
+              (response) => {
+                this.props.loadApplication(response);
+              },
+              (error) => {
+                console.log(error);
+              }
+          );
+        }
         this.props.history.pushState(null, '/' + params.next);
     }
 
