@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Router, Route, Link} from 'react-router';
+import {getApplication, getAccount}  from '../client.js';
 
 import * as actionCreators from '../action_creators';
 import composePage from './base-page.jsx';
@@ -19,9 +20,11 @@ class ExternalLoginPage extends React.Component {
             let pairVals = pair.split("=");
             params[pairVals[0]] = pairVals[1];
         });
-        
+
+        let { token, username, next } = params;
+
         //write token to session
-        sessionStorage.setItem('token', params.token);
+        sessionStorage.setItem('token', token);
 
         // a token, username, and the next destination are all required to proceed
         if ( !params.token || !params.username || !params.next ) {
@@ -32,15 +35,30 @@ class ExternalLoginPage extends React.Component {
         // set the username in props
         this.props.updateField( {
             key: [ 'session', 'f_username' ],
-            value: params.username
+            value: username
         });
 
         // set the token in props as is -- it will be validated downstream during use
         this.props.login({
-            token: params.token
+            token: token
         });
 
-
+        if ( token ) {
+          getAccount(token).then(
+              (response) => {
+                let appID = response['application_id'];
+                sessionStorage.setItem('applicationID', appID);
+                if (appID) {
+                  getApplication(token, appID).then((response) => {
+                    this.props.loadApplication(response);
+                  })
+                }
+              },
+              (error) => {
+                console.log(error);
+              }
+          );
+        }
         this.props.history.pushState(null, '/' + params.next);
     }
 
@@ -49,7 +67,7 @@ class ExternalLoginPage extends React.Component {
             <div>
                 Redirecting ...
             </div>
-        );
+        )
     }
 }
 

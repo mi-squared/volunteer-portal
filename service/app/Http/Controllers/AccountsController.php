@@ -121,7 +121,6 @@ class AccountsController extends BaseController
         $responseMeta = ['account' => $User];
 
         if ($VolunteerApplication && $VolunteerApplication['id']) {
-
             $responseMeta['application_id'] = $VolunteerApplication['id'];
         }
         return response()->json($responseMeta, 200);
@@ -287,5 +286,4 @@ class AccountsController extends BaseController
 
 
     }
-
 }
