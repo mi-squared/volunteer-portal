@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model;
 use App\User as User; // to use Eloquent Model
-use Illuminate\Support\Facades\Hash as Hash;
+use App\Http\Controllers\AccountsController as AccountsController;
 
 
 class UsersSeeder extends Seeder {
@@ -11,7 +10,9 @@ class UsersSeeder extends Seeder {
 
         // hash the password
         $password = 'catmandudu';
-        $hashedPassword = Hash::make($password);
+
+        $salt=AccountsController::oemr_password_salt();
+        $hashedPassword=AccountsController::oemr_password_hash($password,$salt);
 
         if (!User::where('email', '=', 'testlogin@gmail.com')->first()) { //only make test user if non-existant
           User::Create( [

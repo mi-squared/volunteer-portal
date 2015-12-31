@@ -11,6 +11,8 @@ use App\VolunteerApplication;
 use App\Exceptions\ModelExistsException;
 use Illuminate\Support\Facades\Hash as Hash;
 
+define("SALT_PREFIX_SHA1",'$SHA1$');
+
 class AccountsController extends BaseController
 {
     public function getAllAccounts() {
@@ -29,9 +31,17 @@ class AccountsController extends BaseController
         } else {
             // hash the password
             $password = $accountMeta['password'];
-            $hashedPassword = Hash::make($password);
+
+            error_log("trying to hash...");
+            $salt=$this->oemr_password_salt();
+            $hashedPassword=$this->oemr_password_hash($password,$salt);
+
+            error_log("SALT: " . $salt);
+            error_log("HASH: " . $hashedPassword);
 
             $accountMeta['password'] = $hashedPassword;
+            $accountMeta['salt'] = $salt;
+
             $User = User::create($accountMeta);
 
             // get email template from s3
@@ -134,9 +144,10 @@ class AccountsController extends BaseController
             return $error;
         }
 
-        $hashedPassword = Hash::make($plainPassword);
+        $salt=$this->oemr_password_salt();
+        $hashedPassword=$this->oemr_password_hash($plainPassword,$salt);
 
-        $update = [ "password" => $hashedPassword ];
+        $update = [ "password" => $hashedPassword, "salt" => $salt ];
         $User->update($update);
         return response()->json($User);
     }
@@ -150,8 +161,11 @@ class AccountsController extends BaseController
         $User = User::where('username', '=', $credentials['username'])
             ->firstOrFail();
 
-        $hashedPassword = $User['password'];
-        if (!Hash::check($plainPassword, $hashedPassword)) {
+        $salt = $User['salt'];
+        $storedPassword = $User['password'];
+        $hashedPassword=$this->oemr_password_hash($plainPassword,$salt);
+
+        if ($storedPassword != $hashedPassword) {
             return response()->json(['error' => 'unauthorized'], 400);
         }
 
@@ -224,6 +238,58 @@ class AccountsController extends BaseController
         // });
 
         return response()->json("{}");
+    }
+
+    static public function oemr_password_hash($plaintext,$salt)
+    {
+        // if this is a SHA1 salt, the use prepended salt
+        if(strpos($salt,SALT_PREFIX_SHA1)===0)
+        {
+            return SALT_PREFIX_SHA1 . sha1($salt.$plaintext);
+        }
+        else { // Otherwise use PHP crypt()
+            $crypt_return = crypt($plaintext,$salt);
+            if ( ($crypt_return == '*0') || ($crypt_return == '*1') || (strlen($crypt_return) < 6) ) {
+                // Error code returned by crypt or not hash, so die
+                error_log("FATAL ERROR: crypt() function is not working correctly in OpenEMR");
+                die("FATAL ERROR: crypt() function is not working correctly in OpenEMR");
+            }
+            else {
+                // Hash confirmed, so return the hash.
+                return $crypt_return;
+            }
+        }
+    }
+
+    static public function oemr_password_salt()
+    {
+        $Allowed_Chars ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./';
+        $Chars_Len = 63;
+
+        $Salt_Length = 22;
+
+        $salt = "";
+
+        for($i=0; $i<$Salt_Length; $i++)
+        {
+            $salt .= $Allowed_Chars[mt_rand(0,$Chars_Len)];
+        }
+
+        // This is the preferred hashing mechanism
+        if(CRYPT_BLOWFISH===1)
+        {
+            $rounds='05';
+            //This string tells crypt to apply blowfish $rounds times.
+            $Blowfish_Pre = '$2a$'.$rounds.'$';
+            $Blowfish_End = '$';
+
+            return $Blowfish_Pre.$salt.$Blowfish_End;
+        }
+        error_log("Blowfish hashing algorithm not available.  Upgrading to PHP 5.3.x or newer is strongly recommended");
+
+        return SALT_PREFIX_SHA1.$salt;
+
+
     }
 
 }
