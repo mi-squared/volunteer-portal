@@ -7,44 +7,10 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\User;
-use App\VolunteerApplication;
 use App\Exceptions\ModelExistsException;
-use App\Upload;
+use App\Http\Controllers\VolunteerApplicationController as VolunteerApplicationController;
 
 define("SALT_PREFIX_SHA1",'$SHA1$');
-define("APPLICATION_CARRYOVER_FIELD_BLACKLIST", serialize(array(
-        "id",
-
-        "q_volunteering_area",
-        "q_volunteering_capacity",
-
-        "q_available_entire_time",
-        "q_share_room",
-
-        "q_available_day_mon",
-        "q_available_day_tue",
-        "q_available_day_wed",
-        "q_available_day_thu",
-        "q_available_day_fri",
-        "q_available_day_sat",
-        "q_available_day_sun",
-
-        "q_available_preactivity_trucks",
-        "q_available_preactivity_central",
-        "q_available_preactivity_dept",
-
-        "q_available_postactivity_teardown",
-        "q_available_postactivity_truck",
-        "q_available_postactivity_followup",
-        "q_available_postactivity_follow2",
-        "q_available_postactivity_centers",
-
-        "q_esigned",
-        "q_esigned_date",
-
-        "q_comments"
-    ))
-);
 
 class AccountsController extends BaseController
 {
@@ -147,7 +113,7 @@ class AccountsController extends BaseController
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function returnAccount($User) {
-        $VolunteerApplication = $this->resolveApplicationFor($User);
+        $VolunteerApplication = VolunteerApplicationController::resolveApplicationFor($User);
         unset($User['salt']);
         $responseMeta = ['account' => $User];
 
@@ -155,59 +121,6 @@ class AccountsController extends BaseController
             $responseMeta['application_id'] = $VolunteerApplication['id'];
         }
         return response()->json($responseMeta, 200);
-    }
-
-    protected function resolveApplicationFor($User) {
-        $filterParams = ['user_id' => $User['id'], 'event_id' => getenv('CURRENT_EVENT_ID')];
-        $VolunteerApplication = VolunteerApplication::where($filterParams)->first();
-
-        if ( $VolunteerApplication && $VolunteerApplication['id'] ) {
-            return $VolunteerApplication;
-        }
-
-        // no application matching the current exists
-        // try to find the most recent application
-        $PreviousVolunteerApplication = VolunteerApplication::where(
-            ['user_id' => $User['id'] ]
-        )->orderBy('id','DESC')->first();
-
-        if ( $PreviousVolunteerApplication )  {
-            // a previous application exists; therefore clone it
-
-            $fieldBlacklist = unserialize (APPLICATION_CARRYOVER_FIELD_BLACKLIST);
-            $cloneMeta = array();
-            foreach( $PreviousVolunteerApplication->toArray() as $key => $value )
-            {
-                if ( !in_array($key, $fieldBlacklist) ) {
-                    $cloneMeta[$key] = $value;
-                }
-            }
-            // set the cloned application to current event
-            $cloneMeta['event_id'] = getenv('CURRENT_EVENT_ID');
-            $ClonedVolunteerApplication = VolunteerApplication::create($cloneMeta);
-
-            // clone any uploads
-            $uploads = Upload::where('application_id', '=', $PreviousVolunteerApplication['id'])->get();
-            if ( $uploads ) {
-                if ( count($uploads) > 0 ) {
-                    foreach( $uploads as $upload ) {
-                        $uploadMeta = array();
-                        foreach( $upload->toArray() as $key => $value ) {
-                            if ( $key != 'id' ) {
-                                $uploadMeta[$key] = $value;
-                            }
-                        }
-                        $uploadMeta['application_id'] = $ClonedVolunteerApplication['id'];
-                        Upload::create($uploadMeta);
-                    }
-                }
-
-            }
-
-            return $ClonedVolunteerApplication;
-        }
-
-        return null;
     }
 
     public function updateAccount(Request $request) {
@@ -247,7 +160,7 @@ class AccountsController extends BaseController
         if ($storedPassword != $hashedPassword) {
             return response()->json(['error' => 'unauthorized'], 400);
         }
-        $VolunteerApplication = $this->resolveApplicationFor($User);
+        $VolunteerApplication = VolunteerApplicationController::resolveApplicationFor($User);
         try
         {
             $token = JWTAuth::fromUser($User);
