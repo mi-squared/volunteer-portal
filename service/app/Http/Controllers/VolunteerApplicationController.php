@@ -95,6 +95,11 @@ class VolunteerApplicationController extends BaseController
             $VolunteerApplication  = VolunteerApplication::where('id', '=', $volunteerApplicationID)->firstOrFail();
             $VolunteerApplication->update($applicationMeta);
             if ( array_key_exists('children', $applicationMeta) ) {
+                // children exist in the application
+
+                $childIDs = [];
+
+                // 1. add new children to the DB (those without an id); update those children with IDs.
                 foreach($applicationMeta['children'] as $child) {
                     if ( array_key_exists('id', $child) ) {
                         $VolunteerChild = VolunteerChild::where('id', '=', $child['id'])->firstOrFail();
@@ -103,9 +108,28 @@ class VolunteerApplicationController extends BaseController
                         $VolunteerChild = VolunteerChild::create($child);
                     }
                     $VolunteerApplication->children()->save($VolunteerChild);
+
+                    $childIDs[] = $VolunteerChild->id;
+                }
+
+                // 2. children in the DB which do not exist by id in the application should be removed
+                foreach( $VolunteerApplication->children()->get() as $dbChild) {
+                    if ( !in_array ( $dbChild->id, $childIDs ) ) {
+                        error_log("Removing child " . $dbChild->id);
+                        $dbChild->delete();
+                    }
+                }
+
+            } else {
+                // all children have been removed from the application; delete all children from the DB
+                foreach( $VolunteerApplication->children()->get() as $dbChild) {
+                    error_log("Removing child " . $dbChild->id);
+                    $dbChild->delete();
                 }
             }
+
             $VolunteerApplication->children;
+
             /// add uploads to app
             if ( array_key_exists('uploads', $applicationMeta) ) {
                 foreach($applicationMeta['uploads'] as $upload) {

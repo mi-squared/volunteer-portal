@@ -47,13 +47,11 @@ export function addUpload(state, upload ) {
 export function updateChild(state, childSpec ) {
     let childrenArray = state.getIn(['data', 'children'])
     let childIndex = childrenArray.findIndex((item) => {
-      return item.get('id') === childSpec.id
+      return item.get('childID') === childSpec.childID
     })
-    let newstate = state.updateIn(
+    let newstate = state.setIn(
         ['data', 'children', childIndex],
-        () => {
-          return fromJS(childSpec)
-        }
+        fromJS(childSpec)
     );
     return newstate;
 }
