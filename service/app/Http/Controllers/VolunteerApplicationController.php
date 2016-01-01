@@ -212,6 +212,20 @@ class VolunteerApplicationController extends BaseController
             // clone any uploads
             UploadsController::cloneUploads($PreviousVolunteerApplication, $ClonedVolunteerApplication);
 
+            // clone any children
+            foreach( $PreviousVolunteerApplication->children()->get() as $dbChild) {
+                $childCloneMeta = array();
+
+                foreach( $dbChild->toArray() as $key => $value )
+                {
+                    if ( $key != 'id' ) {
+                        $childCloneMeta[$key] = $value;
+                    }
+                }
+                $VolunteerChild = VolunteerChild::create($childCloneMeta);
+                $ClonedVolunteerApplication->children()->save($VolunteerChild);
+            }
+
             return $ClonedVolunteerApplication;
         }
 
