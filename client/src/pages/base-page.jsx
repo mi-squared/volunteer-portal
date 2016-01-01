@@ -153,6 +153,15 @@ export default function composePage(Component) {
         },
 
         render: function() {
+            if ( this.props.session && this.props.session.invalid ) {
+                // clear storage and bail to front page
+                this.props.reset();
+                sessionStorage.clear();
+                this.props.history.pushState(null, '/');
+
+                return <div></div>;
+            }
+
             let token = sessionStorage.getItem('token');
             return (
                 <div>

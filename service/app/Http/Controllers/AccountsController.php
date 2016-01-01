@@ -7,9 +7,8 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\User;
-use App\VolunteerApplication;
 use App\Exceptions\ModelExistsException;
-use Illuminate\Support\Facades\Hash as Hash;
+use App\Http\Controllers\VolunteerApplicationController as VolunteerApplicationController;
 
 define("SALT_PREFIX_SHA1",'$SHA1$');
 
@@ -114,10 +113,8 @@ class AccountsController extends BaseController
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function returnAccount($User) {
-
-      $filterParams = ['user_id' => $User['id'], 'event_id' => getenv('CURRENT_EVENT_ID')];
-      $VolunteerApplication = VolunteerApplication::where($filterParams)->first();
-
+        $VolunteerApplication = VolunteerApplicationController::resolveApplicationFor($User);
+        unset($User['salt']);
         $responseMeta = ['account' => $User];
 
         if ($VolunteerApplication && $VolunteerApplication['id']) {
@@ -163,13 +160,11 @@ class AccountsController extends BaseController
         if ($storedPassword != $hashedPassword) {
             return response()->json(['error' => 'unauthorized'], 400);
         }
-
-        $filterParams = ['user_id' => $User['id'], 'event_id' => getenv('CURRENT_EVENT_ID')];
-        $VolunteerApplication = VolunteerApplication::where($filterParams)->first();
-
+        $VolunteerApplication = VolunteerApplicationController::resolveApplicationFor($User);
         try
         {
             $token = JWTAuth::fromUser($User);
+            unset($User['salt']);
             $responseMeta = ['token' => $token, 'account' => $User];
             if ( $VolunteerApplication && $VolunteerApplication['id'] ) {
                 $responseMeta['application_id'] = $VolunteerApplication['id'];

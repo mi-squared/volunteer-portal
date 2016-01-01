@@ -29,11 +29,8 @@ export default class ChildFields extends BaseSection {
     }
 
     getChild() {
-        var childrenArr = this.props.data['children'];
-        if ( !childrenArr ) {
-            return {};
-        }
-        return childrenArr.find(child => child.id === this.props.childID) || {};
+        var children = this.props.data['children'];
+        return children.find( (child) => child.childID === this.props.childID) || {};
     }
 
     getChildValue(key) {

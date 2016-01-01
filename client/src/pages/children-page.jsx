@@ -28,22 +28,14 @@ class ChildrenPage extends React.Component {
     }
 
     addChild() {
-        var childrenCount = this.props.data.children.length;
         this.props.addChild( {
-            application_id : this.props.data.id
+            application_id : this.props.data.id,
+            childID: new Date().getTime()
         } );
     }
 
     getChildren() {
-        var children = this.props.data.children || {};
-        var childrenArray = [];
-        Object.keys(children).forEach(function (key) {
-            var val = children[key];
-            if ( val )  {
-                childrenArray.push( val );
-            }
-        });
-        return childrenArray;
+        return this.props.data.children || [];
     }
 
     doContinue() {
@@ -75,8 +67,7 @@ class ChildrenPage extends React.Component {
 
                 {self.getChildren().map(entry =>
                     <ChildFields {...this.props}
-                        childID={entry.id}
-                        key={entry.childID}
+                        childID={entry.childID}
                         onBlur={this.onBlur}
                         submitTS={this.props.submitTS}
                         focusElement={this.props.focusElement||this.state.focusElement}

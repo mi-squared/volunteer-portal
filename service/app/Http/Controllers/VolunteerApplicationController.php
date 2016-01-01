@@ -7,6 +7,41 @@ use App\VolunteerApplication;
 use App\VolunteerChild;
 use App\User;
 use App\Upload;
+use App\Http\Controllers\UploadsController as UploadsController;
+
+define("APPLICATION_CARRYOVER_FIELD_BLACKLIST", serialize(array(
+    "id",
+
+    "q_volunteering_area",
+    "q_volunteering_capacity",
+
+    "q_available_entire_time",
+    "q_share_room",
+
+    "q_available_day_mon",
+    "q_available_day_tue",
+    "q_available_day_wed",
+    "q_available_day_thu",
+    "q_available_day_fri",
+    "q_available_day_sat",
+    "q_available_day_sun",
+
+    "q_available_preactivity_trucks",
+    "q_available_preactivity_central",
+    "q_available_preactivity_dept",
+
+    "q_available_postactivity_teardown",
+    "q_available_postactivity_truck",
+    "q_available_postactivity_followup",
+    "q_available_postactivity_follow2",
+    "q_available_postactivity_centers",
+
+    "q_esigned",
+    "q_esigned_date",
+
+    "q_comments"
+))
+);
 
 class VolunteerApplicationController extends BaseController
 {
@@ -60,6 +95,11 @@ class VolunteerApplicationController extends BaseController
             $VolunteerApplication  = VolunteerApplication::where('id', '=', $volunteerApplicationID)->firstOrFail();
             $VolunteerApplication->update($applicationMeta);
             if ( array_key_exists('children', $applicationMeta) ) {
+                // children exist in the application
+
+                $childIDs = [];
+
+                // 1. add new children to the DB (those without an id); update those children with IDs.
                 foreach($applicationMeta['children'] as $child) {
                     if ( array_key_exists('id', $child) ) {
                         $VolunteerChild = VolunteerChild::where('id', '=', $child['id'])->firstOrFail();
@@ -68,9 +108,28 @@ class VolunteerApplicationController extends BaseController
                         $VolunteerChild = VolunteerChild::create($child);
                     }
                     $VolunteerApplication->children()->save($VolunteerChild);
+
+                    $childIDs[] = $VolunteerChild->id;
+                }
+
+                // 2. children in the DB which do not exist by id in the application should be removed
+                foreach( $VolunteerApplication->children()->get() as $dbChild) {
+                    if ( !in_array ( $dbChild->id, $childIDs ) ) {
+                        error_log("Removing child " . $dbChild->id);
+                        $dbChild->delete();
+                    }
+                }
+
+            } else {
+                // all children have been removed from the application; delete all children from the DB
+                foreach( $VolunteerApplication->children()->get() as $dbChild) {
+                    error_log("Removing child " . $dbChild->id);
+                    $dbChild->delete();
                 }
             }
+
             $VolunteerApplication->children;
+
             /// add uploads to app
             if ( array_key_exists('uploads', $applicationMeta) ) {
                 foreach($applicationMeta['uploads'] as $upload) {
@@ -117,6 +176,45 @@ class VolunteerApplicationController extends BaseController
         if ( $User['id'] != $subjectAccountID ) {
             return response()->json([ "error" => "unauthorized" ], 400);
         }
+        return null;
+    }
+
+
+    public static function resolveApplicationFor($User) {
+        $filterParams = ['user_id' => $User['id'], 'event_id' => getenv('CURRENT_EVENT_ID')];
+        $VolunteerApplication = VolunteerApplication::where($filterParams)->first();
+
+        if ( $VolunteerApplication && $VolunteerApplication['id'] ) {
+            return $VolunteerApplication;
+        }
+
+        // no application matching the current exists
+        // try to find the most recent application
+        $PreviousVolunteerApplication = VolunteerApplication::where(
+            ['user_id' => $User['id'] ]
+        )->orderBy('id','DESC')->first();
+
+        if ( $PreviousVolunteerApplication )  {
+            // a previous application exists; therefore clone it
+
+            $fieldBlacklist = unserialize (APPLICATION_CARRYOVER_FIELD_BLACKLIST);
+            $cloneMeta = array();
+            foreach( $PreviousVolunteerApplication->toArray() as $key => $value )
+            {
+                if ( !in_array($key, $fieldBlacklist) ) {
+                    $cloneMeta[$key] = $value;
+                }
+            }
+            // set the cloned application to current event
+            $cloneMeta['event_id'] = getenv('CURRENT_EVENT_ID');
+            $ClonedVolunteerApplication = VolunteerApplication::create($cloneMeta);
+
+            // clone any uploads
+            UploadsController::cloneUploads($PreviousVolunteerApplication, $ClonedVolunteerApplication);
+
+            return $ClonedVolunteerApplication;
+        }
+
         return null;
     }
 
