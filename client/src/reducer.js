@@ -44,6 +44,12 @@ export default function reducer(state = INITIAL_STATE, action) {
         case 'LOGIN': {
             return login(state, action.accountSpec);
         }
+        case 'LOGOUT': {
+            return updateField( state, {
+                key : [ "session", "invalid" ],
+                value: fromJS( true )
+            })
+        }
         case 'LOAD_APPLICATION': {
             return loadApplication(state, action.applicationSpec);
         }

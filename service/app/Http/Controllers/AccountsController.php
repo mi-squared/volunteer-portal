@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\VolunteerApplication;
 use App\Exceptions\ModelExistsException;
-use Illuminate\Support\Facades\Hash as Hash;
+use App\Upload;
 
 define("SALT_PREFIX_SHA1",'$SHA1$');
 
@@ -114,16 +114,65 @@ class AccountsController extends BaseController
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function returnAccount($User) {
-
-      $filterParams = ['user_id' => $User['id'], 'event_id' => getenv('CURRENT_EVENT_ID')];
-      $VolunteerApplication = VolunteerApplication::where($filterParams)->first();
-
+        $VolunteerApplication = $this->resolveApplicationFor($User);
+        unset($User['salt']);
         $responseMeta = ['account' => $User];
 
         if ($VolunteerApplication && $VolunteerApplication['id']) {
             $responseMeta['application_id'] = $VolunteerApplication['id'];
         }
         return response()->json($responseMeta, 200);
+    }
+
+    protected function resolveApplicationFor($User) {
+        $filterParams = ['user_id' => $User['id'], 'event_id' => getenv('CURRENT_EVENT_ID')];
+        $VolunteerApplication = VolunteerApplication::where($filterParams)->first();
+
+        if ( $VolunteerApplication && $VolunteerApplication['id'] ) {
+            return $VolunteerApplication;
+        }
+
+        // no application matching the current exists
+        // try to find the most recent application
+        $PreviousVolunteerApplication = VolunteerApplication::where(
+            ['user_id' => $User['id'] ]
+        )->orderBy('id','DESC')->first();
+
+        if ( $PreviousVolunteerApplication )  {
+            // a previous application exists; therefore clone it
+            $cloneMeta = array();
+            foreach( $PreviousVolunteerApplication->toArray() as $key => $value )
+            {
+                if ($key != 'id' ) {
+                    $cloneMeta[$key] = $value;
+                }
+            }
+            // set the cloned application to current event
+            $cloneMeta['event_id'] = getenv('CURRENT_EVENT_ID');
+            $ClonedVolunteerApplication = VolunteerApplication::create($cloneMeta);
+
+            // clone any uploads
+            $uploads = Upload::where('application_id', '=', $PreviousVolunteerApplication['id'])->get();
+            if ( $uploads ) {
+                if ( count($uploads) > 0 ) {
+                    foreach( $uploads as $upload ) {
+                        $uploadMeta = array();
+                        foreach( $upload->toArray() as $key => $value ) {
+                            if ( $key != 'id' ) {
+                                $uploadMeta[$key] = $value;
+                            }
+                        }
+                        $uploadMeta['application_id'] = $ClonedVolunteerApplication['id'];
+                        Upload::create($uploadMeta);
+                    }
+                }
+
+            }
+
+            return $ClonedVolunteerApplication;
+        }
+
+        return null;
     }
 
     public function updateAccount(Request $request) {
@@ -163,13 +212,11 @@ class AccountsController extends BaseController
         if ($storedPassword != $hashedPassword) {
             return response()->json(['error' => 'unauthorized'], 400);
         }
-
-        $filterParams = ['user_id' => $User['id'], 'event_id' => getenv('CURRENT_EVENT_ID')];
-        $VolunteerApplication = VolunteerApplication::where($filterParams)->first();
-
+        $VolunteerApplication = $this->resolveApplicationFor($User);
         try
         {
             $token = JWTAuth::fromUser($User);
+            unset($User['salt']);
             $responseMeta = ['token' => $token, 'account' => $User];
             if ( $VolunteerApplication && $VolunteerApplication['id'] ) {
                 $responseMeta['application_id'] = $VolunteerApplication['id'];

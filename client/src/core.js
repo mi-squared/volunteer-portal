@@ -72,12 +72,16 @@ export function removeChild(state, childSpec ) {
 }
 
 export function login( state, accountInfo ) {
-    return state.updateIn(
+    state = state.updateIn(
         ['jwt'],
         "",
         function() {
             return accountInfo.token;
         }
+    );
+
+    return state.deleteIn(
+        [ 'session', 'invalid' ]
     );
 }
 

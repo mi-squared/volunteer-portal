@@ -76,6 +76,12 @@ export function receiveDocumentsList(json) {
   }
 }
 
+export function logout() {
+  return {
+    type: 'LOGOUT'
+  }
+}
+
 export function getSessionState(token, applicationID) {
   return (dispatch, getState) => {
     if (applicationID && applicationID !== 'undefined') {
@@ -87,7 +93,7 @@ export function getSessionState(token, applicationID) {
           return 200
         },
         (error) => {
-          return error
+            dispatch(logout())
         }
       )
     } else {
