@@ -54,14 +54,13 @@ class AccountsController extends BaseController
             $result = $request["Body"];
 
             // build the email
-            $to      =  $accountMeta['email'];
-            $subject = 'Welcome to YBPTH';
-            $message = $result;
-            $headers = 'From: do_not_reply@pth.mi-squared.com' . "\r\n" .
-                'Reply-To: do_not_reply@pth.mi-squared.com' . "\r\n" .
-                'X-Mailer: PHP/' . phpversion();
-
-            mail($to, $subject, $message, $headers);
+            Mail::send([], [], function ($message) use ($User, $result)  {
+                $message
+                    ->to($User->email)
+                    ->from('info@ybpth.net')
+                    ->subject("Welcome")
+                    ->setBody($result);
+            });
 
             return response()->json($User);
         }
@@ -204,28 +203,16 @@ class AccountsController extends BaseController
         $host = env('HOST_URL', 'http://pth.mi-squared.com/client/dist/index.html');
         $loginLink = $host . "#/external-login?token=" . $token . "&username=". $email . "&next=account";
 
-        $to      =  $email;
-        $from    =  "do_not_reply@" . env('HOST_NAME', 'pth-production-prwn5v7pi2.elasticbeanstalk.com');
         $subject = 'Password reset link';
-        $message = 'Hello! Please use this temporary link to reset Your Best Pathway to Health Volunteer Account password: ' . $loginLink;
-        $headers = 'From: '. $from . "\r\n" .
-                   'Reply-To: ' . $from . "\r\n" .
-                   'X-Mailer: PHP/' . phpversion();
+        $body = 'Hello! Please use this temporary link to reset Your Best Pathway to Health Volunteer Account password: ' . $loginLink;
 
-        mail($to, $subject, $message, $headers);
-
-        // Mail::send('emails.reset_password', ['user' => $User, 'loginLink' => $loginLink], function ($m) use ($User) {
-        //     $m->from('do_not_reply@pth.mi-squared.com', 'Password Reset Link(from)');
-        //
-        //     $m->to($User->email, $User->last_name . ', ' . $User->first_name)->subject('Password Reset Link(to)');
-        // });
-        //
-        // Mail::raw('Text to e-mail', function($message)
-        // {
-        //     $message->from('us@example.com', 'Laravel');
-        //
-        //     $message->to('ryan.broughan@gmail.com');
-        // });
+        Mail::send([], [], function ($message) use ($User, $subject, $body)  {
+            $message
+                ->to($User->email)
+                ->from('info@ybpth.net')
+                ->subject($subject)
+                ->setBody($body);
+        });
 
         return response()->json("{}");
     }
