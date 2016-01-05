@@ -53,7 +53,6 @@ export default class ContactFields extends BaseSection {
                                 fieldName="data.q_address_state"
                                 onChange={this.handleChange}
                             />
-
                         </div>
                     </div>
                     <div className='col-md-2'>
