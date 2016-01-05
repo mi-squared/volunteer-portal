@@ -3,6 +3,7 @@ import React from 'react';
 import Input from 'react-bootstrap/lib/Input';
 
 import ValidatedInput from '../components/validated-input-field.jsx';
+import QuestionContainer from '../components/question-container.jsx';
 import StateField from '../components/state-field.jsx';
 import CountryField from '../components/country-field.jsx';
 import BaseSection from './base-section.jsx'
@@ -52,6 +53,18 @@ export default class ContactFields extends BaseSection {
                                 fieldName="data.q_address_state"
                                 onChange={this.handleChange}
                             />
+
+                            <QuestionContainer {...this.props}
+                                criteria={ {key : 'q_address_state', value : "Other" } }
+                                >
+                                <ValidatedInput {...this.props}
+                                    label=""
+                                    value={this.props.data.q_address_state_other}
+                                    fieldName="data.q_address_state_other"
+                                    ref="data.q_address_state_other"
+                                    onChange={this.handleChange}
+                                />
+                            </QuestionContainer>
                         </div>
                     </div>
                     <div className="col-md-3">
