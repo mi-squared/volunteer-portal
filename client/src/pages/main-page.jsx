@@ -79,6 +79,10 @@ class MainPage extends React.Component {
                     required: true,
                     allowEmpty: false
                 },
+                q_address_state_other: {
+                    type: 'string',
+                    maxLength: 255
+                },
                 q_address_zip: {
                     type: 'string',
                     maxLength: 255,

@@ -34,7 +34,7 @@ export default class ContactFields extends BaseSection {
                     />
                 </div>
                 <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-md-5">
                         <ValidatedInput {...this.props}
                             required={true}
                             label="City"
@@ -44,7 +44,7 @@ export default class ContactFields extends BaseSection {
                             onChange={this.handleChange}
                         />
                     </div>
-                    <div className="col-md-3">
+                    <div className="col-md-2">
                         <div className="form-group">
                             <StateField {...this.props}
                                 required={true}
@@ -54,18 +54,20 @@ export default class ContactFields extends BaseSection {
                                 onChange={this.handleChange}
                             />
 
-                            <QuestionContainer {...this.props}
-                                criteria={ {key : 'q_address_state', value : "Other" } }
-                                >
-                                <ValidatedInput {...this.props}
-                                    label=""
-                                    value={this.props.data.q_address_state_other}
-                                    fieldName="data.q_address_state_other"
-                                    ref="data.q_address_state_other"
-                                    onChange={this.handleChange}
-                                />
-                            </QuestionContainer>
                         </div>
+                    </div>
+                    <div className='col-md-2'>
+                       <QuestionContainer {...this.props}
+                          criteria={ {key : 'q_address_state', value : "Other" } }
+                          >
+                          <ValidatedInput {...this.props}
+                              label="Other"
+                              value={this.props.data.q_address_state_other}
+                              fieldName="data.q_address_state_other"
+                              ref="data.q_address_state_other"
+                              onChange={this.handleChange}
+                          />
+                      </QuestionContainer>
                     </div>
                     <div className="col-md-3">
                         <ValidatedInput {...this.props}

@@ -39,29 +39,7 @@ export default class LicenseFields extends BaseSection {
                 </QuestionContainer>
 
                 <div className="row">
-                    <div className="col-md-3">
-                        <StateField
-                            {...this.props}
-                            label="State of license"
-                            ref="data.q_licensed_state"
-                            fieldName="data.q_licensed_state"
-                            onChange={this.handleChange}
-                            required={true}
-                        />
-
-                        <QuestionContainer {...this.props}
-                            criteria={ {key : 'q_licensed_state', value : "Other" } }
-                            >
-                            <ValidatedInput {...this.props}
-                                label=""
-                                value={this.props.data.q_licensed_state_other}
-                                fieldName="data.q_licensed_state_other"
-                                ref="data.q_licensed_state_other"
-                                onChange={this.handleChange}
-                            />
-                        </QuestionContainer>
-                    </div>
-                    <div className="col-md-9">
+                    <div className="col-md-6">
                         <ValidatedInput
                             {...this.props}
                             label="Expiration date of license"
@@ -73,6 +51,30 @@ export default class LicenseFields extends BaseSection {
                             onChange={this.handleChange}
                             required={true}
                             />
+                    </div>
+                    <div className="col-md-2">
+                        <StateField
+                            {...this.props}
+                            label="State of license"
+                            ref="data.q_licensed_state"
+                            fieldName="data.q_licensed_state"
+                            onChange={this.handleChange}
+                            required={true}
+                        />
+
+                    </div>
+                    <div className="col-md-4">
+                      <QuestionContainer {...this.props}
+                          criteria={ {key : 'q_licensed_state', value : "Other" } }
+                          >
+                          <ValidatedInput {...this.props}
+                              label="Enter State/Province Name"
+                              value={this.props.data.q_licensed_state_other}
+                              fieldName="data.q_licensed_state_other"
+                              ref="data.q_licensed_state_other"
+                              onChange={this.handleChange}
+                          />
+                      </QuestionContainer>
                     </div>
 
                 </div>

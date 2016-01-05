@@ -28,6 +28,7 @@ class VolunteerApplication extends Model
         "q_address_2",
         "q_address_city",
         "q_address_state",
+        "q_address_state_other",
         "q_address_zip",
         "q_address_country",
         "q_phone_mobile",
@@ -75,6 +76,7 @@ class VolunteerApplication extends Model
         // license
         "q_volunteering_in_licensed_area",
         "q_licensed_state",
+        "q_licensed_state_other",
         "q_licensed_discipline",
         "q_licensed_discipline_other",
         "q_licensed_number",
