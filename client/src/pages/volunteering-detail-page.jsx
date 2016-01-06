@@ -29,6 +29,11 @@ class VolunteeringDetailPage extends React.Component {
                     required: () => this.props.data['q_volunteering_in_licensed_area'] == 'true',
                     allowEmpty: () => this.props.data['q_volunteering_in_licensed_area'] !== 'true'
                 },
+                q_volunteering_area: {
+                    type: 'string',
+                    required: true,
+                    allowEmpty: false
+                },
                 q_licensed_state: {
                     type: 'string',
                     maxLength: 255,

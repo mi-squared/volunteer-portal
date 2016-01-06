@@ -54,6 +54,7 @@ export default class VolunteerGeneral extends BaseSection {
                         {...this.props}
                         label="What area(s) would you like to volunteer in?"
                         value={this.props.data.q_volunteering_area}
+                        required={true}
                         placeHolder="Click to choose volunteer area(s)"
                         ref="data.q_volunteering_area"
                         fieldName="data.q_volunteering_area"

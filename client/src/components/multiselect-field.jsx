@@ -25,7 +25,7 @@ class MultiselectField extends React.Component {
 
   commitChange(e) {
       if ( this.props.onChange ) {
-          this.props.onChange(this.props.fieldName, $(e.target).val().join(","));
+          this.props.onChange(this.props.fieldName, $(e.target).val() ?  $(e.target).val().join(",") : '');
       }
   }
 
@@ -74,13 +74,11 @@ class MultiselectField extends React.Component {
   render() {
       var requiredLabel = this.props.required ? <span className='j-required'>*</span> : '';
       var message;
-      var value = this.state.value;
       var fieldClassName = "form-control";
       if (this.props.errorFields) {
           var errorField = this.props.errorFields[this.props.fieldName];
           if ( errorField ) {
               message = errorField['message'];
-              fieldClassName += " error";
           }
       }
       var errorMessage = message ? <span className='j-error-message'>{message}</span> : '';
@@ -97,7 +95,6 @@ class MultiselectField extends React.Component {
                       className={fieldClassName}
                       ref={this.props.ref}
                       value={this.getValue()}
-                      onChange={this.props.onChange}
                       fieldName={this.props.fieldName}
                       style={{width: "100%"}}>
                       {this.getOptions().map(option =>
