@@ -7,7 +7,6 @@ use App\Http\Controllers\AccountsController as AccountsController;
 
 class UsersSeeder extends Seeder {
     public function run() {
-
         // hash the password
         $password = 'catmandudu';
 
@@ -21,7 +20,8 @@ class UsersSeeder extends Seeder {
             'first_name' => 'Hello',
             'middle_name' => 'Iama',
             'email' => 'testlogin@gmail.com',
-            'password' => $hashedPassword
+            'password' => $hashedPassword,
+            'salt' => $salt
           ] );
         }
 
