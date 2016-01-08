@@ -1327,6 +1327,11 @@ class OptionsSeeder extends Seeder {
         	'form_list_id' => '9'
         ] );
         Option::create( [
+        	'name' => 'Dental Care',
+        	'value' => 'Dental Care',
+        	'form_list_id' => '9'
+        ] );
+        Option::create( [
         	'name' => 'Director’s/Assistant Director’s',
         	'value' => 'Director’s/Assistant Director’s',
         	'form_list_id' => '9'
@@ -2514,6 +2519,11 @@ class OptionsSeeder extends Seeder {
         Option::create( [
         	'name' => 'Orthopedics',
         	'value' => 'Orthopedics',
+        	'form_list_id' => '10'
+        ] );
+        Option::create( [
+        	'name' => 'Orthopedic Surgery',
+        	'value' => 'Orthopedic Surgery',
         	'form_list_id' => '10'
         ] );
         Option::create( [
