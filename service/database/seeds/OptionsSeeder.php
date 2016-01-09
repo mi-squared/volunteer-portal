@@ -1327,6 +1327,11 @@ class OptionsSeeder extends Seeder {
         	'form_list_id' => '9'
         ] );
         Option::create( [
+        	'name' => 'Dental Care',
+        	'value' => 'Dental Care',
+        	'form_list_id' => '9'
+        ] );
+        Option::create( [
         	'name' => 'Director’s/Assistant Director’s',
         	'value' => 'Director’s/Assistant Director’s',
         	'form_list_id' => '9'
@@ -2417,13 +2422,18 @@ class OptionsSeeder extends Seeder {
         	'form_list_id' => '10'
         ] );
         Option::create( [
+        	'name' => 'Cardiology',
+        	'value' => 'Cardiology',
+        	'form_list_id' => '10'
+        ] );
+        Option::create( [
         	'name' => 'Colorectal Surgery',
         	'value' => 'Colorectal Surgery',
         	'form_list_id' => '10'
         ] );
         Option::create( [
-        	'name' => 'Cardiology',
-        	'value' => 'Cardiology',
+        	'name' => 'CEREC',
+        	'value' => 'CEREC',
         	'form_list_id' => '10'
         ] );
         Option::create( [
@@ -2449,6 +2459,11 @@ class OptionsSeeder extends Seeder {
         Option::create( [
         	'name' => 'Endocrinology',
         	'value' => 'Endocrinology',
+        	'form_list_id' => '10'
+        ] );
+        Option::create( [
+        	'name' => 'Endodontics',
+        	'value' => 'Endodontics',
         	'form_list_id' => '10'
         ] );
         Option::create( [
@@ -2517,6 +2532,11 @@ class OptionsSeeder extends Seeder {
         	'form_list_id' => '10'
         ] );
         Option::create( [
+        	'name' => 'Orthopedic Surgery',
+        	'value' => 'Orthopedic Surgery',
+        	'form_list_id' => '10'
+        ] );
+        Option::create( [
         	'name' => 'Pediatrics',
         	'value' => 'Pediatrics',
         	'form_list_id' => '10'
@@ -2564,6 +2584,16 @@ class OptionsSeeder extends Seeder {
         Option::create( [
         	'name' => 'Radiology',
         	'value' => 'Radiology',
+        	'form_list_id' => '10'
+        ] );
+        Option::create( [
+        	'name' => 'Restorative',
+        	'value' => 'Restorative',
+        	'form_list_id' => '10'
+        ] );
+        Option::create( [
+        	'name' => 'Triage',
+        	'value' => 'Triage',
         	'form_list_id' => '10'
         ] );
         Option::create( [

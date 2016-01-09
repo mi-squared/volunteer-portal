@@ -41,7 +41,7 @@ export const WelcomePage = React.createClass({
               </div>
               <div className="row row-centered" style={{fontSize: '1.5rem'}}>
                 <div className="col-xs-9 col-md-8 col col-centered">
-                  <p className="text-left">
+                  <div className="text-left">
                     <h3>
                       Thank you
                     </h3>
@@ -66,7 +66,7 @@ export const WelcomePage = React.createClass({
                         Thank You
                       </li>
                     </ol>
-                  </p>
+                  </div>
                 </div>
               </div>
             </div>
