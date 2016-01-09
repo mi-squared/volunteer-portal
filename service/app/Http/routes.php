@@ -17,7 +17,7 @@ $app->get('/', function () use ($app) {
     return "<!DOCTYPE html>
             <html>
             <head>
-                <title>Lumen</title>
+                <title>YBPTH</title>
 
                 <link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
 
