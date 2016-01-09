@@ -58,7 +58,7 @@ $app->get('/', function () use ($app) {
             <body>
                 <div class=\"container\">
                     <div class=\"content\">
-                        <div class=\"title\">Lumen.</div>
+                        <div class=\"title\">Please wait...</div>
                     </div>
                 </div>
             </body>
