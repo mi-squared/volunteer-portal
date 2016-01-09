@@ -162,6 +162,10 @@ describe('NewVolunteerPage', () => {
           applicationID = appId;
         }
       )
+      .addValue('.select2-search__field', 'Dental Care').then(
+        () => clientApplicationObj['q_volunteering_area'] = 'Dental Care'
+      )
+      .click('.select2-results__option--highlighted')
       .getAttribute('input[value="true"]', "id").then((ids) => {
         ids.forEach((id) => {
           // console.log(id)
