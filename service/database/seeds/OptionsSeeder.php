@@ -2156,6 +2156,63 @@ class OptionsSeeder extends Seeder {
         	'value' => 'WY',
         	'form_list_id' => '1'
         ] );
+        // Canada and Other
+        Option::create( [
+        	'name' => 'AB',
+        	'value' => 'AB',
+        	'form_list_id' => '1'
+        ] );
+        Option::create( [
+        	'name' => 'BC',
+        	'value' => 'BC',
+        	'form_list_id' => '1'
+        ] );
+        Option::create( [
+        	'name' => 'MB',
+        	'value' => 'MB',
+        	'form_list_id' => '1'
+        ] );
+        Option::create( [
+        	'name' => 'NB',
+        	'value' => 'NB',
+        	'form_list_id' => '1'
+        ] );
+        Option::create( [
+        	'name' => 'NL',
+        	'value' => 'NL',
+        	'form_list_id' => '1'
+        ] );
+        Option::create( [
+        	'name' => 'NS',
+        	'value' => 'NS',
+        	'form_list_id' => '1'
+        ] );
+        Option::create( [
+        	'name' => 'ON',
+        	'value' => 'ON',
+        	'form_list_id' => '1'
+        ] );
+        Option::create( [
+        	'name' => 'PE',
+        	'value' => 'PE',
+        	'form_list_id' => '1'
+        ] );
+        Option::create( [
+        	'name' => 'QC',
+        	'value' => 'QC',
+        	'form_list_id' => '1'
+        ] );
+        Option::create( [
+        	'name' => 'SK',
+        	'value' => 'SK',
+        	'form_list_id' => '1'
+        ] );
+        Option::create( [
+        	'name' => 'Other',
+        	'value' => 'Other',
+        	'form_list_id' => '1'
+        ] );
+        //
         Option::create( [
         	'name' => 'Amharic',
         	'value' => 'Amharic',
@@ -2906,6 +2963,63 @@ class OptionsSeeder extends Seeder {
           'value' => 'WY',
           'form_list_id' => '7'
         ] );
+        // Canada and Other
+        Option::create( [
+          'name' => 'AB',
+          'value' => 'AB',
+          'form_list_id' => '7'
+        ] );
+        Option::create( [
+          'name' => 'BC',
+          'value' => 'BC',
+          'form_list_id' => '7'
+        ] );
+        Option::create( [
+          'name' => 'MB',
+          'value' => 'MB',
+          'form_list_id' => '7'
+        ] );
+        Option::create( [
+          'name' => 'NB',
+          'value' => 'NB',
+          'form_list_id' => '7'
+        ] );
+        Option::create( [
+          'name' => 'NL',
+          'value' => 'NL',
+          'form_list_id' => '7'
+        ] );
+        Option::create( [
+          'name' => 'NS',
+          'value' => 'NS',
+          'form_list_id' => '7'
+        ] );
+        Option::create( [
+          'name' => 'ON',
+          'value' => 'ON',
+          'form_list_id' => '7'
+        ] );
+        Option::create( [
+          'name' => 'PE',
+          'value' => 'PE',
+          'form_list_id' => '7'
+        ] );
+        Option::create( [
+          'name' => 'QC',
+          'value' => 'QC',
+          'form_list_id' => '7'
+        ] );
+        Option::create( [
+          'name' => 'SK',
+          'value' => 'SK',
+          'form_list_id' => '7'
+        ] );
+        Option::create( [
+          'name' => 'Other',
+          'value' => 'Other',
+          'form_list_id' => '7'
+        ] );
+        //
 
 
 
